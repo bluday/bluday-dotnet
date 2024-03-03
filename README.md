@@ -1,3 +1,7 @@
-# BluDay.Common
+# BluDay.NET
 
-A library with a bunch of common solutions and convenient method extensions for .NET 8.
+A .NET library with common solutions and convenient method extensions.
+
+### Supported versions
+
+* .NET 8

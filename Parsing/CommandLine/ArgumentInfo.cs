@@ -2,167 +2,43 @@ namespace BluDay.Common.Parsing.CommandLine;
 
 public sealed class ArgumentInfo : IEquatable<ArgumentInfo>
 {
-    private ArgumentActionType _actionType;
+    public ArgumentActionType ActionType { get; init; }
 
-    private string? _longFlag;
-    
-    private string? _longFlagName;
-
-    private string? _shortFlag;
-
-    private string? _shortFlagName;
-
-    private object? _constant;
-
-    private object? _defaultValue;
-
-    private Type _valueType;
-
-    private readonly Guid _id;
-
-    public ArgumentActionType ActionType
-    {
-        get  => _actionType;
-        init => _actionType = value;
-    }
+    public ArgumentFlag Flag { get; }
 
     public bool Required { get; init; }
 
-    public object? Constant
-    {
-        get => _constant;
-        init
-        {
-            // TODO: Add value type check.
+    public object? Constant { get; init; }
 
-            _constant = value;
-        }
-    }
-
-    public object? DefaultValue
-    {
-        get => _defaultValue;
-        init
-        {
-            // TODO: Add value type check.
-
-            _defaultValue = value;
-        }
-    }
+    public object? DefaultValue { get; init; }
     
     public required string Name { get; init; }
 
     public string? Description { get; init; }
 
-    public string? LongFlag => _longFlag;
-
-    public string? LongFlagName
-    {
-        get => _longFlagName;
-        set
-        {
-            _longFlagName = value;
-
-            _longFlag = value?.ToLongArgumentFlag();
-        }
-    }
-
-    public string? ShortFlag => _shortFlag;
-
-    public string? ShortFlagName
-    {
-        get => _shortFlagName;
-        set
-        {
-            _shortFlagName = value;
-
-            _shortFlag = value?.ToShortArgumentFlag();
-        }
-    }
-
     public int MaxValueCount { get; init; }
 
-    public Guid Id => _id;
+    public Type ValueType { get; init; }
 
-    public Type ValueType
+    public ArgumentInfo(string flagDescriptor)
     {
-        get => _valueType;
-        init
+        string[] flags = flagDescriptor.Split(Constants.VERTICAL_BAR_CHAR);
+
+        Flag = new()
         {
-            // TODO: Add support value type check here.
+            Long  = flags.Length > 1 ? flags[1] : null,
+            Short = flags[0]
+        };
 
-            _valueType = value;
-        }
-    }
+        ValueType = typeof(bool);
 
-    public ArgumentInfo()
-    {
-        _id = Guid.NewGuid();
-
-        _valueType = typeof(bool);
-
-        _defaultValue = (bool)default;
+        DefaultValue = (bool)default;
 
         MaxValueCount = 1;
     }
 
-    public ArgumentInfo(string flagName) : this()
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(flagName);
-
-        if (flagName.Length > 1)
-        {
-            LongFlagName = flagName;
-        }
-        else
-        {
-            ShortFlagName = flagName;
-        }
-    }
-
-    public ArgumentInfo(string shortFlagName, string longFlagName) : this()
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(longFlagName);
-        ArgumentException.ThrowIfNullOrWhiteSpace(shortFlagName);
-
-        LongFlagName  = longFlagName;
-        ShortFlagName = shortFlagName;
-    }
-
-    public bool MatchByFlag(string value)
-    {
-        // TODO: Parse flag differently based on the current property values.
-
-        return _shortFlag == value || _longFlag == value;
-    }
-
-    public bool MatchByFlagName(string value)
-    {
-        return _shortFlagName == value || _longFlagName == value;
-    }
-
     public bool Equals(ArgumentInfo? other)
     {
-        return _id == other?.Id;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        return Equals(obj as ArgumentInfo);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public static bool operator ==(string flag, ArgumentInfo? argument)
-    {
-        return argument?.MatchByFlag(flag) is true;
-    }
-
-    public static bool operator !=(string flag, ArgumentInfo? argument)
-    {
-        return !(flag == argument);
+        return false;
     }
 }
