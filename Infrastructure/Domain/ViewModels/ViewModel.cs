@@ -1,3 +1,3 @@
-﻿namespace BluDay.Common.ViewModels;
+﻿namespace BluDay.Net.ViewModels;
 
 public abstract class ViewModel : ObservableObject, IViewModel { }

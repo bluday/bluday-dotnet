@@ -1,3 +1,3 @@
-﻿namespace BluDay.Common.Attributes;
+﻿namespace BluDay.Net.Attributes;
 
 public sealed class NotEmptyOrWhiteSpaceAttribute : Attribute { }

@@ -1,4 +1,4 @@
-﻿namespace BluDay.Common.Models;
+﻿namespace BluDay.Net.Models;
 
 public interface IModel
 {

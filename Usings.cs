@@ -1,2 +1,2 @@
-global using BluDay.Common.Exceptions;
+global using BluDay.Net.Exceptions;
 global using System.Reflection;

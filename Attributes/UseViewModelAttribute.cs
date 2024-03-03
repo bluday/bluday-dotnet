@@ -1,4 +1,4 @@
-﻿namespace BluDay.Common.Attributes;
+﻿namespace BluDay.Net.Attributes;
 
 public sealed class UseViewModelAttribute<TViewModel> : Attribute where TViewModel : IViewModel
 {

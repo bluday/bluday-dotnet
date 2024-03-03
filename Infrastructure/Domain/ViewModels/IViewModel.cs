@@ -1,3 +1,3 @@
-﻿namespace BluDay.Common.ViewModels;
+﻿namespace BluDay.Net.ViewModels;
 
 public interface IViewModel { }

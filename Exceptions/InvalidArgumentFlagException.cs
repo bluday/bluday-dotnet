@@ -1,4 +1,4 @@
-namespace BluDay.Common.Exceptions;
+namespace BluDay.Net.Exceptions;
 
 public sealed class InvalidArgumentFlagException : Exception
 {

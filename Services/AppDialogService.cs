@@ -1,3 +1,3 @@
-﻿namespace BluDay.Common.Services;
+﻿namespace BluDay.Net.Services;
 
 public sealed class AppDialogService : IAppDialogService { }

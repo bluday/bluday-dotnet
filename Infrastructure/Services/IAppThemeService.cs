@@ -1,4 +1,4 @@
-namespace BluDay.Common.Services;
+namespace BluDay.Net.Services;
 
 public interface IAppThemeService
 {
