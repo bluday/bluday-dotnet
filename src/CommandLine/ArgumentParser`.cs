@@ -1,4 +1,4 @@
-namespace BluDay.Net.Parsing.CommandLine;
+namespace BluDay.Net.CommandLine;
 
 public class ArgumentParser<TArguments> where TArguments : class, new()
 {
