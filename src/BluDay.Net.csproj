@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/BluDay/BluDay.Net</PackageProjectUrl>
     <Copyright>2024 © BluDay</Copyright>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   
   <ItemGroup>
