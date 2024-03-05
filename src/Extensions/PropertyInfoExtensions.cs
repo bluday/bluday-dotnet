@@ -9,7 +9,7 @@ public static class PropertyInfoExtensions
 
     public static string? GetArgumentName(this PropertyInfo source)
     {
-        ArgumentAttribute? attribute = source.GetCustomAttribute<ArgumentAttribute>();
+        ArgAttribute? attribute = source.GetCustomAttribute<ArgAttribute>();
 
         return attribute?.TargetName ?? source.Name;
     }
