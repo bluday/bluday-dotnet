@@ -24,7 +24,7 @@ public class ArgumentParser<TArguments> where TArguments : class, new()
         _argumentToParsablePropertyMap = null!;
     }
 
-    public TArguments ParseArguments(params string[] values)
+    public TArguments ParseArguments(string[] args)
     {
         // ( 0 _ o )
 
