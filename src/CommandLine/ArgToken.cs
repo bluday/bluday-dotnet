@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public readonly struct ArgumentToken
+public readonly struct ArgToken
 {
     public bool IsFlag { get; }
 
@@ -8,7 +8,7 @@ public readonly struct ArgumentToken
 
     public string Value { get; }
 
-    public ArgumentToken(string value, int index)
+    public ArgToken(string value, int index)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 

@@ -2,9 +2,9 @@ namespace BluDay.Net.CommandLine;
 
 public class ArgumentParser<TArguments> where TArguments : class, new()
 {
-    private readonly IReadOnlyDictionary<ArgumentInfo, PropertyInfo> _argumentToParsablePropertyMap;
+    private readonly IReadOnlyDictionary<ArgInfo, PropertyInfo> _argumentToParsablePropertyMap;
 
-    public IEnumerable<ArgumentInfo> Arguments
+    public IEnumerable<ArgInfo> Arguments
     {
         get => _argumentToParsablePropertyMap.Keys.ToList().AsReadOnly();
     }
@@ -14,12 +14,12 @@ public class ArgumentParser<TArguments> where TArguments : class, new()
         get => _argumentToParsablePropertyMap.Values.ToList().AsReadOnly();
     }
 
-    public IReadOnlyDictionary<ArgumentInfo, PropertyInfo> ArgumentToParsablePropertyMap
+    public IReadOnlyDictionary<ArgInfo, PropertyInfo> ArgumentToParsablePropertyMap
     {
         get => _argumentToParsablePropertyMap;
     }
 
-    public ArgumentParser(IEnumerable<ArgumentInfo> arguments)
+    public ArgumentParser(IEnumerable<ArgInfo> arguments)
     {
         _argumentToParsablePropertyMap = null!;
     }

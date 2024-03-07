@@ -1,10 +1,10 @@
 namespace BluDay.Net.CommandLine;
 
-public sealed class ArgumentInfo : IEquatable<ArgumentInfo>
+public sealed class ArgInfo : IEquatable<ArgInfo>
 {
-    public ArgumentActionType ActionType { get; init; }
+    public ArgActionType ActionType { get; init; }
 
-    public ArgumentFlag Flag { get; }
+    public ArgFlag Flag { get; }
 
     public bool Required { get; init; }
 
@@ -20,16 +20,8 @@ public sealed class ArgumentInfo : IEquatable<ArgumentInfo>
 
     public Type ValueType { get; init; }
 
-    public ArgumentInfo(string flagDescriptor)
+    public ArgInfo(string flagDescriptor)
     {
-        string[] flags = flagDescriptor.Split(Constants.VERTICAL_BAR_CHAR);
-
-        Flag = new()
-        {
-            Long  = flags.Length > 1 ? flags[1] : null,
-            Short = flags[0]
-        };
-
         ValueType = typeof(bool);
 
         DefaultValue = (bool)default;
@@ -37,7 +29,7 @@ public sealed class ArgumentInfo : IEquatable<ArgumentInfo>
         MaxValueCount = 1;
     }
 
-    public bool Equals(ArgumentInfo? other)
+    public bool Equals(ArgInfo? other)
     {
         return false;
     }

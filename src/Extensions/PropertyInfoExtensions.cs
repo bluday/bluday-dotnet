@@ -2,12 +2,12 @@ namespace BluDay.Net.Extensions;
 
 public static class PropertyInfoExtensions
 {
-    public static ArgumentInfo? GetArgument(this PropertyInfo source, IEnumerable<ArgumentInfo> arguments)
+    public static ArgInfo? GetArg(this PropertyInfo source, IEnumerable<ArgInfo> arguments)
     {
-        return arguments.FirstOrDefault(argument => source.GetArgumentName() == argument.Name);
+        return arguments.FirstOrDefault(argument => source.GetArgName() == argument.Name);
     }
 
-    public static string? GetArgumentName(this PropertyInfo source)
+    public static string? GetArgName(this PropertyInfo source)
     {
         ArgAttribute? attribute = source.GetCustomAttribute<ArgAttribute>();
 
