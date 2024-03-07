@@ -1,31 +1,31 @@
 namespace BluDay.Net.CommandLine;
 
-public class ArgumentParser<TArguments> where TArguments : class, new()
+public class ArgParser<TArgs> where TArgs : IArgs, new()
 {
-    private readonly IReadOnlyDictionary<ArgInfo, PropertyInfo> _argumentToParsablePropertyMap;
+    private readonly IReadOnlyDictionary<ArgInfo, PropertyInfo> _argToParsablePropertyMap;
 
     public IEnumerable<ArgInfo> Arguments
     {
-        get => _argumentToParsablePropertyMap.Keys.ToList().AsReadOnly();
+        get => _argToParsablePropertyMap.Keys.ToList().AsReadOnly();
     }
 
     public IReadOnlyList<PropertyInfo> ParsableProperties
     {
-        get => _argumentToParsablePropertyMap.Values.ToList().AsReadOnly();
+        get => _argToParsablePropertyMap.Values.ToList().AsReadOnly();
     }
 
     public IReadOnlyDictionary<ArgInfo, PropertyInfo> ArgumentToParsablePropertyMap
     {
-        get => _argumentToParsablePropertyMap;
+        get => _argToParsablePropertyMap;
     }
 
-    public ArgumentParser(IEnumerable<ArgInfo> arguments)
+    public ArgParser(IEnumerable<ArgInfo> args)
     {
-        _argumentToParsablePropertyMap = null!;
+        _argToParsablePropertyMap = null!;
     }
 
-    public TArguments ParseArguments(string[] args)
+    public TArgs ParseArgs(string[] args)
     {
-        return Activator.CreateInstance<TArguments>();
+        return Activator.CreateInstance<TArgs>();
     }
 }
