@@ -26,8 +26,6 @@ public class ArgumentParser<TArguments> where TArguments : class, new()
 
     public TArguments ParseArguments(string[] args)
     {
-        // ( 0 _ o )
-
         return Activator.CreateInstance<TArguments>();
     }
 }
