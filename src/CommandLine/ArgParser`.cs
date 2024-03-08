@@ -24,7 +24,7 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
         _argToParsablePropertyMap = null!;
     }
 
-    public TArgs ParseArgs(string[] args)
+    public TArgs ParseArgs(params string[] values)
     {
         return Activator.CreateInstance<TArgs>();
     }
