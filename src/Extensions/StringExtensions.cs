@@ -2,6 +2,11 @@
 
 public static class StringExtensions
 {
+    public static bool IsAlphanumeric(this string source)
+    {
+        return source.All(char.IsLetterOrDigit);
+    }
+
     public static bool IsNullOrWhiteSpace(this string source)
     {
         return string.IsNullOrWhiteSpace(source);

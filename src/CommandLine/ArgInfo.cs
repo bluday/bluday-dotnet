@@ -4,7 +4,7 @@ public sealed class ArgInfo : IEquatable<ArgInfo>
 {
     public ArgActionType ActionType { get; init; }
 
-    public ArgFlag Flag { get; }
+    public ArgFlagDescriptor Flag { get; }
 
     public bool Required { get; init; }
 
@@ -22,6 +22,8 @@ public sealed class ArgInfo : IEquatable<ArgInfo>
 
     public ArgInfo(string flagDescriptor)
     {
+        Flag = new(flagDescriptor);
+
         ValueType = typeof(bool);
 
         DefaultValue = (bool)default;
