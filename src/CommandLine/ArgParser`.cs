@@ -21,11 +21,31 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
 
     public ArgParser(IEnumerable<ArgInfo> args)
     {
-        _argToParsablePropertyMap = null!;
+        _argToParsablePropertyMap = CreateArgToParsablePropertyMap(args).AsReadOnly();
     }
 
-    public TArgs ParseArgs(params string[] values)
+    public TArgs ParseArgs(string[] args)
     {
         return Activator.CreateInstance<TArgs>();
+    }
+
+    public static Dictionary<ArgInfo, PropertyInfo> CreateArgToParsablePropertyMap(IEnumerable<ArgInfo> args)
+    {
+        return typeof(TArgs)
+            .GetProperties()
+            .Select(
+                property => (
+                    Property: property,
+                    ArgInfo:  property.GetArgInfo(args)
+                )
+            )
+            .Where(
+                pair => pair.ArgInfo is not null
+            )
+            .Distinct()
+            .ToDictionary(
+                pair => pair.ArgInfo!,
+                pair => pair.Property
+            );
     }
 }
