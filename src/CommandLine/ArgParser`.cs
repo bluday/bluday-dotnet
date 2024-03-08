@@ -2,26 +2,26 @@ namespace BluDay.Net.CommandLine;
 
 public class ArgParser<TArgs> where TArgs : IArgs, new()
 {
-    private readonly IReadOnlyDictionary<ArgInfo, PropertyInfo> _argToParsablePropertyMap;
+    private readonly IReadOnlyDictionary<PropertyInfo, ArgInfo> _parsablePropertyToArgMap;
 
     public IEnumerable<ArgInfo> Args
     {
-        get => _argToParsablePropertyMap.Keys;
+        get => _parsablePropertyToArgMap.Values;
     }
 
     public IEnumerable<PropertyInfo> ParsableProperties
     {
-        get => _argToParsablePropertyMap.Values;
+        get => _parsablePropertyToArgMap.Keys;
     }
 
-    public IReadOnlyDictionary<ArgInfo, PropertyInfo> ArgumentToParsablePropertyMap
+    public IReadOnlyDictionary<PropertyInfo, ArgInfo> ParsablePropertyToArgMap
     {
-        get => _argToParsablePropertyMap;
+        get => _parsablePropertyToArgMap;
     }
 
     public ArgParser(IEnumerable<ArgInfo> args)
     {
-        _argToParsablePropertyMap = null!;
+        _parsablePropertyToArgMap = null!;
     }
 
     public TArgs ParseArgs(params string[] values)
