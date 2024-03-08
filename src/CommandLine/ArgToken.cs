@@ -4,20 +4,14 @@ public readonly struct ArgToken
 {
     public bool IsFlag { get; }
 
-    public int Index { get; }
-
     public string Value { get; }
 
-    public ArgToken(string value, int index)
+    public ArgToken(string value)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
-        if (index < 0) throw new IndexOutOfRangeException();
-
-        IsFlag = false;
+        IsFlag = value.IsValidArgFlag();
 
         Value = value;
-
-        Index = index;
     }
 }
