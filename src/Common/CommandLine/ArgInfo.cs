@@ -1,4 +1,4 @@
-namespace BluDay.Net.CommandLine;
+namespace BluDay.Net.Common.CommandLine;
 
 public sealed class ArgInfo : IEquatable<ArgInfo>
 {
@@ -11,7 +11,7 @@ public sealed class ArgInfo : IEquatable<ArgInfo>
     public object? Constant { get; init; }
 
     public object? DefaultValue { get; init; }
-    
+
     public required string Name { get; init; }
 
     public string? Description { get; init; }
