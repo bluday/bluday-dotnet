@@ -2,9 +2,9 @@ namespace BluDay.Net.Common.CommandLine;
 
 public class ArgParser<TArgs> where TArgs : IArgs, new()
 {
-    private readonly IReadOnlyDictionary<ArgInfo, PropertyInfo> _argumentToPropertyMap;
+    private readonly IReadOnlyDictionary<ArgumentInfo, PropertyInfo> _argumentToPropertyMap;
 
-    public IEnumerable<ArgInfo> Arguments
+    public IEnumerable<ArgumentInfo> AvailableArguments
     {
         get => _argumentToPropertyMap.Keys;
     }
@@ -14,17 +14,17 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
         get => _argumentToPropertyMap.Values;
     }
 
-    public IReadOnlyDictionary<ArgInfo, PropertyInfo> ArgToParsablePropertyMap
+    public IReadOnlyDictionary<ArgumentInfo, PropertyInfo> ArgumentToPropertyMap
     {
         get => _argumentToPropertyMap;
     }
 
-    public ArgParser(IEnumerable<ArgInfo> arguments)
+    public ArgParser(IEnumerable<ArgumentInfo> arguments)
     {
-        _argumentToPropertyMap = CreateArgToParsablePropertyMap(arguments).AsReadOnly();
+        _argumentToPropertyMap = CreateArgumentToPropertyMap(arguments).AsReadOnly();
     }
 
-    private static ArgInfo? GetArgument(PropertyInfo property, IEnumerable<ArgInfo> args)
+    private static ArgumentInfo? GetArgument(PropertyInfo property, IEnumerable<ArgumentInfo> args)
     {
         return args.FirstOrDefault(arg => GetTargetedArgumentName(property) == arg.Name);
     }
@@ -36,7 +36,7 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
         return attribute?.TargetName ?? property.Name;
     }
 
-    private static Dictionary<ArgInfo, PropertyInfo> CreateArgToParsablePropertyMap(IEnumerable<ArgInfo> arguments)
+    private static Dictionary<ArgumentInfo, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<ArgumentInfo> arguments)
     {
         return typeof(TArgs)
             .GetProperties()
