@@ -6,7 +6,7 @@ public sealed class ArgumentFlagDescriptor
 
     public string? ShortFlag { get; }
 
-    public string? PrimaryFlag { get; }
+    public string PrimaryFlag { get; }
 
     public ArgumentFlagDescriptor(string descriptor)
     {
