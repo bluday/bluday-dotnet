@@ -1,6 +1,4 @@
-﻿using BluDay.Net.Common.CommandLine;
-
-namespace BluDay.Net.Common.Extensions;
+﻿namespace BluDay.Net.Common.Extensions;
 
 public static class StringExtensions
 {

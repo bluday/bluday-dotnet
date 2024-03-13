@@ -1,4 +1,4 @@
-namespace BluDay.Net.CommandLine;
+namespace BluDay.Net.Common.CommandLine;
 
 public class ArgParser<TArgs> where TArgs : IArgs, new()
 {
@@ -43,7 +43,7 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
             .Select(
                 property => (
                     Property: property,
-                    ArgInfo:  GetArgument(property, arguments)
+                    ArgInfo: GetArgument(property, arguments)
                 )
             )
             .Where(

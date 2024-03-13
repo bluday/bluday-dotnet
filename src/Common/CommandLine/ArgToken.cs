@@ -1,5 +1,3 @@
-using BluDay.Net.Common.Extensions;
-
 namespace BluDay.Net.Common.CommandLine;
 
 public readonly struct ArgToken

@@ -1,6 +1,4 @@
-﻿using BluDay.Net.Common.Extensions;
-
-namespace BluDay.Net.Common.CommandLine;
+﻿namespace BluDay.Net.Common.CommandLine;
 
 public sealed class ArgFlagDescriptor
 {
