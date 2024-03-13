@@ -1,6 +1,6 @@
 namespace BluDay.Net.Common.CommandLine;
 
-public sealed class ArgumentInfo : IEquatable<ArgumentInfo>
+public sealed class ArgumentInfo
 {
     public ArgumentActionType ActionType { get; init; }
 
@@ -29,10 +29,5 @@ public sealed class ArgumentInfo : IEquatable<ArgumentInfo>
         DefaultValue = (bool)default;
 
         MaxValueCount = 1;
-    }
-
-    public bool Equals(ArgumentInfo? other)
-    {
-        return false;
     }
 }
