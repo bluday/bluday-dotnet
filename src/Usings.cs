@@ -1,6 +1,7 @@
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Messaging;
 global using BluDay.Net.Common.Attributes;
+global using BluDay.Net.Common.CommandLine;
 global using BluDay.Net.Common.Extensions;
 global using BluDay.Net.UI.Appearance;
 global using BluDay.Net.UI.Navigation;
