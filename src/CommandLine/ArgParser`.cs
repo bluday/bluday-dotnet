@@ -55,7 +55,7 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
             );
     }
 
-    public TArgs ParseArgs(string[] args)
+    public TArgs Parse(string[] args)
     {
         return Activator.CreateInstance<TArgs>();
     }
