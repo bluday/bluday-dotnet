@@ -1,7 +1,7 @@
-namespace BluDay.Net.Extensions.DependencyInjection;
+namespace BluDay.Net.Common.Extensions.DependencyInjection;
 
 public sealed class ObjectFactoryInfo<TService, TImplementation> : IObjectFactoryInfo
-    where TService        : class
+    where TService : class
     where TImplementation : TService, new()
 {
     public Type ServiceType { get; } = typeof(TService);

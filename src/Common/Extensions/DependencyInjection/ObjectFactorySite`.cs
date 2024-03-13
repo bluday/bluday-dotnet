@@ -1,7 +1,7 @@
-namespace BluDay.Net.Extensions.DependencyInjection;
+namespace BluDay.Net.Common.Extensions.DependencyInjection;
 
 public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactorySite
-    where TService        : class
+    where TService : class
     where TImplementation : TService, new()
 {
     private readonly ObjectFactory _implicitFactory;
@@ -21,10 +21,11 @@ public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactor
 
     public static ObjectFactory CreateImplicitFactory(ObjectFactory<TImplementation> factory)
     {
-        return (IServiceProvider serviceProvider, object[] args) =>
+        return (serviceProvider, args) =>
         {
             return factory.Invoke(serviceProvider, args);
-        }!;
+        }
+        !;
     }
 
     public static ObjectFactory<TImplementation> CreateImplementationFactory()

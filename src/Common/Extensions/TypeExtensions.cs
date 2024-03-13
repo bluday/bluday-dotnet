@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Extensions;
+﻿namespace BluDay.Net.Common.Extensions;
 
 public static class TypeExtensions
 {

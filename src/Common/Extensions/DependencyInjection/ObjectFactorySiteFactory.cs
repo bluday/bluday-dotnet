@@ -1,4 +1,4 @@
-namespace BluDay.Net.Extensions.DependencyInjection;
+namespace BluDay.Net.Common.Extensions.DependencyInjection;
 
 public static class ObjectFactorySiteFactory
 {
