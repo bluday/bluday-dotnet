@@ -49,7 +49,6 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
             .Where(
                 pair => pair.ArgInfo is not null
             )
-            .Distinct()
             .ToDictionary(
                 pair => pair.ArgInfo!,
                 pair => pair.Property
