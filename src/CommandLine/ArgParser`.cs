@@ -2,41 +2,48 @@ namespace BluDay.Net.CommandLine;
 
 public class ArgParser<TArgs> where TArgs : IArgs, new()
 {
-    private readonly IReadOnlyDictionary<ArgInfo, PropertyInfo> _argToParsablePropertyMap;
+    private readonly IReadOnlyDictionary<ArgInfo, PropertyInfo> _argumentToPropertyMap;
 
-    public IEnumerable<ArgInfo> Args
+    public IEnumerable<ArgInfo> Arguments
     {
-        get => _argToParsablePropertyMap.Keys;
+        get => _argumentToPropertyMap.Keys;
     }
 
     public IEnumerable<PropertyInfo> ParsableProperties
     {
-        get => _argToParsablePropertyMap.Values;
+        get => _argumentToPropertyMap.Values;
     }
 
     public IReadOnlyDictionary<ArgInfo, PropertyInfo> ArgToParsablePropertyMap
     {
-        get => _argToParsablePropertyMap;
+        get => _argumentToPropertyMap;
     }
 
-    public ArgParser(IEnumerable<ArgInfo> args)
+    public ArgParser(IEnumerable<ArgInfo> arguments)
     {
-        _argToParsablePropertyMap = CreateArgToParsablePropertyMap(args).AsReadOnly();
+        _argumentToPropertyMap = CreateArgToParsablePropertyMap(arguments).AsReadOnly();
     }
 
-    public TArgs ParseArgs(string[] args)
+    private static ArgInfo? GetArgument(PropertyInfo property, IEnumerable<ArgInfo> args)
     {
-        return Activator.CreateInstance<TArgs>();
+        return args.FirstOrDefault(arg => GetTargetedArgumentName(property) == arg.Name);
     }
 
-    public static Dictionary<ArgInfo, PropertyInfo> CreateArgToParsablePropertyMap(IEnumerable<ArgInfo> args)
+    private static string? GetTargetedArgumentName(PropertyInfo property)
+    {
+        ArgAttribute? attribute = property.GetCustomAttribute<ArgAttribute>();
+
+        return attribute?.TargetName ?? property.Name;
+    }
+
+    private static Dictionary<ArgInfo, PropertyInfo> CreateArgToParsablePropertyMap(IEnumerable<ArgInfo> arguments)
     {
         return typeof(TArgs)
             .GetProperties()
             .Select(
                 property => (
                     Property: property,
-                    ArgInfo:  property.GetArgInfo(args)
+                    ArgInfo:  GetArgument(property, arguments)
                 )
             )
             .Where(
@@ -47,5 +54,10 @@ public class ArgParser<TArgs> where TArgs : IArgs, new()
                 pair => pair.ArgInfo!,
                 pair => pair.Property
             );
+    }
+
+    public TArgs ParseArgs(string[] args)
+    {
+        return Activator.CreateInstance<TArgs>();
     }
 }
