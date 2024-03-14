@@ -6,6 +6,8 @@ public sealed class ArgumentInfo
 
     public ArgumentFlagDescriptor Flag { get; }
 
+    public ArgumentStoreType StoreType { get; init; }
+
     public bool Required { get; init; }
 
     public object? Constant { get; init; }

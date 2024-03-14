@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.CommandLine;
+﻿namespace BluDay.Net.Common.CommandLine;
 
 public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 {
@@ -22,6 +22,8 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 
     public TArgs Parse(string[] args)
     {
+        // Pi-day 2024! π
+
         return Activator.CreateInstance<TArgs>();
     }
 }
