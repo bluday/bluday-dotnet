@@ -12,14 +12,14 @@ public static class ArgumentInfoExtensions
             .Select(
                 property => (
                     Property: property,
-                    ArgInfo:  property.GetArgument(arguments)
+                    Argument: property.GetArgument(arguments)
                 )
             )
             .Where(
-                pair => pair.ArgInfo is not null
+                pair => pair.Argument is not null
             )
             .ToDictionary(
-                pair => pair.ArgInfo!,
+                pair => pair.Argument!,
                 pair => pair.Property
             );
     }
