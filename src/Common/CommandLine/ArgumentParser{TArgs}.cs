@@ -18,7 +18,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
         _argumentToPropertyMap = CreateArgumentToPropertyMap(arguments);
     }
 
-    private static ArgumentInfo? GetArgumentByName(string name, IEnumerable<ArgumentInfo> arguments)
+    private static ArgumentInfo? GetArgument(string name, IEnumerable<ArgumentInfo> arguments)
     {
         return arguments.FirstOrDefault(argument => argument.Name == name);
     }
@@ -35,9 +35,9 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 
             if (attribute is null) continue;
 
-            string targetedArgumentName = attribute.TargetName ?? property.Name;
+            string name = attribute.TargetName ?? property.Name;
 
-            ArgumentInfo? argument = GetArgumentByName(targetedArgumentName, arguments);
+            ArgumentInfo? argument = GetArgument(name, arguments);
 
             if (argument is null)
             {
