@@ -26,4 +26,11 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 
         return Activator.CreateInstance<TArgs>();
     }
+
+    public TArgs ParseFromCommandLine()
+    {
+        string[] args = Environment.GetCommandLineArgs()[1..];
+
+        return Parse(args);
+    }
 }
