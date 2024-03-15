@@ -27,9 +27,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
     {
         Dictionary<ArgumentInfo, PropertyInfo> map = new();
 
-        PropertyInfo[] properties = typeof(TArgs).GetProperties();
-
-        foreach (var property in properties)
+        foreach (PropertyInfo property in typeof(TArgs).GetProperties())
         {
             ArgumentAttribute? attribute = property.GetCustomAttribute<ArgumentAttribute>();
 
