@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net;
+﻿namespace BluDay.Net.Common;
 
 public static class Constants
 {
