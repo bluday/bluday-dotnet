@@ -20,20 +20,20 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
             .AsReadOnly();
     }
 
-    public object? ParseArg(ArgumentInfo info, string value)
+    public object? ParseArgument(string value, ArgumentInfo info)
     {
         return null;
     }
 
-    public TArgs ParseArgs(string[] values)
+    public TArgs ParseArguments(string[] values)
     {
         return Activator.CreateInstance<TArgs>();
     }
 
-    public TArgs ParseArgsFromCommandLine()
+    public TArgs ParseArgumentsFromCommandLine()
     {
         string[] values = Environment.GetCommandLineArgs()[1..];
 
-        return ParseArgs(values);
+        return ParseArguments(values);
     }
 }
