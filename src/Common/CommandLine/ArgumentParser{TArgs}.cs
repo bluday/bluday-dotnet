@@ -22,8 +22,6 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 
     public TArgs Parse(string[] args)
     {
-        // Pi Day 2024! π
-
         return Activator.CreateInstance<TArgs>();
     }
 
