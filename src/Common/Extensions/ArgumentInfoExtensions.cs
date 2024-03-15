@@ -3,7 +3,7 @@
 public static class ArgumentInfoExtensions
 {
     public static Dictionary<ArgumentInfo, PropertyInfo> CreateArgumentToPropertyMap<TArgs>(
-        this IEnumerable<ArgumentInfo> arguments
+        this IEnumerable<ArgumentInfo> source
     )
         where TArgs : IArgs, new()
     {
@@ -12,7 +12,7 @@ public static class ArgumentInfoExtensions
             .Select(
                 property => (
                     Property: property,
-                    Argument: property.GetArgument(arguments)
+                    Argument: property.GetArgument(source)
                 )
             )
             .Where(
