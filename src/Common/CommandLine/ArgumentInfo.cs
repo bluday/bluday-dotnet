@@ -4,7 +4,7 @@ public sealed class ArgumentInfo
 {
     public ArgumentActionType ActionType { get; init; }
 
-    public ArgumentFlagDescriptor Flag { get; }
+    public ArgumentFlag Flag { get; }
 
     public ArgumentStoreType StoreType { get; init; }
 
