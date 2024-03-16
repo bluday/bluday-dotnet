@@ -57,20 +57,20 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
         return map.AsReadOnly();
     }
 
-    public object? Parse(ArgumentInfo info, string value)
+    public object? Parse(ArgumentInfo info, string arg)
     {
         throw new NotImplementedException();
     }
 
-    public TArgs Parse(string[] values)
+    public TArgs Parse(string[] args)
     {
         return Activator.CreateInstance<TArgs>();
     }
 
     public TArgs ParseFromCommandLine()
     {
-        string[] values = Environment.GetCommandLineArgs()[1..];
+        string[] args = Environment.GetCommandLineArgs()[1..];
 
-        return Parse(values);
+        return Parse(args);
     }
 }
