@@ -27,7 +27,9 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
     {
         Dictionary<ArgumentInfo, PropertyInfo> map = new();
 
-        foreach (PropertyInfo property in typeof(TArgs).GetProperties())
+        PropertyInfo[] properties = typeof(TArgs).GetProperties();
+
+        foreach (var property in properties)
         {
             ArgumentAttribute? attribute = property.GetCustomAttribute<ArgumentAttribute>();
 
@@ -43,19 +45,13 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
                 throw new ArgumentException();
             }
 
-            if (map.ContainsKey(argument))
-            {
-                // TODO: Throw already-evaluted argument exception.
-                throw new InvalidOperationException();
-            }
-
             if (map.ContainsValue(property))
             {
                 // TODO: Throw target property conflict exception.
                 throw new InvalidOperationException();
             }
 
-            map[argument!] = property;
+            map.Add(argument!, property);
         }
 
         return map.AsReadOnly();
