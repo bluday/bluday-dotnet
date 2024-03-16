@@ -8,8 +8,6 @@ public sealed class ParsedArgument
 
     public IReadOnlyList<object> Values { get; }
 
-    public ParsedArgument(ArgumentInfo info, ArgumentToken token) : this(info, token, []) { }
-
     public ParsedArgument(ArgumentInfo info, ArgumentToken token, object[] values)
     {
         ArgumentNullException.ThrowIfNull(info);
