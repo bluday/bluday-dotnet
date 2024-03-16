@@ -2,23 +2,11 @@ namespace BluDay.Net.Common.CommandLine;
 
 public sealed class ParsedArgument
 {
-    public ArgumentInfo Info { get; }
+    public required ArgumentInfo Info { get; init; }
 
-    public ArgumentToken Token { get; }
+    public required ArgumentToken Token { get; init; }
 
-    public IReadOnlyList<object> Values { get; }
+    public required int Index { get; init; }
 
-    public ParsedArgument(ArgumentInfo info, ArgumentToken token, object[] values)
-    {
-        ArgumentNullException.ThrowIfNull(info);
-        ArgumentNullException.ThrowIfNull(values);
-
-        // TODO: Validate token—and values if not empty.
-
-        Info = info;
-
-        Token = token;
-
-        Values = values;
-    }
+    public IReadOnlyList<object> Values { get; } = [];
 }
