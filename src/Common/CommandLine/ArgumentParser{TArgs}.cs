@@ -59,7 +59,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 
     public object? ParseArgument(ArgumentInfo info, string value)
     {
-        return null;
+        throw new NotImplementedException();
     }
 
     public TArgs ParseArguments(string[] values)
