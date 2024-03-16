@@ -6,7 +6,7 @@ public sealed class ParsedArgument
 
     public ArgumentToken Token { get; }
 
-    public object[] Values { get; }
+    public IReadOnlyList<object> Values { get; }
 
     public ParsedArgument(ArgumentInfo info, ArgumentToken token) : this(info, token, []) { }
 
