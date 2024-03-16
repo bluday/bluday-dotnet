@@ -4,7 +4,7 @@ public sealed class ArgumentInfo
 {
     public ArgumentActionType ActionType { get; init; }
 
-    public ArgumentFlagDescriptor FlagDescriptor { get; }
+    public ArgumentFlagDescriptor Flag { get; }
 
     public ArgumentStoreType StoreType { get; init; }
 
@@ -24,7 +24,7 @@ public sealed class ArgumentInfo
 
     public ArgumentInfo(string flagDescriptor)
     {
-        FlagDescriptor = new(flagDescriptor);
+        Flag = new(flagDescriptor);
 
         ValueType = typeof(bool);
 
