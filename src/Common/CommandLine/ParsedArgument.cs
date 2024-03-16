@@ -17,8 +17,10 @@ public sealed class ParsedArgument
 
         // TODO: Validate token—and values if not empty.
 
-        Info   = info;
-        Token  = token;
+        Info = info;
+
+        Token = token;
+
         Values = values;
     }
 }
