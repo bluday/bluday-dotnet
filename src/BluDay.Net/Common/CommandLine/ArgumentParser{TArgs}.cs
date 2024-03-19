@@ -2,7 +2,7 @@
 
 public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 {
-    private readonly IReadOnlyDictionary<ArgumentInfo, PropertyInfo> _argumentToPropertyMap;
+    private readonly Dictionary<ArgumentInfo, PropertyInfo> _argumentToPropertyMap;
 
     public IEnumerable<ArgumentInfo> AvailableArguments
     {
@@ -12,11 +12,6 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
     public IEnumerable<PropertyInfo> ParsableProperties
     {
         get => _argumentToPropertyMap.Values;
-    }
-
-    public IReadOnlyDictionary<ArgumentInfo, PropertyInfo> ArgumentToPropertyMap
-    {
-        get => _argumentToPropertyMap;
     }
 
     public ArgumentParser(IEnumerable<ArgumentInfo> arguments)
@@ -29,7 +24,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
         return arguments.FirstOrDefault(argument => argument.Name == name);
     }
 
-    private static IReadOnlyDictionary<ArgumentInfo, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<ArgumentInfo> arguments)
+    private static Dictionary<ArgumentInfo, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<ArgumentInfo> arguments)
     {
         Dictionary<ArgumentInfo, PropertyInfo> map = new();
 
@@ -60,7 +55,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
             map.Add(argument!, property);
         }
 
-        return map.AsReadOnly();
+        return map;
     }
 
     public object? Parse(ArgumentInfo info, string arg)
