@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.Extensions.DependencyInjection;
+namespace BluDay.Net.DependencyInjection;
 
 public interface IObjectFactoryInfo
 {

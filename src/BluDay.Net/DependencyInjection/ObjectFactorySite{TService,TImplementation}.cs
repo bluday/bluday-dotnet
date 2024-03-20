@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.Extensions.DependencyInjection;
+namespace BluDay.Net.DependencyInjection;
 
 public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactorySite
     where TService        : class
@@ -26,6 +26,6 @@ public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactor
 
     public static ObjectFactory<TImplementation> CreateImplementationFactory()
     {
-        return ActivatorUtilities.CreateFactory<TImplementation>(argumentTypes: Type.EmptyTypes);
+        return ActivatorUtilities.CreateFactory<TImplementation>(argumentTypes: []);
     }
 }
