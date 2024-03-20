@@ -1,12 +1,12 @@
 namespace BluDay.Net.Common.CommandLine;
 
-public readonly struct ParsedArgument
+public readonly struct ArgumentToken
 {
     public bool IsFlag { get; }
 
     public string Value { get; }
 
-    public ParsedArgument(string value)
+    public ArgumentToken(string value)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
