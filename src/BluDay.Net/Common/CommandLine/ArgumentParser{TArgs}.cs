@@ -52,20 +52,15 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
         return map;
     }
 
-    public object? ParseArgument(string value, ArgumentInfo targetArgument)
+    public TArgs Parse(string[] args)
     {
         throw new NotImplementedException();
     }
 
-    public TArgs ParseArguments(string[] values)
+    public TArgs ParseFromCommandLine()
     {
-        throw new NotImplementedException();
-    }
+        string[] args = Environment.GetCommandLineArgs()[1..];
 
-    public TArgs ParseArgumentsFromCommandLine()
-    {
-        string[] values = Environment.GetCommandLineArgs()[1..];
-
-        return ParseArguments(values);
+        return Parse(args);
     }
 }
