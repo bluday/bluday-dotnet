@@ -1,4 +1,4 @@
-namespace BluDay.Net.DependencyInjection;
+namespace BluDay.Net.Common.DependencyInjection;
 
 public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactorySite
     where TService        : class
