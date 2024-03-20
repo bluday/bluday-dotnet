@@ -20,15 +20,9 @@ public sealed class ArgumentInfo
 
     public int MaxValueCount { get; init; }
 
-    public Type ValueType { get; init; }
-
     public ArgumentInfo(string flagDescriptor)
     {
         Flag = new(flagDescriptor);
-
-        ValueType = typeof(bool);
-
-        DefaultValue = (bool)default;
 
         MaxValueCount = 1;
     }
