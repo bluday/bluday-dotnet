@@ -1,7 +1,3 @@
 # bluday-dotnet
 
-A .NET library with common solutions and convenient method extensions.
-
-### Supported versions
-
-* .NET 8
+A library for .NET 8 (and above) with common solutions and convenient method extensions.
