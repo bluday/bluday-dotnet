@@ -46,7 +46,7 @@ public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
                 throw new InvalidOperationException();
             }
 
-            map.Add(argument!, property);
+            map.Add(argument, property);
         }
 
         return map;
