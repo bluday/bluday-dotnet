@@ -13,7 +13,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
         _argumentToPropertyMap = arguments.CreateArgumentToPropertyMap<TArgs>();
     }
 
-    public object? Parse(ArgumentInfo info, string arg)
+    public object? Parse(string arg, ArgumentInfo info)
     {
         throw new NotImplementedException();
     }
