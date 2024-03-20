@@ -52,7 +52,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
         return map;
     }
 
-    public object? ParseArgument(string values, ArgumentInfo info)
+    public object? ParseArgument(string value, ArgumentInfo targetArgument)
     {
         throw new NotImplementedException();
     }
