@@ -1,6 +1,6 @@
 ﻿namespace BluDay.Net.Common.CommandLine;
 
-public class ArgumentParser<TArgs> where TArgs : IArgs, new()
+public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
 {
     private readonly Dictionary<ArgumentInfo, PropertyInfo> _argumentToPropertyMap;
 
@@ -8,7 +8,7 @@ public class ArgumentParser<TArgs> where TArgs : IArgs, new()
 
     public IEnumerable<PropertyInfo> ParsableProperties => _argumentToPropertyMap.Values;
 
-    public ArgumentParser(IEnumerable<ArgumentInfo> arguments)
+    public ArgumentsParser(IEnumerable<ArgumentInfo> arguments)
     {
         _argumentToPropertyMap = CreateArgumentToPropertyMap(arguments);
     }
