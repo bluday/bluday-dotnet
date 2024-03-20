@@ -16,5 +16,6 @@ public sealed class AppActivationService : IAppActivationService
     public void Activate()
     {
         // TODO: Send a custom IMessage event to other services through the default WeakReferenceMessenger.
+        throw new NotImplementedException();
     }
 }

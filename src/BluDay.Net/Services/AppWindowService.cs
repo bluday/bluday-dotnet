@@ -12,11 +12,11 @@ public sealed class AppWindowService : IAppWindowService
 
     public IWindow CreateWindow()
     {
-        return null!;
+        throw new NotImplementedException();
     }
 
     public bool HasWindow(IWindow window)
     {
-        return _windows.Contains(window);
+        throw new NotImplementedException();
     }
 }
