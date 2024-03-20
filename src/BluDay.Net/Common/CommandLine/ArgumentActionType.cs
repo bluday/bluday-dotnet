@@ -7,5 +7,6 @@ public enum ArgumentActionType
     AppendValue,
     AppendConstant,
     CountFlag,
-    HelpMessage
+    HelpMessage,
+    VersionOutput
 };
