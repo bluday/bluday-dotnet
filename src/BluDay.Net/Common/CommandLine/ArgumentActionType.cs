@@ -2,7 +2,10 @@ namespace BluDay.Net.Common.CommandLine;
 
 public enum ArgumentActionType
 {
-    ParseValueByFlag,
-    ParseValue,
-    AddConstant
+    StoreConstant,
+    StoreValue,
+    AppendValue,
+    AppendConstant,
+    CountFlag,
+    HelpMessage
 };
