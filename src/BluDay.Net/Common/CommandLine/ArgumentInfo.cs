@@ -8,7 +8,7 @@ public sealed class ArgumentInfo
 
     public ArgumentStoreType StoreType { get; init; }
 
-    public bool Required { get; init; }
+    public bool IsRequired { get; init; }
 
     public object? Constant { get; init; }
 
