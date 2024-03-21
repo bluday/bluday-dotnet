@@ -6,6 +6,11 @@ public class ArgumentInfo<TValue> : IArgumentInfo
 
     object? IArgumentInfo.DefaultValue => DefaultValue;
 
+    Func<string, object?> IArgumentInfo.ValueHandler
+    {
+        get => (value) => ValueHandler.Invoke(value);
+    }
+
     public ArgumentActionType ActionType { get; init; }
 
     public required ArgumentFlags Flags { get; init; }
@@ -24,5 +29,5 @@ public class ArgumentInfo<TValue> : IArgumentInfo
 
     public int MaxValueCount { get; init; }
 
-    public Func<string, TValue?> Handler { get; init; } = null!;
+    public Func<string, TValue?> ValueHandler { get; init; } = null!;
 }
