@@ -4,9 +4,15 @@ public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
 {
     private readonly Dictionary<ArgumentInfo, PropertyInfo> _argumentToPropertyMap;
 
-    public IEnumerable<ArgumentInfo> AvailableArguments => _argumentToPropertyMap.Keys;
+    public IEnumerable<ArgumentInfo> AvailableArguments
+    {
+        get => _argumentToPropertyMap.Keys;
+    }
 
-    public IEnumerable<PropertyInfo> ParsableProperties => _argumentToPropertyMap.Values;
+    public IEnumerable<PropertyInfo> ParsableProperties
+    {
+        get => _argumentToPropertyMap.Values;
+    }
 
     public ArgumentsParser(IEnumerable<ArgumentInfo> arguments)
     {
