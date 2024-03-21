@@ -13,7 +13,7 @@ public class ArgumentInfo<TValue> : IArgumentInfo
 
     public ArgumentActionType ActionType { get; init; }
 
-    public required ArgumentFlag Flag { get; init; }
+    public ArgumentFlag Flag { get; }
 
     public ArgumentStoreType StoreType { get; init; }
 
@@ -30,4 +30,9 @@ public class ArgumentInfo<TValue> : IArgumentInfo
     public int MaxValueCount { get; init; }
 
     public Func<string, TValue?> ValueHandler { get; init; } = null!;
+
+    public ArgumentInfo(string flagDescriptor)
+    {
+        Flag = new(flagDescriptor);
+    }
 }
