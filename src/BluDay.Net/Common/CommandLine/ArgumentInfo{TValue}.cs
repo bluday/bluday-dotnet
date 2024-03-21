@@ -13,7 +13,7 @@ public class ArgumentInfo<TValue> : IArgumentInfo
 
     public ArgumentActionType ActionType { get; init; }
 
-    public required ArgumentFlags Flags { get; init; }
+    public required ArgumentFlag Flag { get; init; }
 
     public ArgumentStoreType StoreType { get; init; }
 

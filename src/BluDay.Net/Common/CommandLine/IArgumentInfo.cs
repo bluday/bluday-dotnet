@@ -4,7 +4,7 @@ public interface IArgumentInfo
 {
     ArgumentActionType ActionType { get; }
 
-    ArgumentFlags Flags { get; }
+    ArgumentFlag Flag { get; }
 
     ArgumentStoreType StoreType { get; }
 
