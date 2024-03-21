@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.DependencyInjection;
+namespace BluDay.Net.DependencyInjection;
 
 public interface IImplementationProvider<TService> : IImplementationProvider where TService : notnull
 {
