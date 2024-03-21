@@ -1,12 +1,12 @@
 namespace BluDay.Net.CommandLine;
 
-public class ArgumentInfo<TValue> : IArgumentInfo
+public class Argument<TValue> : IArgument
 {
-    object? IArgumentInfo.Constant => Constant;
+    object? IArgument.Constant => Constant;
 
-    object? IArgumentInfo.DefaultValue => DefaultValue;
+    object? IArgument.DefaultValue => DefaultValue;
 
-    Func<string, object?> IArgumentInfo.ValueHandler
+    Func<string, object?> IArgument.ValueHandler
     {
         get => (value) => ValueHandler.Invoke(value);
     }
@@ -31,7 +31,7 @@ public class ArgumentInfo<TValue> : IArgumentInfo
 
     public Func<string, TValue?> ValueHandler { get; init; } = null!;
 
-    public ArgumentInfo(string flagDescriptor)
+    public Argument(string flagDescriptor)
     {
         Flag = new(flagDescriptor);
     }

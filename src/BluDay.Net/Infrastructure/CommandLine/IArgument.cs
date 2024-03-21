@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public interface IArgumentInfo
+public interface IArgument
 {
     ArgumentActionType ActionType { get; }
 
