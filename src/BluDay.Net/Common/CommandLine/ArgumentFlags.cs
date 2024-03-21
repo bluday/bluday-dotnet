@@ -1,6 +1,6 @@
 ﻿namespace BluDay.Net.Common.CommandLine;
 
-public sealed class ArgumentFlag
+public sealed class ArgumentFlags
 {
     public string? Long { get; }
 
@@ -8,7 +8,7 @@ public sealed class ArgumentFlag
 
     public string Primary { get; }
 
-    public ArgumentFlag(string descriptor)
+    public ArgumentFlags(string descriptor)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(descriptor);
 

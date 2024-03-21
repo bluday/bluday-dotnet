@@ -2,9 +2,9 @@
 
 public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
 {
-    private readonly Dictionary<ArgumentInfo, PropertyInfo> _argumentToPropertyMap;
+    private readonly Dictionary<IArgumentInfo, PropertyInfo> _argumentToPropertyMap;
 
-    public IEnumerable<ArgumentInfo> AvailableArguments
+    public IEnumerable<IArgumentInfo> AvailableArguments
     {
         get => _argumentToPropertyMap.Keys;
     }
@@ -14,19 +14,19 @@ public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
         get => _argumentToPropertyMap.Values;
     }
 
-    public ArgumentsParser(IEnumerable<ArgumentInfo> arguments)
+    public ArgumentsParser(IEnumerable<IArgumentInfo> arguments)
     {
         _argumentToPropertyMap = CreateArgumentToPropertyMap(arguments);
     }
 
-    public static ArgumentInfo? GetArgumentByName(string name, IEnumerable<ArgumentInfo> arguments)
+    public static IArgumentInfo? GetArgumentByName(string name, IEnumerable<IArgumentInfo> arguments)
     {
         return arguments.FirstOrDefault(argument => argument.Name == name);
     }
 
-    private static Dictionary<ArgumentInfo, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<ArgumentInfo> arguments)
+    private static Dictionary<IArgumentInfo, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<IArgumentInfo> arguments)
     {
-        Dictionary<ArgumentInfo, PropertyInfo> map = new();
+        Dictionary<IArgumentInfo, PropertyInfo> map = new();
 
         PropertyInfo[] properties = typeof(TArgs).GetProperties();
 
@@ -38,7 +38,7 @@ public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
 
             string name = attribute.TargetName ?? property.Name;
 
-            ArgumentInfo? argument = GetArgumentByName(name, arguments);
+            IArgumentInfo? argument = GetArgumentByName(name, arguments);
 
             if (argument is null)
             {
