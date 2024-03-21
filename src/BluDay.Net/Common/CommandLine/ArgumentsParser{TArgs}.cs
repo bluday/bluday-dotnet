@@ -62,11 +62,4 @@ public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
     {
         throw new NotImplementedException();
     }
-
-    public TArgs ParseFromCommandLine()
-    {
-        string[] args = Environment.GetCommandLineArgs()[1..];
-
-        return Parse(args);
-    }
 }
