@@ -58,7 +58,7 @@ public class ArgumentsParser<TArguments> where TArguments : IArguments, new()
         return map;
     }
 
-    public TArguments Parse(string[] Arguments)
+    public TArguments Parse(string[] args)
     {
         throw new NotImplementedException();
     }
