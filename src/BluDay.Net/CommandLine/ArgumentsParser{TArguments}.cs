@@ -1,6 +1,6 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public class ArgumentsParser<TArguments> where TArguments : IArguments, new()
+public class ArgumentsParser<TArguments> where TArguments : new()
 {
     private readonly Dictionary<IArgument, PropertyInfo> _argumentToPropertyMap;
 
