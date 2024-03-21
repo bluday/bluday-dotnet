@@ -1,6 +1,6 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
+public class ArgumentsParser<TArguments> where TArguments : IArguments, new()
 {
     private readonly Dictionary<IArgument, PropertyInfo> _argumentToPropertyMap;
 
@@ -28,7 +28,7 @@ public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
     {
         Dictionary<IArgument, PropertyInfo> map = new();
 
-        PropertyInfo[] properties = typeof(TArgs).GetProperties();
+        PropertyInfo[] properties = typeof(TArguments).GetProperties();
 
         foreach (var property in properties)
         {
@@ -58,7 +58,7 @@ public class ArgumentsParser<TArgs> where TArgs : IArgs, new()
         return map;
     }
 
-    public TArgs Parse(string[] args)
+    public TArguments Parse(string[] Arguments)
     {
         throw new NotImplementedException();
     }

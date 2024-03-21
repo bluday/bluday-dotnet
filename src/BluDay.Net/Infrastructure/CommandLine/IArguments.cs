@@ -1,3 +1,3 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public interface IArgs { }
+public interface IArguments { }

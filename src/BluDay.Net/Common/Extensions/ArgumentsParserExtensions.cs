@@ -2,7 +2,8 @@
 
 public static class ArgumentsParserExtensions
 {
-    public static TArgs ParseFromCommandLine<TArgs>(this ArgumentsParser<TArgs> source) where TArgs : IArgs, new()
+    public static TArguments ParseFromCommandLine<TArguments>(this ArgumentsParser<TArguments> source)
+        where TArguments : IArguments, new()
     {
         string[] args = Environment.GetCommandLineArgs()[1..];
 
