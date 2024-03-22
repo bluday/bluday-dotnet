@@ -19,11 +19,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         _argumentToPropertyMap = CreateArgumentToPropertyMap(arguments);
     }
 
-    public static IArgument? GetArgumentByName(string name, IEnumerable<IArgument> arguments)
-    {
-        return arguments.FirstOrDefault(argument => argument.Name == name);
-    }
-
     private static Dictionary<IArgument, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<IArgument> arguments)
     {
         Dictionary<IArgument, PropertyInfo> map = new();
@@ -36,15 +31,9 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
             if (attribute is null) continue;
 
-            string name = attribute.TargetName ?? property.Name;
+            string argumentName = attribute.TargetName ?? property.Name;
 
-            IArgument? argument = GetArgumentByName(name, arguments);
-
-            if (argument is null)
-            {
-                // TODO: Throw non-found argument info exception.
-                throw new ArgumentException();
-            }
+            IArgument? argument = arguments.First(argument => argument.Name == argumentName);
 
             if (map.ContainsValue(property))
             {
