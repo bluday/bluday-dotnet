@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public readonly struct ArgumentToken
+internal readonly struct ArgumentToken
 {
     public bool IsFlag { get; }
 

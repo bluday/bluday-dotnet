@@ -1,6 +1,6 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public sealed class ArgumentPropertyMap
+internal sealed class ArgumentPropertyMap
 {
     public IArgument Argument { get; }
 
