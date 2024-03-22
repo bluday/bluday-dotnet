@@ -2,9 +2,9 @@
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private readonly Dictionary<IArgument, PropertyInfo> _argumentToPropertyMap;
+    private readonly Dictionary<Argument, PropertyInfo> _argumentToPropertyMap;
 
-    public IEnumerable<IArgument> Arguments
+    public IEnumerable<Argument> Arguments
     {
         get => _argumentToPropertyMap.Keys;
     }
@@ -14,14 +14,14 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         get => _argumentToPropertyMap.Values;
     }
 
-    public ArgumentsParser(IEnumerable<IArgument> arguments)
+    public ArgumentsParser(IEnumerable<Argument> arguments)
     {
         _argumentToPropertyMap = CreateArgumentToPropertyMap(arguments);
     }
 
-    private static Dictionary<IArgument, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<IArgument> arguments)
+    private static Dictionary<Argument, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<Argument> arguments)
     {
-        Dictionary<IArgument, PropertyInfo> map = new();
+        Dictionary<Argument, PropertyInfo> map = new();
 
         PropertyInfo[] properties = typeof(TArguments).GetProperties();
 
@@ -33,7 +33,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
             string argumentName = attribute.TargetName ?? property.Name;
 
-            IArgument? argument = arguments.First(argument => argument.Name == argumentName);
+            Argument? argument = arguments.First(argument => argument.Name == argumentName);
 
             if (map.ContainsValue(property))
             {
