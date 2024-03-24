@@ -32,7 +32,7 @@ public readonly struct ArgumentFlag
 
             if (primary.Length > secondary.Length)
             {
-                throw new InvalidArgumentFlagLengthException(secondary, primary);
+                throw new InvalidArgumentFlagLengthException(primary, secondary);
             }
         }
 
