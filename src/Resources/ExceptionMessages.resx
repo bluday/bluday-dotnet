@@ -120,4 +120,10 @@
   <data name="CONFLICITNG_ARGUMENT_TARGET_PROPERTY" xml:space="preserve">
     <value>Argument {0} already targets another property.</value>
   </data>
+  <data name="INVALID_ARGUMENT_FLAG_NAME" xml:space="preserve">
+    <value>Flag name "{0}" must be exlusively alphanumeric.</value>
+  </data>
+  <data name="INVALID_LONG_ARGUMENT_FLAG_LENGTH" xml:space="preserve">
+    <value>Long flag name "{0}" must be longer than short name "{1}".</value>
+  </data>
 </root>

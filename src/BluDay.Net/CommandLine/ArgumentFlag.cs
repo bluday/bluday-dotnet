@@ -18,7 +18,7 @@ public readonly struct ArgumentFlag
 
         if (!primary.IsAlphanumeric())
         {
-            throw new ArgumentException();
+            throw new InvalidArgumentFlagNameException(primary);
         }
 
         string? secondary = flags.Length > 1 ? flags[1] : null;
@@ -27,12 +27,12 @@ public readonly struct ArgumentFlag
         {
             if (!secondary.IsAlphanumeric())
             {
-                throw new ArgumentException();
+                throw new InvalidArgumentFlagNameException(secondary);
             }
 
             if (primary.Length > secondary.Length)
             {
-                throw new ArgumentException();
+                throw new InvalidLongArgumentFlagLengthException(secondary, primary);
             }
         }
 
