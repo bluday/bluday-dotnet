@@ -2,7 +2,7 @@
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private readonly Dictionary<Argument, PropertyInfo> _argumentToPropertyMap;
+    private readonly IReadOnlyDictionary<Argument, PropertyInfo> _argumentToPropertyMap;
 
     public IEnumerable<Argument> Arguments
     {
@@ -19,7 +19,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         _argumentToPropertyMap = CreateArgumentToPropertyMap(arguments);
     }
 
-    private static Dictionary<Argument, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<Argument> arguments)
+    private static IReadOnlyDictionary<Argument, PropertyInfo> CreateArgumentToPropertyMap(IEnumerable<Argument> arguments)
     {
         Dictionary<Argument, PropertyInfo> map = new();
 
