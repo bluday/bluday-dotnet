@@ -1,33 +1,16 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public class ArgumentsParser<TArguments> where TArguments : new()
+public class ArgumentsParser<TArguments> : ArgumentsParser where TArguments : new()
 {
-    private readonly IEnumerable<Argument> _arguments;
+    public ArgumentsParser(IEnumerable<Argument> arguments) : base(typeof(TArguments), arguments) { }
 
-    public IEnumerable<Argument> Arguments => _arguments;
-
-    public ArgumentsParser(IEnumerable<Argument> arguments)
+    public new TArguments Parse(string[] args)
     {
-        _arguments = arguments;
+        return (TArguments)base.Parse(args);
     }
 
-    internal static BindingFlags GetTargetPropertyBindingFlags()
+    public new TArguments ParseFromCommandLine()
     {
-        return BindingFlags.DeclaredOnly
-            | BindingFlags.Instance
-            | BindingFlags.Public
-            | BindingFlags.SetProperty;
-    }
-
-    public TArguments Parse(string[] args)
-    {
-        throw new NotImplementedException();
-    }
-
-    public TArguments ParseFromCommandLine()
-    {
-        string[] args = Environment.GetCommandLineArgs()[1..];
-
-        return Parse(args);
+        return (TArguments)base.ParseFromCommandLine();
     }
 }
