@@ -54,13 +54,20 @@ public sealed class ArgumentsParser
     }
     */
 
+    public TArguments Parse<TArguments>(string[] args) where TArguments : new()
+    {
+        return (TArguments)Parse(args);
+    }
+
     public object Parse(string[] args)
     {
         throw new NotImplementedException();
     }
 
-    public TArguments Parse<TArguments>(string[] args) where TArguments : new()
+    public object ParseFromCommandLine()
     {
-        return (TArguments)Parse(args);
+        string[] args = Environment.GetCommandLineArgs()[1..];
+
+        return Parse(args);
     }
 }
