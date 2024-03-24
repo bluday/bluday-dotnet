@@ -4,6 +4,8 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 {
     private readonly IReadOnlyDictionary<Argument, PropertyInfo> _argumentToPropertyMap;
 
+    internal static readonly BindingFlags _propertyBindingFlags;
+
     public IEnumerable<Argument> Arguments
     {
         get => _argumentToPropertyMap.Keys;
@@ -12,6 +14,14 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public IEnumerable<PropertyInfo> TargetedProperties
     {
         get => _argumentToPropertyMap.Values;
+    }
+
+    static ArgumentsParser()
+    {
+        _propertyBindingFlags = BindingFlags.DeclaredOnly
+            | BindingFlags.Instance
+            | BindingFlags.Public
+            | BindingFlags.SetProperty;
     }
 
     public ArgumentsParser(IEnumerable<Argument> arguments)
@@ -23,7 +33,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     {
         Dictionary<Argument, PropertyInfo> map = new();
 
-        PropertyInfo[] properties = typeof(TArguments).GetProperties();
+        PropertyInfo[] properties = typeof(TArguments).GetProperties(_propertyBindingFlags);
 
         foreach (var property in properties)
         {
