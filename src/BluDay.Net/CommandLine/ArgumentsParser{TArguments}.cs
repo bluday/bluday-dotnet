@@ -1,10 +1,8 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public class ArgumentsParser<TArguments> where TArguments : new()
+public class ArgumentsParser<TArguments> : ArgumentsParser where TArguments : new()
 {
     private readonly IReadOnlyDictionary<Argument, PropertyInfo> _argumentToPropertyMap;
-
-    internal static readonly BindingFlags _propertyBindingFlags;
 
     public IEnumerable<Argument> Arguments
     {
@@ -14,14 +12,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public IEnumerable<PropertyInfo> TargetedProperties
     {
         get => _argumentToPropertyMap.Values;
-    }
-
-    static ArgumentsParser()
-    {
-        _propertyBindingFlags = BindingFlags.DeclaredOnly
-            | BindingFlags.Instance
-            | BindingFlags.Public
-            | BindingFlags.SetProperty;
     }
 
     public ArgumentsParser(IEnumerable<Argument> arguments)
