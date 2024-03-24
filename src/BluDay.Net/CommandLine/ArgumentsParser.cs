@@ -19,7 +19,7 @@ public class ArgumentsParser
 
     private static IEnumerable<ParsedArgumentToken> CreateTokens(IEnumerable<string> args)
     {
-        return args.Select(arg => new ParsedArgumentToken(arg));
+        return args.Select((arg, index) => new ParsedArgumentToken(arg, index));
     }
 
     internal static BindingFlags GetPropertyReflectionBindingFlags()
