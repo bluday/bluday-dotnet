@@ -1,6 +1,6 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public sealed class ArgumentsParser
+public class ArgumentsParser
 {
     private readonly IEnumerable<Argument> _arguments;
 
@@ -21,20 +21,8 @@ public sealed class ArgumentsParser
         _arguments = arguments;
     }
 
-    public TArguments Parse<TArguments>(string[] args) where TArguments : new()
-    {
-        return (TArguments)Parse(args);
-    }
-
-    public object Parse(string[] args)
+    public object Parse(Type objectType, string[] args)
     {
         throw new NotImplementedException();
-    }
-
-    public object ParseFromCommandLine()
-    {
-        string[] args = Environment.GetCommandLineArgs()[1..];
-
-        return Parse(args);
     }
 }
