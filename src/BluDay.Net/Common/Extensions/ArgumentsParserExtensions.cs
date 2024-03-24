@@ -11,11 +11,4 @@ public static class ArgumentsParserExtensions
     {
         return (TArguments)source.ParseFromCommandLine(typeof(TArguments));
     }
-
-    public static object ParseFromCommandLine(this ArgumentsParser source, Type objectType)
-    {
-        string[] args = Environment.GetCommandLineArgs()[1..];
-
-        return source.Parse(objectType, args);
-    }
 }

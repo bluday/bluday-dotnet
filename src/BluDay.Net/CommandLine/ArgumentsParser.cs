@@ -25,4 +25,11 @@ public class ArgumentsParser
     {
         throw new NotImplementedException();
     }
+
+    public object ParseFromCommandLine(Type objectType)
+    {
+        string[] args = Environment.GetCommandLineArgs()[1..];
+
+        return Parse(objectType, args);
+    }
 }
