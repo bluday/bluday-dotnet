@@ -23,4 +23,9 @@ public static class StringExtensions
             source.StartsWith(Constants.ARG_SHORT_FLAG_PREFIX) ||
             source.StartsWith(Constants.ARG_LONG_FLAG_PREFIX);
     }
+
+    public static string Format(this string source, params object[] values)
+    {
+        return string.Format(source, values);
+    }
 }
