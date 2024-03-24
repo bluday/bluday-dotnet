@@ -47,7 +47,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
             if (map.ContainsValue(property))
             {
-                throw new ConflictingArgumentTargetPropertyException(argument);
+                throw new ConflictingArgumentTargetPropertyException(property);
             }
 
             map.Add(argument, property);

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CONFLICITNG_ARGUMENT_TARGET_PROPERTY" xml:space="preserve">
-    <value>Argument {0} already targets another property.</value>
+    <value>Property {0} is already targeted by another argument.</value>
   </data>
   <data name="INVALID_ARGUMENT_FLAG_NAME" xml:space="preserve">
     <value>Flag name "{0}" must be exlusively alphanumeric.</value>
