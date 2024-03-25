@@ -17,7 +17,7 @@ public class ArgumentsParser
         _resultType = resultType;
     }
 
-    private static IEnumerable<ParsedArgumentToken> CreateTokens(IEnumerable<string> args)
+    private static IEnumerable<ParsedArgumentToken> GetParsedArgumentTokens(IEnumerable<string> args)
     {
         return args.Select((arg, index) => new ParsedArgumentToken(arg, index));
     }
