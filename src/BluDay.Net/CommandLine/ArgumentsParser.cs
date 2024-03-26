@@ -29,11 +29,4 @@ public class ArgumentsParser
     {
         throw new NotImplementedException();
     }
-
-    public object ParseFromCommandLine()
-    {
-        string[] args = Environment.GetCommandLineArgs()[1..];
-
-        return Parse(args);
-    }
 }

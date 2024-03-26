@@ -8,9 +8,4 @@ public class ArgumentsParser<TArguments> : ArgumentsParser where TArguments : ne
     {
         return (TArguments)base.Parse(args);
     }
-
-    public new TArguments ParseFromCommandLine()
-    {
-        return (TArguments)base.ParseFromCommandLine();
-    }
 }
