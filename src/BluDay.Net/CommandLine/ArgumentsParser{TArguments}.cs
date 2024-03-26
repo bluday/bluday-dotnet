@@ -19,7 +19,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
             | BindingFlags.SetProperty;
     }
 
-    public TArguments Parse(string[] args)
+    public TArguments Parse(IReadOnlyList<string> args)
     {
         throw new NotImplementedException();
     }
