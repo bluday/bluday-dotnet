@@ -17,11 +17,6 @@ public class ArgumentsParser
         _resultType = resultType;
     }
 
-    private static IEnumerable<ParsedArgumentToken> GetParsedArgumentTokens(IEnumerable<string> args)
-    {
-        return args.Select((arg, index) => new ParsedArgumentToken(arg, index));
-    }
-
     internal static BindingFlags GetPropertyReflectionBindingFlags()
     {
         return BindingFlags.DeclaredOnly
