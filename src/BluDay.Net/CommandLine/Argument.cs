@@ -28,6 +28,16 @@ public class Argument
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
 
-        // TODO: Parse flag descriptor string and create short and long flag instances.
+        (ShortFlag, LongFlag) = GetFlagsByDescriptor(flagDescriptor);
+    }
+
+    public static (ArgumentFlag? Short, ArgumentFlag? Long) GetFlagsByDescriptor(string descriptor)
+    {
+        IReadOnlyList<string> flags = descriptor.Split(Constants.VERTICAL_BAR_CHAR);
+
+        if (flags.Count == 1)
+        {
+
+        }
     }
 }

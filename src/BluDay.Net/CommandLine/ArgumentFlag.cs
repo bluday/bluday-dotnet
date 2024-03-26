@@ -6,9 +6,21 @@ public readonly struct ArgumentFlag
 
     public string Name { get; }
 
-    public ArgumentFlag(string name)
+    public ArgumentFlag(string name, ArgumentFlagType type)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
+
+        if (name.Length < 2 && type is ArgumentFlagType.Long)
+        {
+            throw new ArgumentException();
+        }
+
+        if (name.IsAlphanumeric() && type is ArgumentFlagType.Other)
+        {
+            throw new ArgumentException();
+        }
+
+        Type = type;
 
         Name = name;
     }
