@@ -17,7 +17,7 @@ public class ArgumentsParser
         _resultType = resultType;
     }
 
-    internal static BindingFlags GetPropertyReflectionBindingFlags()
+    internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
     {
         return BindingFlags.DeclaredOnly
             | BindingFlags.Instance
