@@ -4,7 +4,9 @@ public class Argument
 {
     public ArgumentActionType ActionType { get; init; }
 
-    public ArgumentFlag Flag { get; }
+    public ArgumentFlag? ShortFlag { get; }
+
+    public ArgumentFlag? LongFlag { get; }
 
     public ArgumentStoreType StoreType { get; init; }
 
@@ -24,6 +26,8 @@ public class Argument
 
     public Argument(string flagDescriptor)
     {
-        Flag = new(flagDescriptor);
+        ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
+
+        // TODO: Parse flag descriptor string and create short and long flag instances.
     }
 }
