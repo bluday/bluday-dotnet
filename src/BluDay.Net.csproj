@@ -27,7 +27,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Update="Resources\ExceptionMessages.Designer.cs">
+    <Compile Update="BluDay.Net\Resources\ExceptionMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
@@ -35,7 +35,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <EmbeddedResource Update="Resources\ExceptionMessages.resx">
+    <EmbeddedResource Update="BluDay.Net\Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
