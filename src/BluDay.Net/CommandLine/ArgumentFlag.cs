@@ -15,7 +15,7 @@ public readonly struct ArgumentFlag
             throw new ArgumentException();
         }
 
-        if (name.IsAlphanumeric() && type is ArgumentFlagType.Other)
+        if (name.IsAlphanumeric() && type is ArgumentFlagType.Symbol)
         {
             throw new ArgumentException();
         }
