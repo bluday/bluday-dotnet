@@ -4,13 +4,13 @@ public class ArgumentsParser
 {
     private readonly Type _resultType;
 
-    private readonly IEnumerable<Argument> _arguments;
+    private readonly IReadOnlyList<IArgument> _arguments;
 
     public Type ResultType => _resultType;
 
-    public IEnumerable<Argument> Arguments => _arguments;
+    public IReadOnlyList<IArgument> Arguments => _arguments;
 
-    public ArgumentsParser(Type resultType, IEnumerable<Argument> arguments)
+    public ArgumentsParser(Type resultType, IReadOnlyList<IArgument> arguments)
     {
         _arguments = arguments;
 

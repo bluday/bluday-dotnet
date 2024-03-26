@@ -2,7 +2,7 @@
 
 public class ArgumentsParser<TArguments> : ArgumentsParser where TArguments : new()
 {
-    public ArgumentsParser(IEnumerable<Argument> arguments) : base(typeof(TArguments), arguments) { }
+    public ArgumentsParser(IReadOnlyList<IArgument> arguments) : base(typeof(TArguments), arguments) { }
 
     public new TArguments Parse(string[] args)
     {
