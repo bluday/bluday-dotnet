@@ -17,6 +17,11 @@ public static class StringExtensions
         return string.IsNullOrEmpty(source);
     }
 
+    public static bool StartsWith(this string source, params string[] values)
+    {
+        return values.All(source.StartsWith);
+    }
+
     public static string Format(this string source, params object[] values)
     {
         return string.Format(source, values);
