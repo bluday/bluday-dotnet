@@ -2,10 +2,5 @@ namespace BluDay.Net.CommandLine;
 
 public sealed class PositionalArgumentDescriptor : ArgumentDescriptor
 {
-    public ArgumentFlag? Flag { get; }
-
-    public PositionalArgumentDescriptor(string symbol)
-    {
-        Flag = new(symbol);
-    }
+    public string Token { get; } = Constants.ARG_LONG_FLAG_PREFIX;
 }
