@@ -26,7 +26,7 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
         {
             if (primary.Length > secondary.Length)
             {
-                throw new ArgumentException();
+                throw new InvalidArgumentFlagLengthException(primary, secondary);
             }
 
             _longFlag = new(primary, ArgumentFlagType.Long);
