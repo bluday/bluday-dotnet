@@ -6,8 +6,6 @@ public readonly struct ArgumentFlag
 
     public string Name { get; }
 
-    public ArgumentFlag(string name) : this(name, default) { }
-
     public ArgumentFlag(string name, ArgumentFlagType type)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
