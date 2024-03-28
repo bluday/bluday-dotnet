@@ -14,7 +14,7 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
 
     public string? Description { get; init; }
 
-    public string Name { get; init; } = null!;
+    public virtual string Name { get; init; } = null!;
 
     public int MaxValueCount { get; init; }
 

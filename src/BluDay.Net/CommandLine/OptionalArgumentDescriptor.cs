@@ -12,6 +12,8 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
 
     public ArgumentFlag? ShortFlag => _shortFlag;
 
+    public required override string Name { get; init; }
+
     public OptionalArgumentDescriptor(string flagDescriptor)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
