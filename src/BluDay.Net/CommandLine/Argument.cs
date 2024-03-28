@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-internal readonly struct Argument(ArgumentToken token)
+public readonly struct Argument(ArgumentToken token)
 {
     public ArgumentToken Token { get; } = token;
 
