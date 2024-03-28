@@ -14,6 +14,8 @@ public interface IArgumentDescriptor
 
     string? Description { get; }
 
+    string Name { get; }
+
     int MaxValueCount { get; }
 
     Func<string, object?> ValueHandler { get; }
