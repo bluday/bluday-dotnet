@@ -26,4 +26,9 @@ public readonly struct ArgumentFlag
 
         Name = name;
     }
+
+    public static bool HasValidName(string value)
+    {
+        return false;
+    }
 }
