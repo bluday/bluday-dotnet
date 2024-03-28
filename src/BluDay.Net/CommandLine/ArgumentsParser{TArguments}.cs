@@ -6,11 +6,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     private readonly HashSet<OptionalArgumentDescriptor> _optionalArgumentDescriptors;
 
-    public bool HasPositionalArgument
-    {
-        get => _positionalArgumentDescriptor is not null;
-    }
-
     public IReadOnlyList<OptionalArgumentDescriptor> OptionalArgumentDescriptors
     {
         get => _optionalArgumentDescriptors.ToList().AsReadOnly();
@@ -49,9 +44,10 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     public void AddPositionalArgument()
     {
-        if (HasPositionalArgument) return;
-
-        _positionalArgumentDescriptor = new();
+        if (_positionalArgumentDescriptor is null)
+        {
+            _positionalArgumentDescriptor = new();
+        }
     }
 
     public TArguments Parse(string[] args)
