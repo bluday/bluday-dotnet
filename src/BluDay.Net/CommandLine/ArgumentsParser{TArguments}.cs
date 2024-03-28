@@ -4,7 +4,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 {
     private PositionalArgumentDescriptor? _positionalArgumentDescriptor;
 
-    private readonly HashSet<OptionalArgumentDescriptor> _optionalArgumentDescriptors = new();
+    private readonly HashSet<OptionalArgumentDescriptor> _optionalArgumentDescriptors;
 
     public bool HasPositionalArgument
     {
@@ -14,6 +14,11 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public IReadOnlyList<OptionalArgumentDescriptor> OptionalArgumentDescriptors
     {
         get => _optionalArgumentDescriptors.ToList().AsReadOnly();
+    }
+
+    public ArgumentsParser()
+    {
+        _optionalArgumentDescriptors = new();
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
