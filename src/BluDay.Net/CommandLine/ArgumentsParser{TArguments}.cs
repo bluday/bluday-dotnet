@@ -8,7 +8,10 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     public ArgumentsParser(IReadOnlyList<IArgumentDescriptor> argumentDescriptors)
     {
-        _argumentDescriptors = argumentDescriptors;
+        _argumentDescriptors = argumentDescriptors
+            .Distinct()
+            .ToList()
+            .AsReadOnly();
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
