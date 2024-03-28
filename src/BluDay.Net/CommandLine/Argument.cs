@@ -8,8 +8,8 @@ public readonly struct Argument(ArgumentToken token)
 
     public IReadOnlyList<ArgumentToken>? Values { get; }
 
-    public Argument(ArgumentToken token, IEnumerable<ArgumentToken> values) : this(token)
+    public Argument(ArgumentToken token, ArgumentToken[] values) : this(token)
     {
-        Values = values.ToList().AsReadOnly();
+        Values = values.AsReadOnly();
     }
 }
