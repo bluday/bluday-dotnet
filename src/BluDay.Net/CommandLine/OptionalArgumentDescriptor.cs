@@ -31,9 +31,9 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
                 throw new InvalidArgumentFlagLengthException(primary, secondary);
             }
 
-            _longFlag = new(primary, ArgumentFlagType.Long);
+            _longFlag = new(secondary, ArgumentFlagType.Long);
 
-            _shortFlag = new(secondary, ArgumentFlagType.Short);
+            _shortFlag = new(primary, ArgumentFlagType.Short);
 
             return;
         }
