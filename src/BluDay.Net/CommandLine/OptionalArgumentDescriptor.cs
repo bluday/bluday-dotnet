@@ -12,27 +12,47 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
 
     public ArgumentFlag? ShortFlag => _shortFlag;
 
-    public OptionalArgumentDescriptor(string flagName)
+    public OptionalArgumentDescriptor(string flagDescriptor)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(flagName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
 
-        if (flagName.Length > 1)
+        string[] flags = flagDescriptor.Split(Constants.VERTICAL_BAR_CHAR);
+
+        string primary = flags[0];
+
+        if (!primary.IsAlphanumeric())
         {
-            _longFlag = new(flagName, ArgumentFlagType.Long);
+            throw new ArgumentException();
+        }
+
+        string? secondary = flags.ElementAt(1);
+
+        if (secondary is not null)
+        {
+            if (!secondary.IsAlphanumeric())
+            {
+                throw new ArgumentException();
+            }
+
+            if (primary.Length > secondary.Length)
+            {
+                throw new ArgumentException();
+            }
+
+            _longFlag = new(primary, ArgumentFlagType.Long);
+
+            _shortFlag = new(secondary, ArgumentFlagType.Short);
+
+            return;
+        }
+
+        if (primary.Length > 1)
+        {
+            _longFlag = new(primary, ArgumentFlagType.Long);
         }
         else
         {
-            _shortFlag = new(flagName, ArgumentFlagType.Short);
+            _shortFlag = new(primary, ArgumentFlagType.Short);
         }
-    }
-
-    public OptionalArgumentDescriptor(string shortFlagName, string longFlagName)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(longFlagName);
-        ArgumentException.ThrowIfNullOrWhiteSpace(shortFlagName);
-
-        _longFlag = new(longFlagName, ArgumentFlagType.Long);
-
-        _shortFlag = new(shortFlagName, ArgumentFlagType.Short);
     }
 }
