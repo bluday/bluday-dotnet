@@ -22,7 +22,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
             | BindingFlags.SetProperty;
     }
 
-    public TArguments Parse(IReadOnlyList<string> arguments)
+    public TArguments Parse(string[] args)
     {
         throw new NotImplementedException();
     }
