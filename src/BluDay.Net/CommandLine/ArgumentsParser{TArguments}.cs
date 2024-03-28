@@ -30,7 +30,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
         if (!_optionalArgumentDescriptors.Add(descriptor))
         {
-            throw new InvalidOperationException();
+            throw new DuplicateOptionalArgumentException(descriptor);
         }
     }
 

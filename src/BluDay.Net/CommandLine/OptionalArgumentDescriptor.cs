@@ -24,7 +24,7 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
 
         string? secondary = flags.ElementAt(1);
 
-        if (secondary is not null)
+        if (!secondary.IsNullOrWhiteSpace())
         {
             if (primary.Length > secondary.Length)
             {
@@ -46,5 +46,28 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
         {
             _shortFlag = new(primary, ArgumentFlagType.Short);
         }
+    }
+
+    public string AsRawFlagDescriptor()
+    {
+        StringBuilder builder = new();
+
+        if (_shortFlag.HasValue && _longFlag.HasValue)
+        {
+            builder.Append(_shortFlag.Value.Name);
+            builder.Append(Constants.VERTICAL_BAR_CHAR);
+            builder.Append(_longFlag.Value.Name);
+        }
+        else
+        {
+            builder.Append(PrimaryFlag);
+        }
+
+        return builder.ToString();
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} \"{AsRawFlagDescriptor()}\"";
     }
 }

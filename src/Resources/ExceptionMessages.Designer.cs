@@ -70,6 +70,15 @@ namespace BluDay.Net.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Argument &quot;{0}&quot; (&quot;{1}&quot;) has already been added..
+        /// </summary>
+        internal static string DUPLICATE_OPTIONAL_ARGUMENT {
+            get {
+                return ResourceManager.GetString("DUPLICATE_OPTIONAL_ARGUMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flag name &quot;{0}&quot; can only contain alphanumeric, dash and underscore characters..
         /// </summary>
         internal static string INVALID_ARGUMENT_FLAG_NAME {
