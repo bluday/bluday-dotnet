@@ -10,6 +10,8 @@ public static class Constants
 
     public const string ARG_SHORT_FLAG_PREFIX = "-";
 
+    public const string POSITIONAL_ARG_SYMBOL = "--";
+
     public const string Dark = "Dark";
 
     public const string Default = "Default";
