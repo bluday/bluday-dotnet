@@ -20,19 +20,13 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
 
         string primary = flags[0];
 
-        if (!primary.IsAlphanumeric())
-        {
-            throw new ArgumentException();
-        }
+        ValidateFlagName(primary);
 
         string? secondary = flags.ElementAt(1);
 
         if (secondary is not null)
         {
-            if (!secondary.IsAlphanumeric())
-            {
-                throw new ArgumentException();
-            }
+            ValidateFlagName(secondary);
 
             if (primary.Length > secondary.Length)
             {
@@ -53,6 +47,14 @@ public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
         else
         {
             _shortFlag = new(primary, ArgumentFlagType.Short);
+        }
+    }
+
+    private void ValidateFlagName(string name)
+    {
+        if (!ArgumentFlag.HasValidName(name))
+        {
+            throw new ArgumentException();
         }
     }
 }
