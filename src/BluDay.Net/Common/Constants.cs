@@ -2,6 +2,12 @@
 
 public static class Constants
 {
+    public const char DASH_CHAR = '-';
+
+    public const char EMPTY_CHAR = '\0';
+
+    public const char UNDERSCORE_CHAR = '_';
+
     public const char VERTICAL_BAR_CHAR = '|';
 
     public const char WHITESPACE_CHAR = ' ';

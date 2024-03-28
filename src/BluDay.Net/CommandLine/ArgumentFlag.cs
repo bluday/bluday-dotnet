@@ -8,15 +8,24 @@ public readonly struct ArgumentFlag
 
     public ArgumentFlag(string name, ArgumentFlagType type)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        InvalidArgumentFlagNameException.ThrowIfInvalid(name);
 
         Type = type;
 
         Name = name;
     }
 
-    public static bool HasValidName(string value)
+    public static bool IsValidNameCharacter(char value)
     {
-        return false;
+        return value is not Constants.EMPTY_CHAR
+            || value is not Constants.WHITESPACE_CHAR
+            || value is Constants.DASH_CHAR
+            || value is Constants.UNDERSCORE_CHAR
+            || char.IsAsciiLetterOrDigit(value);
+    }
+
+    public static bool HasValidName(string name)
+    {
+        return name.All(IsValidNameCharacter);
     }
 }
