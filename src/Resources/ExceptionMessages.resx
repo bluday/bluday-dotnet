@@ -123,8 +123,8 @@
   <data name="INVALID_ARGUMENT_FLAG_NAME" xml:space="preserve">
     <value>Flag name "{0}" can only contain alphanumeric, dash and underscore characters.</value>
   </data>
-  <data name="INVALID_ARGUMENT_TOKEN_POSITION" xml:space="preserve">
-    <value>Argument position for "{0}" must be zero or greater.</value>
+  <data name="INVALID_ARGUMENT_TOKEN_INDEX" xml:space="preserve">
+    <value>Argument index for "{0}" must be zero or greater.</value>
   </data>
   <data name="INVALID_LONG_ARGUMENT_FLAG_LENGTH" xml:space="preserve">
     <value>Long flag name "{0}" must be longer than short name "{1}".</value>

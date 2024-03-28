@@ -79,11 +79,11 @@ namespace BluDay.Net.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Argument position for &quot;{0}&quot; must be zero or greater..
+        ///   Looks up a localized string similar to Argument index for &quot;{0}&quot; must be zero or greater..
         /// </summary>
-        internal static string INVALID_ARGUMENT_TOKEN_POSITION {
+        internal static string INVALID_ARGUMENT_TOKEN_INDEX {
             get {
-                return ResourceManager.GetString("INVALID_ARGUMENT_TOKEN_POSITION", resourceCulture);
+                return ResourceManager.GetString("INVALID_ARGUMENT_TOKEN_INDEX", resourceCulture);
             }
         }
         
