@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public sealed class NamedArgument : Argument
+public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
 {
     private readonly ArgumentFlag? _longFlag, _shortFlag;
 
@@ -10,7 +10,7 @@ public sealed class NamedArgument : Argument
 
     public ArgumentFlag? ShortFlag => _shortFlag;
 
-    public NamedArgument(string flagName)
+    public OptionalArgumentDescriptor(string flagName)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(flagName);
 
@@ -24,7 +24,7 @@ public sealed class NamedArgument : Argument
         }
     }
 
-    public NamedArgument(string shortFlagName, string longFlagName)
+    public OptionalArgumentDescriptor(string shortFlagName, string longFlagName)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(longFlagName);
         ArgumentException.ThrowIfNullOrWhiteSpace(shortFlagName);

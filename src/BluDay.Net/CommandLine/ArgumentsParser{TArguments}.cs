@@ -2,13 +2,13 @@
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private readonly IReadOnlyList<IArgument> _arguments;
+    private readonly IReadOnlyList<IArgumentDescriptor> _argumentDescriptors;
 
-    public IReadOnlyList<IArgument> Arguments => _arguments;
+    public IReadOnlyList<IArgumentDescriptor> ArgumentDescriptors => _argumentDescriptors;
 
-    public ArgumentsParser(IReadOnlyList<IArgument> arguments)
+    public ArgumentsParser(IReadOnlyList<IArgumentDescriptor> argumentDescriptors)
     {
-        _arguments = arguments;
+        _argumentDescriptors = argumentDescriptors;
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()

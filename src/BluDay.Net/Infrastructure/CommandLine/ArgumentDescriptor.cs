@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public abstract class Argument : IArgument
+public abstract class ArgumentDescriptor : IArgumentDescriptor
 {
     public ArgumentActionType ActionType { get; init; }
 
