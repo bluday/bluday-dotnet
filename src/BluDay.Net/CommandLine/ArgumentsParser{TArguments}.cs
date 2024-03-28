@@ -6,6 +6,11 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     private readonly HashSet<OptionalArgumentDescriptor> _optionalArgumentDescriptors;
 
+    public PositionalArgumentDescriptor? PositionalArgumentDescriptor
+    {
+        get => _positionalArgumentDescriptor;
+    }
+
     public IReadOnlyList<OptionalArgumentDescriptor> OptionalArgumentDescriptors
     {
         get => _optionalArgumentDescriptors.ToList().AsReadOnly();
