@@ -8,7 +8,10 @@ public readonly struct ArgumentFlag
 
     public ArgumentFlag(string name, ArgumentFlagType type)
     {
-        InvalidArgumentFlagNameException.ThrowIfInvalid(name);
+        if (!HasValidName(name))
+        {
+            throw new InvalidArgumentFlagNameException(name);
+        }
 
         Type = type;
 
