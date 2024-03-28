@@ -70,7 +70,7 @@ namespace BluDay.Net.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Flag name &quot;{0}&quot; must be exlusively alphanumeric..
+        ///   Looks up a localized string similar to Flag name &quot;{0}&quot; can only contain alphanumeric, dash and underscore characters..
         /// </summary>
         internal static string INVALID_ARGUMENT_FLAG_NAME {
             get {

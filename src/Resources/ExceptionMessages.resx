@@ -121,7 +121,7 @@
     <value>Property {0} is already targeted by another argument.</value>
   </data>
   <data name="INVALID_ARGUMENT_FLAG_NAME" xml:space="preserve">
-    <value>Flag name "{0}" must be exlusively alphanumeric.</value>
+    <value>Flag name "{0}" can only contain alphanumeric, dash and underscore characters.</value>
   </data>
   <data name="INVALID_ARGUMENT_TOKEN_POSITION" xml:space="preserve">
     <value>Argument position for "{0}" must be zero or greater.</value>
