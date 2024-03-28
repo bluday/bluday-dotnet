@@ -2,13 +2,18 @@
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private readonly IReadOnlyList<IArgumentDescriptor> _argumentDescriptors;
+    private PositionalArgumentDescriptor? _positionalArgument;
 
-    public IReadOnlyList<IArgumentDescriptor> ArgumentDescriptors => _argumentDescriptors;
+    private readonly IReadOnlyList<OptionalArgumentDescriptor> _optionalArguments;
 
-    public ArgumentsParser(IReadOnlyList<IArgumentDescriptor> argumentDescriptors)
+    public IReadOnlyList<OptionalArgumentDescriptor> OptionalArguments
     {
-        _argumentDescriptors = argumentDescriptors
+        get => _optionalArguments;
+    }
+
+    public ArgumentsParser(IReadOnlyList<OptionalArgumentDescriptor> optionalArguments)
+    {
+        _optionalArguments = optionalArguments
             .Distinct()
             .ToList()
             .AsReadOnly();
