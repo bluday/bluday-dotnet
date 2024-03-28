@@ -13,6 +13,8 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     public ArgumentsParser(IReadOnlyList<OptionalArgumentDescriptor> optionalArguments)
     {
+        ArgumentNullException.ThrowIfNull(optionalArguments);
+
         _optionalArguments = optionalArguments
             .Distinct()
             .ToList()
