@@ -2,18 +2,18 @@
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private PositionalArgumentDescriptor? _positionalArgument;
+    private PositionalArgumentDescriptor? _positionalArgumentDescriptor;
 
-    private readonly HashSet<OptionalArgumentDescriptor> _optionalArguments = new();
+    private readonly HashSet<OptionalArgumentDescriptor> _optionalArgumentDescriptors = new();
 
     public bool HasPositionalArgument
     {
-        get => _positionalArgument is not null;
+        get => _positionalArgumentDescriptor is not null;
     }
 
-    public IReadOnlyList<OptionalArgumentDescriptor> OptionalArguments
+    public IReadOnlyList<OptionalArgumentDescriptor> OptionalArgumentDescriptors
     {
-        get => _optionalArguments.ToList().AsReadOnly();
+        get => _optionalArgumentDescriptors.ToList().AsReadOnly();
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
@@ -24,21 +24,21 @@ public class ArgumentsParser<TArguments> where TArguments : new()
             | BindingFlags.SetProperty;
     }
 
-    public void AddOptionalArgument(OptionalArgumentDescriptor argument)
+    public void AddOptionalArgument(OptionalArgumentDescriptor descriptor)
     {
-        ArgumentNullException.ThrowIfNull(argument);
+        ArgumentNullException.ThrowIfNull(descriptor);
 
-        if (!_optionalArguments.Add(argument))
+        if (!_optionalArgumentDescriptors.Add(descriptor))
         {
             throw new InvalidOperationException();
         }
     }
 
-    public void AddOptionalArguments(params OptionalArgumentDescriptor[] arguments)
+    public void AddOptionalArguments(params OptionalArgumentDescriptor[] descriptors)
     {
-        foreach (var argument in arguments)
+        foreach (var descriptor in descriptors)
         {
-            AddOptionalArgument(argument);
+            AddOptionalArgument(descriptor);
         }
     }
 
@@ -46,7 +46,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     {
         if (HasPositionalArgument) return;
 
-        _positionalArgument = new();
+        _positionalArgumentDescriptor = new();
     }
 
     public TArguments Parse(string[] args)
