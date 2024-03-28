@@ -47,11 +47,11 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         }
     }
 
-    public void AddPositionalArgument()
+    public void AddPositionalArgument(PositionalArgumentDescriptor descriptor)
     {
         if (_positionalArgumentDescriptor is null)
         {
-            _positionalArgumentDescriptor = new();
+            _positionalArgumentDescriptor = descriptor;
         }
     }
 
