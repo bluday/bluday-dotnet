@@ -6,9 +6,4 @@ public static class CharExtensions
     {
         return char.IsLetterOrDigit(source);
     }
-
-    public static bool IsNotEmptyOrWhitespace(this char source)
-    {
-        return source is not Constants.EMPTY_CHAR && source is not Constants.WHITESPACE_CHAR;
-    }
 }
