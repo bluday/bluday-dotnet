@@ -10,16 +10,6 @@ public readonly struct ArgumentFlag
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
-        if (name.Length < 2 && type is ArgumentFlagType.Long)
-        {
-            throw new ArgumentException();
-        }
-
-        if (name.IsAlphanumeric() && type is ArgumentFlagType.Symbol)
-        {
-            throw new ArgumentException();
-        }
-
         Type = type;
 
         Name = name;
