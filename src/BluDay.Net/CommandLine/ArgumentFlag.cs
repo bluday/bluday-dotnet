@@ -21,7 +21,8 @@ public readonly struct ArgumentFlag
     public static bool IsValidNameCharacter(char value)
     {
         return value.IsNotEmptyOrWhitespace()
-            || value.IsDashOrUnderscore()
+            || value is Constants.DASH_CHAR
+            || value is Constants.UNDERSCORE_CHAR
             || value.IsAlphanumeric();
     }
 
