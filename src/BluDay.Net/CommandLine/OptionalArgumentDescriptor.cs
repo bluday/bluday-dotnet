@@ -2,7 +2,9 @@ namespace BluDay.Net.CommandLine;
 
 public sealed class OptionalArgumentDescriptor : ArgumentDescriptor
 {
-    private readonly ArgumentFlag? _longFlag, _shortFlag;
+    private readonly ArgumentFlag? _longFlag;
+
+    private readonly ArgumentFlag? _shortFlag;
 
     public ArgumentFlag PrimaryFlag => (_shortFlag ?? _longFlag)!.Value;
 
