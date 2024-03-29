@@ -12,7 +12,7 @@ public sealed class OptionalArgument : Argument
 
     public ArgumentFlag? ShortFlag => _shortFlag;
 
-    public required override string Name { get; init; }
+    public required new string Name { get; init; }
 
     public OptionalArgument(string flagDescriptor)
     {

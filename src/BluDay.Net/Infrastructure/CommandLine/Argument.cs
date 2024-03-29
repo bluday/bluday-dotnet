@@ -14,7 +14,7 @@ public abstract class Argument : IArgument
 
     public string? Description { get; init; }
 
-    public virtual string Name { get; init; } = null!;
+    public string Name { get; protected set; } = null!;
 
     public int MaxValueCount { get; init; }
 
