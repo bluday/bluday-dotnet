@@ -45,7 +45,7 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
     {
         if (!implementationType.IsAssignableTo(_serviceType))
         {
-            throw new ArgumentException($"Implementation type {implementationType} must be of type {_serviceType}.");
+            throw new InvalidImplementationTypeException(implementationType, _serviceType);
         }
 
         IObjectFactorySite site = _objectFactorySiteMap[implementationType];

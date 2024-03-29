@@ -97,6 +97,15 @@ namespace BluDay.Net.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Implementation type {0} must be of type {1}..
+        /// </summary>
+        internal static string INVALID_IMPLEMENTATION_TYPE {
+            get {
+                return ResourceManager.GetString("INVALID_IMPLEMENTATION_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Long flag name &quot;{0}&quot; must be longer than short name &quot;{1}&quot;..
         /// </summary>
         internal static string INVALID_LONG_ARGUMENT_FLAG_LENGTH {

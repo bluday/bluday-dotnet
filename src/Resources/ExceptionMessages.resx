@@ -129,6 +129,9 @@
   <data name="INVALID_ARGUMENT_TOKEN_INDEX" xml:space="preserve">
     <value>Argument index for "{0}" must be zero or greater.</value>
   </data>
+  <data name="INVALID_IMPLEMENTATION_TYPE" xml:space="preserve">
+    <value>Implementation type {0} must be of type {1}.</value>
+  </data>
   <data name="INVALID_LONG_ARGUMENT_FLAG_LENGTH" xml:space="preserve">
     <value>Long flag name "{0}" must be longer than short name "{1}".</value>
   </data>
