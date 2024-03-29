@@ -22,9 +22,9 @@ public sealed class OptionalArgument : Argument
 
         string primary = flags[0];
 
-        string? secondary = flags.ElementAt(1);
+        string? secondary = flags.ElementAtOrDefault(1);
 
-        if (!secondary.IsNullOrWhiteSpace())
+        if (!secondary!.IsNullOrWhiteSpace())
         {
             if (primary.Length > secondary.Length)
             {
