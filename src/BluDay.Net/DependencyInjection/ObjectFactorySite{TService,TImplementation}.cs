@@ -6,9 +6,9 @@ public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactor
 {
     private readonly ObjectFactory _implicitFactory;
 
-    public ObjectFactoryInfo<TService, TImplementation> Info { get; }
-
     public ObjectFactory<TImplementation> Factory { get; }
+
+    public ObjectFactoryInfo<TService, TImplementation> Info { get; }
 
     IObjectFactoryInfo IObjectFactorySite.Info => Info;
 
@@ -20,9 +20,9 @@ public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactor
 
         _implicitFactory = CreateImplicitFactory(factory);
 
-        Info = new();
-
         Factory = factory;
+
+        Info = new();
     }
 
     public static ObjectFactory CreateImplicitFactory(ObjectFactory<TImplementation> factory)
