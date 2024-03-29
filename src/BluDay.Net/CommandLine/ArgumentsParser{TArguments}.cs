@@ -18,7 +18,10 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
         _positionalArgument = positionalArgument;
 
-        _optionalArguments = optionalArguments;
+        _optionalArguments = optionalArguments
+            .Distinct()
+            .ToList()
+            .AsReadOnly();
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
