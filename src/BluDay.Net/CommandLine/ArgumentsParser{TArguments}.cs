@@ -10,16 +10,13 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     public IReadOnlyList<OptionalArgument> OptionalArguments => _optionalArguments;
 
-    public ArgumentsParser(OptionalArgument[] optionalArguments) : this(optionalArguments, null) { }
-
-    public ArgumentsParser(OptionalArgument[] optionalArguments, PositionalArgument? positionalArgument)
+    public ArgumentsParser(OptionalArgument[]? optionalArguments, PositionalArgument? positionalArgument)
     {
         ArgumentNullException.ThrowIfNull(optionalArguments);
 
         _positionalArgument = positionalArgument;
 
-        _optionalArguments = optionalArguments
-            .Distinct()
+        _optionalArguments = (optionalArguments?.Distinct() ?? [])
             .ToList()
             .AsReadOnly();
     }
