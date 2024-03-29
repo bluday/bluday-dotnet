@@ -2,23 +2,23 @@
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private PositionalArgumentDescriptor? _positionalArgumentDescriptor;
+    private PositionalArgument? _positionalArgument;
 
-    private readonly HashSet<OptionalArgumentDescriptor> _optionalArgumentDescriptors;
+    private readonly IReadOnlyList<OptionalArgument> _optionalArguments;
 
-    public PositionalArgumentDescriptor? PositionalArgumentDescriptor
+    public PositionalArgument? PositionalArgument => _positionalArgument;
+
+    public IReadOnlyList<OptionalArgument> OptionalArguments => _optionalArguments;
+
+    public ArgumentsParser(OptionalArgument[] optionalArguments) : this(optionalArguments, null) { }
+
+    public ArgumentsParser(OptionalArgument[] optionalArguments, PositionalArgument? positionalArgument)
     {
-        get => _positionalArgumentDescriptor;
-    }
+        ArgumentNullException.ThrowIfNull(optionalArguments);
 
-    public IReadOnlyList<OptionalArgumentDescriptor> OptionalArgumentDescriptors
-    {
-        get => _optionalArgumentDescriptors.ToList().AsReadOnly();
-    }
+        _positionalArgument = positionalArgument;
 
-    public ArgumentsParser()
-    {
-        _optionalArgumentDescriptors = new();
+        _optionalArguments = optionalArguments;
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
@@ -27,37 +27,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
             | BindingFlags.Instance
             | BindingFlags.Public
             | BindingFlags.SetProperty;
-    }
-
-    public void AddOptionalArgument(OptionalArgumentDescriptor descriptor)
-    {
-        ArgumentNullException.ThrowIfNull(descriptor);
-
-        if (!_optionalArgumentDescriptors.Add(descriptor))
-        {
-            throw new DuplicateOptionalArgumentException(descriptor);
-        }
-    }
-
-    public void AddOptionalArguments(params OptionalArgumentDescriptor[] descriptors)
-    {
-        foreach (var descriptor in descriptors)
-        {
-            AddOptionalArgument(descriptor);
-        }
-    }
-
-    public void AddPositionalArgument()
-    {
-        AddPositionalArgument(new PositionalArgumentDescriptor());
-    }
-
-    public void AddPositionalArgument(PositionalArgumentDescriptor descriptor)
-    {
-        if (_positionalArgumentDescriptor is null)
-        {
-            _positionalArgumentDescriptor = descriptor;
-        }
     }
 
     public TArguments Parse(string[] args)

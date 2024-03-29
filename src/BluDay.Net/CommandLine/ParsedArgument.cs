@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public readonly struct Argument
+public readonly struct ParsedArgument
 {
     public ArgumentToken Token { get; }
 
@@ -8,9 +8,9 @@ public readonly struct Argument
 
     public IReadOnlyList<ArgumentToken> Values { get; }
 
-    public Argument(ArgumentToken token) : this(token, []) { }
+    public ParsedArgument(ArgumentToken token) : this(token, []) { }
 
-    public Argument(ArgumentToken token, ArgumentToken[] values)
+    public ParsedArgument(ArgumentToken token, ArgumentToken[] values)
     {
         Token = token;
 
