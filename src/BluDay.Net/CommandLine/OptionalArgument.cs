@@ -24,7 +24,7 @@ public sealed class OptionalArgument : Argument
 
         string? secondary = flags.ElementAtOrDefault(1);
 
-        if (secondary is not null && !secondary.IsNullOrWhiteSpace())
+        if (secondary is not null)
         {
             if (primary.Length > secondary.Length)
             {
