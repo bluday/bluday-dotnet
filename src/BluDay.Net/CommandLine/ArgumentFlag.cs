@@ -8,27 +8,31 @@ public readonly struct ArgumentFlag
 
     public ArgumentFlag(string name, ArgumentFlagType type)
     {
-        if (!HasValidName(name))
-        {
-            throw new InvalidArgumentFlagNameException(name);
-        }
+        ValidateName(name);
 
         Type = type;
 
         Name = name;
     }
 
-    public static bool IsValidNameCharacter(char value)
+    private static void ValidateName(string name)
     {
-        return value is not Constants.EMPTY_CHAR
-            || value is not Constants.WHITESPACE_CHAR
-            || value is Constants.DASH_CHAR
-            || value is Constants.UNDERSCORE_CHAR
-            || value.IsAlphanumeric();
+        throw new NotImplementedException();
+
+        // throw new InvalidArgumentFlagNameException(name);
     }
 
     public static bool HasValidName(string name)
     {
-        return name.All(IsValidNameCharacter);
+        try
+        {
+            ValidateName(name);
+        }
+        catch
+        {
+            return false;
+        }
+
+        return true;
     }
 }
