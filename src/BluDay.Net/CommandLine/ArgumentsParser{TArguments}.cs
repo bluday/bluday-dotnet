@@ -2,7 +2,7 @@
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private PositionalArgument? _positionalArgument;
+    private readonly PositionalArgument? _positionalArgument;
 
     private readonly IReadOnlyList<OptionalArgument> _optionalArguments;
 
