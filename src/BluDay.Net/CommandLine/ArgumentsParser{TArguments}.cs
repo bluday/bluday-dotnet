@@ -1,25 +1,24 @@
-﻿namespace BluDay.Net.CommandLine;
+﻿using System.Collections.Immutable;
+
+namespace BluDay.Net.CommandLine;
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
     private readonly PositionalArgument? _positionalArgument;
 
-    private readonly IReadOnlyList<OptionalArgument> _optionalArguments;
+    private readonly IImmutableList<OptionalArgument> _optionalArguments;
 
     public PositionalArgument? PositionalArgument => _positionalArgument;
 
-    public IReadOnlyList<OptionalArgument> OptionalArguments => _optionalArguments;
+    public IImmutableList<OptionalArgument> OptionalArguments => _optionalArguments;
 
-    public ArgumentsParser(OptionalArgument[]? optionalArguments, PositionalArgument? positionalArgument)
+    public ArgumentsParser(IEnumerable<OptionalArgument>? optionalArguments, PositionalArgument? positionalArgument)
     {
         ArgumentNullException.ThrowIfNull(optionalArguments);
 
         _positionalArgument = positionalArgument;
 
-        _optionalArguments = optionalArguments
-            .Distinct()
-            .ToList()
-            .AsReadOnly();
+        _optionalArguments = optionalArguments.Distinct().ToImmutableList();
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
