@@ -4,7 +4,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 {
     private readonly PositionalArgument? _positionalArgument;
 
-    [DisallowNull]
     private readonly IImmutableList<OptionalArgument> _optionalArguments;
 
     public PositionalArgument? PositionalArgument
@@ -13,6 +12,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         init => _positionalArgument = value;
     }
 
+    [DisallowNull]
     public IImmutableList<OptionalArgument> OptionalArguments
     {
         get  => _optionalArguments;
