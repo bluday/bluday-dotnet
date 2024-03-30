@@ -26,10 +26,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
     {
-        return BindingFlags.DeclaredOnly
-            | BindingFlags.Instance
-            | BindingFlags.Public
-            | BindingFlags.SetProperty;
+        return BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public;
     }
 
     public TArguments Parse(string[] args)
