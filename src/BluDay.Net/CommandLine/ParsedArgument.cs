@@ -12,6 +12,8 @@ public readonly struct ParsedArgument
 
     public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
+        ArgumentNullException.ThrowIfNull(values);
+
         Token = token;
 
         Values = values.ToImmutableList();
