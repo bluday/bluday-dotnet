@@ -16,7 +16,8 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
         _positionalArgument = positionalArgument;
 
-        _optionalArguments = (optionalArguments?.Distinct() ?? [])
+        _optionalArguments = optionalArguments
+            .Distinct()
             .ToList()
             .AsReadOnly();
     }
