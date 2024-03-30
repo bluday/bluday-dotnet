@@ -8,9 +8,15 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     private readonly IImmutableList<OptionalArgument> _optionalArguments;
 
-    public PositionalArgument? PositionalArgument => _positionalArgument;
+    public PositionalArgument? PositionalArgument
+    {
+        get => _positionalArgument;
+    }
 
-    public IImmutableList<OptionalArgument> OptionalArguments => _optionalArguments;
+    public IImmutableList<OptionalArgument> OptionalArguments
+    {
+        get => _optionalArguments;
+    }
 
     public ArgumentsParser(IEnumerable<OptionalArgument>? optionalArguments, PositionalArgument? positionalArgument)
     {
