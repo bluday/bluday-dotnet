@@ -11,5 +11,6 @@ global using BluDay.Net.UI.Appearance;
 global using BluDay.Net.UI.Navigation;
 global using BluDay.Net.UI.WindowManagement;
 global using Microsoft.Extensions.DependencyInjection;
+global using System.Collections.Immutable;
 global using System.Reflection;
 global using System.Text;

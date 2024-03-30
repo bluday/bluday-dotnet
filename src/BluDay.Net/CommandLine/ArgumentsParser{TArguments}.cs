@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-
-namespace BluDay.Net.CommandLine;
+﻿namespace BluDay.Net.CommandLine;
 
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
