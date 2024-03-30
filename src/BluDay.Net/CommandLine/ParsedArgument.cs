@@ -6,14 +6,14 @@ public readonly struct ParsedArgument
 
     public bool HasValues => Values is not null;
 
-    public IReadOnlyList<ArgumentToken> Values { get; }
+    public IImmutableList<ArgumentToken> Values { get; }
 
-    public ParsedArgument(ArgumentToken token) : this(token, []) { }
+    public ParsedArgument(ArgumentToken token) : this(token, Enumerable.Empty<ArgumentToken>()) { }
 
-    public ParsedArgument(ArgumentToken token, ArgumentToken[] values)
+    public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
         Token = token;
 
-        Values = values.AsReadOnly();
+        Values = values.ToImmutableList();
     }
 }

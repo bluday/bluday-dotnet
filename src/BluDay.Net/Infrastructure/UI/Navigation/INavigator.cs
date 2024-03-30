@@ -10,7 +10,7 @@ public interface INavigator
 
     Guid Id { get; }
 
-    IReadOnlyList<Type> Views { get; }
+    IImmutableList<Type> Views { get; }
 
     bool Pop();
 
