@@ -12,6 +12,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         init => _positionalArgument = value;
     }
 
+    [DisallowNull]
     public IImmutableList<OptionalArgument> OptionalArguments
     {
         get  => _optionalArguments;

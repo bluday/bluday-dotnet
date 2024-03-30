@@ -1,21 +1,17 @@
 namespace BluDay.Net.CommandLine;
 
-public readonly struct ParsedArgument
+public readonly struct ParsedArgument(ArgumentToken token)
 {
-    public ArgumentToken Token { get; }
+    private readonly IImmutableList<ArgumentToken> _values;
 
-    public bool HasValues => Values is not null;
+    public ArgumentToken Token { get; } = token;
 
-    public IImmutableList<ArgumentToken> Values { get; }
+    public bool HasValues => _values is not null;
 
-    public ParsedArgument(ArgumentToken token) : this(token, Enumerable.Empty<ArgumentToken>()) { }
-
-    public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
+    [DisallowNull]
+    public IImmutableList<ArgumentToken> Values
     {
-        ArgumentNullException.ThrowIfNull(values);
-
-        Token = token;
-
-        Values = values.ToImmutableList();
+        get  => _values;
+        init => _values = value;
     }
 }
