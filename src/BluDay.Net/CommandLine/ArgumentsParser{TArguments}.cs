@@ -36,4 +36,9 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     {
         throw new NotImplementedException();
     }
+
+    public TArguments ParseFromCommandLine()
+    {
+        return Parse(Environment.GetCommandLineArgs());
+    }
 }
