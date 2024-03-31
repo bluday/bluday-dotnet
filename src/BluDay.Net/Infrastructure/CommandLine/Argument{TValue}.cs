@@ -23,9 +23,4 @@ public abstract class Argument<TValue> : IArgument
     object? IArgument.Constant => Constant;
 
     object? IArgument.DefaultValue => DefaultValue;
-
-    Func<string, object?> IArgument.ValueHandler
-    {
-        get => (arg) => ValueHandler(arg);
-    }
 }

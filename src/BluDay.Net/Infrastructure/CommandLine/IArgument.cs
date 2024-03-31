@@ -17,6 +17,4 @@ public interface IArgument
     string Name { get; }
 
     int MaxValueCount { get; }
-
-    Func<string, object?> ValueHandler { get; }
 }
