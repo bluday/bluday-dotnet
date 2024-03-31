@@ -14,13 +14,20 @@ public abstract class Argument<TValue> : IArgument
 
     public string? Description { get; init; }
 
-    public string Name { get; protected set; } = null!;
+    public string Name { get; protected set; }
 
     public int MaxValueCount { get; init; }
 
-    public Func<string, TValue?> ValueHandler { get; init; } = null!;
+    public Func<string, TValue?> ValueHandler { get; init; }
 
     object? IArgument.Constant => Constant;
 
     object? IArgument.DefaultValue => DefaultValue;
+
+    public Argument()
+    {
+        Name = null!;
+
+        ValueHandler = null!;
+    }
 }
