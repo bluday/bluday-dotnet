@@ -10,7 +10,7 @@ public readonly struct ParsedArgument
 
     public IImmutableList<ArgumentToken> Values => _values;
 
-    public ParsedArgument(ArgumentToken token) : this(token, ImmutableList<ArgumentToken>.Empty) { }
+    public ParsedArgument(ArgumentToken token) : this(token, []) { }
 
     public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
