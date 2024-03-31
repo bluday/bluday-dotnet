@@ -21,6 +21,8 @@ public class ArgumentsParser
         init => _optionalArguments = value.Distinct().ToImmutableList();
     }
 
+    public Type ResultType => _resultType;
+
     public ArgumentsParser(Type resultType)
     {
         ArgumentNullException.ThrowIfNull(resultType);
