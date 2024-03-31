@@ -47,27 +47,4 @@ public class OptionalArgument<TValue> : Argument<TValue>, IOptionalArgument
             _shortFlag = new(primary, ArgumentFlagType.Short);
         }
     }
-
-    public string AsRawFlagDescriptor()
-    {
-        StringBuilder builder = new();
-
-        if (_shortFlag.HasValue && _longFlag.HasValue)
-        {
-            builder.Append(_shortFlag.Value.Name);
-            builder.Append(Constants.VERTICAL_BAR_CHAR);
-            builder.Append(_longFlag.Value.Name);
-        }
-        else
-        {
-            builder.Append(PrimaryFlag);
-        }
-
-        return builder.ToString();
-    }
-
-    public override string ToString()
-    {
-        return $"{Name} \"{AsRawFlagDescriptor()}\"";
-    }
 }
