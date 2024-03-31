@@ -1,40 +1,15 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public class ArgumentsParser<TArguments> where TArguments : new()
+public class ArgumentsParser<TArguments> : ArgumentsParser where TArguments : new()
 {
-    private readonly PositionalArgument? _positionalArgument;
+    public ArgumentsParser() : base(typeof(TArguments)) { }
 
-    private readonly IImmutableList<OptionalArgument> _optionalArguments;
-
-    public PositionalArgument? PositionalArgument
+    public new TArguments Parse(string[] args)
     {
-        get  => _positionalArgument;
-        init => _positionalArgument = value;
+        return (TArguments)base.Parse(args);
     }
 
-    [DisallowNull]
-    public IImmutableList<OptionalArgument> OptionalArguments
-    {
-        get  => _optionalArguments;
-        init => _optionalArguments = value.Distinct().ToImmutableList();
-    }
-
-    public ArgumentsParser()
-    {
-        _optionalArguments = ImmutableList<OptionalArgument>.Empty;
-    }
-
-    internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
-    {
-        return BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public;
-    }
-
-    public TArguments Parse(string[] args)
-    {
-        throw new NotImplementedException();
-    }
-
-    public TArguments ParseFromCommandLine()
+    public new TArguments ParseFromCommandLine()
     {
         return Parse(Environment.GetCommandLineArgs());
     }
