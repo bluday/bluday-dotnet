@@ -14,7 +14,7 @@ public interface IArgument
 
     string? Description { get; }
 
-    string Name { get; }
+    string? Name { get; }
 
     int MaxValueCount { get; }
 }
