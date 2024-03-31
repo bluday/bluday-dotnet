@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public sealed class OptionalArgument<TValue> : Argument<TValue>
+public class OptionalArgument<TValue> : Argument<TValue>
 {
     private readonly ArgumentFlag? _longFlag;
 

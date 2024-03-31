@@ -1,6 +1,6 @@
 namespace BluDay.Net.CommandLine;
 
-public sealed class PositionalArgument<TValue> : Argument<TValue>
+public class PositionalArgument<TValue> : Argument<TValue>
 {
     public string Symbol { get; }
 
