@@ -8,16 +8,15 @@ public readonly struct ParsedArgument
 
     public bool HasValues => _values.Count > 0;
 
-    [DisallowNull]
-    public IImmutableList<ArgumentToken> Values
-    {
-        get  => _values;
-        init => _values = value;
-    }
+    public IImmutableList<ArgumentToken> Values => _values;
 
-    public ParsedArgument(ArgumentToken token)
+    public ParsedArgument(ArgumentToken token) : this(token, ImmutableList<ArgumentToken>.Empty) { }
+
+    public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
-        _values = ImmutableList<ArgumentToken>.Empty;
+        ArgumentNullException.ThrowIfNull(values);
+
+        _values = values.ToImmutableList();
 
         Token = token;
     }
