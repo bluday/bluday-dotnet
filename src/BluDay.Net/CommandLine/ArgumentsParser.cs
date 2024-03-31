@@ -2,13 +2,13 @@
 
 public class ArgumentsParser
 {
-    private readonly PositionalArgument? _positionalArgument;
+    private readonly IPositionalArgument? _positionalArgument;
 
     private readonly IImmutableList<IOptionalArgument> _optionalArguments;
 
     private readonly Type _resultType;
 
-    public PositionalArgument? PositionalArgument
+    public IPositionalArgument? PositionalArgument
     {
         get  => _positionalArgument;
         init => _positionalArgument = value;
