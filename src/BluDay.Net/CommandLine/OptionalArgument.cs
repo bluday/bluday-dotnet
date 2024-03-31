@@ -20,31 +20,33 @@ public class OptionalArgument : Argument
 
         string[] flags = flagDescriptor.Split(Constants.VERTICAL_BAR_CHAR);
 
-        string primary = flags[0];
+        string primaryName = flags[0];
 
-        string? secondary = flags.ElementAtOrDefault(1);
+        string? secondaryName = flags.Length > 1 ? flags[1] : null;
 
-        if (secondary is not null)
+        if (secondaryName?.Length < primaryName.Length)
         {
-            if (primary.Length > secondary.Length)
-            {
-                throw new InvalidArgumentFlagLengthException(primary, secondary);
-            }
+            throw new InvalidArgumentFlagLengthException(primaryName, secondaryName);
+        }
 
-            _longFlag = new(secondary, ArgumentFlagType.Long);
+        ArgumentFlag primary = new(primaryName);
 
-            _shortFlag = new(primary, ArgumentFlagType.Short);
+        if (secondaryName is not null)
+        {
+            _longFlag = new(secondaryName);
+
+            _shortFlag = primary;
 
             return;
         }
 
-        if (primary.Length > 1)
+        if (primary.Type is ArgumentFlagType.Long)
         {
-            _longFlag = new(primary, ArgumentFlagType.Long);
+            _longFlag = primary;
         }
         else
         {
-            _shortFlag = new(primary, ArgumentFlagType.Short);
+            _shortFlag = primary;
         }
     }
 }

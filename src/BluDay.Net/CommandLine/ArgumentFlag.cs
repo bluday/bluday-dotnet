@@ -6,19 +6,20 @@ public readonly struct ArgumentFlag
 
     public string Name { get; }
 
-    public ArgumentFlag(string name, ArgumentFlagType type)
+    public ArgumentFlag(string name)
     {
         ValidateName(name);
 
-        Type = type;
+        if (name.Length > 2)
+        {
+            Type = ArgumentFlagType.Long;
+        }
 
         Name = name;
     }
 
     private static void ValidateName(string name)
     {
-        throw new NotImplementedException();
-
         // throw new InvalidArgumentFlagNameException(name);
     }
 
