@@ -23,11 +23,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         _optionalArguments = optionalArguments.Distinct().ToImmutableList();
     }
 
-    internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
-    {
-        return BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public;
-    }
-
     public TArguments Parse(string[] args)
     {
         throw new NotImplementedException();
