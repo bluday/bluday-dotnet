@@ -4,7 +4,7 @@ public class ArgumentsParser
 {
     private readonly PositionalArgument? _positionalArgument;
 
-    private readonly IImmutableList<OptionalArgument> _optionalArguments;
+    private readonly IImmutableList<IOptionalArgument> _optionalArguments;
 
     private readonly Type _resultType;
 
@@ -15,7 +15,7 @@ public class ArgumentsParser
     }
 
     [DisallowNull]
-    public IImmutableList<OptionalArgument> OptionalArguments
+    public IImmutableList<IOptionalArgument> OptionalArguments
     {
         get  => _optionalArguments;
         init => _optionalArguments = value.Distinct().ToImmutableList();
@@ -27,7 +27,7 @@ public class ArgumentsParser
     {
         ArgumentNullException.ThrowIfNull(resultType);
 
-        _optionalArguments = ImmutableList<OptionalArgument>.Empty;
+        _optionalArguments = ImmutableList<IOptionalArgument>.Empty;
 
         _resultType = resultType;
     }
