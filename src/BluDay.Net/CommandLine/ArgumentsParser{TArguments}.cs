@@ -11,6 +11,6 @@ public class ArgumentsParser<TArguments> : ArgumentsParser where TArguments : ne
 
     public new TArguments ParseFromCommandLine()
     {
-        return Parse(Environment.GetCommandLineArgs());
+        return (TArguments)base.ParseFromCommandLine();
     }
 }
