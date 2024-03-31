@@ -16,10 +16,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         get => _optionalArguments;
     }
 
-    public ArgumentsParser(PositionalArgument? positionalArgument) : this([], positionalArgument) { }
-
-    public ArgumentsParser(IImmutableList<OptionalArgument> optionalArguments) : this(optionalArguments, null) { }
-
     public ArgumentsParser(IImmutableList<OptionalArgument> optionalArguments, PositionalArgument? positionalArgument)
     {
         _optionalArguments = optionalArguments.Distinct().ToImmutableList();
