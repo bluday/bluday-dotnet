@@ -4,8 +4,8 @@ public enum ArgumentActionType
 {
     StoreConstant,
     StoreValue,
-    AppendValue,
     AppendConstant,
+    AppendValue,
     CountFlag,
     HelpMessage,
     VersionOutput
