@@ -18,9 +18,9 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
     public ArgumentsParser(IEnumerable<OptionalArgument> optionalArguments, PositionalArgument? positionalArgument)
     {
-        _optionalArguments = optionalArguments.Distinct().ToImmutableList();
-
         _positionalArgument = positionalArgument;
+
+        _optionalArguments = optionalArguments.Distinct().ToImmutableList();
     }
 
     internal static BindingFlags GetTargetPropertyReflectionBindingFlags()
