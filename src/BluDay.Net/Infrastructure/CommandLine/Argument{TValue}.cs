@@ -15,6 +15,8 @@ public abstract class Argument : IArgument
         get => _actionKind;
         init
         {
+            // TODO: Reset invalid constant and default value.
+
             _actionKind = value;
         }
     }
@@ -24,6 +26,8 @@ public abstract class Argument : IArgument
         get => _storeKind;
         init
         {
+            // TODO: Reset invalid constant and default value.
+
             _storeKind = value;
         }
     }
@@ -35,6 +39,8 @@ public abstract class Argument : IArgument
         get => _constant;
         init
         {
+            // TODO: Validate value type.
+
             _constant = value;
         }
     }
@@ -44,6 +50,8 @@ public abstract class Argument : IArgument
         get => _defaultValue;
         init
         {
+            // TODO: Validate value type.
+
             _defaultValue = value;
         }
     }
