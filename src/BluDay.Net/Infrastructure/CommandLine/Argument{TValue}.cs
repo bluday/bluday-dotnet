@@ -60,25 +60,4 @@ public abstract class Argument : IArgument
     {
         ValueHandler = null!;
     }
-
-    private void ValidateStoreValue(object value)
-    {
-        if (value.GetType() != GetStoreValueType(_storeKind))
-        {
-            throw new InvalidOperationException();
-        }
-    }
-
-    public static Type GetStoreValueType(ArgumentStoreKind kind)
-    {
-        switch (kind)
-        {
-            case ArgumentStoreKind.Integer: return typeof(int);
-            case ArgumentStoreKind.Point:   return typeof(float);
-            case ArgumentStoreKind.String:  return typeof(string);
-            case ArgumentStoreKind.Char:    return typeof(char);
-        }
-
-        return typeof(bool);
-    }
 }
