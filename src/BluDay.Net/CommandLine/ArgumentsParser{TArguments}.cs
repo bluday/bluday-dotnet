@@ -23,7 +23,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         _optionalArguments = optionalArguments.Distinct().ToImmutableList();
     }
 
-    public TArguments Parse(string[] args)
+    public TArguments Parse(params string[] values)
     {
         throw new NotImplementedException();
     }
