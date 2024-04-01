@@ -2,9 +2,9 @@ namespace BluDay.Net.CommandLine;
 
 public interface IArgument
 {
-    ArgumentActionType ActionType { get; }
+    ArgumentActionKind ActionKind { get; }
 
-    ArgumentStoreType StoreType { get; }
+    ArgumentStoreKind StoreKind { get; }
 
     bool IsRequired { get; }
 
