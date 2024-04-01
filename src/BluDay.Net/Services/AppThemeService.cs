@@ -8,6 +8,8 @@ public sealed class AppThemeService : IAppThemeService
 
     public AppThemeService(IMessenger messenger)
     {
+        ArgumentNullException.ThrowIfNull(messenger);
+
         _messenger = messenger;
     }
 }

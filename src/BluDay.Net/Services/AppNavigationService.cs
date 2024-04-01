@@ -13,6 +13,8 @@ public sealed class AppNavigationService : IAppNavigationService
 
     public AppNavigationService(IMessenger messenger)
     {
+        ArgumentNullException.ThrowIfNull(messenger);
+
         _messenger = messenger;
 
         _navigatorMap = new();

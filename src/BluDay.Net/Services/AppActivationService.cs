@@ -10,6 +10,8 @@ public sealed class AppActivationService : IAppActivationService
 
     public AppActivationService(IMessenger messenger)
     {
+        ArgumentNullException.ThrowIfNull(messenger);
+
         _messenger = messenger;
     }
 
