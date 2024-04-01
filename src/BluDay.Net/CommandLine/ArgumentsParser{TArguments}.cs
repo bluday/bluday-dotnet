@@ -16,11 +16,21 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         get => _optionalArguments;
     }
 
-    public ArgumentsParser(IEnumerable<OptionalArgument> optionalArguments, PositionalArgument? positionalArgument)
+    public ArgumentsParser()
     {
-        _positionalArgument = positionalArgument;
+        _positionalArgument = CreatePositional();
 
-        _optionalArguments = optionalArguments.Distinct().ToImmutableList();
+        _optionalArguments = CreateOptionals().Distinct().ToImmutableList();
+    }
+
+    protected virtual PositionalArgument? CreatePositional()
+    {
+        return null;
+    }
+
+    protected virtual IEnumerable<OptionalArgument> CreateOptionals()
+    {
+        yield break;
     }
 
     public TArguments Parse(params string[] values)
