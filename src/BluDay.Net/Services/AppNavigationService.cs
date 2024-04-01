@@ -4,13 +4,18 @@ public sealed class AppNavigationService : IAppNavigationService
 {
     private readonly IMessenger _messenger;
 
-    private readonly Dictionary<Guid, INavigator> _navigatorMap = new();
+    private readonly Dictionary<Guid, INavigator> _navigatorMap;
 
-    public IReadOnlyDictionary<Guid, INavigator> NavigatorMap => _navigatorMap.AsReadOnly();
+    public IReadOnlyDictionary<Guid, INavigator> NavigatorMap
+    {
+        get => _navigatorMap.AsReadOnly();
+    }
 
     public AppNavigationService(IMessenger messenger)
     {
         _messenger = messenger;
+
+        _navigatorMap = new();
     }
 
     public INavigator CreateNavigator(object source)
