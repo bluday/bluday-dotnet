@@ -6,7 +6,7 @@ public interface IAppWindowService
 
     int WindowCount { get; }
 
-    IEnumerable<IWindow> Windows { get; }
+    IImmutableList<IWindow> Windows { get; }
 
     IWindow CreateWindow();
 
