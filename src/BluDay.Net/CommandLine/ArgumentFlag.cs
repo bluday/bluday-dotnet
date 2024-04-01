@@ -2,7 +2,7 @@
 
 public readonly struct ArgumentFlag
 {
-    public ArgumentFlagType Type { get; }
+    public ArgumentFlagKind Kind { get; }
 
     public string Name { get; }
 
@@ -12,7 +12,7 @@ public readonly struct ArgumentFlag
 
         if (name.Length > 2)
         {
-            Type = ArgumentFlagType.Long;
+            Kind = ArgumentFlagKind.Long;
         }
 
         Name = name;

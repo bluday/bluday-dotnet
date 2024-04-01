@@ -40,7 +40,7 @@ public class OptionalArgument : Argument
             return;
         }
 
-        if (primary.Type is ArgumentFlagType.Long)
+        if (primary.Kind is ArgumentFlagKind.Long)
         {
             _longFlag = primary;
         }
