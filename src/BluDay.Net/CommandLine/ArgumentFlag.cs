@@ -8,7 +8,9 @@ public readonly struct ArgumentFlag
 
     public ArgumentFlag(string name)
     {
-        ValidateName(name);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+
+        // TODO: Validate name.
 
         if (name.Length > 2)
         {
@@ -16,24 +18,5 @@ public readonly struct ArgumentFlag
         }
 
         Name = name;
-    }
-
-    private static void ValidateName(string name)
-    {
-        // throw new InvalidArgumentFlagNameException(name);
-    }
-
-    public static bool HasValidName(string name)
-    {
-        try
-        {
-            ValidateName(name);
-        }
-        catch
-        {
-            return false;
-        }
-
-        return true;
     }
 }
