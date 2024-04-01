@@ -2,6 +2,8 @@
 
 public sealed class AppWindowService : IAppWindowService
 {
+    private readonly IMessenger _messenger;
+
     private readonly HashSet<IWindow> _windows = new();
 
     public IWindow? MainWindow => _windows.FirstOrDefault();
@@ -9,6 +11,11 @@ public sealed class AppWindowService : IAppWindowService
     public int WindowCount => _windows.Count;
 
     public IEnumerable<IWindow> Windows => _windows;
+
+    public AppWindowService(IMessenger messenger)
+    {
+        _messenger = messenger;
+    }
 
     public IWindow CreateWindow()
     {
