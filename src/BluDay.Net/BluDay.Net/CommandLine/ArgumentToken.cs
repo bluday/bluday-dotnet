@@ -8,9 +8,13 @@ public readonly struct ArgumentToken
 
     public string Value { get; }
 
+    public ArgumentToken(string value) : this(value, -1) { }
+
     public ArgumentToken(string value, int index)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
+
+        index = index >= 0 ? index : -1;
 
         IsFlag =
             value.StartsWith(Constants.ARG_SHORT_FLAG_PREFIX) ||
