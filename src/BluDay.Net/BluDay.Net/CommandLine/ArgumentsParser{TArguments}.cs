@@ -16,20 +16,11 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         get => _optionalArguments;
     }
 
-    public ArgumentsParser() : this(
-        optionalArguments:  null!,
-        positionalArgument: null!
-    ) { }
+    public ArgumentsParser() : this(null!, null!) { }
 
-    public ArgumentsParser(PositionalArgument positionalArgument) : this(
-        optionalArguments:  null!,
-        positionalArgument: positionalArgument
-    ) { }
+    public ArgumentsParser(PositionalArgument positionalArgument) : this(null!, positionalArgument) { }
 
-    public ArgumentsParser(IEnumerable<OptionalArgument> optionalArguments) : this(
-        optionalArguments:  optionalArguments,
-        positionalArgument: null!
-    ) { }
+    public ArgumentsParser(IEnumerable<OptionalArgument> optionalArguments) : this(optionalArguments, null!) { }
 
     public ArgumentsParser(IEnumerable<OptionalArgument> optionalArguments, PositionalArgument positionalArgument)
     {
