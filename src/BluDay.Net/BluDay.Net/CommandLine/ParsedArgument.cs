@@ -13,7 +13,7 @@ public readonly struct ParsedArgument
     public ArgumentToken Token { get; }
 
     /// <summary>
-    /// A convenience property for evaluating the value count for the parsed argument.
+    /// The count for store values.
     /// </summary>
     public bool HasValues => _values.Count > 0;
 
