@@ -50,21 +50,21 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     }
 
     /// <summary>
-    /// Parses raw argument string values and maps them to a new <see cref="TArguments"/> instance.
+    /// Parses arguments from <see cref="Environment.GetCommandLineArgs"/>.
     /// </summary>
-    /// <param name="values">Raw argument values.</param>
-    /// <returns>A new <see cref="TArguments"/> instance with parsed and mapped argument values.</returns>
-    public TArguments Parse(params string[] values)
+    /// <returns>A new <see cref="TArguments"/> instance with parsed argument.</returns>
+    public TArguments Parse()
     {
-        throw new NotImplementedException();
+        return Parse(Environment.GetCommandLineArgs());
     }
 
     /// <summary>
-    /// Convenient method for parsing arguments using <see cref="Environment.GetCommandLineArgs"/>.
+    /// Parses provided raw argument values.
     /// </summary>
-    /// <returns>A new <see cref="TArguments"/> instance with parsed and mapped argument values.</returns>
-    public TArguments ParseFromCommandLine()
+    /// <param name="values">Raw argument values.</param>
+    /// <returns>A new <see cref="TArguments"/> instance with parsed argument.</returns>
+    public TArguments Parse(params string[] values)
     {
-        return Parse(Environment.GetCommandLineArgs());
+        throw new NotImplementedException();
     }
 }
