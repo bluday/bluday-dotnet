@@ -51,8 +51,8 @@ public readonly struct ArgumentToken
     /// <returns>A <see cref="bool"/> value indicative whether the value is a flag.</returns>
     public static bool IsValidFlag(string value)
     {
-        return
-            value.StartsWith(Constants.ARG_SHORT_FLAG_PREFIX) ||
-            value.StartsWith(Constants.ARG_LONG_FLAG_PREFIX);
+        return !value.IsNullOrWhiteSpace()
+            || value.StartsWith(Constants.ARG_SHORT_FLAG_PREFIX)
+            || value.StartsWith(Constants.ARG_LONG_FLAG_PREFIX);
     }
 }
