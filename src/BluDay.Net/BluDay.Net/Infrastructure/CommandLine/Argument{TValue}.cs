@@ -114,7 +114,7 @@ public abstract class Argument : IArgument
     }
 
     /// <summary>
-    /// Gets the store value type a provided <see cref="ArgumentStoreKind"/> value.
+    /// Gets the store value type by a provided <see cref="ArgumentStoreKind"/> value.
     /// </summary>
     /// <param name="kind">The store kind.</param>
     /// <returns>The corresponding value type.</returns>
