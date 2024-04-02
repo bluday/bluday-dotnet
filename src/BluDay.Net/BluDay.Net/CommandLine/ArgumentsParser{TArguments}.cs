@@ -1,10 +1,10 @@
 ﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// A class that facilitates parsing and mapping of command-line argument values to an instance of the specified generic parameter type.
+/// A class for parsing and mapping command-line argument values to an instance of the specified generic parameter type.
 /// </summary>
 /// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
-public class ArgumentsParser<TArguments> where TArguments : new()
+public class ArgumentsParser<TArguments> : IArgumentsParser where TArguments : new()
 {
     private readonly PositionalArgument? _positional;
 
@@ -19,6 +19,11 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// Gets an immutable list of distinct optional arguments.
     /// </summary>
     public IImmutableList<OptionalArgument> OptionalArguments => _optionals;
+
+    /// <summary>
+    /// <inheritdoc cref="IArgumentsParser.Res"/>
+    /// </summary>
+    public Type ResultType { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ArgumentsParser{TArguments}"/> class with default values.
@@ -47,12 +52,13 @@ public class ArgumentsParser<TArguments> where TArguments : new()
         _positional = positional;
 
         _optionals = optionals?.Distinct().ToImmutableList() ?? ImmutableList<OptionalArgument>.Empty;
+
+        ResultType = typeof(TArguments);
     }
 
     /// <summary>
-    /// Parses raw argument string values and maps them to a new <see cref="TArguments"/> instance.
+    /// <inheritdoc cref="IArgumentsParser.Parse(string[])"/>
     /// </summary>
-    /// <param name="values">Raw argument values.</param>
     /// <returns>A new <see cref="TArguments"/> instance with parsed and mapped argument values.</returns>
     public TArguments Parse(params string[] values)
     {
@@ -60,11 +66,27 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     }
 
     /// <summary>
-    /// Convenient method for parsing arguments using <see cref="Environment.GetCommandLineArgs"/>.
+    /// <inheritdoc cref="IArgumentsParser.ParseFromCommandLine"/>
     /// </summary>
     /// <returns>A new <see cref="TArguments"/> instance with parsed and mapped argument values.</returns>
     public TArguments ParseFromCommandLine()
     {
         return Parse(Environment.GetCommandLineArgs());
+    }
+
+    /// <summary>
+    /// <inheritdoc cref="IArgumentsParser.Parse(string[])"/>
+    /// </summary>
+    object IArgumentsParser.Parse(params string[] values)
+    {
+        return Parse(values)!;
+    }
+
+    /// <summary>
+    /// <inheritdoc cref="IArgumentsParser.ParseFromCommandLine"/>
+    /// </summary>
+    object IArgumentsParser.ParseFromCommandLine()
+    {
+        return ParseFromCommandLine()!;
     }
 }
