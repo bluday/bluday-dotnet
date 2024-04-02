@@ -55,4 +55,9 @@ public interface IArgument
     /// Gets the maximum number of values allowed for the argument.
     /// </summary>
     int MaxValueCount { get; }
+
+    /// <summary>
+    /// Gets the type of the store value.
+    /// </summary>
+    Type StoreType { get; }
 }

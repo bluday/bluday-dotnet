@@ -94,6 +94,22 @@ public abstract class Argument : IArgument
     /// </summary>
     public Func<string, object?> ValueHandler { get; init; }
 
+    /// <summary>
+    /// <inheritdoc cref="IArgument.StoreType"/>
+    /// </summary>
+    public Type StoreType
+    {
+        get => _storeKind switch
+        {
+            ArgumentStoreKind.Boolean => typeof(bool),
+            ArgumentStoreKind.Integer => typeof(int),
+            ArgumentStoreKind.Point   => typeof(float),
+            ArgumentStoreKind.String  => typeof(string),
+            ArgumentStoreKind.Char    => typeof(char),
+            _ => typeof(bool)
+        };
+    }
+
     public Argument()
     {
         ValueHandler = null!;
