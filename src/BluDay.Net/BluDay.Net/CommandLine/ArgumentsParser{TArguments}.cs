@@ -1,10 +1,10 @@
 ﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// A class for parsing and mapping command-line argument values to an instance of the specified generic parameter type.
+/// A class that facilitates parsing and mapping of command-line argument values to an instance of the specified generic parameter type.
 /// </summary>
 /// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
-public class ArgumentsParser<TArguments> : IArgumentsParser where TArguments : new()
+public class ArgumentsParser<TArguments> where TArguments : new()
 {
     private readonly PositionalArgument? _positional;
 
@@ -21,29 +21,24 @@ public class ArgumentsParser<TArguments> : IArgumentsParser where TArguments : n
     public IImmutableList<OptionalArgument> OptionalArguments => _optionals;
 
     /// <summary>
-    /// <inheritdoc cref="IArgumentsParser.ResultType"/>
-    /// </summary>
-    public Type ResultType { get; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ArgumentsParser{TArguments}"/> class with default values.
+    /// Initializes a new instance with default values.
     /// </summary>
     public ArgumentsParser() : this(null!, null!) { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ArgumentsParser{TArguments}"/> class with a positional argument.
+    /// Initializes a new instance with a positional argument.
     /// </summary>
     /// <param name="positional">The postional argument.</param>
     public ArgumentsParser(PositionalArgument positional) : this(null!, positional) { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ArgumentsParser{TArguments}"/> class with optional arguments.
+    /// Initializes a new instance with optional arguments.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
     public ArgumentsParser(IEnumerable<OptionalArgument> optionals) : this(optionals, null!) { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ArgumentsParser{TArguments}"/> class with optional and positional arguments.
+    /// Initializes a new instance with optional and positional arguments.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
     /// <param name="positional">The postional argument.</param>
@@ -52,13 +47,12 @@ public class ArgumentsParser<TArguments> : IArgumentsParser where TArguments : n
         _positional = positional;
 
         _optionals = optionals?.Distinct().ToImmutableList() ?? ImmutableList<OptionalArgument>.Empty;
-
-        ResultType = typeof(TArguments);
     }
 
     /// <summary>
-    /// <inheritdoc cref="IArgumentsParser.Parse(string[])"/>
+    /// Parses raw argument string values and maps them to a new <see cref="TArguments"/> instance.
     /// </summary>
+    /// <param name="values">Raw argument values.</param>
     /// <returns>A new <see cref="TArguments"/> instance with parsed and mapped argument values.</returns>
     public TArguments Parse(params string[] values)
     {
@@ -66,27 +60,11 @@ public class ArgumentsParser<TArguments> : IArgumentsParser where TArguments : n
     }
 
     /// <summary>
-    /// <inheritdoc cref="IArgumentsParser.ParseFromCommandLine"/>
+    /// Convenient method for parsing arguments using <see cref="Environment.GetCommandLineArgs"/>.
     /// </summary>
     /// <returns>A new <see cref="TArguments"/> instance with parsed and mapped argument values.</returns>
     public TArguments ParseFromCommandLine()
     {
         return Parse(Environment.GetCommandLineArgs());
-    }
-
-    /// <summary>
-    /// <inheritdoc cref="IArgumentsParser.Parse(string[])"/>
-    /// </summary>
-    object IArgumentsParser.Parse(params string[] values)
-    {
-        return Parse(values)!;
-    }
-
-    /// <summary>
-    /// <inheritdoc cref="IArgumentsParser.ParseFromCommandLine"/>
-    /// </summary>
-    object IArgumentsParser.ParseFromCommandLine()
-    {
-        return ParseFromCommandLine()!;
     }
 }
