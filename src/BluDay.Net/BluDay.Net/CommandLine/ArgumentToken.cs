@@ -14,7 +14,7 @@ public readonly struct ArgumentToken
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
-        index = index >= 0 ? index : -1;
+        ArgumentOutOfRangeException.ThrowIfLessThan(index, -1);
 
         IsFlag = IsValidFlag(value);
 
