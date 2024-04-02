@@ -31,5 +31,6 @@
 
   <ItemGroup>
     <Folder Include="BluDay.Net.Tests\Integration\" />
+    <Folder Include="BluDay.Net.Tests\Unit\" />
   </ItemGroup>
 </Project>
