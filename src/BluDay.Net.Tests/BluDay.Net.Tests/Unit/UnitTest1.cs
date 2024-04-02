@@ -1,4 +1,4 @@
-namespace BluDay.Net.Tests;
+namespace BluDay.Net.Tests.Unit;
 
 [TestClass]
 public class UnitTest1
