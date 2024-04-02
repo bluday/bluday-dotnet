@@ -26,14 +26,9 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     {
         _positionalArgument = positionalArgument;
 
-        if (optionalArguments is null)
-        {
-            _optionalArguments = ImmutableList<OptionalArgument>.Empty;
-
-            return;
-        }
-
-        _optionalArguments = optionalArguments.Distinct().ToImmutableList();
+        _optionalArguments = optionalArguments?
+            .Distinct()
+            .ToImmutableList() ?? ImmutableList<OptionalArgument>.Empty;
     }
 
     public TArguments Parse(params string[] values)
