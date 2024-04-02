@@ -1,0 +1,1 @@
+global using BluDay.Net.CommandLine;
