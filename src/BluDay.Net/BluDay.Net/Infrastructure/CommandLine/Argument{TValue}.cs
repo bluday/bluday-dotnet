@@ -13,6 +13,8 @@ public abstract class Argument : IArgument
 
     private readonly object? _defaultValue;
 
+    private readonly Type _storeType;
+
     /// <summary>
     /// <inheritdoc cref="IArgument.ActionKind"/>
     /// </summary>
@@ -38,6 +40,8 @@ public abstract class Argument : IArgument
             // TODO: Reset invalid constant and default value.
 
             _storeKind = value;
+
+            _storeType = GetStoreType(value);
         }
     }
 
@@ -97,21 +101,30 @@ public abstract class Argument : IArgument
     /// <summary>
     /// <inheritdoc cref="IArgument.StoreType"/>
     /// </summary>
-    public Type StoreType
-    {
-        get => _storeKind switch
-        {
-            ArgumentStoreKind.Boolean => typeof(bool),
-            ArgumentStoreKind.Integer => typeof(int),
-            ArgumentStoreKind.Point   => typeof(float),
-            ArgumentStoreKind.String  => typeof(string),
-            ArgumentStoreKind.Char    => typeof(char),
-            _ => typeof(bool)
-        };
-    }
+    public Type StoreType => _storeType;
 
+    /// <summary>
+    /// Initializes a new <see cref="Argument"/> instance.
+    /// </summary>
     public Argument()
     {
+        _storeType = null!;
+
         ValueHandler = null!;
     }
+
+    /// <summary>
+    /// Gets the store value type a provided <see cref="ArgumentStoreKind"/> value.
+    /// </summary>
+    /// <param name="kind">The store kind.</param>
+    /// <returns>The corresponding value type.</returns>
+    public static Type GetStoreType(ArgumentStoreKind kind) => kind switch
+    {
+        ArgumentStoreKind.Boolean => typeof(bool),
+        ArgumentStoreKind.Integer => typeof(int),
+        ArgumentStoreKind.Point   => typeof(float),
+        ArgumentStoreKind.String  => typeof(string),
+        ArgumentStoreKind.Char    => typeof(char),
+        _ => typeof(bool)
+    };
 }
