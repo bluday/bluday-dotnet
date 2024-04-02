@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluDay.Net", "BluDay.Net\BluDay.Net.csproj", "{DB2EA637-8F3F-4791-A627-33109EA3F496}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB2EA637-8F3F-4791-A627-33109EA3F496}.Debug|x64.ActiveCfg = Debug|x64
+		{DB2EA637-8F3F-4791-A627-33109EA3F496}.Debug|x64.Build.0 = Debug|x64
+		{DB2EA637-8F3F-4791-A627-33109EA3F496}.Release|x64.ActiveCfg = Release|x64
+		{DB2EA637-8F3F-4791-A627-33109EA3F496}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E8200F9-40B5-46F8-94FB-2172CAD1F008}
+	EndGlobalSection
+EndGlobal
