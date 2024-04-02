@@ -21,7 +21,7 @@ public class ArgumentsParser<TArguments> : IArgumentsParser where TArguments : n
     public IImmutableList<OptionalArgument> OptionalArguments => _optionals;
 
     /// <summary>
-    /// <inheritdoc cref="IArgumentsParser.Res"/>
+    /// <inheritdoc cref="IArgumentsParser.ResultType"/>
     /// </summary>
     public Type ResultType { get; }
 
