@@ -38,7 +38,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public ArgumentsParser(IEnumerable<OptionalArgument> optionals) : this(optionals, null!) { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ArgumentsParser{TArguments}"/> class with default values.
+    /// Initializes a new instance of the <see cref="ArgumentsParser{TArguments}"/> class with optional and positional arguments.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
     /// <param name="positional">The postional argument.</param>
