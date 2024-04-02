@@ -13,7 +13,7 @@ public readonly struct ParsedArgument
     public ArgumentToken Token { get; }
 
     /// <summary>
-    /// A convenience property for quickly checking if store value count is greater than zero.
+    /// Gets a value indicative of if the count of values is greater than zero.
     /// </summary>
     public bool HasValues => _values.Count > 0;
 
