@@ -12,10 +12,9 @@ public readonly struct ArgumentToken
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
-        IsFlag = value.StartsWith(
-            Constants.ARG_SHORT_FLAG_PREFIX,
-            Constants.ARG_LONG_FLAG_PREFIX
-        );
+        IsFlag =
+            value.StartsWith(Constants.ARG_SHORT_FLAG_PREFIX) ||
+            value.StartsWith(Constants.ARG_LONG_FLAG_PREFIX);
 
         Index = index;
 
