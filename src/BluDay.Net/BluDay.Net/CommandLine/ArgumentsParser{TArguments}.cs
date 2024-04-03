@@ -23,7 +23,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public IImmutableList<OptionalArgument> OptionalArguments => _optionals;
 
     /// <summary>
-    /// Gets the targeted type that the <see cref="Parse(string[])"/> method returns an instance of.
+    /// Gets the type of object that <see cref="Parse(string[])"/> method returns.
     /// </summary>
     public Type ResultType => _resultType;
 
@@ -59,15 +59,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     }
 
     /// <summary>
-    /// Parses arguments from <see cref="Environment.GetCommandLineArgs"/>.
-    /// </summary>
-    /// <returns>A new <see cref="TArguments"/> instance with parsed argument.</returns>
-    public TArguments Parse()
-    {
-        return Parse(Environment.GetCommandLineArgs());
-    }
-
-    /// <summary>
     /// Parses provided raw argument values.
     /// </summary>
     /// <param name="values">Raw argument values.</param>
@@ -75,5 +66,14 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public TArguments Parse(params string[] values)
     {
         throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Parses arguments from <see cref="Environment.GetCommandLineArgs"/>.
+    /// </summary>
+    /// <returns>A new <see cref="TArguments"/> instance with parsed argument.</returns>
+    public TArguments ParseFromCommandLine()
+    {
+        return Parse(Environment.GetCommandLineArgs());
     }
 }
