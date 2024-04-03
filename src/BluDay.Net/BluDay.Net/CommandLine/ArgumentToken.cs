@@ -1,7 +1,7 @@
 namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// A parsed command-line argument token.
+/// A command-line argument token.
 /// </summary>
 public readonly struct ArgumentToken
 {
