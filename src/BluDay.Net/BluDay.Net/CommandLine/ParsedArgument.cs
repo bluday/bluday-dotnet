@@ -1,7 +1,7 @@
 namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// A struct for representing a raw command-line argument value.
+/// A struct for representing a raw command-line argument flag or value.
 /// </summary>
 public readonly struct ParsedArgument
 {
