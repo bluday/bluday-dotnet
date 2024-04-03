@@ -6,6 +6,8 @@
 /// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
+    private readonly Type _resultType;
+
     private readonly PositionalArgument? _positional;
 
     private readonly IImmutableList<OptionalArgument> _optionals;
@@ -19,6 +21,11 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// Gets an immutable list of distinct optional arguments.
     /// </summary>
     public IImmutableList<OptionalArgument> OptionalArguments => _optionals;
+
+    /// <summary>
+    /// Gets the targeted type that the <see cref="Parse(string[])"/> method returns an instance of.
+    /// </summary>
+    public Type ResultType => _resultType;
 
     /// <summary>
     /// Initializes a new instance with default values.
@@ -44,6 +51,8 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <param name="positional">The postional argument.</param>
     public ArgumentsParser(IEnumerable<OptionalArgument> optionals, PositionalArgument positional)
     {
+        _resultType = typeof(TArguments);
+
         _positional = positional;
 
         _optionals = optionals?.Distinct().ToImmutableList() ?? ImmutableList<OptionalArgument>.Empty;
