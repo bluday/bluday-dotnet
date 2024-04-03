@@ -67,13 +67,4 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     {
         throw new NotImplementedException();
     }
-
-    /// <summary>
-    /// Parses arguments from <see cref="Environment.GetCommandLineArgs"/>.
-    /// </summary>
-    /// <returns>A new <see cref="TArguments"/> instance with parsed argument.</returns>
-    public TArguments ParseFromCommandLine()
-    {
-        return Parse(Environment.GetCommandLineArgs());
-    }
 }
