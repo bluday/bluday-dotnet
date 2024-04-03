@@ -55,7 +55,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
 
         _positional = positional;
 
-        _optionals = optionals?.Distinct().ToImmutableList() ?? ImmutableList<OptionalArgument>.Empty;
+        _optionals = optionals.Distinct().ToImmutableList();
     }
 
     /// <summary>

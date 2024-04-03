@@ -35,7 +35,7 @@ public readonly struct ParsedArgument
     /// <param name="values">An enumerable of store value tokens.</param>
     public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
-        _values = values.ToImmutableList() ?? ImmutableList<ArgumentToken>.Empty;
+        _values = values.ToImmutableList();
 
         Token = token;
     }
