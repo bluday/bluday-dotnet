@@ -86,7 +86,7 @@ public abstract class Argument : IArgument
     /// <summary>
     /// <inheritdoc cref="IArgument.Name"/>
     /// </summary>
-    public string? Name { get; init; }
+    public required string Name { get; init; }
 
     /// <summary>
     /// <inheritdoc cref="IArgument.MaxValueCount"/>
