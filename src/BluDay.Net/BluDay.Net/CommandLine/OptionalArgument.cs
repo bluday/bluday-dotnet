@@ -25,11 +25,6 @@ public class OptionalArgument : Argument
     public ArgumentFlag? ShortFlag => _shortFlag;
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.Name"/>
-    /// </summary>
-    public required new string Name { get; init; }
-
-    /// <summary>
     /// Initializes an new instance with a flags described in a <see cref="string"/> value.
     /// </summary>
     /// <param name="flagDescriptor">The flag descriptor.</param>

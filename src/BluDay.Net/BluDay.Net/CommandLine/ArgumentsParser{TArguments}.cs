@@ -6,16 +6,11 @@
 /// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private readonly PositionalArgument? _positional;
-
     private readonly Type _resultType;
 
     private readonly IImmutableList<OptionalArgument> _optionals;
 
-    /// <summary>
-    /// Represents the positional argument descriptor.
-    /// </summary>
-    public PositionalArgument? PositionalArgument => _positional;
+    private readonly IImmutableList<PositionalArgument> _positionals;
 
     /// <summary>
     /// Gets the type of object that <see cref="Parse(string[])"/> method returns.
@@ -28,6 +23,11 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public IImmutableList<OptionalArgument> OptionalArguments => _optionals;
 
     /// <summary>
+    /// Represents the positional argument descriptor.
+    /// </summary>
+    public IImmutableList<PositionalArgument> PositionalArguments => _positionals;
+
+    /// <summary>
     /// Initializes a new instance with default values.
     /// </summary>
     public ArgumentsParser() : this(null!, null!) { }
@@ -36,7 +36,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// Initializes a new instance with a positional argument descriptor.
     /// </summary>
     /// <param name="positional">The postional argument.</param>
-    public ArgumentsParser(PositionalArgument positional) : this(null!, positional) { }
+    public ArgumentsParser(IEnumerable<PositionalArgument> positionals) : this(null!, positionals) { }
 
     /// <summary>
     /// Initializes a new instance with optional argument descriptors.
@@ -49,13 +49,13 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
     /// <param name="positional">The postional argument.</param>
-    public ArgumentsParser(IEnumerable<OptionalArgument> optionals, PositionalArgument positional)
+    public ArgumentsParser(IEnumerable<OptionalArgument> optionals, IEnumerable<PositionalArgument> positionals)
     {
         _resultType = typeof(TArguments);
 
-        _positional = positional;
-
         _optionals = optionals.Distinct().ToImmutableList();
+
+        _positionals = positionals.Distinct().ToImmutableList();
     }
 
     /// <summary>
