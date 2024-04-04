@@ -11,7 +11,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     private readonly Type _resultType;
 
     /// <summary>
-    /// Gets an immutable list of distinct optional argument descriptors.
+    /// Gets a descriptor of different argument descriptors.
     /// </summary>
     public ArgumentDescriptors Arguments => _arguments;
 
