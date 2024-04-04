@@ -1,7 +1,7 @@
 namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// Base class for creating command-line argument classes.
+/// Base class for creating derived command-line argument descriptors classes.
 /// </summary>
 public abstract class ArgumentDescriptor : IArgumentDescriptor
 {

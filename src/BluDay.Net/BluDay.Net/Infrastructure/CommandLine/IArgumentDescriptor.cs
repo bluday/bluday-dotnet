@@ -1,7 +1,7 @@
 namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// Provides information about a particular command-line argument.
+/// Describes a particular command-line argument.
 /// </summary>
 public interface IArgumentDescriptor
 {
