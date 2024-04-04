@@ -49,7 +49,7 @@ public interface IArgumentDescriptor
     /// <summary>
     /// Gets the name of the argument.
     /// </summary>
-    string? Name { get; }
+    string Name { get; }
 
     /// <summary>
     /// Gets the maximum number of values allowed for the argument.

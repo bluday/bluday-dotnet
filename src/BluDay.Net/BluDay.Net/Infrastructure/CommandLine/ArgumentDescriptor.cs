@@ -13,6 +13,8 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
 
     private readonly object? _defaultValue;
 
+    private readonly string _name;
+
     private readonly Type _storeType;
 
     /// <summary>
@@ -86,7 +88,7 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
     /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.Name"/>
     /// </summary>
-    public required string Name { get; init; }
+    public string Name => _name;
 
     /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.MaxValueCount"/>
@@ -106,8 +108,13 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
     /// <summary>
     /// Initializes a new <see cref="ArgumentDescriptor"/> instance.
     /// </summary>
-    public ArgumentDescriptor()
+    /// <param name="name">The name of the argument.</param>
+    public ArgumentDescriptor(string name)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+
+        _name = name;
+
         _storeType = null!;
 
         ValueHandler = null!;
