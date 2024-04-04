@@ -27,7 +27,7 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     public ArgumentFlag? ShortFlag => _shortFlag;
 
     /// <summary>
-    /// 
+    /// Gets the raw flag descriptor value specified at instantiation.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="InvalidArgumentFlagLengthException"></exception>
