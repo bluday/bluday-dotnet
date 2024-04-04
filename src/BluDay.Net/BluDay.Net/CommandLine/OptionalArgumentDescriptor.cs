@@ -36,38 +36,7 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
         get => _flagDescriptor;
         init
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(value);
-
-            string[] flags = value.Split(Constants.VERTICAL_BAR_CHAR);
-
-            string primaryName = flags[0];
-
-            string? secondaryName = flags.Length > 1 ? flags[1] : null;
-
-            if (secondaryName?.Length < primaryName.Length)
-            {
-                throw new InvalidArgumentFlagLengthException(primaryName, secondaryName);
-            }
-
-            ArgumentFlag primary = new(primaryName);
-
-            if (secondaryName is not null)
-            {
-                _longFlag = new(secondaryName);
-
-                _shortFlag = primary;
-
-                return;
-            }
-
-            if (primary.Kind is ArgumentFlagKind.Long)
-            {
-                _longFlag = primary;
-            }
-            else
-            {
-                _shortFlag = primary;
-            }
+            (_shortFlag, _longFlag) = ParseFlags(value);
 
             _flagDescriptor = value;
         }
@@ -80,5 +49,42 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     public OptionalArgumentDescriptor(string name) : base(name)
     {
         _flagDescriptor = null!;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="flagDescriptor"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="InvalidArgumentFlagLengthException"></exception>
+    public static (ArgumentFlag? Short, ArgumentFlag? Long) ParseFlags(string flagDescriptor)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
+
+        string[] flags = flagDescriptor.Split(Constants.VERTICAL_BAR_CHAR);
+
+        string primaryName = flags[0];
+
+        string? secondaryName = flags.Length > 1 ? flags[1] : null;
+
+        if (secondaryName?.Length < primaryName.Length)
+        {
+            throw new InvalidArgumentFlagLengthException(primaryName, secondaryName);
+        }
+
+        ArgumentFlag primary = new(primaryName);
+
+        if (secondaryName is null)
+        {
+            if (primary.Kind is ArgumentFlagKind.Long)
+            {
+                return (null, primary);
+            }
+
+            return (primary, null);
+        }
+
+        return (primary, new(secondaryName));
     }
 }
