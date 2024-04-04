@@ -3,7 +3,7 @@ namespace BluDay.Net.CommandLine;
 /// <summary>
 /// A descriptor for an optional command-line argument.
 /// </summary>
-public class OptionalArgument : Argument
+public class OptionalArgumentDescriptor : ArgumentDescriptor
 {
     private readonly ArgumentFlag? _longFlag;
 
@@ -29,7 +29,7 @@ public class OptionalArgument : Argument
     /// </summary>
     /// <param name="flagDescriptor">The flag descriptor.</param>
     /// <exception cref="InvalidArgumentFlagLengthException"></exception>
-    public OptionalArgument(string flagDescriptor)
+    public OptionalArgumentDescriptor(string flagDescriptor)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
 

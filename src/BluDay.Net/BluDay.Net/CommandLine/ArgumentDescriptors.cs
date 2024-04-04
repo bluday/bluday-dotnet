@@ -1,15 +1,15 @@
 ﻿namespace BluDay.Net.CommandLine;
 
-public sealed class Arguments
+public sealed class ArgumentDescriptors
 {
-    private readonly ImmutableList<OptionalArgument> _optionals;
+    private readonly ImmutableList<OptionalArgumentDescriptor> _optionals;
 
-    private readonly ImmutableList<PositionalArgument> _positionals;
+    private readonly ImmutableList<PositionalArgumentDescriptor> _positionals;
 
     /// <summary>
     /// Gets an immutable list of distinct optional argument descriptors.
     /// </summary>
-    public IImmutableList<OptionalArgument> Optionals
+    public IImmutableList<OptionalArgumentDescriptor> Optionals
     {
         get  => _optionals;
         init => _optionals = value.Distinct().ToImmutableList();
@@ -18,7 +18,7 @@ public sealed class Arguments
     /// <summary>
     /// Gets an immutable list of distinct positional argument descriptors.
     /// </summary>
-    public IImmutableList<PositionalArgument> Positionals
+    public IImmutableList<PositionalArgumentDescriptor> Positionals
     {
         get  => _positionals;
         init => _positionals = value.Distinct().ToImmutableList();
@@ -27,33 +27,33 @@ public sealed class Arguments
     /// <summary>
     /// Initializes a new instance with default values.
     /// </summary>
-    public Arguments() : this(null!, null!) { }
+    public ArgumentDescriptors() : this(null!, null!) { }
 
     /// <summary>
     /// Initializes a new instance with positional argument descriptors.
     /// </summary>
     /// <param name="positionals">The postional argument.</param>
-    public Arguments(IEnumerable<PositionalArgument> positionals) : this(null!, positionals) { }
+    public ArgumentDescriptors(IEnumerable<PositionalArgumentDescriptor> positionals) : this(null!, positionals) { }
 
     /// <summary>
     /// Initializes a new instance with optional argument descriptors.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
-    public Arguments(IEnumerable<OptionalArgument> optionals) : this(optionals, null!) { }
+    public ArgumentDescriptors(IEnumerable<OptionalArgumentDescriptor> optionals) : this(optionals, null!) { }
 
     /// <summary>
     /// Initializes a new instance with optional and positional arguments.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
     /// <param name="positional">An enumerable of positional arguments.</param>
-    public Arguments(IEnumerable<OptionalArgument> optionals, IEnumerable<PositionalArgument> positionals)
+    public ArgumentDescriptors(IEnumerable<OptionalArgumentDescriptor> optionals, IEnumerable<PositionalArgumentDescriptor> positionals)
     {
         _optionals = optionals
             .Distinct()
-            .ToImmutableList() ?? ImmutableList<OptionalArgument>.Empty;
+            .ToImmutableList() ?? ImmutableList<OptionalArgumentDescriptor>.Empty;
 
         _positionals = positionals
             .Distinct()
-            .ToImmutableList() ?? ImmutableList<PositionalArgument>.Empty;
+            .ToImmutableList() ?? ImmutableList<PositionalArgumentDescriptor>.Empty;
     }
 }

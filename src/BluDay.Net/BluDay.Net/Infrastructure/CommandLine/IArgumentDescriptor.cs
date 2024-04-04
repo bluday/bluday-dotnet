@@ -3,7 +3,7 @@ namespace BluDay.Net.CommandLine;
 /// <summary>
 /// Provides information about a particular command-line argument.
 /// </summary>
-public interface IArgument
+public interface IArgumentDescriptor
 {
     /// <summary>
     /// Gets the type of action to perform on a corresponding parsed argument.

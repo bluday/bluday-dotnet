@@ -6,7 +6,7 @@
 /// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private readonly Arguments _arguments;
+    private readonly ArgumentDescriptors _arguments;
 
     private readonly Type _resultType;
 
@@ -18,10 +18,10 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <summary>
     /// Gets an immutable list of distinct optional argument descriptors.
     /// </summary>
-    public Arguments Arguments => _arguments;
+    public ArgumentDescriptors Arguments => _arguments;
 
     /// <summary>
-    /// Initializes a new instance with a default <see cref="CommandLine.Arguments"/> instance.
+    /// Initializes a new instance with a default <see cref="ArgumentDescriptors"/> instance.
     /// </summary>
     public ArgumentsParser() : this(new()) { }
 
@@ -29,7 +29,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// Initializes a new instance and with pre-defined arguments.
     /// </summary>
     /// <param name="arguments">A descriptor of arguments.</param>
-    public ArgumentsParser(Arguments arguments)
+    public ArgumentsParser(ArgumentDescriptors arguments)
     {
         ArgumentNullException.ThrowIfNull(arguments);
 

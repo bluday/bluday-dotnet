@@ -3,7 +3,7 @@ namespace BluDay.Net.CommandLine;
 /// <summary>
 /// Base class for creating command-line argument classes.
 /// </summary>
-public abstract class Argument : IArgument
+public abstract class ArgumentDescriptor : IArgumentDescriptor
 {
     private readonly ArgumentActionKind _actionKind;
 
@@ -16,7 +16,7 @@ public abstract class Argument : IArgument
     private readonly Type _storeType;
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.ActionKind"/>
+    /// <inheritdoc cref="IArgumentDescriptor.ActionKind"/>
     /// </summary>
     public ArgumentActionKind ActionKind
     {
@@ -30,7 +30,7 @@ public abstract class Argument : IArgument
     }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.StoreKind"/>
+    /// <inheritdoc cref="IArgumentDescriptor.StoreKind"/>
     /// </summary>
     public ArgumentStoreKind StoreKind
     {
@@ -46,12 +46,12 @@ public abstract class Argument : IArgument
     }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.IsRequired"/>
+    /// <inheritdoc cref="IArgumentDescriptor.IsRequired"/>
     /// </summary>
     public bool IsRequired { get; init; }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.Constant"/>
+    /// <inheritdoc cref="IArgumentDescriptor.Constant"/>
     /// </summary>
     public object? Constant
     {
@@ -65,7 +65,7 @@ public abstract class Argument : IArgument
     }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.DefaultValue"/>
+    /// <inheritdoc cref="IArgumentDescriptor.DefaultValue"/>
     /// </summary>
     public object? DefaultValue
     {
@@ -79,17 +79,17 @@ public abstract class Argument : IArgument
     }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.Description"/>
+    /// <inheritdoc cref="IArgumentDescriptor.Description"/>
     /// </summary>
     public string? Description { get; init; }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.Name"/>
+    /// <inheritdoc cref="IArgumentDescriptor.Name"/>
     /// </summary>
     public required string Name { get; init; }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.MaxValueCount"/>
+    /// <inheritdoc cref="IArgumentDescriptor.MaxValueCount"/>
     /// </summary>
     public int MaxValueCount { get; init; }
 
@@ -99,14 +99,14 @@ public abstract class Argument : IArgument
     public Func<string, object?> ValueHandler { get; init; }
 
     /// <summary>
-    /// <inheritdoc cref="IArgument.StoreType"/>
+    /// <inheritdoc cref="IArgumentDescriptor.StoreType"/>
     /// </summary>
     public Type StoreType => _storeType;
 
     /// <summary>
-    /// Initializes a new <see cref="Argument"/> instance.
+    /// Initializes a new <see cref="ArgumentDescriptor"/> instance.
     /// </summary>
-    public Argument()
+    public ArgumentDescriptor()
     {
         _storeType = null!;
 
