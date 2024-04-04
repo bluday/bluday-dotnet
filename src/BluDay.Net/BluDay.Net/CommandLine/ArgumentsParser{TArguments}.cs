@@ -23,7 +23,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public IImmutableList<OptionalArgument> OptionalArguments => _optionals;
 
     /// <summary>
-    /// Represents the positional argument descriptor.
+    /// Gets an immutable list of distinct positional argument descriptors.
     /// </summary>
     public IImmutableList<PositionalArgument> PositionalArguments => _positionals;
 
@@ -33,7 +33,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public ArgumentsParser() : this(null!, null!) { }
 
     /// <summary>
-    /// Initializes a new instance with a positional argument descriptor.
+    /// Initializes a new instance with positional argument descriptors.
     /// </summary>
     /// <param name="positional">The postional argument.</param>
     public ArgumentsParser(IEnumerable<PositionalArgument> positionals) : this(null!, positionals) { }
@@ -48,7 +48,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// Initializes a new instance with optional and positional arguments.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
-    /// <param name="positional">The postional argument.</param>
+    /// <param name="positional">An enumerable of positional arguments.</param>
     public ArgumentsParser(IEnumerable<OptionalArgument> optionals, IEnumerable<PositionalArgument> positionals)
     {
         _resultType = typeof(TArguments);
