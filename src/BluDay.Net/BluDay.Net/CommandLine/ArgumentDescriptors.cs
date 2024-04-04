@@ -1,5 +1,8 @@
 ﻿namespace BluDay.Net.CommandLine;
 
+/// <summary>
+/// Stores immutable lists of optional and positional argument descriptors.
+/// </summary>
 public sealed class ArgumentDescriptors
 {
     private readonly ImmutableList<OptionalArgumentDescriptor> _optionals;
@@ -45,7 +48,7 @@ public sealed class ArgumentDescriptors
     /// Initializes a new instance with optional and positional arguments.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
-    /// <param name="positional">An enumerable of positional arguments.</param>
+    /// <param name="positionals">An enumerable of positional arguments.</param>
     public ArgumentDescriptors(IEnumerable<OptionalArgumentDescriptor> optionals, IEnumerable<PositionalArgumentDescriptor> positionals)
     {
         _optionals = optionals
