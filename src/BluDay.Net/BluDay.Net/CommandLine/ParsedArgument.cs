@@ -5,7 +5,7 @@ namespace BluDay.Net.CommandLine;
 /// </summary>
 public readonly struct ParsedArgument
 {
-    private readonly IImmutableList<ArgumentToken> _values;
+    private readonly IReadOnlyList<ArgumentToken> _values;
 
     /// <summary>
     /// The token of the parsed argument.
@@ -18,9 +18,9 @@ public readonly struct ParsedArgument
     public bool HasValues => _values.Count > 0;
 
     /// <summary>
-    /// An immutable list of store value tokens.
+    /// An read-only list of store value tokens.
     /// </summary>
-    public IImmutableList<ArgumentToken> Values => _values;
+    public IReadOnlyList<ArgumentToken> Values => _values;
 
     /// <summary>
     /// Initializes a new value with the provided argument token.
@@ -35,7 +35,7 @@ public readonly struct ParsedArgument
     /// <param name="values">An enumerable of store value tokens.</param>
     public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
-        _values = values.ToImmutableList();
+        _values = values.ToList();
 
         Token = token;
     }
