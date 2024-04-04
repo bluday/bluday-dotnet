@@ -31,7 +31,7 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="InvalidArgumentFlagLengthException"></exception>
-    public string FlagDescriptor
+    public required string FlagDescriptor
     {
         get => _flagDescriptor;
         init
