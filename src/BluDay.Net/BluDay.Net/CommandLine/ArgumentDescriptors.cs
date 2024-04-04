@@ -12,20 +12,12 @@ public sealed class ArgumentDescriptors
     /// <summary>
     /// Gets an immutable list of distinct optional argument descriptors.
     /// </summary>
-    public IImmutableList<OptionalArgumentDescriptor> Optionals
-    {
-        get  => _optionals;
-        init => _optionals = value.Distinct().ToImmutableList();
-    }
+    public IImmutableList<OptionalArgumentDescriptor> Optionals => _optionals;
 
     /// <summary>
     /// Gets an immutable list of distinct positional argument descriptors.
     /// </summary>
-    public IImmutableList<PositionalArgumentDescriptor> Positionals
-    {
-        get  => _positionals;
-        init => _positionals = value.Distinct().ToImmutableList();
-    }
+    public IImmutableList<PositionalArgumentDescriptor> Positionals => _positionals;
 
     /// <summary>
     /// Initializes a new instance with default values.
