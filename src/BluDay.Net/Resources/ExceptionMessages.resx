@@ -120,9 +120,6 @@
   <data name="CONFLICITNG_ARGUMENT_TARGET_PROPERTY" xml:space="preserve">
     <value>Property {0} is already targeted by another argument.</value>
   </data>
-  <data name="DUPLICATE_OPTIONAL_ARGUMENT" xml:space="preserve">
-    <value>Argument "{0}" ("{1}") has already been added.</value>
-  </data>
   <data name="INVALID_ARGUMENT_FLAG_NAME" xml:space="preserve">
     <value>Flag name "{0}" can only contain alphanumeric, dash and underscore characters.</value>
   </data>
