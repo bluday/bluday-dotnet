@@ -1,23 +1,19 @@
 ﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// Stores immutable lists of optional and positional argument descriptors.
+/// Stores read-only lists of optional and positional argument descriptors.
 /// </summary>
 public sealed class ArgumentDescriptors
 {
-    private readonly ImmutableList<OptionalArgumentDescriptor> _optionals;
-
-    private readonly ImmutableList<PositionalArgumentDescriptor> _positionals;
+    /// <summary>
+    /// Gets an read-only list of distinct optional argument descriptors.
+    /// </summary>
+    public IReadOnlyList<OptionalArgumentDescriptor> Optionals { get; }
 
     /// <summary>
-    /// Gets an immutable list of distinct optional argument descriptors.
+    /// Gets an read-only list of distinct positional argument descriptors.
     /// </summary>
-    public IImmutableList<OptionalArgumentDescriptor> Optionals => _optionals;
-
-    /// <summary>
-    /// Gets an immutable list of distinct positional argument descriptors.
-    /// </summary>
-    public IImmutableList<PositionalArgumentDescriptor> Positionals => _positionals;
+    public IReadOnlyList<PositionalArgumentDescriptor> Positionals { get; }
 
     /// <summary>
     /// Initializes a new instance with default values.
@@ -43,12 +39,8 @@ public sealed class ArgumentDescriptors
     /// <param name="positionals">An enumerable of positional arguments.</param>
     public ArgumentDescriptors(IEnumerable<OptionalArgumentDescriptor> optionals, IEnumerable<PositionalArgumentDescriptor> positionals)
     {
-        _optionals = optionals
-            .Distinct()
-            .ToImmutableList() ?? ImmutableList<OptionalArgumentDescriptor>.Empty;
+        Optionals = optionals?.Distinct().ToList() ?? [];
 
-        _positionals = positionals
-            .Distinct()
-            .ToImmutableList() ?? ImmutableList<PositionalArgumentDescriptor>.Empty;
+        Positionals = positionals?.Distinct().ToList() ?? [];
     }
 }
