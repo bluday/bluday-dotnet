@@ -21,14 +21,21 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public Arguments Arguments => _arguments;
 
     /// <summary>
+    /// Initializes a new instance with a default <see cref="CommandLine.Arguments"/> instance.
+    /// </summary>
+    public ArgumentsParser() : this(new()) { }
+
+    /// <summary>
     /// Initializes a new instance and with pre-defined arguments.
     /// </summary>
     /// <param name="arguments">A descriptor of arguments.</param>
     public ArgumentsParser(Arguments arguments)
     {
+        ArgumentNullException.ThrowIfNull(arguments);
+
         _resultType = typeof(TArguments);
 
-        _arguments = arguments ?? new();
+        _arguments = arguments;
     }
 
     /// <summary>
