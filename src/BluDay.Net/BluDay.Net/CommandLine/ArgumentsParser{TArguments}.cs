@@ -11,14 +11,14 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     private readonly Type _resultType;
 
     /// <summary>
-    /// Gets the type of object that <see cref="Parse(string[])"/> method returns.
-    /// </summary>
-    public Type ResultType => _resultType;
-
-    /// <summary>
     /// Gets an immutable list of distinct optional argument descriptors.
     /// </summary>
     public ArgumentDescriptors Arguments => _arguments;
+
+    /// <summary>
+    /// Gets the type of object that <see cref="Parse(string[])"/> method returns.
+    /// </summary>
+    public Type ResultType => _resultType;
 
     /// <summary>
     /// Initializes a new instance with a default <see cref="ArgumentDescriptors"/> instance.
@@ -33,9 +33,9 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     {
         ArgumentNullException.ThrowIfNull(arguments);
 
-        _resultType = typeof(TArguments);
-
         _arguments = arguments;
+
+        _resultType = typeof(TArguments);
     }
 
     /// <summary>
