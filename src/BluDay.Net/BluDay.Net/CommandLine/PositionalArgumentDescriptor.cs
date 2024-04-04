@@ -8,6 +8,6 @@ public class PositionalArgumentDescriptor : ArgumentDescriptor
     /// <summary>
     /// Initializes a new instance.
     /// </summary>
-    /// <param name="name"><inheritdoc cref="ArgumentDescriptor(string)"/></param>
+    /// <inheritdoc cref="ArgumentDescriptor(string)"/>
     public PositionalArgumentDescriptor(string name) : base(name) { }
 }
