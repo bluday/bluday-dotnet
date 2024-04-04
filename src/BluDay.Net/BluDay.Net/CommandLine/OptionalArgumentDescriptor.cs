@@ -52,12 +52,12 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     }
 
     /// <summary>
-    /// 
+    /// Parses a flag descriptor and extracts the short and long argument flags.
     /// </summary>
-    /// <param name="flagDescriptor"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="InvalidArgumentFlagLengthException"></exception>
+    /// <param name="flagDescriptor">The flag descriptor string.</param>
+    /// <returns>A tuple containing the short and long arguments (if present).</returns>
+    /// <exception cref="ArgumentException">Thrown if the flag descriptor is null or whitespace.</exception>
+    /// <exception cref="InvalidArgumentFlagLengthException">Thrown if the long flag length is incorrect.</exception>
     public static (ArgumentFlag? Short, ArgumentFlag? Long) ParseFlags(string flagDescriptor)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
