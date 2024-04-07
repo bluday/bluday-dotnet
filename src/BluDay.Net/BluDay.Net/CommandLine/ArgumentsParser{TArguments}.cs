@@ -1,7 +1,8 @@
 ﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// A class that facilitates parsing and mapping of command-line argument values to an instance of the specified generic parameter type.
+/// A class that facilitates parsing and mapping of command-line argument values to an instance
+/// of the specified generic parameter type.
 /// </summary>
 /// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
 public class ArgumentsParser<TArguments> where TArguments : new()
