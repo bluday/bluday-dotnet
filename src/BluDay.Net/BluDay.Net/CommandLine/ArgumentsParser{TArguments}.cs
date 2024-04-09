@@ -22,11 +22,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public Type ResultType => _resultType;
 
     /// <summary>
-    /// Initializes a new instance with a default <see cref="ArgumentDescriptors"/> instance.
-    /// </summary>
-    public ArgumentsParser() : this(new()) { }
-
-    /// <summary>
     /// Initializes a new instance and with pre-defined arguments.
     /// </summary>
     /// <param name="arguments">A descriptor of arguments.</param>
