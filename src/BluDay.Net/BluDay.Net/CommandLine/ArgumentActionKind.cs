@@ -31,12 +31,12 @@ public enum ArgumentActionKind
     CountFlag,
 
     /// <summary>
-    /// Represents a help message action.
+    /// Output a specified help message.
     /// </summary>
-    HelpMessage,
+    OutputHelpMessage,
 
     /// <summary>
-    /// Represents a version output action.
+    /// Output the application version.
     /// </summary>
-    VersionOutput
+    OutputVersion
 };
