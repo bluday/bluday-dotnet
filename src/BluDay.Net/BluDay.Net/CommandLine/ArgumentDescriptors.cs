@@ -37,7 +37,9 @@ public sealed class ArgumentDescriptors
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
     /// <param name="positionals">An enumerable of positional arguments.</param>
-    public ArgumentDescriptors(IEnumerable<OptionalArgumentDescriptor> optionals, IEnumerable<PositionalArgumentDescriptor> positionals)
+    public ArgumentDescriptors(
+        IEnumerable<OptionalArgumentDescriptor>   optionals,
+        IEnumerable<PositionalArgumentDescriptor> positionals)
     {
         Optionals = optionals?.Distinct().ToList() ?? [];
 
