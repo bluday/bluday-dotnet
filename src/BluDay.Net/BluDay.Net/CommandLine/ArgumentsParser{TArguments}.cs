@@ -24,7 +24,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <summary>
     /// Initializes a new instance and with pre-defined arguments.
     /// </summary>
-    /// <param name="arguments">A descriptor of arguments.</param>
+    /// <param name="arguments">A group of optional and positional argument descriptors.</param>
     /// <exception cref="ArgumentNullException"></exception>
     public ArgumentsParser(ArgumentDescriptors arguments)
     {
