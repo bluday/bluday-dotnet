@@ -22,7 +22,7 @@ public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactor
 
         Factory = factory;
 
-        Info = new();
+        Info = new ObjectFactoryInfo<TService, TImplementation>();
     }
 
     public static ObjectFactory CreateImplicitFactory(ObjectFactory<TImplementation> factory)

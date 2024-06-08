@@ -17,7 +17,7 @@ public sealed class AppNavigationService : IAppNavigationService
 
         _messenger = messenger;
 
-        _navigatorMap = new();
+        _navigatorMap = new Dictionary<Guid, INavigator>();
     }
 
     public INavigator CreateNavigator(object source)

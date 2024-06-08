@@ -85,6 +85,6 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
             return (primary, null);
         }
 
-        return (primary, new(secondaryName));
+        return (primary, new ArgumentFlag(secondaryName));
     }
 }

@@ -18,7 +18,7 @@ public sealed class AppWindowService : IAppWindowService
 
         _messenger = messenger;
 
-        _windows = new();
+        _windows = new HashSet<IWindow>();
     }
 
     public IWindow CreateWindow()
