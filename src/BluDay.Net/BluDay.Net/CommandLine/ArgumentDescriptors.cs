@@ -24,13 +24,15 @@ public sealed class ArgumentDescriptors
     /// Initializes a new instance with positional argument descriptors.
     /// </summary>
     /// <param name="positionals">The postional argument.</param>
-    public ArgumentDescriptors(IEnumerable<PositionalArgumentDescriptor> positionals) : this(null!, positionals) { }
+    public ArgumentDescriptors(IEnumerable<PositionalArgumentDescriptor> positionals)
+        : this(null!, positionals) { }
 
     /// <summary>
     /// Initializes a new instance with optional argument descriptors.
     /// </summary>
     /// <param name="optionals">An enumerable of optionals arguments.</param>
-    public ArgumentDescriptors(IEnumerable<OptionalArgumentDescriptor> optionals) : this(optionals, null!) { }
+    public ArgumentDescriptors(IEnumerable<OptionalArgumentDescriptor> optionals)
+        : this(optionals, null!) { }
 
     /// <summary>
     /// Initializes a new instance with optional and positional arguments.
