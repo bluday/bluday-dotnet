@@ -24,13 +24,13 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <summary>
     /// Initializes a new instance and with pre-defined arguments.
     /// </summary>
-    /// <param name="arguments">A group of optional and positional argument descriptors.</param>
+    /// <param name="argumentDescriptors">A group of optional and positional argument descriptors.</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public ArgumentsParser(ArgumentDescriptors arguments)
+    public ArgumentsParser(ArgumentDescriptors argumentDescriptors)
     {
-        ArgumentNullException.ThrowIfNull(arguments);
+        ArgumentNullException.ThrowIfNull(argumentDescriptors);
 
-        _argumentDescriptors = arguments;
+        _argumentDescriptors = argumentDescriptors;
 
         _resultType = typeof(TArguments);
     }
