@@ -7,14 +7,14 @@
 /// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
-    private readonly ArgumentDescriptors _arguments;
+    private readonly ArgumentDescriptors _argumentDescriptors;
 
     private readonly Type _resultType;
 
     /// <summary>
     /// Gets a descriptor of different argument descriptors.
     /// </summary>
-    public ArgumentDescriptors Arguments => _arguments;
+    public ArgumentDescriptors ArgumentDescriptors => _argumentDescriptors;
 
     /// <summary>
     /// Gets the type of object that <see cref="Parse(string[])"/> method returns.
@@ -30,7 +30,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     {
         ArgumentNullException.ThrowIfNull(arguments);
 
-        _arguments = arguments;
+        _argumentDescriptors = arguments;
 
         _resultType = typeof(TArguments);
     }
