@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.Attributes;
+namespace BluDay.Net.Attributes;
 
 public abstract class ArgumentAttribute : Attribute
 {

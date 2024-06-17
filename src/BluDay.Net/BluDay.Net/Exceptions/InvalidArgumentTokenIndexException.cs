@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.Exceptions;
+namespace BluDay.Net.Exceptions;
 
 public sealed class InvalidArgumentTokenIndexException : Exception
 {
