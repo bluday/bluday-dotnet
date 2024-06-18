@@ -14,8 +14,6 @@ public sealed class AppWindowService : IAppWindowService
 
     public AppWindowService(IMessenger messenger)
     {
-        ArgumentNullException.ThrowIfNull(messenger);
-
         _messenger = messenger;
 
         _windows = new HashSet<IWindow>();

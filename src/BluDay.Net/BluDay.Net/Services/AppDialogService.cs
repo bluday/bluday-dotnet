@@ -6,8 +6,6 @@ public sealed class AppDialogService : IAppDialogService
 
     public AppDialogService(IMessenger messenger)
     {
-        ArgumentNullException.ThrowIfNull(messenger);
-
         _messenger = messenger;
     }
 }

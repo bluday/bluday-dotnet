@@ -1,5 +1,8 @@
 namespace BluDay.Net.Services;
 
+/// <summary>
+/// The service that handles the activation and deactivation of an app.
+/// </summary>
 public sealed class AppActivationService : IAppActivationService
 {
     private bool _isActivated;
@@ -10,14 +13,11 @@ public sealed class AppActivationService : IAppActivationService
 
     public AppActivationService(IMessenger messenger)
     {
-        ArgumentNullException.ThrowIfNull(messenger);
-
         _messenger = messenger;
     }
 
     public void Activate()
     {
-        // TODO: Send a custom IMessage event to other services through the WeakReferenceMessenger.
-        throw new NotImplementedException();
+        _messenger.Send<AppActivatingMessage>();
     }
 }
