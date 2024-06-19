@@ -42,6 +42,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <returns>A new <see cref="TArguments"/> instance with parsed argument.</returns>
     public TArguments Parse(params string[] values)
     {
-        throw new NotImplementedException();
+        return new TArguments();
     }
 }
