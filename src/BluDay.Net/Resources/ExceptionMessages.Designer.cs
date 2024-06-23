@@ -106,6 +106,15 @@ namespace BluDay.Net.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid viewmodel type..
+        /// </summary>
+        internal static string INVALID_VIEWMODEL_TYPE {
+            get {
+                return ResourceManager.GetString("INVALID_VIEWMODEL_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unrecognized argument flag &quot;{0}&quot;..
         /// </summary>
         internal static string UNRECOGNIZED_ARGUMENT_FLAG {

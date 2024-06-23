@@ -11,10 +11,15 @@ public sealed class ViewModelAttribute : Attribute
     /// Initializes a new instance with the provided viewmodel type.
     /// </summary>
     /// <param name="viewModelType">The targeted viewmodel type.</param>
-    /// <exception cref="ArgumentNullException">If the viewmodel type is null.</exception>
+    /// <exception cref="ArgumentNullException">If the viewmodel type is null or invalid.</exception>
     public ViewModelAttribute(Type viewModelType)
     {
         ArgumentNullException.ThrowIfNull(viewModelType);
+
+        if (!viewModelType.IsAssignableTo(typeof(IViewModel)))
+        {
+            throw new ArgumentException(ExceptionMessages.INVALID_VIEWMODEL_TYPE);
+        }
 
         ViewModelType = viewModelType;
     }
