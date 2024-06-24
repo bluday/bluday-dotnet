@@ -25,7 +25,7 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// Initializes a new instance and with pre-defined arguments.
     /// </summary>
     /// <param name="argumentDescriptors">A group of optional and positional argument descriptors.</param>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="ArgumentNullException">If the <see cref="ArgumentDescriptors"/> instance is null.</exception>
     public ArgumentsParser(ArgumentDescriptors argumentDescriptors)
     {
         ArgumentNullException.ThrowIfNull(argumentDescriptors);
