@@ -24,5 +24,8 @@ public interface IImplementationProvider
     /// <returns>
     /// An instance of the resolved implementation.
     /// </returns>
+    /// <exception cref="InvalidImplementationTypeException">
+    /// If <paramref name="implementationType"/> is not assignable to the shared service type.
+    /// </exception>
     object GetInstance(Type implementationType);
 }
