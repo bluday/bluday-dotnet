@@ -2,7 +2,7 @@ namespace BluDay.Net.DependencyInjection;
 
 public sealed class ObjectFactorySite<TService, TImplementation> : IObjectFactorySite
     where TService        : class
-    where TImplementation : TService, new()
+    where TImplementation : TService
 {
     private readonly ObjectFactory _implicitFactory;
 

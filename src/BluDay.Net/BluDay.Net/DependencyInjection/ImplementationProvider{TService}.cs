@@ -2,41 +2,38 @@ namespace BluDay.Net.DependencyInjection;
 
 public class ImplementationProvider<TService> : IImplementationProvider<TService> where TService : notnull
 {
+    private readonly Type _serviceType;
+
+    private readonly IReadOnlyDictionary<Type, ObjectFactory> _typeToObjectFactoryMap;
+
     private readonly IServiceProvider _serviceProvider;
 
-    private static readonly Type _serviceType;
-
-    private static readonly IReadOnlyDictionary<Type, IObjectFactorySite> _objectFactorySiteMap;
-
-    Type IImplementationProvider.ServiceType => _serviceType;
-
-    public static Type ServiceType => _serviceType;
-
-    static ImplementationProvider()
-    {
-        _serviceType = typeof(TService);
-
-        _objectFactorySiteMap = CreateMappedObjectFactorySites();
-    }
+    public Type ServiceType => _serviceType;
 
     public ImplementationProvider(IServiceProvider serviceProvider)
     {
+        _serviceType = typeof(TService);
+
+        _typeToObjectFactoryMap = CreateMappedObjectFactorySites();
+
         _serviceProvider = serviceProvider;
     }
 
-    private object CreateInstance(IObjectFactorySite site)
+    private object CreateInstance(Type implementationType)
     {
-        return site.Factory.Invoke(_serviceProvider, arguments: null);
+        ObjectFactory factory = _typeToObjectFactoryMap[implementationType];
+
+        return factory.Invoke(_serviceProvider, arguments: null);
     }
 
-    private static IReadOnlyDictionary<Type, IObjectFactorySite> CreateMappedObjectFactorySites()
+    private IReadOnlyDictionary<Type, ObjectFactory> CreateMappedObjectFactorySites()
     {
         return _serviceType
             .GetImplementationTypes()
             .Select(ObjectFactorySiteFactory.Create<TService>)
             .ToDictionary(
                 site => site.Info.ImplementationType,
-                site => site
+                site => site.Factory
             )
             .AsReadOnly();
     }
@@ -48,15 +45,11 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
             throw new InvalidImplementationTypeException(implementationType, _serviceType);
         }
 
-        IObjectFactorySite site = _objectFactorySiteMap[implementationType];
-
-        return CreateInstance(site);
+        return CreateInstance(implementationType);
     }
 
-    public TImplementation GetInstance<TImplementation>() where TImplementation : TService, new()
+    public TImplementation GetInstance<TImplementation>() where TImplementation : TService
     {
-        IObjectFactorySite site = _objectFactorySiteMap[typeof(TImplementation)];
-
-        return (TImplementation)CreateInstance(site);
+        return (TImplementation)CreateInstance(typeof(TImplementation));
     }
 }
