@@ -1,5 +1,8 @@
 ﻿namespace BluDay.Net.Attributes;
 
+/// <summary>
+/// Specifies which viewmodel type to use.
+/// </summary>
 public sealed class ViewModelAttribute : Attribute
 {
     /// <summary>
