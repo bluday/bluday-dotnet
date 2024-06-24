@@ -10,6 +10,8 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
 
     public Type ServiceType => _serviceType;
 
+    public IReadOnlyList<Type> ImplementationTypes => _typeToObjectFactoryMap.Keys.ToList();
+
     public ImplementationProvider(IServiceProvider serviceProvider)
     {
         _serviceType = typeof(TService);
