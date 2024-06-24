@@ -18,7 +18,12 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
 
         _serviceType = typeof(TService);
 
-        _typeToObjectFactoryMap = CreateMappedObjectFactorySites();
+        _typeToObjectFactoryMap = _serviceType
+            .GetImplementationTypes()
+            .ToDictionary(
+                type => type,
+                CreateImplementationResolver
+            );
 
         _serviceProvider = serviceProvider;
     }
@@ -30,16 +35,16 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
         return factory.Invoke(_serviceProvider, arguments: null);
     }
 
-    private IReadOnlyDictionary<Type, ObjectFactory> CreateMappedObjectFactorySites()
+    private static ObjectFactory CreateImplementationResolver(Type implementationType)
     {
-        return _serviceType
-            .GetImplementationTypes()
-            .Select(ObjectFactorySiteFactory.Create<TService>)
-            .ToDictionary(
-                site => site.Info.ImplementationType,
-                site => site.Factory
-            )
-            .AsReadOnly();
+        Type genericFactoryType = typeof(ObjectFactory<>).MakeGenericType(implementationType);
+
+        ObjectFactory factory = ActivatorUtilities.CreateFactory(genericFactoryType, argumentTypes: []);
+
+        return (serviceProvider, args) =>
+        {
+            return factory.Invoke(serviceProvider, args)!;
+        };
     }
 
     public object GetInstance(Type implementationType)
