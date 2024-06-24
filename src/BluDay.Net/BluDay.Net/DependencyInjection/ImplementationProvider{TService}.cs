@@ -19,7 +19,7 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
         _serviceProvider = serviceProvider;
     }
 
-    private object CreateInstance(Type implementationType)
+    private object ResolveInstance(Type implementationType)
     {
         ObjectFactory factory = _typeToObjectFactoryMap[implementationType];
 
@@ -45,11 +45,11 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
             throw new InvalidImplementationTypeException(implementationType, _serviceType);
         }
 
-        return CreateInstance(implementationType);
+        return ResolveInstance(implementationType);
     }
 
     public TImplementation GetInstance<TImplementation>() where TImplementation : TService
     {
-        return (TImplementation)CreateInstance(typeof(TImplementation));
+        return (TImplementation)ResolveInstance(typeof(TImplementation));
     }
 }
