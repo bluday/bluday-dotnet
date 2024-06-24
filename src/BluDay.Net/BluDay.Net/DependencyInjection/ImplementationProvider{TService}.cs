@@ -14,6 +14,8 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
 
     public ImplementationProvider(IServiceProvider serviceProvider)
     {
+        ArgumentNullException.ThrowIfNull(serviceProvider);
+
         _serviceType = typeof(TService);
 
         _typeToObjectFactoryMap = CreateMappedObjectFactorySites();
