@@ -10,7 +10,7 @@ public sealed class AppWindowService : IAppWindowService
 
     public int WindowCount => _windows.Count;
 
-    public IImmutableList<IWindow> Windows => _windows.ToImmutableList();
+    public IEnumerable<IWindow> Windows => _windows;
 
     public AppWindowService(IMessenger messenger)
     {

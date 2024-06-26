@@ -10,7 +10,7 @@ public interface INavigator
 
     Guid WindowId { get; }
 
-    IImmutableList<Type> Views { get; }
+    IEnumerable<Type> Views { get; }
 
     bool Pop();
 
