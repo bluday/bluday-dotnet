@@ -11,7 +11,7 @@ public interface IWindow
     string? Title { get; set; }
 
     /// <summary>
-    /// Gets the ID of the current window.
+    /// Gets the ID of the window.
     /// </summary>
     Guid Id { get; }
 
@@ -26,7 +26,7 @@ public interface IWindow
     void Close();
 
     /// <summary>
-    /// Resizes the current window to the provided width and height values.
+    /// Resizes the window using the provided width and height values.
     /// </summary>
     /// <param name="width">The width of the window, in pixels.</param>
     /// <param name="height">The height of the window, in pixels</param>
