@@ -6,6 +6,11 @@ namespace BluDay.Net.UI.WindowManagement;
 public interface IWindow
 {
     /// <summary>
+    /// The title of the window.
+    /// </summary>
+    string? Title { get; set; }
+
+    /// <summary>
     /// Activates and shows the current window.
     /// </summary>
     void Activate();
