@@ -11,6 +11,11 @@ public interface IWindow
     string? Title { get; set; }
 
     /// <summary>
+    /// Gets the ID of the current window.
+    /// </summary>
+    Guid Id { get; }
+
+    /// <summary>
     /// Activates and shows the current window.
     /// </summary>
     void Activate();

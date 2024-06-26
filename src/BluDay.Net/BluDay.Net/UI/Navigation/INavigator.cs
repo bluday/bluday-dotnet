@@ -8,7 +8,7 @@ public interface INavigator
 
     int MaxCacheSize { get; set; }
 
-    Guid Id { get; }
+    Guid WindowId { get; }
 
     IImmutableList<Type> Views { get; }
 
