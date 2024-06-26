@@ -6,7 +6,7 @@ namespace BluDay.Net.UI.WindowManagement;
 public interface IWindow
 {
     /// <summary>
-    /// The title of the window.
+    /// Gets the title of the window.
     /// </summary>
     string? Title { get; set; }
 
