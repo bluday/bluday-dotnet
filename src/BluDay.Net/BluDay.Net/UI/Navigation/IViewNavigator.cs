@@ -36,7 +36,7 @@ public interface IViewNavigator
     /// <returns>
     /// <c>true</c> if successful, <c>false</c> if the stack is empty.
     /// </returns>
-    bool Pop();
+    void Pop();
 
     /// <summary>
     /// Pushes a new view onto the navigation stack based on the specific view model type.
@@ -44,10 +44,7 @@ public interface IViewNavigator
     /// <param name="viewModelType">
     /// The type of the view model associated with the view.
     /// </param>
-    /// <returns>
-    /// <c>true</c> if successful.
-    /// </returns>
-    bool Push(Type viewModelType);
+    void Push(Type viewModelType);
 
     /// <summary>
     /// Pushes a new view onto the navigation stack based on the specific view model type.
@@ -55,10 +52,7 @@ public interface IViewNavigator
     /// <typeparam name="TViewModel">
     /// The type of the view model associated with the view.
     /// </typeparam>
-    /// <returns>
-    /// <c>true</c> if successful.
-    /// </returns>
-    bool Push<TViewModel>() where TViewModel : IViewModel;
+    void Push<TViewModel>() where TViewModel : IViewModel;
 
     /// <summary>
     /// Resets the view navigation stack.
