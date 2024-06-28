@@ -4,9 +4,9 @@ public sealed class AppNavigationService : IAppNavigationService
 {
     private readonly IMessenger _messenger;
 
-    private readonly Dictionary<Guid, INavigator> _navigatorMap;
+    private readonly Dictionary<Guid, IViewNavigator> _navigatorMap;
 
-    public IReadOnlyDictionary<Guid, INavigator> NavigatorMap
+    public IReadOnlyDictionary<Guid, IViewNavigator> NavigatorMap
     {
         get => _navigatorMap.AsReadOnly();
     }
@@ -15,10 +15,10 @@ public sealed class AppNavigationService : IAppNavigationService
     {
         _messenger = messenger;
 
-        _navigatorMap = new Dictionary<Guid, INavigator>();
+        _navigatorMap = new Dictionary<Guid, IViewNavigator>();
     }
 
-    public INavigator CreateNavigator(object source)
+    public IViewNavigator CreateNavigator(object source)
     {
         throw new NotImplementedException();
     }

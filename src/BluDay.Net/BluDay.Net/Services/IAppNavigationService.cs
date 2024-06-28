@@ -2,7 +2,7 @@ namespace BluDay.Net.Services;
 
 public interface IAppNavigationService
 {
-    IReadOnlyDictionary<Guid, INavigator> NavigatorMap { get; }
+    IReadOnlyDictionary<Guid, IViewNavigator> NavigatorMap { get; }
 
-    INavigator CreateNavigator(object source);
+    IViewNavigator CreateNavigator(object source);
 }

@@ -8,5 +8,5 @@ public interface INavigableWindow : IWindow
     /// <summary>
     /// Gets the navigator instance for handling view navigation within the window.
     /// </summary>
-    INavigator Navigator { get; }
+    IViewNavigator ViewNavigator { get; }
 }
