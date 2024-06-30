@@ -6,6 +6,11 @@ namespace BluDay.Net.UI.WindowManagement;
 public interface IWindow
 {
     /// <summary>
+    /// Gets a value indicating whether the window is resizable.
+    /// </summary>
+    bool IsResizable { get; set; }
+
+    /// <summary>
     /// Gets the title of the window.
     /// </summary>
     string? Title { get; set; }
