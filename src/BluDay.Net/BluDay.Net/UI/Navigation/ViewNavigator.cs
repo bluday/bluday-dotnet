@@ -32,21 +32,23 @@ public sealed class ViewNavigator : IViewNavigator
 
     public void Pop()
     {
-        throw new NotImplementedException();
+        _viewTypeStack.Pop();
     }
 
     public void Push(Type viewModelType)
     {
-        throw new NotImplementedException();
+        InvalidViewModelTypeException.ThrowIfInvalid(viewModelType);
+
+        _viewTypeStack.Push(viewModelType);
     }
 
     public void Push<TViewModel>() where TViewModel : IViewModel
     {
-        throw new NotImplementedException();
+        Push(typeof(TViewModel));
     }
 
     public void Reset()
     {
-        throw new NotImplementedException();
+        _viewTypeStack.Clear();
     }
 }
