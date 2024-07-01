@@ -21,7 +21,7 @@ public interface IViewNavigator
     Guid WindowId { get; }
 
     /// <summary>
-    /// Gets an enumerable collection of view types for all displayed views.
+    /// Gets an enumerable of types for all displayed views.
     /// </summary>
     IEnumerable<Type> Views { get; }
 
