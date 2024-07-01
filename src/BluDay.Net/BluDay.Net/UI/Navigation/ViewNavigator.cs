@@ -7,6 +7,8 @@ public sealed class ViewNavigator : IViewNavigator
 
     private bool _canGoForward;
 
+    private Type? _currentViewModelType;
+
     private readonly Stack<Type> _viewModelTypeStack;
 
     public bool CanGoBack => _canGoBack;
@@ -14,6 +16,8 @@ public sealed class ViewNavigator : IViewNavigator
     public bool CanGoForward => _canGoForward;
 
     public Guid WindowId { get; }
+
+    public Type? CurrentView => _currentViewModelType;
 
     public IEnumerable<Type> CurrentViews => _viewModelTypeStack;
 
@@ -32,7 +36,16 @@ public sealed class ViewNavigator : IViewNavigator
 
     public bool Pop()
     {
-        return _viewModelTypeStack.TryPop(out Type? _);
+        if (!_viewModelTypeStack.TryPop(out Type? _))
+        {
+            return false;
+        }
+
+        _viewModelTypeStack.TryPeek(out Type? currentViewModelType);
+
+        _currentViewModelType = currentViewModelType;
+
+        return true;
     }
 
     public void Push(Type viewModelType)
@@ -40,6 +53,8 @@ public sealed class ViewNavigator : IViewNavigator
         InvalidViewModelTypeException.ThrowIfInvalid(viewModelType);
 
         _viewModelTypeStack.Push(viewModelType);
+
+        _currentViewModelType = viewModelType;
     }
 
     public void Push<TViewModel>() where TViewModel : IViewModel
@@ -50,5 +65,7 @@ public sealed class ViewNavigator : IViewNavigator
     public void Reset()
     {
         _viewModelTypeStack.Clear();
+
+        _currentViewModelType = null;
     }
 }

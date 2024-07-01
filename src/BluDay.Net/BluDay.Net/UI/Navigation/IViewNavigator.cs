@@ -21,6 +21,11 @@ public interface IViewNavigator
     Guid WindowId { get; }
 
     /// <summary>
+    /// Gets the view type at the top of the current view type stack.
+    /// </summary>
+    Type? CurrentView { get; }
+
+    /// <summary>
     /// Gets an enumerable of types for all displayed views.
     /// </summary>
     IEnumerable<Type> CurrentViews { get; }
