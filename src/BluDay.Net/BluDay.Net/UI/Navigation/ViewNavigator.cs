@@ -30,9 +30,9 @@ public sealed class ViewNavigator : IViewNavigator
         _viewModelTypeStack = new Stack<Type>();
     }
 
-    public void Pop()
+    public bool Pop()
     {
-        _viewModelTypeStack.Pop();
+        return _viewModelTypeStack.TryPop(out Type? _);
     }
 
     public void Push(Type viewModelType)

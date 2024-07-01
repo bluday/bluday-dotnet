@@ -31,7 +31,7 @@ public interface IViewNavigator
     /// <returns>
     /// <c>true</c> if successful, <c>false</c> if the stack is empty.
     /// </returns>
-    void Pop();
+    bool Pop();
 
     /// <summary>
     /// Pushes a new view onto the navigation stack based on the specific view model type.
