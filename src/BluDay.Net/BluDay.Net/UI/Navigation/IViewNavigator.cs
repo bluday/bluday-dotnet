@@ -16,11 +16,6 @@ public interface IViewNavigator
     bool CanGoForward { get; }
 
     /// <summary>
-    /// Gets or sets the maximum size of the view cache.
-    /// </summary>
-    int MaxCacheSize { get; set; }
-
-    /// <summary>
     /// Gets the unique identifier associated with the window.
     /// </summary>
     Guid WindowId { get; }
