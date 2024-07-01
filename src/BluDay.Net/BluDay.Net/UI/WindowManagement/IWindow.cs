@@ -6,6 +6,11 @@ namespace BluDay.Net.UI.WindowManagement;
 public interface IWindow
 {
     /// <summary>
+    /// Gets the navigator instance for handling view navigation within the window.
+    /// </summary>
+    IViewNavigator ViewNavigator { get; }
+
+    /// <summary>
     /// Gets a value indicating whether the window is resizable.
     /// </summary>
     bool IsResizable { get; set; }
