@@ -106,7 +106,7 @@ namespace BluDay.Net.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid viewmodel type..
+        ///   Looks up a localized string similar to Invalid viewmodel type ({0})..
         /// </summary>
         internal static string INVALID_VIEWMODEL_TYPE {
             get {

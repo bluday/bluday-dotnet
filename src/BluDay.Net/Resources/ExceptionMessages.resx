@@ -133,7 +133,7 @@
     <value>Long flag name "{0}" must be longer than short name "{1}".</value>
   </data>
   <data name="INVALID_VIEWMODEL_TYPE" xml:space="preserve">
-    <value>Invalid viewmodel type.</value>
+    <value>Invalid viewmodel type ({0}).</value>
   </data>
   <data name="UNRECOGNIZED_ARGUMENT_FLAG" xml:space="preserve">
     <value>Unrecognized argument flag "{0}".</value>
