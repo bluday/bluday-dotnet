@@ -7,7 +7,7 @@ public sealed class ViewNavigator : IViewNavigator
 
     private bool _canGoForward;
 
-    private readonly Stack<Type> _viewTypeStack;
+    private readonly Stack<Type> _viewModelTypeStack;
 
     public bool CanGoBack => _canGoBack;
 
@@ -15,7 +15,7 @@ public sealed class ViewNavigator : IViewNavigator
 
     public Guid WindowId { get; }
 
-    public IEnumerable<Type> Views => _viewTypeStack;
+    public IEnumerable<Type> CurrentViews => _viewModelTypeStack;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewNavigator"/> class.
@@ -27,19 +27,19 @@ public sealed class ViewNavigator : IViewNavigator
     {
         ArgumentNullException.ThrowIfNull(window);
 
-        _viewTypeStack = new Stack<Type>();
+        _viewModelTypeStack = new Stack<Type>();
     }
 
     public void Pop()
     {
-        _viewTypeStack.Pop();
+        _viewModelTypeStack.Pop();
     }
 
     public void Push(Type viewModelType)
     {
         InvalidViewModelTypeException.ThrowIfInvalid(viewModelType);
 
-        _viewTypeStack.Push(viewModelType);
+        _viewModelTypeStack.Push(viewModelType);
     }
 
     public void Push<TViewModel>() where TViewModel : IViewModel
@@ -49,6 +49,6 @@ public sealed class ViewNavigator : IViewNavigator
 
     public void Reset()
     {
-        _viewTypeStack.Clear();
+        _viewModelTypeStack.Clear();
     }
 }

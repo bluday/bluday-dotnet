@@ -23,7 +23,7 @@ public interface IViewNavigator
     /// <summary>
     /// Gets an enumerable of types for all displayed views.
     /// </summary>
-    IEnumerable<Type> Views { get; }
+    IEnumerable<Type> CurrentViews { get; }
 
     /// <summary>
     /// Removes the top view from the navigation stack.
