@@ -1,4 +1,4 @@
-namespace BluDay.Net.UI.WindowManagement;
+namespace BluDay.Net.UI.Windowing;
 
 /// <summary>
 /// Represents the control of a window.
