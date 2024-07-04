@@ -13,4 +13,5 @@ global using BluDay.Net.UI.Windowing;
 global using Microsoft.Extensions.DependencyInjection;
 
 global using System.Collections.Immutable;
+global using System.Drawing;
 global using System.Reflection;
