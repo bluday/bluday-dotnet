@@ -51,6 +51,24 @@ public abstract class ArgumentDescriptorBuilder
     }
 
     /// <summary>
+    /// Shortcut method for the <see cref="ArgumentDescriptorsBuilder.Optional"/> method.
+    /// </summary>
+    /// <returns>The builder instance for a new optional argument.</returns>
+    public OptionalArgumentDescriptorBuilder AddOptional()
+    {
+        return Descriptors.AddOptional();
+    }
+
+    /// <summary>
+    /// Shortcut method for the <see cref="ArgumentDescriptorsBuilder.Positional"/> method.
+    /// </summary>
+    /// <returns>The builder instance for a new positional argument.</returns>
+    public PositionalArgumentDescriptorBuilder AddPositional()
+    {
+        return Descriptors.AddPositional();
+    }
+
+    /// <summary>
     /// Sets the constant to set or append for every qualifying value.
     /// </summary>
     /// <param name="value">The constant object to set.</param>
