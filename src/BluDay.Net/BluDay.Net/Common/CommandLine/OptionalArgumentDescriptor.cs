@@ -43,7 +43,8 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     }
 
     /// <summary>
-    /// Initializes an new instance with a flags described in a <see cref="string"/> value.
+    /// Initializes an instance of the <see cref="OptionalArgumentDescriptor"/> class using the
+    /// provided <see cref="string"/> flag descriptor value.
     /// </summary>
     /// <param name="name"><inheritdoc cref="ArgumentDescriptor(string)"/></param>
     public OptionalArgumentDescriptor(string name) : base(name)

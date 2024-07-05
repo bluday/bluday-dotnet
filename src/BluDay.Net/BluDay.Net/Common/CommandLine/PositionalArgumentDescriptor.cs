@@ -6,8 +6,8 @@ namespace BluDay.Net.Common.CommandLine;
 public class PositionalArgumentDescriptor : ArgumentDescriptor
 {
     /// <summary>
-    /// Initializes a new instance.
+    /// Initializes a new instance of the <see cref="PositionalArgumentDescriptor"/> class.
     /// </summary>
     /// <inheritdoc cref="ArgumentDescriptor(string)"/>
-    public PositionalArgumentDescriptor(string name) : base(name) { }
+    public PositionalArgumentDescriptor() : base(nameof(PositionalArgumentDescriptor)) { }
 }
