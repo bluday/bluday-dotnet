@@ -2,7 +2,7 @@
 
 public sealed class AppWindowService : IAppWindowService
 {
-    private readonly IMessenger _messenger;
+    private readonly WeakReferenceMessenger _messenger;
 
     private readonly HashSet<IWindow> _windows;
 
@@ -12,7 +12,7 @@ public sealed class AppWindowService : IAppWindowService
 
     public IEnumerable<IWindow> Windows => _windows;
 
-    public AppWindowService(IMessenger messenger)
+    public AppWindowService(WeakReferenceMessenger messenger)
     {
         _messenger = messenger;
 

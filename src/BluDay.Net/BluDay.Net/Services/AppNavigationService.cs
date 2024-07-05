@@ -2,7 +2,7 @@ namespace BluDay.Net.Services;
 
 public sealed class AppNavigationService : IAppNavigationService
 {
-    private readonly IMessenger _messenger;
+    private readonly WeakReferenceMessenger _messenger;
 
     private readonly Dictionary<Guid, IViewNavigator> _navigatorMap;
 
@@ -11,7 +11,7 @@ public sealed class AppNavigationService : IAppNavigationService
         get => _navigatorMap.AsReadOnly();
     }
 
-    public AppNavigationService(IMessenger messenger)
+    public AppNavigationService(WeakReferenceMessenger messenger)
     {
         _messenger = messenger;
 

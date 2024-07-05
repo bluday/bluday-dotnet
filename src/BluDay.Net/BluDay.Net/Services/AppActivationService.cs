@@ -7,11 +7,11 @@ public sealed class AppActivationService : IAppActivationService
 {
     private bool _isActivated;
 
-    private readonly IMessenger _messenger;
+    private readonly WeakReferenceMessenger _messenger;
 
     public bool IsActivated => _isActivated;
 
-    public AppActivationService(IMessenger messenger)
+    public AppActivationService(WeakReferenceMessenger messenger)
     {
         _messenger = messenger;
     }

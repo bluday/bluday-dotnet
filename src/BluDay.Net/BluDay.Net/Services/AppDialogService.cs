@@ -2,9 +2,9 @@
 
 public sealed class AppDialogService : IAppDialogService
 {
-    private readonly IMessenger _messenger;
+    private readonly WeakReferenceMessenger _messenger;
 
-    public AppDialogService(IMessenger messenger)
+    public AppDialogService(WeakReferenceMessenger messenger)
     {
         _messenger = messenger;
     }
