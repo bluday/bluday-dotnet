@@ -3,13 +3,11 @@ namespace BluDay.Net.Services;
 /// <summary>
 /// A service that handles the activation and deactivation of an app.
 /// </summary>
-public sealed class AppActivationService : 
+public sealed class AppActivationService : Service, 
     IRecipient<AppActivationRequestMessage>,
     IRecipient<AppDeactivationRequestMessage>
 {
     private bool _isActivated;
-
-    private readonly WeakReferenceMessenger _messenger;
 
     /// <summary>
     /// Gets a value indicating whether the app is activated.
@@ -22,12 +20,12 @@ public sealed class AppActivationService :
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
-    public AppActivationService(WeakReferenceMessenger messenger)
-    {
-        _messenger = messenger;
+    public AppActivationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
-        _messenger.Register<AppActivationRequestMessage>(this);
-        _messenger.Register<AppDeactivationRequestMessage>(this);
+    protected override void Subscribe()
+    {
+        Messenger.Register<AppActivationRequestMessage>(this);
+        Messenger.Register<AppDeactivationRequestMessage>(this);
     }
 
     /// <summary>
@@ -35,11 +33,11 @@ public sealed class AppActivationService :
     /// </summary>
     public void Activate()
     {
-        _messenger.Send<AppActivatingMessage>();
+        Messenger.Send<AppActivatingMessage>();
 
         _isActivated = true;
 
-        _messenger.Send<AppActivatedMessage>();
+        Messenger.Send<AppActivatedMessage>();
     }
 
     /// <summary>
@@ -47,11 +45,11 @@ public sealed class AppActivationService :
     /// </summary>
     public void Deactivate()
     {
-        _messenger.Send<AppDeactivatingMessage>();
+        Messenger.Send<AppDeactivatingMessage>();
 
         _isActivated = false;
 
-        _messenger.Send<AppDeactivatedMessage>();
+        Messenger.Send<AppDeactivatedMessage>();
     }
 
     /// <summary>
