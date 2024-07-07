@@ -28,12 +28,12 @@ public abstract class Service
     }
 
     /// <summary>
-    /// Creates recipients or subscribers for specified message types.
+    /// Registers recipients of specified message types.
     /// </summary>
     protected virtual void Subscribe() { }
 
     /// <summary>
-    /// Removes recipients or subscribers for specified message types.
+    /// Unregisters recipients of specified message types.
     /// </summary>
     protected virtual void Unsubscribe() { }
 }
