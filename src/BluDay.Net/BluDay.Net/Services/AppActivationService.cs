@@ -15,7 +15,7 @@ public sealed class AppActivationService
     public bool IsActivated => _isActivated;
 
     /// <summary>
-    /// Initializes an instance of the <see cref="AppActivationService"/> class.
+    /// Initializes a new instance of the <see cref="AppActivationService"/> class.
     /// </summary>
     /// <param name="messenger">
     /// The event messenger instance.
