@@ -7,12 +7,10 @@ public sealed class AppActivationService : Service,
     IRecipient<AppActivationRequestMessage>,
     IRecipient<AppDeactivationRequestMessage>
 {
-    private bool _isActivated;
-
     /// <summary>
     /// Gets a value indicating whether the app is activated.
     /// </summary>
-    public bool IsActivated => _isActivated;
+    public bool IsActivated { get; private set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AppActivationService"/> class.
@@ -35,7 +33,7 @@ public sealed class AppActivationService : Service,
     {
         Messenger.Send<AppActivatingMessage>();
 
-        _isActivated = true;
+        IsActivated = true;
 
         Messenger.Send<AppActivatedMessage>();
     }
@@ -47,7 +45,7 @@ public sealed class AppActivationService : Service,
     {
         Messenger.Send<AppDeactivatingMessage>();
 
-        _isActivated = false;
+        IsActivated = false;
 
         Messenger.Send<AppDeactivatedMessage>();
     }
