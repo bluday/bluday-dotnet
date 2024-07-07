@@ -31,6 +31,8 @@ public sealed class AppActivationService : Service,
     /// </summary>
     public void Activate()
     {
+        if (IsActivated) return;
+
         Messenger.Send<AppActivatingMessage>();
 
         IsActivated = true;
@@ -43,6 +45,8 @@ public sealed class AppActivationService : Service,
     /// </summary>
     public void Deactivate()
     {
+        if (!IsActivated) return;
+
         Messenger.Send<AppDeactivatingMessage>();
 
         IsActivated = false;
