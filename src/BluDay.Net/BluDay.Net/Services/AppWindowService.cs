@@ -3,10 +3,8 @@
 /// <summary>
 /// A service that manages windows within an app.
 /// </summary>
-public sealed class AppWindowService
+public sealed class AppWindowService : Service
 {
-    private readonly WeakReferenceMessenger _messenger;
-
     private readonly HashSet<IWindow> _windows;
 
     /// <summary>
@@ -30,10 +28,8 @@ public sealed class AppWindowService
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
-    public AppWindowService(WeakReferenceMessenger messenger)
+    public AppWindowService(WeakReferenceMessenger messenger) : base(messenger)
     {
-        _messenger = messenger;
-
         _windows = new HashSet<IWindow>();
     }
 

@@ -3,10 +3,8 @@ namespace BluDay.Net.Services;
 /// <summary>
 /// A service that manages view navigation within an app, for all active windows.
 /// </summary>
-public sealed class AppNavigationService
+public sealed class AppNavigationService : Service
 {
-    private readonly WeakReferenceMessenger _messenger;
-
     private readonly Dictionary<Guid, ViewNavigator> _navigatorMap;
 
     /// <summary>
@@ -23,10 +21,8 @@ public sealed class AppNavigationService
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
-    public AppNavigationService(WeakReferenceMessenger messenger)
+    public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger)
     {
-        _messenger = messenger;
-
         _navigatorMap = new Dictionary<Guid, ViewNavigator>();
     }
 
