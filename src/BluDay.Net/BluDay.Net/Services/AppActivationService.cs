@@ -3,7 +3,9 @@ namespace BluDay.Net.Services;
 /// <summary>
 /// A service that handles the activation and deactivation of an app.
 /// </summary>
-public sealed class AppActivationService : IRecipient<AppActivationRequestMessage>
+public sealed class AppActivationService : 
+    IRecipient<AppActivationRequestMessage>,
+    IRecipient<AppDeactivationRequestMessage>
 {
     private bool _isActivated;
 
@@ -28,7 +30,7 @@ public sealed class AppActivationService : IRecipient<AppActivationRequestMessag
     }
 
     /// <summary>
-    /// Activates the application.
+    /// Activates the app.
     /// </summary>
     public void Activate()
     {
@@ -40,6 +42,18 @@ public sealed class AppActivationService : IRecipient<AppActivationRequestMessag
     }
 
     /// <summary>
+    /// Deactivates the actve app.
+    /// </summary>
+    public void Deactivate()
+    {
+        _messenger.Send<AppDeactivatingMessage>();
+
+        _isActivated = false;
+
+        _messenger.Send<AppDeactivatedMessage>();
+    }
+
+    /// <summary>
     /// Handles a received <see cref="AppActivationRequestMessage"/> message.
     /// </summary>
     /// <param name="message">
@@ -48,5 +62,16 @@ public sealed class AppActivationService : IRecipient<AppActivationRequestMessag
     public void Receive(AppActivationRequestMessage message)
     {
         Activate();
+    }
+
+    /// <summary>
+    /// Handles a received <see cref="AppDeactivationRequestMessage"/> message.
+    /// </summary>
+    /// <param name="message">
+    /// The received message.
+    /// </param>
+    public void Receive(AppDeactivationRequestMessage message)
+    {
+        Deactivate();
     }
 }
