@@ -129,9 +129,9 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
     {
         ArgumentStoreKind.Boolean => typeof(bool),
         ArgumentStoreKind.Integer => typeof(int),
-        ArgumentStoreKind.Point => typeof(float),
-        ArgumentStoreKind.String => typeof(string),
-        ArgumentStoreKind.Char => typeof(char),
+        ArgumentStoreKind.Point   => typeof(float),
+        ArgumentStoreKind.String  => typeof(string),
+        ArgumentStoreKind.Char    => typeof(char),
         _ => typeof(bool)
     };
 }
