@@ -3,7 +3,7 @@ namespace BluDay.Net.Services;
 /// <summary>
 /// A service that handles the activation and deactivation of an app.
 /// </summary>
-public sealed class AppActivationService
+public sealed class AppActivationService : IRecipient<AppActivationRequestMessage>
 {
     private bool _isActivated;
 
@@ -23,6 +23,8 @@ public sealed class AppActivationService
     public AppActivationService(WeakReferenceMessenger messenger)
     {
         _messenger = messenger;
+
+        _messenger.Register<AppActivationRequestMessage>(this);
     }
 
     /// <summary>
@@ -35,5 +37,16 @@ public sealed class AppActivationService
         _isActivated = true;
 
         _messenger.Send<AppActivatedMessage>();
+    }
+
+    /// <summary>
+    /// Handles a received <see cref="AppActivationRequestMessage"/> message.
+    /// </summary>
+    /// <param name="message">
+    /// The received message.
+    /// </param>
+    public void Receive(AppActivationRequestMessage message)
+    {
+        Activate();
     }
 }
