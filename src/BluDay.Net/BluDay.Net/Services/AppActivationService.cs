@@ -1,7 +1,7 @@
 namespace BluDay.Net.Services;
 
 /// <summary>
-/// The service that handles the activation and deactivation of an app.
+/// A service that handles the activation and deactivation of an app.
 /// </summary>
 public sealed class AppActivationService
 {
