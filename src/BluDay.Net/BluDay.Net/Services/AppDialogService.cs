@@ -1,6 +1,6 @@
 ﻿namespace BluDay.Net.Services;
 
-public sealed class AppDialogService : IAppDialogService
+public sealed class AppDialogService
 {
     private readonly WeakReferenceMessenger _messenger;
 

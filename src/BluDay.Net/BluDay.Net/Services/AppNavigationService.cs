@@ -1,6 +1,6 @@
 namespace BluDay.Net.Services;
 
-public sealed class AppNavigationService : IAppNavigationService
+public sealed class AppNavigationService
 {
     private readonly WeakReferenceMessenger _messenger;
 
