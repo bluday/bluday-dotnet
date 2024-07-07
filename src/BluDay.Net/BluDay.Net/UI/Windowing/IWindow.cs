@@ -8,7 +8,7 @@ public interface IWindow
     /// <summary>
     /// Gets the navigator instance for handling view navigation within the window.
     /// </summary>
-    IViewNavigator ViewNavigator { get; }
+    ViewNavigator ViewNavigator { get; }
 
     /// <summary>
     /// Gets a value indicating whether the window is resizable.

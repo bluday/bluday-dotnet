@@ -4,9 +4,9 @@ public sealed class AppNavigationService
 {
     private readonly WeakReferenceMessenger _messenger;
 
-    private readonly Dictionary<Guid, IViewNavigator> _navigatorMap;
+    private readonly Dictionary<Guid, ViewNavigator> _navigatorMap;
 
-    public IReadOnlyDictionary<Guid, IViewNavigator> NavigatorMap
+    public IReadOnlyDictionary<Guid, ViewNavigator> NavigatorMap
     {
         get => _navigatorMap.AsReadOnly();
     }
@@ -15,10 +15,10 @@ public sealed class AppNavigationService
     {
         _messenger = messenger;
 
-        _navigatorMap = new Dictionary<Guid, IViewNavigator>();
+        _navigatorMap = new Dictionary<Guid, ViewNavigator>();
     }
 
-    public IViewNavigator CreateNavigator(object source)
+    public ViewNavigator CreateNavigator(object source)
     {
         throw new NotImplementedException();
     }

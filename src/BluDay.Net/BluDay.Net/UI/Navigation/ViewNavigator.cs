@@ -1,7 +1,9 @@
 namespace BluDay.Net.UI.Navigation;
 
-/// <inheritdoc cref="IViewNavigator"/>
-public sealed class ViewNavigator : IViewNavigator
+/// <summary>
+/// Represents a view navigator for managing navigation between views.
+/// </summary>
+public sealed class ViewNavigator
 {
     private bool _canGoBack;
 
@@ -11,14 +13,29 @@ public sealed class ViewNavigator : IViewNavigator
 
     private readonly Stack<Type> _viewModelTypeStack;
 
+    /// <summary>
+    /// Gets a value indicating whether navigation to the previous view is possible.
+    /// </summary>
     public bool CanGoBack => _canGoBack;
 
+    /// <summary>
+    /// Gets a value indicating whether navigation to the next view is possible.
+    /// </summary>
     public bool CanGoForward => _canGoForward;
 
+    /// <summary>
+    /// Gets the unique identifier associated with the window.
+    /// </summary>
     public Guid WindowId { get; }
 
+    /// <summary>
+    /// Gets the view type at the top of the current view type stack.
+    /// </summary>
     public Type? CurrentView => _currentViewModelType;
 
+    /// <summary>
+    /// Gets an enumerable of types for all displayed views.
+    /// </summary>
     public IEnumerable<Type> CurrentViews => _viewModelTypeStack;
 
     /// <summary>
@@ -34,6 +51,12 @@ public sealed class ViewNavigator : IViewNavigator
         _viewModelTypeStack = new Stack<Type>();
     }
 
+    /// <summary>
+    /// Removes the top view from the navigation stack.
+    /// </summary>
+    /// <returns>
+    /// <c>true</c> if successful, <c>false</c> if the stack is empty.
+    /// </returns>
     public bool Pop()
     {
         if (!_viewModelTypeStack.TryPop(out Type? _))
@@ -48,6 +71,12 @@ public sealed class ViewNavigator : IViewNavigator
         return true;
     }
 
+    /// <summary>
+    /// Pushes a new view onto the navigation stack based on the specific view model type.
+    /// </summary>
+    /// <param name="viewModelType">
+    /// The type of the view model associated with the view.
+    /// </param>
     public void Push(Type viewModelType)
     {
         InvalidViewModelTypeException.ThrowIfInvalid(viewModelType);
@@ -57,11 +86,20 @@ public sealed class ViewNavigator : IViewNavigator
         _currentViewModelType = viewModelType;
     }
 
+    /// <summary>
+    /// Pushes a new view onto the navigation stack based on the specific view model type.
+    /// </summary>
+    /// <typeparam name="TViewModel">
+    /// The type of the view model associated with the view.
+    /// </typeparam>
     public void Push<TViewModel>() where TViewModel : IViewModel
     {
         Push(typeof(TViewModel));
     }
 
+    /// <summary>
+    /// Resets the view navigation stack.
+    /// </summary>
     public void Reset()
     {
         _viewModelTypeStack.Clear();
