@@ -27,6 +27,7 @@ public sealed class AppActivationService :
         _messenger = messenger;
 
         _messenger.Register<AppActivationRequestMessage>(this);
+        _messenger.Register<AppDeactivationRequestMessage>(this);
     }
 
     /// <summary>
