@@ -4,7 +4,7 @@
 public sealed class AppActivationServiceTests
 {
     [TestMethod]
-    public void Check_If_IsActivated_Is_True()
+    public void GetIsActivated_AfterActivation_AndExpectTrue()
     {
         // Arrange
         AppActivationService service = new(WeakReferenceMessenger.Default);
