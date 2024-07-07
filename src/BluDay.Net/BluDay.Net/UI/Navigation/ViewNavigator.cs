@@ -77,6 +77,9 @@ public sealed class ViewNavigator
     /// <param name="viewModelType">
     /// The type of the view model associated with the view.
     /// </param>
+    /// <exception cref="InvalidViewModelTypeException">
+    /// If the provided view model type is not of type <see cref="ViewModel"/>.
+    /// </exception>
     public void Push(Type viewModelType)
     {
         InvalidViewModelTypeException.ThrowIfInvalid(viewModelType);
