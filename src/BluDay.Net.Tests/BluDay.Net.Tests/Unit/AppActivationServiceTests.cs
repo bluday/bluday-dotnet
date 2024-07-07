@@ -6,6 +6,13 @@ public sealed class AppActivationServiceTests
     [TestMethod]
     public void Check_If_IsActivated_Is_True()
     {
-        throw new NotImplementedException();
+        // Arrange
+        AppActivationService service = new(WeakReferenceMessenger.Default);
+
+        // Act
+        service.Activate();
+
+        // Assert
+        Assert.IsTrue(service.IsActivated);
     }
 }
