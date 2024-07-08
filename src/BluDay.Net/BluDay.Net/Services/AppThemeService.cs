@@ -5,10 +5,21 @@ namespace BluDay.Net.Services;
 /// </summary>
 public sealed class AppThemeService : Service
 {
+    private AppTheme _currentTheme;
+
     /// <summary>
     /// Gets the current theme.
     /// </summary>
-    public AppTheme CurrentTheme { get; set; }
+    public AppTheme CurrentTheme
+    {
+        get => _currentTheme;
+        set
+        {
+            _currentTheme = value;
+
+            Messenger.Send(new AppThemeChangedMessage(value));
+        }
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AppThemeService"/> class.
