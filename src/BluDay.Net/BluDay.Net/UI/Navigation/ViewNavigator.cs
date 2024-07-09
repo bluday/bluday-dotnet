@@ -24,11 +24,6 @@ public sealed class ViewNavigator
     public bool CanGoForward => _canGoForward;
 
     /// <summary>
-    /// Gets the unique identifier associated with the window.
-    /// </summary>
-    public Guid WindowId { get; }
-
-    /// <summary>
     /// Gets the view type at the top of the current view type stack.
     /// </summary>
     public Type? CurrentView => _currentViewModelType;
@@ -41,13 +36,8 @@ public sealed class ViewNavigator
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewNavigator"/> class.
     /// </summary>
-    /// <exception cref="ArgumentNullException">
-    /// If <paramref name="window"/> is null.
-    /// </exception>
-    public ViewNavigator(IWindow window)
+    public ViewNavigator()
     {
-        ArgumentNullException.ThrowIfNull(window);
-
         _viewModelTypeStack = new Stack<Type>();
     }
 
