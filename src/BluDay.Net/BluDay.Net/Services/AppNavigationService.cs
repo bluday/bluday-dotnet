@@ -5,26 +5,15 @@ namespace BluDay.Net.Services;
 /// </summary>
 public sealed class AppNavigationService : Service
 {
-    private readonly Dictionary<Guid, ViewNavigator> _navigatorMap;
-
-    /// <summary>
-    /// Gets a read-only dictionary of the concrete id-to-view-navigator map.
-    /// </summary>
-    public IReadOnlyDictionary<Guid, ViewNavigator> NavigatorMap
-    {
-        get => _navigatorMap.AsReadOnly();
-    }
+    private readonly Dictionary<Guid, ViewNavigator> _windowIdToViewNavigatorMap = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AppNavigationService"/> class.
     /// </summary>
     /// <param name="messenger">
-    /// The event messenger instance.
+    /// The default <see cref="WeakReferenceMessenger"/> instance.
     /// </param>
-    public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger)
-    {
-        _navigatorMap = new Dictionary<Guid, ViewNavigator>();
-    }
+    public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
     /// <summary>
     /// Navigates to the specified view within a window of type <see cref="IWindow"/>.
