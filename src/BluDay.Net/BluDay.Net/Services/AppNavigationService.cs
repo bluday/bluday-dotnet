@@ -27,17 +27,24 @@ public sealed class AppNavigationService : Service
     }
 
     /// <summary>
-    /// Creates a <see cref="ViewNavigator"/> instance for the specified object.
+    /// Navigates to the specified view within a window of type <see cref="IWindow"/>.
     /// </summary>
-    /// <param name="source">
-    /// The owner of the navigator.
+    /// <typeparam name="TView"></typeparam>
+    /// <param name="windowId">
+    /// The id of the targeted window.
     /// </param>
-    /// <returns>
-    /// The view navigator instance.
-    /// </returns>
     /// <exception cref="NotImplementedException">
     /// </exception>
-    public ViewNavigator CreateNavigator(object source)
+    public void Navigate<TView>(Guid windowId) where TView : IView
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Tries to navigate to the specified view within a window without throwing an exception.
+    /// </summary>
+    /// <inheritdoc cref="Navigate{TView}(Guid)"/>
+    public bool TryNavigate<TView>(Guid windowId) where TView : IView
     {
         throw new NotImplementedException();
     }
