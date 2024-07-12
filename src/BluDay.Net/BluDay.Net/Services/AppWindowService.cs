@@ -60,4 +60,13 @@ public sealed class AppWindowService : Service
     {
         throw new NotImplementedException();
     }
+
+    /// <param name="windowId">
+    /// The id of the window.
+    /// </param>
+    /// <inheritdoc cref="HasWindow(IWindow)"/>
+    public bool HasWindow(Guid windowId)
+    {
+        throw new NotImplementedException();
+    }
 }
