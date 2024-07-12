@@ -61,13 +61,8 @@ public sealed class AppWindowService : Service
     /// <returns>
     /// <c>true</c> if the window exists, <c>false</c> otherwise.
     /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// If <paramref name="window"/> is null.
-    /// </exception>
     public bool HasWindow(IWindow window)
     {
-        ArgumentNullException.ThrowIfNull(window);
-
         return _windows.Contains(window);
     }
 
