@@ -39,10 +39,16 @@ public sealed class AppWindowService : Service
     /// <returns>
     /// The window instance.
     /// </returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public IWindow CreateWindow(WindowConfiguration config)
+    /// <exception cref="ArgumentNullException">
+    /// If <paramref name="config"/> is null.
+    /// </exception>
+    public TWindow CreateWindow<TWindow>() where TWindow : IWindow, new()
     {
-        throw new NotImplementedException();
+        TWindow window = new();
+
+        _windows.Add(window);
+
+        return window;
     }
 
     /// <summary>
@@ -55,10 +61,14 @@ public sealed class AppWindowService : Service
     /// <returns>
     /// <c>true</c> if the window exists, <c>false</c> otherwise.
     /// </returns>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="ArgumentNullException">
+    /// If <paramref name="window"/> is null.
+    /// </exception>
     public bool HasWindow(IWindow window)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(window);
+
+        return _windows.Contains(window);
     }
 
     /// <param name="windowId">
@@ -67,6 +77,6 @@ public sealed class AppWindowService : Service
     /// <inheritdoc cref="HasWindow(IWindow)"/>
     public bool HasWindow(Guid windowId)
     {
-        throw new NotImplementedException();
+        return _windows.Any(window => window.Id == windowId);
     }
 }
