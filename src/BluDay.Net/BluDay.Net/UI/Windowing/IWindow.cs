@@ -26,6 +26,14 @@ public interface IWindow : IWindowInfo
     void Close();
 
     /// <summary>
+    /// Configures the window using the provided <see cref="WindowConfiguration"/> instance.
+    /// </summary>
+    /// <param name="config">
+    /// The configuration instance.
+    /// </param>
+    void Configure(WindowConfiguration config);
+
+    /// <summary>
     /// Resizes the window using the provided width and height values.
     /// </summary>
     /// <param name="width">The width of the window, in pixels.</param>
