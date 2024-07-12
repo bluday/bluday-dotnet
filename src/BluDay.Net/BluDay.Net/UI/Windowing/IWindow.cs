@@ -26,11 +26,6 @@ public interface IWindow
     Guid Id { get; }
 
     /// <summary>
-    /// Gets the size of the window.
-    /// </summary>
-    Size Size { get; }
-
-    /// <summary>
     /// Activates and shows the current window.
     /// </summary>
     void Activate();
