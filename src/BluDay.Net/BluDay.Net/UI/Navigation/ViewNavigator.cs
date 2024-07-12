@@ -45,20 +45,20 @@ public sealed class ViewNavigator
     /// Removes the top view from the navigation stack.
     /// </summary>
     /// <returns>
-    /// <c>true</c> if successful, <c>false</c> if the stack is empty.
+    /// The current instance to allow additional chained calls.
     /// </returns>
-    public bool Pop()
+    public ViewNavigator Pop()
     {
         if (!_viewTypeStack.TryPop(out Type? _))
         {
-            return false;
+            return this;
         }
 
         _viewTypeStack.TryPeek(out Type? currentViewType);
 
         _currentViewType = currentViewType;
 
-        return true;
+        return this;
     }
 
     /// <summary>
@@ -67,36 +67,44 @@ public sealed class ViewNavigator
     /// <param name="viewType">
     /// The type of the view associated with the view.
     /// </param>
+    /// <returns>
+    /// The current instance to allow additional chained calls.
+    /// </returns>
     /// <exception cref="InvalidViewTypeException">
     /// If the provided view type is not of type <see cref="IView"/>.
     /// </exception>
-    public void Push(Type viewType)
+    public ViewNavigator Push(Type viewType)
     {
         InvalidViewTypeException.ThrowIfInvalid(viewType);
 
         _viewTypeStack.Push(viewType);
 
         _currentViewType = viewType;
+
+        return this;
     }
 
-    /// <summary>
-    /// Pushes a new view onto the navigation stack based on the specific view type.
-    /// </summary>
+    /// <inheritdoc cref="Push(Type)"/>
     /// <typeparam name="TView">
     /// The type of the view associated with the view.
     /// </typeparam>
-    public void Push<TView>() where TView : IView
+    public ViewNavigator Push<TView>() where TView : IView
     {
-        Push(typeof(TView));
+        return Push(typeof(TView));
     }
 
     /// <summary>
     /// Resets the view navigation stack.
     /// </summary>
-    public void Reset()
+    /// <returns>
+    /// The current instance to allow additional chained calls.
+    /// </returns>
+    public ViewNavigator Reset()
     {
         _viewTypeStack.Clear();
 
         _currentViewType = null;
+
+        return this;
     }
 }
