@@ -3,22 +3,12 @@ namespace BluDay.Net.UI.Windowing;
 /// <summary>
 /// Represents the control of a window.
 /// </summary>
-public interface IWindow
+public interface IWindow : IWindowInfo
 {
     /// <summary>
     /// Gets the navigator instance for handling view navigation within the window.
     /// </summary>
     ViewNavigator ViewNavigator { get; }
-
-    /// <summary>
-    /// Gets a value indicating whether the window is resizable.
-    /// </summary>
-    bool IsResizable { get; set; }
-
-    /// <summary>
-    /// Gets the title of the window.
-    /// </summary>
-    string? Title { get; set; }
 
     /// <summary>
     /// Gets the ID of the window.
