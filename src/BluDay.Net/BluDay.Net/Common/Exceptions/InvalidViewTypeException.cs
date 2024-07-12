@@ -23,7 +23,7 @@ public sealed class InvalidViewTypeException : Exception
     {
         ArgumentNullException.ThrowIfNull(value);
 
-        if (!value.IsAssignableFrom(typeof(IView)))
+        if (!value.IsAssignableTo(typeof(IView)))
         {
             throw new InvalidViewTypeException(value);
         }
