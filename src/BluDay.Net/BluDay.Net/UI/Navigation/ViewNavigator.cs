@@ -9,9 +9,9 @@ public sealed class ViewNavigator
 
     private bool _canGoForward;
 
-    private Type? _currentViewModelType;
+    private Type? _currentViewType;
 
-    private readonly Stack<Type> _viewModelTypeStack;
+    private readonly Stack<Type> _viewTypeStack;
 
     /// <summary>
     /// Gets a value indicating whether navigation to the previous view is possible.
@@ -26,19 +26,19 @@ public sealed class ViewNavigator
     /// <summary>
     /// Gets the view type at the top of the current view type stack.
     /// </summary>
-    public Type? CurrentView => _currentViewModelType;
+    public Type? CurrentView => _currentViewType;
 
     /// <summary>
     /// Gets an enumerable of types for all displayed views.
     /// </summary>
-    public IEnumerable<Type> CurrentViews => _viewModelTypeStack;
+    public IEnumerable<Type> CurrentViews => _viewTypeStack;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewNavigator"/> class.
     /// </summary>
     public ViewNavigator()
     {
-        _viewModelTypeStack = new Stack<Type>();
+        _viewTypeStack = new Stack<Type>();
     }
 
     /// <summary>
@@ -49,45 +49,45 @@ public sealed class ViewNavigator
     /// </returns>
     public bool Pop()
     {
-        if (!_viewModelTypeStack.TryPop(out Type? _))
+        if (!_viewTypeStack.TryPop(out Type? _))
         {
             return false;
         }
 
-        _viewModelTypeStack.TryPeek(out Type? currentViewModelType);
+        _viewTypeStack.TryPeek(out Type? currentViewType);
 
-        _currentViewModelType = currentViewModelType;
+        _currentViewType = currentViewType;
 
         return true;
     }
 
     /// <summary>
-    /// Pushes a new view onto the navigation stack based on the specific view model type.
+    /// Pushes a new view onto the navigation stack based on the specific view type.
     /// </summary>
-    /// <param name="viewModelType">
-    /// The type of the view model associated with the view.
+    /// <param name="viewType">
+    /// The type of the view associated with the view.
     /// </param>
-    /// <exception cref="InvalidViewModelTypeException">
-    /// If the provided view model type is not of type <see cref="ViewModel"/>.
+    /// <exception cref="InvalidViewTypeException">
+    /// If the provided view type is not of type <see cref="IView"/>.
     /// </exception>
-    public void Push(Type viewModelType)
+    public void Push(Type viewType)
     {
-        InvalidViewModelTypeException.ThrowIfInvalid(viewModelType);
+        InvalidViewTypeException.ThrowIfInvalid(viewType);
 
-        _viewModelTypeStack.Push(viewModelType);
+        _viewTypeStack.Push(viewType);
 
-        _currentViewModelType = viewModelType;
+        _currentViewType = viewType;
     }
 
     /// <summary>
-    /// Pushes a new view onto the navigation stack based on the specific view model type.
+    /// Pushes a new view onto the navigation stack based on the specific view type.
     /// </summary>
-    /// <typeparam name="TViewModel">
-    /// The type of the view model associated with the view.
+    /// <typeparam name="TView">
+    /// The type of the view associated with the view.
     /// </typeparam>
-    public void Push<TViewModel>() where TViewModel : IViewModel
+    public void Push<TView>() where TView : IView
     {
-        Push(typeof(TViewModel));
+        Push(typeof(TView));
     }
 
     /// <summary>
@@ -95,8 +95,8 @@ public sealed class ViewNavigator
     /// </summary>
     public void Reset()
     {
-        _viewModelTypeStack.Clear();
+        _viewTypeStack.Clear();
 
-        _currentViewModelType = null;
+        _currentViewType = null;
     }
 }
