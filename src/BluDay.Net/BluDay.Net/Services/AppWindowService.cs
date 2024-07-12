@@ -5,7 +5,7 @@
 /// </summary>
 public sealed class AppWindowService : Service
 {
-    private readonly HashSet<IWindow> _windows;
+    private readonly HashSet<IWindow> _windows = new();
 
     /// <summary>
     /// Gets the main window.
@@ -28,19 +28,19 @@ public sealed class AppWindowService : Service
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
-    public AppWindowService(WeakReferenceMessenger messenger) : base(messenger)
-    {
-        _windows = new HashSet<IWindow>();
-    }
+    public AppWindowService(WeakReferenceMessenger messenger) : base(messenger) { }
 
     /// <summary>
     /// Creates a new window instance of type <see cref="IWindow"/>.
     /// </summary>
+    /// <param name="config">
+    /// The window configuration instance.
+    /// </param>
     /// <returns>
     /// The window instance.
     /// </returns>
     /// <exception cref="NotImplementedException"></exception>
-    public IWindow CreateWindow()
+    public IWindow CreateWindow(WindowConfiguration config)
     {
         throw new NotImplementedException();
     }
