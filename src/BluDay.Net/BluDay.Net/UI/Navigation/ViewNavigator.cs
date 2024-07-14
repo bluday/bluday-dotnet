@@ -11,7 +11,7 @@ public sealed class ViewNavigator
 
     private Type? _currentViewType;
 
-    private readonly Stack<Type> _viewTypeStack;
+    private readonly Stack<Type> _viewTypeStack = new();
 
     /// <summary>
     /// Gets a value indicating whether navigation to the previous view is possible.
@@ -32,14 +32,6 @@ public sealed class ViewNavigator
     /// Gets an enumerable of types for all displayed views.
     /// </summary>
     public IEnumerable<Type> CurrentViews => _viewTypeStack;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ViewNavigator"/> class.
-    /// </summary>
-    public ViewNavigator()
-    {
-        _viewTypeStack = new Stack<Type>();
-    }
 
     /// <summary>
     /// Removes the top view from the navigation stack.
