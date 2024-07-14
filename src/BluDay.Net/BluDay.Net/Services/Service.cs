@@ -5,12 +5,7 @@
 /// </summary>
 public abstract class Service
 {
-    private readonly WeakReferenceMessenger _messenger;
-
-    /// <summary>
-    /// Gets the messenger instance.
-    /// </summary>
-    public WeakReferenceMessenger Messenger => _messenger;
+    protected readonly WeakReferenceMessenger _messenger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Service"/> class.

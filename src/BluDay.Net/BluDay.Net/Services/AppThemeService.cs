@@ -17,7 +17,7 @@ public sealed class AppThemeService : Service
         {
             _currentTheme = value;
 
-            Messenger.Send(new AppThemeChangedMessage(value));
+            _messenger.Send(new AppThemeChangedMessage(value));
         }
     }
 

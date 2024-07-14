@@ -22,8 +22,8 @@ public sealed class AppActivationService : Service,
 
     protected override void Subscribe()
     {
-        Messenger.Register<AppActivationRequestMessage>(this);
-        Messenger.Register<AppDeactivationRequestMessage>(this);
+        _messenger.Register<AppActivationRequestMessage>(this);
+        _messenger.Register<AppDeactivationRequestMessage>(this);
     }
 
     /// <summary>
@@ -33,11 +33,11 @@ public sealed class AppActivationService : Service,
     {
         if (IsActivated) return;
 
-        Messenger.Send<AppActivatingMessage>();
+        _messenger.Send<AppActivatingMessage>();
 
         IsActivated = true;
 
-        Messenger.Send<AppActivatedMessage>();
+        _messenger.Send<AppActivatedMessage>();
     }
 
     /// <summary>
@@ -47,11 +47,11 @@ public sealed class AppActivationService : Service,
     {
         if (!IsActivated) return;
 
-        Messenger.Send<AppDeactivatingMessage>();
+        _messenger.Send<AppDeactivatingMessage>();
 
         IsActivated = false;
 
-        Messenger.Send<AppDeactivatedMessage>();
+        _messenger.Send<AppDeactivatedMessage>();
     }
 
     /// <summary>
