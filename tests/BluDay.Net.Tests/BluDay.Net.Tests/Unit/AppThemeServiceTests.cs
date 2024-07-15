@@ -6,7 +6,7 @@ public sealed class AppThemeServiceTests
     private readonly WeakReferenceMessenger _messenger = WeakReferenceMessenger.Default;
 
     [TestMethod]
-    public void SetAndGetCurrentThemeExplicitly()
+    public void SetCurrentThemeExplicitly_AndGetValue()
     {
         // Arrange.
         AppThemeService service = new(_messenger);
@@ -19,7 +19,7 @@ public sealed class AppThemeServiceTests
     }
 
     [TestMethod]
-    public void SetCurrentThemeAndReceiveUpdateMessage()
+    public void SetCurrentTheme_AndReceiveValueChangedMessage()
     {
         // Arrange.
         AppThemeService service = new(_messenger);
@@ -40,5 +40,19 @@ public sealed class AppThemeServiceTests
 
         // Assert.
         Assert.IsTrue(currentTheme is AppTheme.Dark);
+    }
+
+    [TestMethod]
+    public void RequestThemeChange_AndValidateValue()
+    {
+        // Arrange.
+        AppThemeService service = new(_messenger);
+
+        // Act.
+        var message = _messenger.Send(new AppThemeChangeRequestMessage(AppTheme.Light));
+
+        // Assert.
+        Assert.IsTrue(message.Response     is AppTheme.Light);
+        Assert.IsTrue(service.CurrentTheme is AppTheme.Light);
     }
 }
