@@ -11,9 +11,9 @@ public interface IImplementationProvider
     Type ServiceType { get; }
 
     /// <summary>
-    /// Gets a read-only dictionary of implementation types and their object factories.
+    /// Gets an enumerable of implementation types and their object factories.
     /// </summary>
-    IReadOnlyList<Type> ImplementationTypes { get; }
+    IEnumerable<Type> ImplementationTypes { get; }
 
     /// <summary>
     /// Resolves an instance of the specificed <paramref name="implementationType"/>.

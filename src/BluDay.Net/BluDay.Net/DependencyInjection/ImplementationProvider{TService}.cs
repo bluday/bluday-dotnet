@@ -11,7 +11,7 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
 
     public Type ServiceType => _serviceType;
 
-    public IReadOnlyList<Type> ImplementationTypes => _typeToObjectFactoryMap.Keys.ToList();
+    public IEnumerable<Type> ImplementationTypes => _typeToObjectFactoryMap.Keys;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ImplementationProvider{TService}"/> class.
