@@ -1,13 +1,28 @@
 ﻿namespace BluDay.Net.Abstractions.Models;
 
-public abstract class Model : IModel, IEquatable<Model>, IEqualityComparer<Model>
+/// <summary>
+/// Represents the base class for a derived domain model class.
+/// </summary>
+public abstract class Model : IEquatable<Model>
 {
-    public Guid Id { get; init; } = Guid.NewGuid();
+    /// <summary>
+    /// Gets the id of the model.
+    /// </summary>
+    public Guid Id { get; set; }
 
+    /// <summary>
+    /// Gets the date at which the model was created.
+    /// </summary>
     public DateTime? CreatedAt { get; set; }
 
+    /// <summary>
+    /// Gets the date at which the model was updated.
+    /// </summary>
     public DateTime? UpdatedAt { get; set; }
 
+    /// <summary>
+    /// Gets the date at which the model was deleted.
+    /// </summary>
     public DateTime? DeletedAt { get; set; }
 
     public bool Equals(Model? other)
@@ -15,13 +30,8 @@ public abstract class Model : IModel, IEquatable<Model>, IEqualityComparer<Model
         return Id == other?.Id;
     }
 
-    public bool Equals(Model? x, Model? y)
-    {
-        return EqualityComparer<Model>.Default.Equals(x, y);
-    }
-
     public int GetHashCode(Model obj)
     {
-        return obj.GetHashCode() ^ obj.Id.GetHashCode();
+        return Id.GetHashCode();
     }
 }
