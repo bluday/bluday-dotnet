@@ -1,5 +1,6 @@
 ﻿namespace BluDay.Net.Tests.Unit;
 
+// TODO: Use a mocked messenger class instead of an actual instance.
 [TestClass]
 public sealed class AppActivationServiceTests
 {
@@ -8,52 +9,52 @@ public sealed class AppActivationServiceTests
     [TestMethod]
     public void GetIsActivated_AfterExplicitActivationCall_AndExpectTrue()
     {
-        // Arrange
+        // Arrange.
         AppActivationService service = new(_messenger);
 
-        // Act
+        // Act.
         service.Activate();
 
-        // Assert
+        // Assert.
         Assert.IsTrue(service.IsActivated);
     }
 
     [TestMethod]
     public void GetIsActivated_AfterExplicitDeactivationCall_AndExpectTrue()
     {
-        // Arrange
+        // Arrange.
         AppActivationService service = new(_messenger);
 
-        // Act
+        // Act.
         service.Deactivate();
 
-        // Assert
+        // Assert.
         Assert.IsFalse(service.IsActivated);
     }
 
     [TestMethod]
     public void GetIsActivated_AfterSentActivationRequestMessage_AndExpectTrue()
     {
-        // Arrange
+        // Arrange.
         AppActivationService service = new(_messenger);
 
-        // Act
+        // Act.
         _messenger.Send<AppActivationRequestMessage>();
 
-        // Assert
+        // Assert.
         Assert.IsTrue(service.IsActivated);
     }
 
     [TestMethod]
     public void GetIsActivated_AfterSentDeactivationRequestMessage_AndExpectTrue()
     {
-        // Arrange
+        // Arrange.
         AppActivationService service = new(_messenger);
 
-        // Act
+        // Act.
         _messenger.Send<AppDeactivationRequestMessage>();
 
-        // Assert
+        // Assert.
         Assert.IsFalse(service.IsActivated);
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace BluDay.Net.Tests.Unit;
 
+// TODO: Use a mocked messenger class instead of an actual instance.
 [TestClass]
 public sealed class AppThemeServiceTests
 {
