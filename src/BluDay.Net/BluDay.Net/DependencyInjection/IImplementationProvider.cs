@@ -1,5 +1,3 @@
-using BluDay.Net.Common.Exceptions;
-
 namespace BluDay.Net.DependencyInjection;
 
 /// <summary>

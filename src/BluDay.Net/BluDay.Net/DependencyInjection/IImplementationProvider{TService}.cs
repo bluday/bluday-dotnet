@@ -1,9 +1,9 @@
-using BluDay.Net.Common.Exceptions;
-
 namespace BluDay.Net.DependencyInjection;
 
 /// <inheritdoc />
-/// <typeparam name="TService">The shared service type.</typeparam>
+/// <typeparam name="TService">
+/// The shared service type.
+/// </typeparam>
 public interface IImplementationProvider<TService> : IImplementationProvider where TService : notnull
 {
     /// <summary>

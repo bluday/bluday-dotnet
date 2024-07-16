@@ -1,5 +1,3 @@
-using BluDay.Net.Common.Extensions;
-
 namespace BluDay.Net.DependencyInjection;
 
 /// <inheritdoc cref="IImplementationProvider{TService}"/>
