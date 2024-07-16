@@ -52,6 +52,46 @@ public sealed class AppWindowService : Service
     }
 
     /// <summary>
+    /// Closes and destroys the provided <see cref="IWindow"/> window instance if it
+    /// has been registered within this service.
+    /// </summary>
+    /// <param name="window">
+    /// The window instance.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if destroyed, otherwise <c>false</c>.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// If <paramref name="window"/> is null.
+    /// </exception>
+    public bool DestroyWindow(IWindow window)
+    {
+        if (!_windows.Contains(window))
+        {
+            return false;
+        }
+        
+        window.Close();
+
+        return _windows.Remove(window);
+    }
+
+    /// <inheritdoc cref="DestroyWindow(IWindow)"/>
+    /// <param name="windowId">
+    /// The id of the window.
+    /// </param>
+    public bool DestroyWindow(Guid windowId)
+    {
+        IWindow? window = _windows.FirstOrDefault(window => window.Id == windowId);
+
+        if (window is null) return false;
+
+        window.Close();
+
+        return _windows.Remove(window);
+    }
+
+    /// <summary>
     /// Gets a value indicating whether the provided window instance exists and if it
     /// has been registered within the service.
     /// </summary>
