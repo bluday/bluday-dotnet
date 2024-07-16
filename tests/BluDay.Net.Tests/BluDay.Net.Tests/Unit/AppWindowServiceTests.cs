@@ -5,6 +5,7 @@ public sealed class AppWindowServiceTests
 {
     private readonly WeakReferenceMessenger _messenger = WeakReferenceMessenger.Default;
 
+    #region CreateWindow
     [TestMethod]
     public void CreateWindow_ReturnRegisteredNonNullInstance()
     {
@@ -32,7 +33,9 @@ public sealed class AppWindowServiceTests
         // Assert.
         Assert.IsTrue(hasWindow);
     }
+    #endregion
 
+    #region DestroyWindow
     [TestMethod]
     public void DestroyWindowByInstance_ReturnTrue()
     {
@@ -88,7 +91,9 @@ public sealed class AppWindowServiceTests
         // Assert.
         Assert.IsFalse(isDestroyed);
     }
+    #endregion
 
+    #region HasWindow
     [TestMethod]
     public void CreateWindow_CheckIfHasWindowById_ReturnTrue()
     {
@@ -129,6 +134,7 @@ public sealed class AppWindowServiceTests
         // Assert.
         Assert.IsFalse(hasWindow);
     }
+    #endregion
 }
 
 public sealed class FakeWindow : IWindow
