@@ -1,14 +1,14 @@
-﻿namespace BluDay.Net.Tests.Unit;
+﻿namespace BluDay.Net.Tests.Unit.Services;
 
-// TODO: Use a mocked messenger class instead of an actual instance.
 [TestClass]
 public sealed class AppWindowServiceTests
 {
+    // TODO: Use a mocked messenger class instead of an actual instance.
     private readonly WeakReferenceMessenger _messenger = WeakReferenceMessenger.Default;
 
     #region CreateWindow
     [TestMethod]
-    public void CreateWindow_ReturnRegisteredNonNullInstance()
+    public void CreateWindow_AndReturnRegisteredInstance()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -21,7 +21,7 @@ public sealed class AppWindowServiceTests
     }
 
     [TestMethod]
-    public void CreateWindow_CheckIfHasWindowByInstance_ReturnTrue()
+    public void CreateWindow_AndCheckIfHasWindowByInstance_AndReturnTrue()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -38,7 +38,7 @@ public sealed class AppWindowServiceTests
 
     #region DestroyWindow
     [TestMethod]
-    public void DestroyWindowByInstance_ReturnTrue()
+    public void DestroyWindow_AndReturnTrue()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -53,7 +53,7 @@ public sealed class AppWindowServiceTests
     }
 
     [TestMethod]
-    public void DestroyWindowById_ReturnTrue()
+    public void DestroyWindow_ById_AndReturnTrue()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -68,7 +68,7 @@ public sealed class AppWindowServiceTests
     }
 
     [TestMethod]
-    public void DestroyManuallyCreatedWindowByInstance_ReturnFalse()
+    public void DestroyWindow_UsingManuallyCreatedInstance_AndReturnFalse()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -81,7 +81,7 @@ public sealed class AppWindowServiceTests
     }
 
     [TestMethod]
-    public void DestroyManuallyCreatedWindowById_ReturnFalse()
+    public void DestroyWindow_ById_UsingManuallyCreatedInstance_AndReturnFalse()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -96,7 +96,7 @@ public sealed class AppWindowServiceTests
 
     #region HasWindow
     [TestMethod]
-    public void CreateWindow_CheckIfHasWindowById_ReturnTrue()
+    public void CheckIf_HasWindow_AndReturnTrue()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -111,7 +111,7 @@ public sealed class AppWindowServiceTests
     }
 
     [TestMethod]
-    public void CreateWindowManually_GetWindowByInstance_ReturnFalse()
+    public void CheckIf_HasWindow_CreatedManually_AndReturnFalse()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -124,7 +124,7 @@ public sealed class AppWindowServiceTests
     }
 
     [TestMethod]
-    public void CreateWindowManually_GetWindowById_ReturnFalse()
+    public void CheckIf_HasWindow_CreateManually_ById_AndReturnFalse()
     {
         // Arrange.
         AppWindowService service = new(_messenger);
@@ -138,6 +138,7 @@ public sealed class AppWindowServiceTests
     #endregion
 }
 
+// Temporary solution. Am going to use Moq soon.
 public sealed class FakeWindow : IWindow
 {
     public ViewNavigator ViewNavigator { get; } = new();
@@ -159,7 +160,7 @@ public sealed class FakeWindow : IWindow
         ArgumentNullException.ThrowIfNull(config);
 
         IsResizable = config.IsResizable;
-        Title       = config.Title;
+        Title = config.Title;
 
         if (config.Size.HasValue)
         {

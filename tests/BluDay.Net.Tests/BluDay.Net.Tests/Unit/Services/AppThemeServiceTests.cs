@@ -1,13 +1,14 @@
-﻿namespace BluDay.Net.Tests.Unit;
+﻿namespace BluDay.Net.Tests.Unit.Services;
 
-// TODO: Use a mocked messenger class instead of an actual instance.
 [TestClass]
 public sealed class AppThemeServiceTests
 {
+    // TODO: Use a mocked messenger class instead of an actual instance.
     private readonly WeakReferenceMessenger _messenger = WeakReferenceMessenger.Default;
 
+    #region CurrentTheme
     [TestMethod]
-    public void SetCurrentThemeExplicitly_AndGetValue()
+    public void Set_CurrentTheme_AndReturnTrue()
     {
         // Arrange.
         AppThemeService service = new(_messenger);
@@ -20,7 +21,7 @@ public sealed class AppThemeServiceTests
     }
 
     [TestMethod]
-    public void SetCurrentTheme_AndReceiveValueChangedMessage()
+    public void Set_CurrentTheme_AndReceiveValueChangedMessage_AndReturnTrue()
     {
         // Arrange.
         AppThemeService service = new(_messenger);
@@ -44,7 +45,7 @@ public sealed class AppThemeServiceTests
     }
 
     [TestMethod]
-    public void RequestThemeChange_AndValidateValue()
+    public void Set_CurrentTheme_UsingMessengerAndValidateResponse_AndReturnTrue()
     {
         // Arrange.
         AppThemeService service = new(_messenger);
@@ -56,4 +57,5 @@ public sealed class AppThemeServiceTests
         Assert.IsTrue(message.Response     is AppTheme.Light);
         Assert.IsTrue(service.CurrentTheme is AppTheme.Light);
     }
+    #endregion
 }
