@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.UI.Views;
+﻿namespace BluDay.Net.Abstractions.UI.Views;
 
 /// <summary>
 /// Represents a view control.
