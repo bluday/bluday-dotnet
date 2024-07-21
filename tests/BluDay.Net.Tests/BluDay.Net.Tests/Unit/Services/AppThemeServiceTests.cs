@@ -51,10 +51,12 @@ public sealed class AppThemeServiceTests
         AppThemeService service = new(_messenger);
 
         // Act.
-        var message = _messenger.Send(new AppThemeChangeRequestMessage(AppTheme.Light));
+        AppTheme currentTheme = _messenger.Send(
+            new AppThemeChangeRequestMessage(AppTheme.Light)
+        );
 
         // Assert.
-        Assert.IsTrue(message.Response     is AppTheme.Light);
+        Assert.IsTrue(currentTheme         is AppTheme.Light);
         Assert.IsTrue(service.CurrentTheme is AppTheme.Light);
     }
     #endregion
