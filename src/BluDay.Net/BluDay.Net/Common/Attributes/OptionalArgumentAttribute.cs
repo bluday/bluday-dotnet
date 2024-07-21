@@ -1,3 +1,6 @@
 namespace BluDay.Net.Common.Attributes;
 
-public sealed class OptionalArgumentAttribute : ArgumentAttribute { }
+/// <summary>
+/// Specifies an optional command-line argument to be parsed.
+/// </summary>
+public sealed class OptionalArgumentAttribute : CommandLineArgumentAttribute { }

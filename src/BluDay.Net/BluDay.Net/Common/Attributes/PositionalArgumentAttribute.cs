@@ -1,3 +1,6 @@
 namespace BluDay.Net.Common.Attributes;
 
-public sealed class PositionalArgumentAttribute : ArgumentAttribute { }
+/// <summary>
+/// Specifies a positional command-line argument to be parsed.
+/// </summary>
+public sealed class PositionalArgumentAttribute : CommandLineArgumentAttribute { }
