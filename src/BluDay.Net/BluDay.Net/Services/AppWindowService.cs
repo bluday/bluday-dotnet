@@ -39,9 +39,6 @@ public sealed class AppWindowService : Service
     /// <returns>
     /// The window instance.
     /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// If <paramref name="config"/> is null.
-    /// </exception>
     public TWindow CreateWindow<TWindow>() where TWindow : IWindow, new()
     {
         TWindow window = new();
