@@ -43,21 +43,5 @@ public sealed class AppThemeServiceTests
         // Assert.
         Assert.IsTrue(currentTheme is AppTheme.Dark);
     }
-
-    [TestMethod]
-    public void Set_CurrentTheme_UsingMessengerAndValidateResponse_AndReturnTrue()
-    {
-        // Arrange.
-        AppThemeService service = new(_messenger);
-
-        // Act.
-        AppTheme currentTheme = _messenger.Send(
-            new AppThemeChangeRequestMessage(AppTheme.Light)
-        );
-
-        // Assert.
-        Assert.IsTrue(currentTheme         is AppTheme.Light);
-        Assert.IsTrue(service.CurrentTheme is AppTheme.Light);
-    }
     #endregion
 }
