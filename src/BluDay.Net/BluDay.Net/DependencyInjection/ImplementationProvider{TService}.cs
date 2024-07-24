@@ -1,23 +1,22 @@
 namespace BluDay.Net.DependencyInjection;
 
-/// <inheritdoc cref="IImplementationProvider{TService}"/>
 public class ImplementationProvider<TService> : IImplementationProvider<TService> where TService : notnull
 {
     private readonly Type _serviceType;
 
-    private readonly IReadOnlyDictionary<Type, ObjectFactory> _typeToObjectFactoryMap;
-
     private readonly IServiceProvider _serviceProvider;
+
+    private readonly IReadOnlyDictionary<Type, ObjectFactory> _implementationTypeToFactoryMap;
 
     public Type ServiceType => _serviceType;
 
-    public IEnumerable<Type> ImplementationTypes => _typeToObjectFactoryMap.Keys;
+    public IEnumerable<Type> ImplementationTypes => _implementationTypeToFactoryMap.Keys;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ImplementationProvider{TService}"/> class.
     /// </summary>
     /// <param name="serviceProvider">
-    /// The <see cref="IServiceProvider"/> used for resolving implementation instances.
+    /// The <see cref="IServiceProvider"/> used for resolving the dependencies a registered, concrete type.
     /// </param>
     /// <exception cref="ArgumentNullException">
     /// If <paramref name="serviceProvider"/> is null.
@@ -28,12 +27,9 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
 
         _serviceType = typeof(TService);
 
-        _typeToObjectFactoryMap = _serviceType
+        _implementationTypeToFactoryMap = _serviceType
             .GetImplementationTypes()
-            .ToDictionary(
-                type => type,
-                CreateImplementationResolver
-            );
+            .ToDictionary(type => type, CreateImplementationResolver);
 
         _serviceProvider = serviceProvider;
     }
@@ -49,9 +45,7 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
     /// </returns>
     private object ResolveInstance(Type implementationType)
     {
-        ObjectFactory factory = _typeToObjectFactoryMap[implementationType];
-
-        return factory.Invoke(_serviceProvider, arguments: null);
+        return _implementationTypeToFactoryMap[implementationType].Invoke(_serviceProvider, null);
     }
 
     /// <summary>
@@ -65,14 +59,9 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
     /// </returns>
     private static ObjectFactory CreateImplementationResolver(Type implementationType)
     {
-        Type genericFactoryType = typeof(ObjectFactory<>).MakeGenericType(implementationType);
+        ObjectFactory factory = ActivatorUtilities.CreateFactory(implementationType, argumentTypes: []);
 
-        ObjectFactory factory = ActivatorUtilities.CreateFactory(genericFactoryType, argumentTypes: []);
-
-        return (serviceProvider, args) =>
-        {
-            return factory.Invoke(serviceProvider, args)!;
-        };
+        return (serviceProvider, args) => factory.Invoke(serviceProvider, args)!;
     }
 
     public object GetInstance(Type implementationType)
