@@ -5,6 +5,8 @@
 /// </summary>
 public sealed class AppWindowService : Service
 {
+    private readonly ImplementationProvider<IWindow> _windowFactory;
+
     private readonly HashSet<IWindow> _windows = new();
 
     /// <summary>
@@ -25,10 +27,21 @@ public sealed class AppWindowService : Service
     /// <summary>
     /// Initializes a new instance of the <see cref="AppWindowService"/> class.
     /// </summary>
+    /// <param name="windowFactory">
+    /// An <see cref="IImplementationProvider"/> instance for resolving transient
+    /// window instances of type <see cref="IWindow"/>.
+    /// </param>
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
-    public AppWindowService(WeakReferenceMessenger messenger) : base(messenger) { }
+    public AppWindowService(
+        ImplementationProvider<IWindow> windowFactory,
+        WeakReferenceMessenger          messenger
+    )
+        : base(messenger)
+    {
+        _windowFactory = windowFactory;
+    }
 
     /// <summary>
     /// Creates a new window instance of type <see cref="IWindow"/>.
@@ -39,9 +52,9 @@ public sealed class AppWindowService : Service
     /// <returns>
     /// The window instance.
     /// </returns>
-    public TWindow CreateWindow<TWindow>() where TWindow : IWindow, new()
+    public TWindow CreateWindow<TWindow>() where TWindow : IWindow
     {
-        TWindow window = new();
+        TWindow window = _windowFactory.GetInstance<TWindow>();
 
         _windows.Add(window);
 
