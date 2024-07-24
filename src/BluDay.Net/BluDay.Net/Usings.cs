@@ -8,6 +8,7 @@ global using BluDay.Net.Abstractions.UI.Views;
 global using BluDay.Net.Abstractions.UI.Windowing;
 global using BluDay.Net.Common.Exceptions;
 global using BluDay.Net.Common.Extensions;
+global using BluDay.Net.DependencyInjection;
 global using BluDay.Net.Messaging;
 global using BluDay.Net.Resources;
 global using BluDay.Net.UI.Appearance;
