@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Common.CommandLine;
+﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
 /// Stores read-only lists of optional and positional argument descriptors.

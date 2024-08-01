@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.CommandLine;
+namespace BluDay.Net.CommandLine;
 
 /// <summary>
 /// A struct for representing a raw command-line argument flag or value.

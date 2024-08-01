@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Common;
+﻿namespace BluDay.Net;
 
 /// <summary>
 /// Stores a collection of constant values for convenient use in applications.

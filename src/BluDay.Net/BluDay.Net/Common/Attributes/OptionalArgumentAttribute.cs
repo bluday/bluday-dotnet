@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.Attributes;
+namespace BluDay.Net.Attributes;
 
 /// <summary>
 /// Specifies an optional command-line argument to be parsed.

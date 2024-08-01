@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Common.Exceptions;
+﻿namespace BluDay.Net.Exceptions;
 
 /// <summary>
 /// Represents an exception for invalid view types.

@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.CommandLine;
+namespace BluDay.Net.CommandLine;
 
 /// <summary>
 /// A command-line argument token.

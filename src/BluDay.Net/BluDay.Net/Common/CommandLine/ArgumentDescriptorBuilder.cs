@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Common.CommandLine;
+﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
 /// A builder class for constructing an instance of the <see cref="OptionalArgumentDescriptor"/> class.

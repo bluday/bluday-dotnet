@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Common.CommandLine;
+﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
 /// A bulilder class for constructing a <see cref="ArgumentDescriptors"/> instance.

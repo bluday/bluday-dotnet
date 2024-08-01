@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Common.CommandLine;
+﻿namespace BluDay.Net.CommandLine;
 
 /// <summary>
 /// Represents a flag for an optional command-line argument.

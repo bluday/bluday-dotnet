@@ -1,4 +1,4 @@
-namespace BluDay.Net.Common.CommandLine;
+namespace BluDay.Net.CommandLine;
 
 /// <summary>
 /// Base class for creating derived command-line argument descriptors classes.
