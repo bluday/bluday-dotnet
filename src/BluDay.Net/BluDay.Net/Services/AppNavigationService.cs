@@ -24,7 +24,7 @@ public sealed class AppNavigationService : Service
     /// </param>
     /// <exception cref="NotImplementedException">
     /// </exception>
-    public void Navigate<TView>(Guid windowId) where TView : IView
+    public void Navigate<TView>(Guid windowId) where TView : class
     {
         throw new NotImplementedException();
     }
@@ -33,7 +33,7 @@ public sealed class AppNavigationService : Service
     /// Tries to navigate to the specified view within a window without throwing an exception.
     /// </summary>
     /// <inheritdoc cref="Navigate{TView}(Guid)"/>
-    public bool TryNavigate<TView>(Guid windowId) where TView : IView
+    public bool TryNavigate<TView>(Guid windowId) where TView : class
     {
         throw new NotImplementedException();
     }

@@ -80,7 +80,7 @@ public sealed class ViewNavigator
     /// <typeparam name="TView">
     /// The type of the view associated with the view.
     /// </typeparam>
-    public ViewNavigator Push<TView>() where TView : IView
+    public ViewNavigator Push<TView>() where TView : class
     {
         return Push(typeof(TView));
     }

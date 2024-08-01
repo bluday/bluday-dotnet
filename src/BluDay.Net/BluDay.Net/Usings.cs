@@ -10,7 +10,6 @@ global using BluDay.Net.Resources;
 global using BluDay.Net.ViewModels;
 global using BluDay.Net.UI.Appearance;
 global using BluDay.Net.UI.Navigation;
-global using BluDay.Net.UI.Views;
 global using BluDay.Net.UI.Windowing;
 
 global using Microsoft.Extensions.DependencyInjection;

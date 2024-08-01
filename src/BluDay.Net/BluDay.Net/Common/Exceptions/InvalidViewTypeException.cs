@@ -23,9 +23,10 @@ public sealed class InvalidViewTypeException : Exception
     {
         ArgumentNullException.ThrowIfNull(value);
 
-        if (!value.IsAssignableTo(typeof(IView)))
+        // TODO: Check if type is a view.
+        if (value is null)
         {
-            throw new InvalidViewTypeException(value);
+            throw new InvalidViewTypeException(value!);
         }
     }
 }
