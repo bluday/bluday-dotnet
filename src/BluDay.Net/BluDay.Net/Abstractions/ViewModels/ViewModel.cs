@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the base of a view model class.
 /// </summary>
-public abstract class ViewModel : ObservableObject, IViewModel
+public abstract class ViewModel : ObservableObject
 {
     protected readonly WeakReferenceMessenger _messenger;
 
