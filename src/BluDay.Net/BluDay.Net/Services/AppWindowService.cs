@@ -61,6 +61,22 @@ public sealed class AppWindowService : Service
         return window;
     }
 
+    /// <typeparam name="TWindow">
+    /// The concrete window type.
+    /// </typeparam>
+    /// <param name="config">
+    /// An <see cref="WindowConfiguration"/> instance with the initial configuration values for the window.
+    /// </param>
+    /// <inheritdoc cref="CreateWindow{TWindow}()"/>
+    public TWindow CreateWindow<TWindow>(WindowConfiguration config) where TWindow : IWindow
+    {
+        TWindow window = CreateWindow<TWindow>();
+
+        window.Configure(config);
+
+        return window;
+    }
+
     /// <summary>
     /// Closes and destroys the provided <see cref="IWindow"/> window instance if it
     /// has been registered within this service.

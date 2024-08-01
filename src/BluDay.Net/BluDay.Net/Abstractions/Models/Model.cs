@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Abstractions.Models;
+﻿namespace BluDay.Net.Models;
 
 /// <summary>
 /// Represents the base class for a derived domain model class.

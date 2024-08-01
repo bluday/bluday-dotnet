@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Abstractions.ViewModels;
+﻿namespace BluDay.Net.ViewModels;
 
 /// <summary>
 /// Represents the base of a view model class.

@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Abstractions.Services;
+﻿namespace BluDay.Net.Services;
 
 /// <summary>
 /// A service that manages dialogs within an app.
