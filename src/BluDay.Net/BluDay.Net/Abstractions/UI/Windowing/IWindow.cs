@@ -1,9 +1,9 @@
-namespace BluDay.Net.UI.Windowing;
+﻿namespace BluDay.Net.UI.Windowing;
 
 /// <summary>
 /// Represents the control of a window.
 /// </summary>
-public interface IWindow : IWindowInfo
+public interface IWindow
 {
     /// <summary>
     /// Gets the navigator instance for handling view navigation within the window.
@@ -24,14 +24,6 @@ public interface IWindow : IWindowInfo
     /// Closes the current window.
     /// </summary>
     void Close();
-
-    /// <summary>
-    /// Configures the window using the provided <see cref="WindowConfiguration"/> instance.
-    /// </summary>
-    /// <param name="config">
-    /// The configuration instance.
-    /// </param>
-    void Configure(WindowConfiguration config);
 
     /// <summary>
     /// Resizes the window using the provided width and height values.

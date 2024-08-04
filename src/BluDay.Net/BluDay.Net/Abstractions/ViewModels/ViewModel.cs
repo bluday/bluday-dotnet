@@ -5,7 +5,25 @@
 /// </summary>
 public abstract class ViewModel : ObservableObject
 {
+    protected ViewModel? _currentChild;
+
     protected readonly WeakReferenceMessenger _messenger;
+
+    /// <summary>
+    /// Gets the current child instance.
+    /// </summary>
+    public ViewModel? CurrentChild
+    {
+        get => _currentChild;
+        protected set
+        {
+            _currentChild = value;
+
+            // TODO: Deactivate the previous one and activate the new one.
+
+            OnPropertyChanged(nameof(CurrentChild));
+        }
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewModel"/> class.

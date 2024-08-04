@@ -1,11 +1,13 @@
 ﻿namespace BluDay.Net.DependencyInjection;
 
 /// <summary>
-/// Represents a collection of <see cref="BluContainerService"/> instances.
+/// Represents a collection of registered <see cref="BluContainerService"/> instances.
 /// </summary>
 public sealed class BluContainerServices
 {
     private readonly HashSet<BluContainerService> _services = new();
+
+    public int Count => _services.Count;
 
     /// <summary>
     /// Gets an enumerable of all registered core services.
@@ -13,14 +15,6 @@ public sealed class BluContainerServices
     public IEnumerable<BluContainerService> CoreServices
     {
         get => _services.Where(service => service.Kind is BluContainerServiceKind.Core);
-    }
-
-    /// <summary>
-    /// Gets an enumerable of all registered user services.
-    /// </summary>
-    public IEnumerable<BluContainerService> UserServices
-    {
-        get => _services.Where(service => service.Kind is BluContainerServiceKind.User);
     }
 
     /// <summary>
@@ -58,19 +52,5 @@ public sealed class BluContainerServices
         }
 
         _services.Add(service);
-    }
-
-    /// <summary>
-    /// Creates a <see cref="IServiceCollection"/> instance containing service descriptors for all of
-    /// the registered services.
-    /// </summary>
-    /// <returns>
-    /// An <see cref="IServiceCollection"/> instance with all of the registered services.
-    /// </returns>
-    public IServiceCollection CreateServiceCollection()
-    {
-        ServiceCollection services = [.. Descriptors];
-
-        return services;
     }
 }
