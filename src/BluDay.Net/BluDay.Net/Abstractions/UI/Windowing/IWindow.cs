@@ -6,12 +6,7 @@
 public interface IWindow
 {
     /// <summary>
-    /// Gets the navigator instance for handling view navigation within the window.
-    /// </summary>
-    ViewNavigator ViewNavigator { get; }
-
-    /// <summary>
-    /// Gets the ID of the window.
+    /// Gets the id of the window.
     /// </summary>
     Guid Id { get; }
 
