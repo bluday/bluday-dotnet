@@ -8,7 +8,7 @@ public interface IWindow
     /// <summary>
     /// Gets the id of the window.
     /// </summary>
-    Guid Id { get; }
+    ulong Id { get; }
 
     /// <summary>
     /// Activates and shows the current window.

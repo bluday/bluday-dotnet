@@ -90,7 +90,7 @@ public sealed class AppWindowService : Service
     /// <param name="windowId">
     /// The id of the window.
     /// </param>
-    public bool DestroyWindow(Guid windowId)
+    public bool DestroyWindow(ulong windowId)
     {
         IWindow? window = _windows.FirstOrDefault(window => window.Id == windowId);
 
@@ -120,7 +120,7 @@ public sealed class AppWindowService : Service
     /// The id of the window.
     /// </param>
     /// <inheritdoc cref="HasWindow(IWindow)"/>
-    public bool HasWindow(Guid windowId)
+    public bool HasWindow(ulong windowId)
     {
         return _windows.Any(window => window.Id == windowId);
     }
