@@ -23,7 +23,11 @@ public interface IBluWindow
     /// <summary>
     /// Resizes the window using the provided width and height values.
     /// </summary>
-    /// <param name="width">The width of the window, in pixels.</param>
-    /// <param name="height">The height of the window, in pixels</param>
+    /// <param name="width">
+    /// The width of the window, in pixels.
+    /// </param>
+    /// <param name="height">
+    /// The height of the window, in pixels
+    /// </param>
     void Resize(int width, int height);
 }

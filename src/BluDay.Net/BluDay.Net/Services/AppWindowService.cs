@@ -28,15 +28,14 @@ public sealed class AppWindowService : Service
     /// Initializes a new instance of the <see cref="AppWindowService"/> class.
     /// </summary>
     /// <param name="windowFactory">
-    /// An <see cref="IImplementationProvider"/> instance for resolving transient
-    /// window instances of type <see cref="IBluWindow"/>.
+    /// An implementation provider instance for resolving transient window instances of type <see cref="IBluWindow"/>.
     /// </param>
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
     public AppWindowService(
         ImplementationProvider<IBluWindow> windowFactory,
-        WeakReferenceMessenger          messenger
+        WeakReferenceMessenger             messenger
     )
         : base(messenger)
     {
