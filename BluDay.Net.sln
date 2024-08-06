@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluDay.Net", "BluDay.Net\BluDay.Net.csproj", "{DB2EA637-8F3F-4791-A627-33109EA3F496}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluDay.Net.Tests", "..\tests\BluDay.Net.Tests\BluDay.Net.Tests.csproj", "{9178305D-3DAD-4A0A-9DC7-4EAFAD840BF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluDay.Net.Tests", "BluDay.Net.Tests\BluDay.Net.Tests.csproj", "{9178305D-3DAD-4A0A-9DC7-4EAFAD840BF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
