@@ -5,6 +5,8 @@ namespace BluDay.Net.UI.Navigation;
 /// </summary>
 public sealed class ViewNavigator
 {
+    private readonly IBluWindow _window;
+
     private bool _canGoBack;
 
     private bool _canGoForward;
@@ -24,6 +26,11 @@ public sealed class ViewNavigator
     public bool CanGoForward => _canGoForward;
 
     /// <summary>
+    /// Gets the id of the targeted window.
+    /// </summary>
+    public ulong WindowId => _window.Id;
+
+    /// <summary>
     /// Gets the view type at the top of the current view type stack.
     /// </summary>
     public Type? CurrentView => _currentViewType;
@@ -32,6 +39,19 @@ public sealed class ViewNavigator
     /// Gets an enumerable of types for all displayed views.
     /// </summary>
     public IEnumerable<Type> CurrentViews => _viewTypeStack;
+
+    /// <summary>
+    /// Initializes a new <see cref="ViewNavigator"/> instance for the provided <paramref name="window"/>.
+    /// </summary>
+    /// <param name="window">
+    /// The window instance.
+    /// </param>
+    public ViewNavigator(IBluWindow window)
+    {
+        ArgumentNullException.ThrowIfNull(window);
+
+        _window = window;
+    }
 
     /// <summary>
     /// Removes the top view from the navigation stack.
