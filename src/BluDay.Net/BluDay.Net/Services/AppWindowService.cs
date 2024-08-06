@@ -5,14 +5,14 @@
 /// </summary>
 public sealed class AppWindowService : Service
 {
-    private readonly ImplementationProvider<IWindow> _windowFactory;
+    private readonly ImplementationProvider<IBluWindow> _windowFactory;
 
-    private readonly HashSet<IWindow> _windows = new();
+    private readonly HashSet<IBluWindow> _windows = new();
 
     /// <summary>
     /// Gets the main window.
     /// </summary>
-    public IWindow? MainWindow => _windows.FirstOrDefault();
+    public IBluWindow? MainWindow => _windows.FirstOrDefault();
 
     /// <summary>
     /// Gets the count of all windows.
@@ -22,20 +22,20 @@ public sealed class AppWindowService : Service
     /// <summary>
     /// Gets an enumerable of all windows.
     /// </summary>
-    public IEnumerable<IWindow> Windows => _windows;
+    public IEnumerable<IBluWindow> Windows => _windows;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AppWindowService"/> class.
     /// </summary>
     /// <param name="windowFactory">
     /// An <see cref="IImplementationProvider"/> instance for resolving transient
-    /// window instances of type <see cref="IWindow"/>.
+    /// window instances of type <see cref="IBluWindow"/>.
     /// </param>
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
     public AppWindowService(
-        ImplementationProvider<IWindow> windowFactory,
+        ImplementationProvider<IBluWindow> windowFactory,
         WeakReferenceMessenger          messenger
     )
         : base(messenger)
@@ -44,7 +44,7 @@ public sealed class AppWindowService : Service
     }
 
     /// <summary>
-    /// Creates a new window instance of type <see cref="IWindow"/>.
+    /// Creates a new window instance of type <see cref="IBluWindow"/>.
     /// </summary>
     /// <param name="config">
     /// The window configuration instance.
@@ -52,7 +52,7 @@ public sealed class AppWindowService : Service
     /// <returns>
     /// The window instance.
     /// </returns>
-    public TWindow CreateWindow<TWindow>() where TWindow : IWindow
+    public TWindow CreateWindow<TWindow>() where TWindow : IBluWindow
     {
         TWindow window = _windowFactory.GetInstance<TWindow>();
 
@@ -62,7 +62,7 @@ public sealed class AppWindowService : Service
     }
 
     /// <summary>
-    /// Closes and destroys the provided <see cref="IWindow"/> window instance if it
+    /// Closes and destroys the provided <see cref="IBluWindow"/> window instance if it
     /// has been registered within this service.
     /// </summary>
     /// <param name="window">
@@ -74,7 +74,7 @@ public sealed class AppWindowService : Service
     /// <exception cref="ArgumentNullException">
     /// If <paramref name="window"/> is null.
     /// </exception>
-    public bool DestroyWindow(IWindow window)
+    public bool DestroyWindow(IBluWindow window)
     {
         if (!_windows.Contains(window))
         {
@@ -86,13 +86,13 @@ public sealed class AppWindowService : Service
         return _windows.Remove(window);
     }
 
-    /// <inheritdoc cref="DestroyWindow(IWindow)"/>
+    /// <inheritdoc cref="DestroyWindow(IBluWindow)"/>
     /// <param name="windowId">
     /// The id of the window.
     /// </param>
     public bool DestroyWindow(ulong windowId)
     {
-        IWindow? window = _windows.FirstOrDefault(window => window.Id == windowId);
+        IBluWindow? window = _windows.FirstOrDefault(window => window.Id == windowId);
 
         if (window is null) return false;
 
@@ -111,7 +111,7 @@ public sealed class AppWindowService : Service
     /// <returns>
     /// <c>true</c> if the window exists, <c>false</c> otherwise.
     /// </returns>
-    public bool HasWindow(IWindow window)
+    public bool HasWindow(IBluWindow window)
     {
         return _windows.Contains(window);
     }
@@ -119,7 +119,7 @@ public sealed class AppWindowService : Service
     /// <param name="windowId">
     /// The id of the window.
     /// </param>
-    /// <inheritdoc cref="HasWindow(IWindow)"/>
+    /// <inheritdoc cref="HasWindow(IBluWindow)"/>
     public bool HasWindow(ulong windowId)
     {
         return _windows.Any(window => window.Id == windowId);

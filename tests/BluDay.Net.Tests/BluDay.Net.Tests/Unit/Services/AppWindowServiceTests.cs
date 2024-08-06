@@ -14,7 +14,7 @@ public sealed class AppWindowServiceTests
         AppWindowService service = new(_messenger);
 
         // Act.
-        IWindow window = service.CreateWindow<FakeWindow>();
+        IBluWindow window = service.CreateWindow<FakeWindow>();
 
         // Assert.
         Assert.IsNotNull(window);
@@ -27,7 +27,7 @@ public sealed class AppWindowServiceTests
         AppWindowService service = new(_messenger);
 
         // Act.
-        IWindow window = service.CreateWindow<FakeWindow>();
+        IBluWindow window = service.CreateWindow<FakeWindow>();
 
         bool hasWindow = service.HasWindow(window);
 
@@ -44,7 +44,7 @@ public sealed class AppWindowServiceTests
         AppWindowService service = new(_messenger);
 
         // Act.
-        IWindow window = service.CreateWindow<FakeWindow>();
+        IBluWindow window = service.CreateWindow<FakeWindow>();
 
         bool isDestroyed = service.DestroyWindow(window);
 
@@ -59,7 +59,7 @@ public sealed class AppWindowServiceTests
         AppWindowService service = new(_messenger);
 
         // Act.
-        IWindow window = service.CreateWindow<FakeWindow>();
+        IBluWindow window = service.CreateWindow<FakeWindow>();
 
         bool isDestroyed = service.DestroyWindow(window.Id);
 
@@ -102,7 +102,7 @@ public sealed class AppWindowServiceTests
         AppWindowService service = new(_messenger);
 
         // Act.
-        IWindow window = service.CreateWindow<FakeWindow>();
+        IBluWindow window = service.CreateWindow<FakeWindow>();
 
         bool hasWindow = service.HasWindow(window.Id);
 
@@ -139,7 +139,7 @@ public sealed class AppWindowServiceTests
 }
 
 // Temporary solution. Am going to use Moq soon.
-public sealed class FakeWindow : IWindow
+public sealed class FakeWindow : IBluWindow
 {
     public ViewNavigator ViewNavigator { get; } = new();
 

@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the control of a window.
 /// </summary>
-public interface INavigableWindow : IWindow
+public interface IBluNavigableWindow : IBluWindow
 {
     /// <summary>
     /// Gets the navigator instance for handling view navigation within the window.

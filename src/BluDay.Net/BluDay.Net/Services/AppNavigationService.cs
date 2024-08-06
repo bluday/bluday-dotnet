@@ -16,7 +16,7 @@ public sealed class AppNavigationService : Service
     public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
     /// <summary>
-    /// Navigates to the specified view within a window of type <see cref="IWindow"/>.
+    /// Navigates to the specified view within a window of type <see cref="IBluWindow"/>.
     /// </summary>
     /// <typeparam name="TView"></typeparam>
     /// <param name="windowId">

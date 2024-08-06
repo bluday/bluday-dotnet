@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the control of a window.
 /// </summary>
-public interface IWindow
+public interface IBluWindow
 {
     /// <summary>
     /// Gets the id of the window.
