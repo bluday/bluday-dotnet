@@ -3,27 +3,15 @@
 /// <summary>
 /// Represents the base of a view model class.
 /// </summary>
-public abstract class ViewModel : ObservableObject
+public abstract partial class ViewModel : ObservableObject
 {
-    protected ViewModel? _currentChild;
-
     protected readonly WeakReferenceMessenger _messenger;
 
     /// <summary>
     /// Gets the current child instance.
     /// </summary>
-    public ViewModel? CurrentChild
-    {
-        get => _currentChild;
-        protected set
-        {
-            _currentChild = value;
-
-            // TODO: Deactivate the previous one and activate the new one.
-
-            OnPropertyChanged(nameof(CurrentChild));
-        }
-    }
+    [ObservableProperty]
+    protected ViewModel? _currentChild;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewModel"/> class.
@@ -37,6 +25,8 @@ public abstract class ViewModel : ObservableObject
 
         _messenger = messenger;
     }
+
+    // TODO: Deactivate the previous one and activate the new one.
 
     /// <summary>
     /// Registers recipients of specified message types.
