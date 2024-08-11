@@ -5,31 +5,15 @@
 /// </summary>
 public static class HostingExtensions
 {
-    [DllImport("Microsoft.UI.Xaml.dll")]
-    static extern void XamlCheckProcessRequirements();
-
     /// <summary>
-    /// Starts the application host and instantiates a new <see cref="App"/> instance.
+    /// Starts the application host and instantiates a <typeparamref name="TApp"/> instance.
     /// </summary>
     /// <param name="source">
     /// The application host instance.
     /// </param>
-    /// <typeparam name="TApp">
-    /// The derived <see cref="Application"/> type for the WinUI 3 app.
-    /// </typeparam>
+    /// <inheritdoc cref="ServiceProviderExtensions.CreateWinui3App{TApp}(IServiceProvider)"/>
     public static void CreateWinui3App<TApp>(this IHost source) where TApp : Application
     {
-        XamlCheckProcessRequirements();
-
-        WinRT.ComWrappersSupport.InitializeComWrappers();
-
-        Application.Start(callback =>
-        {
-            DispatcherQueueSynchronizationContext context = new(DispatcherQueue.GetForCurrentThread());
-
-            SynchronizationContext.SetSynchronizationContext(context);
-
-            source.Services.GetRequiredService<TApp>();
-        });
+        source.Services.CreateWinui3App<TApp>();
     }
 }
