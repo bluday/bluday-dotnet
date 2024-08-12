@@ -46,29 +46,14 @@ public static class Constants
     public const string POSITIONAL_ARG_SYMBOL = "--";
 
     /// <summary>
-    /// "Dark".
-    /// </summary>
-    public const string Dark = "Dark";
-
-    /// <summary>
     /// "Default".
     /// </summary>
     public const string Default = "Default";
 
     /// <summary>
-    /// "Light".
-    /// </summary>
-    public const string Light = "Light";
-
-    /// <summary>
     /// "None".
     /// </summary>
     public const string None = "None";
-
-    /// <summary>
-    /// "System".
-    /// </summary>
-    public const string System = "System";
 
     /// <summary>
     /// "Untitled".
