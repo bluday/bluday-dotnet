@@ -11,9 +11,12 @@ public static class HostingExtensions
     /// <param name="source">
     /// The application host instance.
     /// </param>
+    /// <returns>
+    /// The created app instance.
+    /// </returns>
     /// <inheritdoc cref="ServiceProviderExtensions.CreateWinui3App{TApp}(IServiceProvider)"/>
-    public static void CreateWinui3App<TApp>(this IHost source) where TApp : Application
+    public static TApp CreateWinui3App<TApp>(this IHost source) where TApp : Application
     {
-        source.Services.CreateWinui3App<TApp>();
+        return source.Services.CreateWinui3App<TApp>();
     }
 }

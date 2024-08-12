@@ -21,11 +21,16 @@ public sealed class Winui3Application<TApp> where TApp : Application
     /// <param name="postInitalizationCallback">
     /// The callback function for instantiating a <typeparamref name="TApp"/> instance in.
     /// </param>
-    public static void Create(Func<TApp> postInitalizationCallback)
+    /// <returns>
+    /// The created app instance.
+    /// </returns>
+    public static TApp Create(Func<TApp> postInitalizationCallback)
     {
         Winui3Application.XamlCheckProcessRequirements();
 
         WinRT.ComWrappersSupport.InitializeComWrappers();
+
+        TApp? app = null;
 
         Application.Start(callback =>
         {
@@ -33,7 +38,9 @@ public sealed class Winui3Application<TApp> where TApp : Application
 
             SynchronizationContext.SetSynchronizationContext(context);
 
-            postInitalizationCallback();
+            app = postInitalizationCallback();
         });
+
+        return app!;
     }
 }

@@ -11,11 +11,14 @@ public static class ServiceProviderExtensions
     /// <param name="source">
     /// A service provider instance.
     /// </param>
+    /// <returns>
+    /// The created app instance.
+    /// </returns>
     /// <typeparam name="TApp">
     /// The derived <see cref="Application"/> type for the WinUI 3 app.
     /// </typeparam>
-    public static void CreateWinui3App<TApp>(this IServiceProvider source) where TApp : Application
+    public static TApp CreateWinui3App<TApp>(this IServiceProvider source) where TApp : Application
     {
-        Winui3Application<TApp>.Create(source.GetRequiredService<TApp>);
+        return Winui3Application<TApp>.Create(source.GetRequiredService<TApp>);
     }
 }
