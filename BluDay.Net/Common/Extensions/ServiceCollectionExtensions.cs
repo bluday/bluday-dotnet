@@ -6,7 +6,7 @@ namespace BluDay.Net.Extensions;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Registers all view model types from the provided <paramref name="assembly"/>.
+    /// Registers all view model types from the calling assembly.
     /// </summary>
     /// <param name="source">
     /// The targeted service collection instance.
