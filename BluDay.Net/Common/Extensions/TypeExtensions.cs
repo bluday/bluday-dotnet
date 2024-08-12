@@ -34,16 +34,20 @@ public static class TypeExtensions
     /// </param>
     /// <returns>
     /// An <see cref="IEnumerable{T}"/> with all of the found types.
-    /// </returns>
     public static IEnumerable<Type> GetImplementationTypes(this Type source)
     {
-        IEnumerable<Type> types = source.Assembly.GetTypes();
+        return source.GetImplementationTypes(Assembly.GetEntryAssembly()!);
+    }
 
-        if (Assembly.GetEntryAssembly() is Assembly entryAssembly)
-        {
-            types = types.Union(entryAssembly.GetTypes());
-        }
-
-        return types.Where(type => type.IsImplementationType(source));
+    /// <summary>
+    /// Gets all implementation types from the provided <paramref name="assembly"/>.
+    /// </summary>
+    /// <param name="assembly">
+    /// The assembly to search for the qualifying types in.
+    /// </param>
+    /// <inheritdoc cref="GetImplementationTypes(Type)"/>
+    public static IEnumerable<Type> GetImplementationTypes(this Type source, Assembly assembly)
+    {
+        return assembly.GetTypes().Where(type => type.IsImplementationType(source));
     }
 }

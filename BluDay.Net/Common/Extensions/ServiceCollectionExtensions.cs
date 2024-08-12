@@ -16,7 +16,9 @@ public static class ServiceCollectionExtensions
     /// </returns>
     public static IServiceCollection AddViewModels(this IServiceCollection source)
     {
-        foreach (Type viewModelType in typeof(ViewModel).GetImplementationTypes())
+        Assembly assembly = Assembly.GetCallingAssembly();
+
+        foreach (Type viewModelType in typeof(ViewModel).GetImplementationTypes(assembly))
         {
             source.AddTransient(viewModelType);
         }
