@@ -34,6 +34,7 @@ public static class TypeExtensions
     /// </param>
     /// <returns>
     /// An <see cref="IEnumerable{T}"/> with all of the found types.
+    /// </returns>
     public static IEnumerable<Type> GetImplementationTypes(this Type source)
     {
         return source.GetImplementationTypes(Assembly.GetEntryAssembly()!);
