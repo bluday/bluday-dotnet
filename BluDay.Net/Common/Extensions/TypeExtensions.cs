@@ -30,7 +30,7 @@ public static class TypeExtensions
     /// Gets all implementation types from the calling assembly and the entry assembly, as an enumerable.
     /// </summary>
     /// <param name="source">
-    /// The service type.
+    /// The base implementation type for derived types to find.
     /// </param>
     /// <returns>
     /// An <see cref="IEnumerable{T}"/> with all of the found types.
