@@ -1,3 +1,3 @@
 # bluday-dotnet
 
-A .NET 8 library with common and convenient solutions.
+A library for .NET 8 with common and convenient solutions and implementations.
