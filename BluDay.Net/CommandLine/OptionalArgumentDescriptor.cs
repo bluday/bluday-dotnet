@@ -63,7 +63,7 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
 
-        string[] flags = flagDescriptor.Split(Constants.VERTICAL_BAR_CHAR);
+        string[] flags = flagDescriptor.Split(Characters.VERTICAL_BAR_CHAR);
 
         string primaryName = flags[0];
 

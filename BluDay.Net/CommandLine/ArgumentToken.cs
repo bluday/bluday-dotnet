@@ -52,7 +52,7 @@ public readonly struct ArgumentToken
     public static bool IsValidFlag(string value)
     {
         return !string.IsNullOrWhiteSpace(value)
-            || value.StartsWith(Constants.ARG_SHORT_FLAG_PREFIX)
-            || value.StartsWith(Constants.ARG_LONG_FLAG_PREFIX);
+            || value.StartsWith(Strings.ARG_SHORT_FLAG_PREFIX)
+            || value.StartsWith(Strings.ARG_LONG_FLAG_PREFIX);
     }
 }

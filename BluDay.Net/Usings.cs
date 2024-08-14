@@ -2,6 +2,7 @@ global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Messaging;
 global using CommunityToolkit.Mvvm.Messaging.Messages;
 
+global using BluDay.Net.Constants;
 global using BluDay.Net.Exceptions;
 global using BluDay.Net.Extensions;
 global using BluDay.Net.DependencyInjection;

@@ -1,35 +1,10 @@
-﻿namespace BluDay.Net;
+﻿namespace BluDay.Net.Constants;
 
 /// <summary>
-/// Stores a collection of constant values for convenient use in applications.
+/// Stores a collection of convenient <see cref="string"/> constants.
 /// </summary>
-public static class Constants
+public static class Strings
 {
-    /// <summary>
-    /// Dash character.
-    /// </summary>
-    public const char DASH_CHAR = '-';
-
-    /// <summary>
-    /// Empty character.
-    /// </summary>
-    public const char EMPTY_CHAR = '\0';
-
-    /// <summary>
-    /// Underscore character.
-    /// </summary>
-    public const char UNDERSCORE_CHAR = '_';
-
-    /// <summary>
-    /// Vertical bar character.
-    /// </summary>
-    public const char VERTICAL_BAR_CHAR = '|';
-
-    /// <summary>
-    /// White-space character.
-    /// </summary>
-    public const char WHITESPACE_CHAR = ' ';
-
     /// <summary>
     /// Long command-line argument flag prefix.
     /// </summary>
