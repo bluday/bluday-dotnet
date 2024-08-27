@@ -18,13 +18,13 @@ public sealed class Winui3Application<TApp> where TApp : Application
     /// <summary>
     /// Creates an app instance of the <typeparamref name="TApp"/> type.
     /// </summary>
-    /// <param name="postInitalizationCallback">
-    /// The callback function for instantiating a <typeparamref name="TApp"/> instance in.
+    /// <param name="factory">
+    /// An <typeparamref name="TApp"/> instance factory.
     /// </param>
     /// <returns>
     /// The created app instance.
     /// </returns>
-    public static TApp Create(Func<TApp> postInitalizationCallback)
+    public static TApp Create(Func<TApp> factory)
     {
         Winui3Application.XamlCheckProcessRequirements();
 
@@ -38,7 +38,7 @@ public sealed class Winui3Application<TApp> where TApp : Application
 
             SynchronizationContext.SetSynchronizationContext(context);
 
-            app = postInitalizationCallback();
+            app = factory();
         });
 
         return app!;
