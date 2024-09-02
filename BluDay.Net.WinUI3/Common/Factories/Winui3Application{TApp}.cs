@@ -30,7 +30,7 @@ public sealed class Winui3Application<TApp> where TApp : Application
 
         WinRT.ComWrappersSupport.InitializeComWrappers();
 
-        TApp? app = null;
+        TApp app = null!;
 
         Application.Start(callback =>
         {
@@ -41,6 +41,6 @@ public sealed class Winui3Application<TApp> where TApp : Application
             app = factory();
         });
 
-        return app!;
+        return app;
     }
 }
