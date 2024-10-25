@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluDay.Net.Tests", "BluDay.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluDay.Net.WinUI3", "BluDay.Net.WinUI3\BluDay.Net.WinUI3.csproj", "{7638D017-8105-4B85-8ADA-54C638446871}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluDay.Impart.WPF", "BluDay.Impart.WPF\BluDay.Impart.WPF.csproj", "{F528004C-8CC6-4DEA-BDCB-BBBDCFF6D3B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluDay.Net.WPF", "BluDay.Impart.WPF\BluDay.Net.WPF.csproj", "{F528004C-8CC6-4DEA-BDCB-BBBDCFF6D3B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
