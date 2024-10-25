@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Factories;
+﻿namespace BluDay.Net.WinUI3;
 
 internal class Winui3Application
 {
@@ -21,16 +21,13 @@ public sealed class Winui3Application<TApp> where TApp : Application
     /// <param name="factory">
     /// An <typeparamref name="TApp"/> instance factory.
     /// </param>
-    /// <returns>
-    /// The created app instance.
-    /// </returns>
-    public static TApp Create(Func<TApp> factory)
+    public static void Create(Func<TApp> factory)
     {
+        ArgumentNullException.ThrowIfNull(factory);
+
         Winui3Application.XamlCheckProcessRequirements();
 
         WinRT.ComWrappersSupport.InitializeComWrappers();
-
-        TApp app = null!;
 
         Application.Start(callback =>
         {
@@ -38,9 +35,7 @@ public sealed class Winui3Application<TApp> where TApp : Application
 
             SynchronizationContext.SetSynchronizationContext(context);
 
-            app = factory();
+            factory();
         });
-
-        return app;
     }
 }

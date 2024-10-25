@@ -128,7 +128,7 @@ public partial class ShellViewModel : ViewModel
         get => _appWindow.Size;
         set
         {
-            _appWindow.Resize(value!.Value);
+            _appWindow.ResizeClient(value!.Value);
 
             OnPropertyChanged();
         }
