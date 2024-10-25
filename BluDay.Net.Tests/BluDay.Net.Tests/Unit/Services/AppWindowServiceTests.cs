@@ -11,6 +11,8 @@ public sealed class AppWindowServiceTests
     public void CreateWindow_AndReturnRegisteredInstance()
     {
         // Arrange.
+        // TODO: Create a fake `ImplementationFactory<IBluWindow>` instance.
+
         AppWindowService service = new(_messenger);
 
         // Act.
