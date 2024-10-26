@@ -16,6 +16,6 @@ public static class ServiceProviderExtensions
     /// </typeparam>
     public static void CreateWinui3App<TApp>(this IServiceProvider source) where TApp : Application
     {
-        Winui3Application<TApp>.Create(source.GetRequiredService<TApp>);
+        Winui3Application.Create(source.GetRequiredService<TApp>);
     }
 }
