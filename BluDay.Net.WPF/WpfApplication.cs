@@ -14,7 +14,7 @@ public sealed class WpfApplication
     /// </param>
     public static Thread Create<TApp>(Func<TApp> factory) where TApp : Application
     {
-        Thread thread = new(() => factory());
+        Thread thread = new(() => factory().Run());
 
         thread.TrySetApartmentState(ApartmentState.STA);
 
