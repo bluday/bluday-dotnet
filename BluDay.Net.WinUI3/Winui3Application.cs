@@ -15,7 +15,10 @@ public sealed class Winui3Application
     /// <param name="factory">
     /// An <typeparamref name="TApp"/> instance factory.
     /// </param>
-    public static void Create<TApp>(Func<TApp> factory) where TApp : Application
+    /// <returns>
+    /// The created <typeparamref name="TApp"/> instance.
+    /// </returns>
+    public static TApp Create<TApp>(Func<TApp> factory) where TApp : Application
     {
         ArgumentNullException.ThrowIfNull(factory);
 
@@ -23,13 +26,17 @@ public sealed class Winui3Application
 
         WinRT.ComWrappersSupport.InitializeComWrappers();
 
+        TApp app = null!;
+
         Application.Start(callback =>
         {
             DispatcherQueueSynchronizationContext context = new(DispatcherQueue.GetForCurrentThread());
 
             SynchronizationContext.SetSynchronizationContext(context);
 
-            factory();
+            app = factory();
         });
+
+        return app;
     }
 }
