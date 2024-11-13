@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.WinUI3.Extensions;
+﻿namespace BluDay.Net.WPF.Extensions;
 
 /// <summary>
 /// A utility class with method extensions for the <see cref="IServiceProvider"/> type.
@@ -6,7 +6,7 @@
 public static class ServiceProviderExtensions
 {
     /// <summary>
-    /// Starts the application host and instantiates a new <see cref="App"/> instance.
+    /// Starts the application host and instantiates a new <see cref="Application"/> instance.
     /// </summary>
     /// <param name="source">
     /// A service provider instance.
@@ -14,9 +14,9 @@ public static class ServiceProviderExtensions
     /// <typeparam name="TApp">
     /// The derived <see cref="Application"/> type for the WinUI 3 app.
     /// </typeparam>
-    public static IServiceProvider CreateWinui3App<TApp>(this IServiceProvider source) where TApp : Application
+    public static IServiceProvider CreateWpfApp<TApp>(this IServiceProvider source) where TApp : Application
     {
-        Winui3Application.Create(source.GetRequiredService<TApp>);
+        WpfApplication.Create(source.GetRequiredService<TApp>);
 
         return source;
     }
