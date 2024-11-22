@@ -75,14 +75,14 @@ public sealed class AppWindowService : Service
     /// </exception>
     public bool DestroyWindow(IBluWindow window)
     {
-        if (!_windows.Contains(window))
+        if (!_windows.Remove(window))
         {
             return false;
         }
         
         window.Close();
 
-        return _windows.Remove(window);
+        return true;
     }
 
     /// <inheritdoc cref="DestroyWindow(IBluWindow)"/>
@@ -91,13 +91,9 @@ public sealed class AppWindowService : Service
     /// </param>
     public bool DestroyWindow(ulong windowId)
     {
-        IBluWindow? window = _windows.FirstOrDefault(window => window.Id == windowId);
+        IBluWindow window = _windows.First(window => window.Id == windowId);
 
-        if (window is null) return false;
-
-        window.Close();
-
-        return _windows.Remove(window);
+        return DestroyWindow(window);
     }
 
     /// <summary>
