@@ -302,6 +302,8 @@ public partial class ShellViewModel : ViewModel
 
         UpdateDisplayArea();
 
+        ApplyDefaultConfiguration();
+
         OnPropertyChanged(string.Empty);
     }
 
