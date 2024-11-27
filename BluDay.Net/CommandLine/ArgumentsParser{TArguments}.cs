@@ -17,15 +17,19 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     public ArgumentDescriptors ArgumentDescriptors => _argumentDescriptors;
 
     /// <summary>
-    /// Gets the type of object that <see cref="Parse(string[])"/> method returns.
+    /// Gets the type of object that <see cref="ParseArguments(string[])"/> method returns.
     /// </summary>
     public Type ResultType => _resultType;
 
     /// <summary>
     /// Initializes a new instance and with pre-defined arguments.
     /// </summary>
-    /// <param name="argumentDescriptors">A group of optional and positional argument descriptors.</param>
-    /// <exception cref="ArgumentNullException">If the <see cref="ArgumentDescriptors"/> instance is null.</exception>
+    /// <param name="argumentDescriptors">
+    /// A group of optional and positional argument descriptors.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    /// If the <see cref="ArgumentDescriptor"/> instance is null.
+    /// </exception>
     public ArgumentsParser(ArgumentDescriptors argumentDescriptors)
     {
         ArgumentNullException.ThrowIfNull(argumentDescriptors);
@@ -38,9 +42,13 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <summary>
     /// Parses provided raw argument values.
     /// </summary>
-    /// <param name="values">Raw argument values.</param>
-    /// <returns>A new <see cref="TArguments"/> instance with parsed argument.</returns>
-    public TArguments Parse(params string[] values)
+    /// <param name="values">
+    /// Raw argument values.
+    /// </param>
+    /// <returns>
+    /// A new <see cref="TArguments"/> instance with parsed argument.
+    /// </returns>
+    public TArguments ParseArguments(params string[] values)
     {
         return new TArguments();
     }
