@@ -12,14 +12,23 @@ public sealed class WpfApplication
     /// <param name="factory">
     /// An <typeparamref name="TApp"/> instance factory.
     /// </param>
-    public static Thread Create<TApp>(Func<TApp> factory) where TApp : Application
+    /// <returns>
+    /// The created application instance.
+    /// </returns>
+    public static TApp Create<TApp>(Func<TApp> factory) where TApp : Application
     {
-        Thread thread = new(() => factory());
+        TApp app = null!;
+
+        Thread thread = new(() =>
+        {
+            app = factory();
+
+            app.Run();
+        });
 
         thread.TrySetApartmentState(ApartmentState.STA);
-
         thread.Start();
         
-        return thread;
+        return app;
     }
 }
