@@ -14,7 +14,5 @@ global using BluDay.Net.UI.Navigation;
 global using BluDay.Net.UI.Windowing;
 
 global using Microsoft.Extensions.DependencyInjection;
-global using Microsoft.Extensions.DependencyInjection.Extensions;
 
-global using System.Drawing;
 global using System.Reflection;
