@@ -40,10 +40,44 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     }
 
     /// <summary>
+    /// Parses a single command-line argument.
+    /// </summary>
+    /// <param name="value">
+    /// The unparsed argument as a <see cref="string"/>.
+    /// </param>
+    /// <returns>
+    /// A <see cref="ParsedArgument"/> value with information about the argument.
+    /// </returns>
+    /// <exception cref="NotImplementedException">
+    /// Temporary.
+    /// </exception>
+    public ParsedArgument ParseArgument(string argument)
+    {
+        return ParseArgument(argument, []);
+    }
+
+    /// <summary>
+    /// Parses a single command-line argument.
+    /// </summary>
+    /// <param name="value">
+    /// The unparsed argument as a <see cref="string"/>.
+    /// </param>
+    /// <returns>
+    /// A <see cref="ParsedArgument"/> value with information about the argument.
+    /// </returns>
+    /// <exception cref="NotImplementedException">
+    /// Temporary.
+    /// </exception>
+    public ParsedArgument ParseArgument(string argument, params string[] values)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Parses provided raw argument values.
     /// </summary>
     /// <param name="values">
-    /// Raw argument values.
+    /// A <see cref="string"/> array of raw, unparsed values.
     /// </param>
     /// <returns>
     /// A new <see cref="TArguments"/> instance with parsed argument.
