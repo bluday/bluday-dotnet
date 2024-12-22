@@ -5,6 +5,12 @@
 /// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <inheritdoc cref="AddViews{TView}(IServiceCollection)"/>
+    public static IServiceCollection AddViews(this IServiceCollection source)
+    {
+        return source.AddViews<UserControl>();
+    }
+
     /// <summary>
     /// Registers all views of type <see cref="UserControl"/>.
     /// </summary>
@@ -14,18 +20,19 @@ public static class ServiceCollectionExtensions
     /// <returns>
     /// The service collection to chained calls.
     /// </returns>
-    public static IServiceCollection AddViews(this IServiceCollection source)
+    /// <typeparam name="TView">
+    /// The underlying view type.
+    /// </typeparam>
+    public static IServiceCollection AddViews<TView>(this IServiceCollection source) where TView : class
     {
         Assembly assembly = Assembly.GetCallingAssembly();
 
-        foreach (Type viewType in typeof(UserControl).GetImplementationTypes(assembly))
+        foreach (Type viewType in typeof(TView).GetImplementationTypes(assembly))
         {
-            if (viewType.Name[new Index(4, fromEnd: true)..] is not Strings.View)
+            if (viewType.Name[new Index(4, fromEnd: true)..] is Strings.View)
             {
-                continue;
+                source.AddTransient(viewType);
             }
-
-            source.AddTransient(viewType);
         }
 
         return source;
