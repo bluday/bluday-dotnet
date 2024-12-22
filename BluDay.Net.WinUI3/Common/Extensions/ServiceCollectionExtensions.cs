@@ -5,12 +5,6 @@
 /// </summary>
 public static class ServiceCollectionExtensions
 {
-    /// <inheritdoc cref="AddViews{TView}(IServiceCollection)"/>
-    public static IServiceCollection AddViews(this IServiceCollection source)
-    {
-        return source.AddViews<UserControl>();
-    }
-
     /// <summary>
     /// Registers all views of type <see cref="UserControl"/>.
     /// </summary>
