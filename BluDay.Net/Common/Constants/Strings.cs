@@ -20,18 +20,11 @@ public static class Strings
     /// </summary>
     public const string POSITIONAL_ARG_SYMBOL = "--";
 
-    /// <summary>
-    /// "Default".
-    /// </summary>
     public const string Default = "Default";
 
-    /// <summary>
-    /// "None".
-    /// </summary>
     public const string None = "None";
 
-    /// <summary>
-    /// "Untitled".
-    /// </summary>
     public const string Untitled = "Untitled";
+
+    public const string View = "View";
 }

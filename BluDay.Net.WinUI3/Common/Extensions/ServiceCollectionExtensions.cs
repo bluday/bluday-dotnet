@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.WinUI3.Common.Extensions;
+﻿namespace BluDay.Net.WinUI3.Extensions;
 
 /// <summary>
 /// A utility class with method extensions for the <see cref="ServiceCollection"/> type.
@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
 
         foreach (Type viewType in typeof(UserControl).GetImplementationTypes(assembly))
         {
-            if (!viewType.Name[-4..].Equals("View"))
+            if (viewType.Name[new Index(4, fromEnd: true)..] is not Strings.View)
             {
                 continue;
             }
