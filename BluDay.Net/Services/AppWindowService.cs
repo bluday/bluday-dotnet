@@ -7,7 +7,7 @@ public sealed class AppWindowService : Service
 {
     private readonly ImplementationProvider<IBluWindow> _windowFactory;
 
-    private readonly HashSet<IBluWindow> _windows = new();
+    private readonly HashSet<IBluWindow> _windows;
 
     /// <summary>
     /// Gets the main window.
@@ -28,7 +28,8 @@ public sealed class AppWindowService : Service
     /// Initializes a new instance of the <see cref="AppWindowService"/> class.
     /// </summary>
     /// <param name="windowFactory">
-    /// An implementation provider instance for resolving transient window instances of type <see cref="IBluWindow"/>.
+    /// An implementation provider instance for resolving transient window instances
+    /// of type <see cref="IBluWindow"/>.
     /// </param>
     /// <param name="messenger">
     /// The event messenger instance.
@@ -40,6 +41,8 @@ public sealed class AppWindowService : Service
         : base(messenger)
     {
         _windowFactory = windowFactory;
+
+        _windows = new HashSet<IBluWindow>();
     }
 
     /// <summary>
@@ -56,6 +59,8 @@ public sealed class AppWindowService : Service
         TWindow window = _windowFactory.GetInstance<TWindow>();
 
         _windows.Add(window);
+
+        _messenger.Send(new WindowCreatedMessage(window));
 
         return window;
     }
@@ -82,6 +87,8 @@ public sealed class AppWindowService : Service
         
         window.Close();
 
+        _messenger.Send(new WindowDestroyedMessage(window));
+
         return true;
     }
 
@@ -91,9 +98,7 @@ public sealed class AppWindowService : Service
     /// </param>
     public bool DestroyWindow(ulong windowId)
     {
-        IBluWindow window = _windows.First(window => window.Id == windowId);
-
-        return DestroyWindow(window);
+        return DestroyWindow(_windows.First(window => window.Id == windowId));
     }
 
     /// <summary>
