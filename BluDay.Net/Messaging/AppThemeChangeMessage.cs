@@ -1,9 +1,9 @@
 ﻿namespace BluDay.Net.Messaging;
 
 /// <summary>
-/// Represents a message that is sent when the current application theme has been changed.
+/// Represents a message to update the application's theme.
 /// </summary>
-public sealed class AppThemeChangedMessage : ValueChangedMessage<AppTheme>
+public sealed class AppThemeChangeMessage : ValueChangedMessage<AppTheme>
 {
     /// <summary>
     /// Intiializes a new instance of the <see cref="AppThemeChangedMessage"/> class.
@@ -11,5 +11,5 @@ public sealed class AppThemeChangedMessage : ValueChangedMessage<AppTheme>
     /// <param name="value">
     /// The new <see cref="AppTheme"/> value.
     /// </param>
-    public AppThemeChangedMessage(AppTheme value) : base(value) { }
+    public AppThemeChangeMessage(AppTheme value) : base(value) { }
 }

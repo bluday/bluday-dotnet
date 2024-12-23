@@ -3,7 +3,7 @@ namespace BluDay.Net.Services;
 /// <summary>
 /// A service that manages the theme state of an app.
 /// </summary>
-public sealed class AppThemeService : Service
+public sealed class AppThemeService : Service, IRecipient<AppThemeChangeMessage>
 {
     private AppTheme _currentTheme;
 
@@ -17,7 +17,7 @@ public sealed class AppThemeService : Service
         {
             _currentTheme = value;
 
-            _messenger.Send(new AppThemeChangedMessage(_currentTheme));
+            _messenger.Send(new AppThemeChangedMessage(value));
         }
     }
 
@@ -28,4 +28,9 @@ public sealed class AppThemeService : Service
     /// The event messenger instance.
     /// </param>
     public AppThemeService(WeakReferenceMessenger messenger) : base(messenger) { }
+
+    public void Receive(AppThemeChangeMessage message)
+    {
+        CurrentTheme = message.Value;
+    }
 }
