@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the view model class for the <see cref="Shell"/> control.
 /// </summary>
-public partial class ShellViewModel : ViewModel
+public abstract partial class ShellViewModel : ViewModel
 {
     private AppNavigationService _navigationService;
 
@@ -138,7 +138,10 @@ public partial class ShellViewModel : ViewModel
     /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
     /// </summary>
     /// <param name="navigationService">
-    /// The registered navigation service singleton.
+    /// The navigation service.
+    /// </param>
+    /// <param name="messenger">
+    /// The default <see cref="WeakReferenceMessenger"/> instance.
     /// </param>
     public ShellViewModel(
         AppNavigationService   navigationService,
