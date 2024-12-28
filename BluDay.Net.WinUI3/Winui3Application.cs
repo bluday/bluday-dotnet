@@ -18,6 +18,9 @@ public sealed class Winui3Application
     /// <returns>
     /// A task that represents the asynchronous creation of the <typeparamref name="TApp"/> instance.
     /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Throws if <paramref name="factory"/> is null.
+    /// </exception>
     public static Task<TApp> CreateAsync<TApp>(Func<TApp> factory) where TApp : Application
     {
         ArgumentNullException.ThrowIfNull(factory);
@@ -38,9 +41,9 @@ public sealed class Winui3Application
 
                 taskCompletionSource.SetResult(factory());
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                taskCompletionSource.SetException(ex);
+                taskCompletionSource.SetException(exception);
             }
         });
 
