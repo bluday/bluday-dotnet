@@ -6,18 +6,19 @@
 public static class ServiceProviderExtensions
 {
     /// <summary>
-    /// Starts the application host and instantiates a new <see cref="Application"/> instance.
+    /// Creates a new task that represents the asynchronous creation of the app.
     /// </summary>
     /// <param name="source">
     /// A service provider instance.
     /// </param>
+    /// <returns>
+    /// A task that represents the asynchronous creation of the <typeparamref name="TApp"/> instance.
+    /// </returns>
     /// <typeparam name="TApp">
-    /// The derived <see cref="Application"/> type for the WinUI 3 app.
+    /// The derived <see cref="Application"/> type for the WPF app.
     /// </typeparam>
-    public static IServiceProvider CreateWpfApp<TApp>(this IServiceProvider source) where TApp : Application
+    public static Task<TApp> CreateWpfAppAsync<TApp>(this IServiceProvider source) where TApp : Application
     {
-        WpfApplication.Create(source.GetRequiredService<TApp>);
-
-        return source;
+        return WpfApplication.CreateAsync(source.GetRequiredService<TApp>);
     }
 }

@@ -1,34 +1,48 @@
 ﻿namespace BluDay.Net.WPF;
 
 /// <summary>
-/// Represents a factory for creating a Windows Presentation Foundation (WPF) app
-/// using the derived application type specified via the generic parameter.
+/// Represents a factory for creating a Windows Presentation Foundation (WPF) app using the derived
+/// application type specified via the generic parameter.
 /// </summary>
 public sealed class WpfApplication
 {
     /// <summary>
-    /// Creates an app instance of the <typeparamref name="TApp"/> type.
+    /// Creates an app instance of the <typeparamref name="TApp"/> type asynchronously.
     /// </summary>
     /// <param name="factory">
     /// An <typeparamref name="TApp"/> instance factory.
     /// </param>
     /// <returns>
-    /// The created application instance.
+    /// A task that represents the asynchronous creation of the <typeparamref name="TApp"/> instance.
     /// </returns>
-    public static TApp Create<TApp>(Func<TApp> factory) where TApp : Application
+    /// <exception cref="ArgumentNullException">
+    /// Throws if <paramref name="factory"/> is null.
+    /// </exception>
+    public static Task<TApp> CreateAsync<TApp>(Func<TApp> factory) where TApp : Application
     {
-        TApp app = null!;
+        ArgumentNullException.ThrowIfNull(factory);
+
+        TaskCompletionSource<TApp> taskCompletionSource = new();
 
         Thread thread = new(() =>
         {
-            app = factory();
+            try
+            {
+                TApp app = factory();
 
-            app.Run();
+                taskCompletionSource.SetResult(app);
+
+                app.Run();
+            }
+            catch (Exception exception)
+            {
+                taskCompletionSource.SetException(exception);
+            }
         });
 
         thread.TrySetApartmentState(ApartmentState.STA);
         thread.Start();
-        
-        return app;
+
+        return taskCompletionSource.Task;
     }
 }
