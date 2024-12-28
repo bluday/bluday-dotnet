@@ -1,8 +1,8 @@
 ﻿namespace BluDay.Net.WinUI3;
 
 /// <summary>
-/// Represents a factory for creating a WinUI 3 app using the derived application
-/// type specified via the generic parameter.
+/// Represents a factory for creating a WinUI 3 app using the derived application type specified via
+/// the generic parameter.
 /// </summary>
 public sealed class Winui3Application
 {
@@ -10,15 +10,15 @@ public sealed class Winui3Application
     internal static extern void XamlCheckProcessRequirements();
 
     /// <summary>
-    /// Creates an app instance of the <typeparamref name="TApp"/> type.
+    /// Creates an app instance of the <typeparamref name="TApp"/> type asynchronously.
     /// </summary>
     /// <param name="factory">
     /// An <typeparamref name="TApp"/> instance factory.
     /// </param>
     /// <returns>
-    /// The created <typeparamref name="TApp"/> instance.
+    /// A task that represents the asynchronous creation of the <typeparamref name="TApp"/> instance.
     /// </returns>
-    public static TApp Create<TApp>(Func<TApp> factory) where TApp : Application
+    public static Task<TApp> CreateAsync<TApp>(Func<TApp> factory) where TApp : Application
     {
         ArgumentNullException.ThrowIfNull(factory);
 
@@ -26,17 +26,24 @@ public sealed class Winui3Application
 
         WinRT.ComWrappersSupport.InitializeComWrappers();
 
-        TApp app = null!;
+        TaskCompletionSource<TApp> taskCompletionSource = new();
 
-        Application.Start(callback =>
+        Application.Start(_ =>
         {
-            DispatcherQueueSynchronizationContext context = new(DispatcherQueue.GetForCurrentThread());
+            try
+            {
+                DispatcherQueueSynchronizationContext context = new(DispatcherQueue.GetForCurrentThread());
 
-            SynchronizationContext.SetSynchronizationContext(context);
+                SynchronizationContext.SetSynchronizationContext(context);
 
-            app = factory();
+                taskCompletionSource.SetResult(factory());
+            }
+            catch (Exception ex)
+            {
+                taskCompletionSource.SetException(ex);
+            }
         });
 
-        return app;
+        return taskCompletionSource.Task;
     }
 }
