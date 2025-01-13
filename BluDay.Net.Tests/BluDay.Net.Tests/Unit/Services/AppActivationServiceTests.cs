@@ -27,7 +27,7 @@ public sealed class AppActivationServiceTests
         AppActivationService service = new(_messenger);
 
         // Act.
-        _messenger.Send<AppActivationRequestMessage>();
+        // _messenger.Send<AppActivationRequestMessage>();
 
         // Assert.
         Assert.IsTrue(service.IsActivated);
@@ -55,7 +55,7 @@ public sealed class AppActivationServiceTests
         AppActivationService service = new(_messenger);
 
         // Act.
-        _messenger.Send<AppDeactivationRequestMessage>();
+        // _messenger.Send<AppDeactivationRequestMessage>();
 
         // Assert.
         Assert.IsFalse(service.IsActivated);

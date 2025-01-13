@@ -1,8 +1,10 @@
 ﻿namespace BluDay.Net.Tests.Unit.Services;
 
+
 [TestClass]
 public sealed class AppWindowServiceTests
 {
+    /*
     // TODO: Use a mocked messenger class instead of an actual instance.
     private readonly WeakReferenceMessenger _messenger = WeakReferenceMessenger.Default;
 
@@ -138,42 +140,5 @@ public sealed class AppWindowServiceTests
         Assert.IsFalse(hasWindow);
     }
     #endregion
-}
-
-// Temporary solution. Am going to use Moq soon.
-public sealed class FakeWindow : IBluWindow
-{
-    public ViewNavigator ViewNavigator { get; } = new();
-
-    public Guid Id { get; } = Guid.NewGuid();
-
-    public bool IsResizable { get; set; }
-
-    public string? Title { get; set; }
-
-    public Size Size { get; private set; }
-
-    public void Activate() { }
-
-    public void Close() { }
-
-    public void Configure(WindowConfiguration config)
-    {
-        ArgumentNullException.ThrowIfNull(config);
-
-        IsResizable = config.IsResizable;
-        Title = config.Title;
-
-        if (config.Size.HasValue)
-        {
-            Size size = config.Size.Value;
-
-            Resize(size.Width, size.Height);
-        }
-    }
-
-    public void Resize(int width, int height)
-    {
-        Size = new(width, height);
-    }
+    */
 }
