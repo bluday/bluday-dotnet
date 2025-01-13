@@ -11,7 +11,7 @@ public abstract partial class ViewModel : ObservableObject
     /// Gets the current child instance.
     /// </summary>
     [ObservableProperty]
-    protected ViewModel? _currentChild;
+    public partial ViewModel? CurrentChild { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewModel"/> class.

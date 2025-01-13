@@ -1,7 +1,7 @@
 ﻿namespace BluDay.Net.WinUI3.ViewModels;
 
 /// <summary>
-/// Represents the view model class for the <see cref="Shell"/> control.
+/// Represents the view model class for an app shell control.
 /// </summary>
 public abstract partial class ShellViewModel : ViewModel
 {
@@ -23,18 +23,7 @@ public abstract partial class ShellViewModel : ViewModel
 
     private ContentAlignment? _alignment;
 
-    /// <summary>
-    /// Gets the default configuration instance.
-    /// </summary>
-    [ObservableProperty]
-    private WindowConfiguration? _defaultConfiguration;
-
-    /// <summary>
-    /// Gets the title bar control.
-    /// </summary>
-    [ObservableProperty]
-    private UIElement? _titleBarControl;
-
+    #region Properties
     /// <summary>
     /// Gets the view navigator instance.
     /// </summary>
@@ -133,6 +122,21 @@ public abstract partial class ShellViewModel : ViewModel
             OnPropertyChanged();
         }
     }
+    #endregion
+
+    #region Observable properties
+    /// <summary>
+    /// Gets the default configuration instance.
+    /// </summary>
+    [ObservableProperty]
+    public partial WindowConfiguration? DefaultConfiguration { get; set; }
+
+    /// <summary>
+    /// Gets the title bar control.
+    /// </summary>
+    [ObservableProperty]
+    public partial UIElement? TitleBarControl { get; set; }
+    #endregion
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
