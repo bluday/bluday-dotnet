@@ -9,7 +9,7 @@
     <Authors>BluDay</Authors>
     <Title>BluDay.Net</Title>
     <PackageVersion>1.0.0</PackageVersion>
-    <RepositoryUrl>https://github.com/BluDay/bluday-dotnet</RepositoryUrl>
+    <RepositoryUrl>https://github.com/bluday/bluday-dotnet</RepositoryUrl>
     <Copyright>© 2024 BluDay</Copyright>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
