@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>BluDay.Net.WinUI3</RootNamespace>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <Reference Include="BluDay.Net">
-      <HintPath>..\..\bluday-dotnet\BluDay.Net\bin\x64\Debug\net8.0\BluDay.Net.dll</HintPath>
+      <HintPath>..\..\bluday-dotnet\BluDay.Net\bin\x64\Debug\net9.0\BluDay.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
 
