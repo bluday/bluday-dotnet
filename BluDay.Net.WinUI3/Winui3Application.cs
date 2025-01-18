@@ -4,10 +4,10 @@
 /// Represents a factory for creating a WinUI 3 app using the derived application type specified via
 /// the generic parameter.
 /// </summary>
-public sealed class Winui3Application
+public sealed partial class Winui3Application
 {
-    [DllImport("Microsoft.UI.Xaml.dll")]
-    internal static extern void XamlCheckProcessRequirements();
+    [LibraryImport("Microsoft.UI.Xaml.dll", EntryPoint = "XamlCheckProcessRequirements")]
+    internal static partial void XamlCheckProcessRequirements();
 
     /// <summary>
     /// Creates an app instance of the <typeparamref name="TApp"/> type asynchronously.
