@@ -1,24 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Assembly information -->
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Platforms>x64;ARM64</Platforms>
-    <PlatformTarget>x64</PlatformTarget>
     <Authors>BluDay</Authors>
-    <Title>BluDay.Net</Title>
-    <PackageVersion>1.0.0</PackageVersion>
+    <Copyright>© BluDay 2025</Copyright>
+    <Description>Developed by BluDay.</Description>
     <RepositoryUrl>https://github.com/bluday/bluday-dotnet</RepositoryUrl>
-    <Copyright>© 2024 BluDay</Copyright>
-    <LangVersion>preview</LangVersion>
+    <Title>BluDay.Net</Title>
   </PropertyGroup>
   
+  <!-- Framework versioning -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  
+  <!-- General settings -->
+  <PropertyGroup>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Platforms>x64;ARM64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <!-- Assemblies -->
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
   </ItemGroup>
-  
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <!-- Generated resources -->
   <ItemGroup>
     <Compile Update="Resources\ExceptionMessages.Designer.cs">
       <DesignTime>True</DesignTime>

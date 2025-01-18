@@ -1,24 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Assembly information -->
+  <PropertyGroup>
+    <Authors>BluDay</Authors>
+    <Copyright>© BluDay 2025</Copyright>
+    <Description>Developed by BluDay.</Description>
+    <RepositoryUrl>https://github.com/bluday/bluday-dotnet</RepositoryUrl>
+    <Title>BluDay.Net.Tests</Title>
+  </PropertyGroup>
+  
+  <!-- Framework versioning -->
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  
+  <!-- General settings -->
+  <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <PackageVersion>1.0.0</PackageVersion>
     <Platforms>x64;ARM64</Platforms>
     <PlatformTarget>x64</PlatformTarget>
-    <Authors>BluDay</Authors>
-    <Title>BluDay.Net.Tests</Title>
-    <PackageVersion>1.0.0</PackageVersion>
-    <RepositoryUrl>https://github.com/bluday/bluday-dotnet</RepositoryUrl>
-    <Copyright>© 2024 BluDay</Copyright>
-    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <!-- Project references -->
   <ItemGroup>
     <ProjectReference Include="..\BluDay.Net\BluDay.Net.csproj" />
   </ItemGroup>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <!-- NuGet packages -->
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="Moq" Version="4.20.72" />
@@ -30,6 +46,9 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <!-- Includes -->
   <ItemGroup>
     <Folder Include="BluDay.Net.Tests\Integration\" />
   </ItemGroup>
