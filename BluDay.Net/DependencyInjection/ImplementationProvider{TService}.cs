@@ -29,53 +29,43 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
 
         _implementationTypeToFactoryMap = _serviceType
             .GetImplementationTypes()
-            .ToDictionary(type => type, CreateImplementationResolver);
+            .ToDictionary(
+                keySelector:     implementationType => implementationType,
+                elementSelector: GetImplementationFactory
+            );
 
         _serviceProvider = serviceProvider;
     }
 
-    /// <summary>
-    /// Resolves an instance of the specificed <paramref name="implementationType"/>.
-    /// </summary>
-    /// <param name="implementationType">
-    /// The type of implementation to resolve.
-    /// </param>
-    /// <returns>
-    /// An instance of the resolved implementation.
-    /// </returns>
-    private object ResolveInstance(Type implementationType)
+    private static ObjectFactory GetImplementationFactory(Type implementationType)
     {
-        return _implementationTypeToFactoryMap[implementationType].Invoke(_serviceProvider, null);
+        ObjectFactory factory = ActivatorUtilities.CreateFactory(
+            implementationType,
+            argumentTypes: []
+        );
+
+        object GetFactory(IServiceProvider serviceProvider, object?[]? args)
+        {
+            return factory.Invoke(serviceProvider, args)!;
+        };
+
+        return GetFactory;
     }
 
-    /// <summary>
-    /// Creates an implementation resolver for the specificed <paramref name="implementationType"/>.
-    /// </summary>
-    /// <param name="implementationType">
-    /// The type of implementation to resolve.
-    /// </param>
-    /// <returns>
-    /// An implementation resolver function.
-    /// </returns>
-    private static ObjectFactory CreateImplementationResolver(Type implementationType)
-    {
-        ObjectFactory factory = ActivatorUtilities.CreateFactory(implementationType, argumentTypes: []);
-
-        return (serviceProvider, args) => factory.Invoke(serviceProvider, args)!;
-    }
-
-    public object GetInstance(Type implementationType)
+    public object? GetInstance(Type implementationType)
     {
         if (!implementationType.IsAssignableTo(_serviceType))
         {
             throw new InvalidImplementationTypeException(implementationType, _serviceType);
         }
 
-        return ResolveInstance(implementationType);
+        return _implementationTypeToFactoryMap
+            .GetValueOrDefault(implementationType)?
+            .Invoke(_serviceProvider, arguments: null);
     }
 
-    public TImplementation GetInstance<TImplementation>() where TImplementation : TService
+    public TImplementation? GetInstance<TImplementation>() where TImplementation : TService
     {
-        return (TImplementation)ResolveInstance(typeof(TImplementation));
+        return (TImplementation)GetInstance(typeof(TImplementation))!;
     }
 }

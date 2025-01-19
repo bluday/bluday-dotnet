@@ -18,5 +18,5 @@ public interface IImplementationProvider<TService> : IImplementationProvider whe
     /// <exception cref="InvalidImplementationTypeException">
     /// If <typeparamref name="TImplementation"/> is not assignable to <typeparamref name="TService"/>.
     /// </exception>
-    TImplementation GetInstance<TImplementation>() where TImplementation : TService;
+    TImplementation? GetInstance<TImplementation>() where TImplementation : TService;
 }
