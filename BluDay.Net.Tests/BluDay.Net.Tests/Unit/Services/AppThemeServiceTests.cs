@@ -11,7 +11,7 @@ public sealed class AppThemeServiceTests
     public void Set_CurrentTheme_AndReturnTrue()
     {
         // Arrange.
-        AppThemeService service = new(_messenger);
+        IAppThemeService service = new(_messenger);
 
         // Act.
         service.CurrentTheme = AppTheme.Dark;
@@ -24,7 +24,7 @@ public sealed class AppThemeServiceTests
     public void Set_CurrentTheme_AndReceiveValueChangedMessage_AndReturnTrue()
     {
         // Arrange.
-        AppThemeService service = new(_messenger);
+        IAppThemeService service = new(_messenger);
 
         AppTheme currentTheme = default;
 

@@ -5,7 +5,7 @@
 /// </summary>
 public abstract partial class ShellViewModel : ViewModel
 {
-    private AppNavigationService _navigationService;
+    private IAppNavigationService _navigationService;
 
     private ViewNavigator _viewNavigator;
 
@@ -148,7 +148,7 @@ public abstract partial class ShellViewModel : ViewModel
     /// The default <see cref="WeakReferenceMessenger"/> instance.
     /// </param>
     public ShellViewModel(
-        AppNavigationService   navigationService,
+        IAppNavigationService  navigationService,
         WeakReferenceMessenger messenger
     )
         : base(messenger)
