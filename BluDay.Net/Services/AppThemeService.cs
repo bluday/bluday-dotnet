@@ -1,5 +1,6 @@
 namespace BluDay.Net.Services;
 
+/// <inheritdoc cref="IAppWindowService"/>
 public sealed class AppThemeService : Service,
     IAppThemeService,
     IRecipient<AppThemeChangeMessage>

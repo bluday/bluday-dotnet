@@ -6,20 +6,6 @@ namespace BluDay.Net.Services;
 public interface IAppNavigationService
 {
     /// <summary>
-    /// Creates a new view navigator for the provided <paramref name="window"/> instance.
-    /// </summary>
-    /// <typeparam name="TWindow">
-    /// The window type of the owner instance.
-    /// </typeparam>
-    /// <param name="window">
-    /// The window and the owner of the new navigator instance.
-    /// </param>
-    /// <returns>
-    /// A <see cref="ViewNavigator"/> instance for the window.
-    /// </returns>
-    ViewNavigator CreateNavigator<TWindow>(TWindow window) where TWindow : IBluWindow;
-
-    /// <summary>
     /// Navigates to the specified view within a window of type <see cref="IBluWindow"/>.
     /// </summary>
     /// <typeparam name="TViewModel">
