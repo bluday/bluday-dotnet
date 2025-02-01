@@ -7,8 +7,6 @@ public abstract partial class ShellViewModel : ViewModel
 {
     private IAppNavigationService _navigationService;
 
-    private ViewNavigator _viewNavigator;
-
     private Window _window;
 
     private AppWindow _appWindow;
@@ -24,12 +22,6 @@ public abstract partial class ShellViewModel : ViewModel
     private ContentAlignment? _alignment;
 
     #region Properties
-    /// <summary>
-    /// Gets the view navigator instance.
-    /// </summary>
-    public ViewNavigator ViewNavigator => _viewNavigator;
-
-    /// <inheritdoc/>
     public bool ExtendsContentIntoTitleBar
     {
         get => _appWindowTitleBar.ExtendsContentIntoTitleBar;
@@ -55,7 +47,6 @@ public abstract partial class ShellViewModel : ViewModel
     /// </summary>
     public bool IsVisible => _appWindow.IsVisible;
 
-    /// <inheritdoc/>
     public string? IconPath
     {
         get => _iconPath;
@@ -69,7 +60,6 @@ public abstract partial class ShellViewModel : ViewModel
         }
     }
 
-    /// <inheritdoc/>
     public string? Title
     {
         get => _appWindow?.Title;
@@ -86,7 +76,6 @@ public abstract partial class ShellViewModel : ViewModel
     /// </summary>
     public ulong? Id => _appWindow.Id.Value;
 
-    /// <inheritdoc/>
     public ContentAlignment? Alignment
     {
         get => _alignment;
@@ -111,7 +100,6 @@ public abstract partial class ShellViewModel : ViewModel
         }
     }
 
-    /// <inheritdoc/>
     public SizeInt32? Size
     {
         get => _appWindow.Size;
@@ -155,7 +143,6 @@ public abstract partial class ShellViewModel : ViewModel
     {
         _navigationService = navigationService;
 
-        _viewNavigator       = null!;
         _window              = null!;
         _appWindow           = null!;
         _appWindowTitleBar   = null!;
@@ -299,8 +286,6 @@ public abstract partial class ShellViewModel : ViewModel
 
         _window = window;
 
-        _viewNavigator = _navigationService.CreateNavigator(window);
-        
         _appWindow = window.AppWindow;
 
         _appWindowTitleBar = _appWindow.TitleBar;
