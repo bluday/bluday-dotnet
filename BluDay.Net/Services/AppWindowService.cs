@@ -1,15 +1,19 @@
 ﻿namespace BluDay.Net.Services;
 
+/// <inheritdoc cref="IAppWindowService"/>
 public sealed class AppWindowService : Service, IAppWindowService
 {
     private readonly ImplementationProvider<IBluWindow> _windowFactory;
 
     private readonly HashSet<IBluWindow> _windows;
 
+    /// <inheritdoc cref="IAppWindowService"/>
     public IBluWindow? MainWindow => _windows.FirstOrDefault();
 
+    /// <inheritdoc cref="IAppWindowService"/>
     public int WindowCount => _windows.Count;
 
+    /// <inheritdoc cref="IAppWindowService"/>
     public IEnumerable<IBluWindow> Windows => _windows;
 
     /// <summary>
@@ -33,6 +37,7 @@ public sealed class AppWindowService : Service, IAppWindowService
         _windows = new HashSet<IBluWindow>();
     }
 
+    /// <inheritdoc cref="IAppWindowService"/>
     public TWindow CreateWindow<TWindow>() where TWindow : IBluWindow
     {
         TWindow window = _windowFactory.GetInstance<TWindow>()!;
@@ -44,6 +49,7 @@ public sealed class AppWindowService : Service, IAppWindowService
         return window;
     }
 
+    /// <inheritdoc cref="IAppWindowService"/>
     public bool DestroyWindow(IBluWindow window)
     {
         if (!_windows.Remove(window))
@@ -58,6 +64,7 @@ public sealed class AppWindowService : Service, IAppWindowService
         return true;
     }
 
+    /// <inheritdoc cref="IAppWindowService"/>
     public bool HasWindow(IBluWindow window)
     {
         return _windows.Contains(window);

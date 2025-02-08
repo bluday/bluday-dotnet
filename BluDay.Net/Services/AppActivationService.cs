@@ -1,7 +1,9 @@
 namespace BluDay.Net.Services;
 
+/// <inheritdoc cref="IAppActivationService"/>
 public sealed class AppActivationService : Service, IAppActivationService
 {
+    /// <inheritdoc cref="IAppActivationService"/>
     public bool IsActivated { get; private set; }
 
     /// <summary>
@@ -12,6 +14,7 @@ public sealed class AppActivationService : Service, IAppActivationService
     /// </param>
     public AppActivationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
+    /// <inheritdoc cref="IAppActivationService"/>
     public void Activate()
     {
         if (IsActivated) return;
@@ -21,6 +24,7 @@ public sealed class AppActivationService : Service, IAppActivationService
         IsActivated = true;
     }
 
+    /// <inheritdoc cref="IAppActivationService"/>
     public void Deactivate()
     {
         if (!IsActivated) return;

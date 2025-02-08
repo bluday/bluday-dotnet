@@ -1,12 +1,13 @@
 namespace BluDay.Net.Services;
 
-/// <inheritdoc cref="IAppWindowService"/>
+/// <inheritdoc cref="IAppThemeService"/>
 public sealed class AppThemeService : Service,
     IAppThemeService,
     IRecipient<AppThemeChangeMessage>
 {
     private AppTheme _currentTheme;
 
+    /// <inheritdoc cref="IAppThemeService"/>
     public AppTheme CurrentTheme
     {
         get => _currentTheme;
@@ -26,6 +27,7 @@ public sealed class AppThemeService : Service,
     /// </param>
     public AppThemeService(WeakReferenceMessenger messenger) : base(messenger) { }
 
+    /// <inheritdoc cref="IRecipient{TMessage}"/>
     public void Receive(AppThemeChangeMessage message)
     {
         CurrentTheme = message.Value;

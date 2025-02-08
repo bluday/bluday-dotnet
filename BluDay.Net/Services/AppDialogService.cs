@@ -1,5 +1,6 @@
 ﻿namespace BluDay.Net.Services;
 
+/// <inheritdoc cref="IAppDialogService"/>
 public sealed class AppDialogService : Service, IAppDialogService
 {
     /// <summary>

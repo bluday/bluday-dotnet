@@ -1,5 +1,6 @@
 namespace BluDay.Net.Services;
 
+/// <inheritdoc cref="IAppNavigationService"/>
 public sealed class AppNavigationService : Service, IAppNavigationService
 {
     /// <summary>
@@ -10,11 +11,13 @@ public sealed class AppNavigationService : Service, IAppNavigationService
     /// </param>
     public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
+    /// <inheritdoc cref="IAppNavigationService"/>
     public void Navigate<TViewModel>(Guid windowId) where TViewModel : ViewModel
     {
         throw new NotImplementedException();
     }
 
+    /// <inheritdoc cref="IAppNavigationService"/>
     public bool TryNavigate<TViewModel>(Guid windowId) where TViewModel : ViewModel
     {
         throw new NotImplementedException();
