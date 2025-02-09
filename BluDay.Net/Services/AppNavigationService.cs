@@ -11,13 +11,13 @@ public sealed class AppNavigationService : Service, IAppNavigationService
     /// </param>
     public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
-    /// <inheritdoc cref="IAppNavigationService"/>
+    /// <inheritdoc cref="IAppNavigationService.Navigate{TViewModel}(Guid)"/>
     public void Navigate<TViewModel>(Guid windowId) where TViewModel : ViewModel
     {
         throw new NotImplementedException();
     }
 
-    /// <inheritdoc cref="IAppNavigationService"/>
+    /// <inheritdoc cref="IAppNavigationService.TryNavigate{TViewModel}(Guid)"/>
     public bool TryNavigate<TViewModel>(Guid windowId) where TViewModel : ViewModel
     {
         throw new NotImplementedException();

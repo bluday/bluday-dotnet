@@ -7,7 +7,7 @@ public sealed class AppThemeService : Service,
 {
     private AppTheme _currentTheme;
 
-    /// <inheritdoc cref="IAppThemeService"/>
+    /// <inheritdoc cref="IAppThemeService.CurrentTheme"/>
     public AppTheme CurrentTheme
     {
         get => _currentTheme;
@@ -27,7 +27,7 @@ public sealed class AppThemeService : Service,
     /// </param>
     public AppThemeService(WeakReferenceMessenger messenger) : base(messenger) { }
 
-    /// <inheritdoc cref="IRecipient{TMessage}"/>
+    /// <inheritdoc cref="IRecipient{TMessage}.Receive(TMessage)"/>
     public void Receive(AppThemeChangeMessage message)
     {
         CurrentTheme = message.Value;
