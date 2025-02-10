@@ -10,9 +10,12 @@ public sealed class ArgumentDescriptorsBuilder
     private readonly List<PositionalArgumentDescriptorBuilder> _positionals = new();
 
     /// <summary>
-    /// Constructs an instance of the <see cref="ArgumentDescriptors"/> class using the set values.
+    /// Constructs an instance of the <see cref="ArgumentDescriptors"/> class using
+    /// the set values.
     /// </summary>
-    /// <returns>The constructed instance.</returns>
+    /// <returns>
+    /// The constructed instance.
+    /// </returns>
     public ArgumentDescriptors Build()
     {
         return new(
@@ -26,10 +29,12 @@ public sealed class ArgumentDescriptorsBuilder
     }
 
     /// <summary>
-    /// Initializes an instance of the <see cref="OptionalArgumentDescriptorBuilder"/> class
-    /// for constructing a optional argument descriptor.
+    /// Initializes an instance of the <see cref="OptionalArgumentDescriptorBuilder"/>
+    /// class for constructing a optional argument descriptor.
     /// </summary>
-    /// <returns>The optional argument builder instance.</returns>
+    /// <returns>
+    /// The optional argument builder instance.
+    /// </returns>
     public OptionalArgumentDescriptorBuilder AddOptional()
     {
         OptionalArgumentDescriptorBuilder builder = new(this);
@@ -43,7 +48,9 @@ public sealed class ArgumentDescriptorsBuilder
     /// Intitializes an instance of the <see cref="PositionalArgumentDescriptorBuilder"/> class
     /// for constructing a positional arguments descriptor.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>
+    /// The positional argument builder instance.
+    /// </returns>
     public PositionalArgumentDescriptorBuilder AddPositional()
     {
         PositionalArgumentDescriptorBuilder builder = new(this);

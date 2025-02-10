@@ -41,8 +41,12 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Sets the action kind for the argument.
     /// </summary>
-    /// <param name="value">The type of action to perform on the argument.</param>
-    /// <returns>The builder instance.</returns>
+    /// <param name="value">
+    /// The type of action to perform on the argument.
+    /// </param>
+    /// <returns>
+    /// The builder instance.
+    /// </returns>
     public ArgumentDescriptorBuilder ActionKind(ArgumentActionKind value)
     {
         _actionKind = value;
@@ -53,7 +57,9 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Shortcut method for the <see cref="ArgumentDescriptorsBuilder.Optional"/> method.
     /// </summary>
-    /// <returns>The builder instance for a new optional argument.</returns>
+    /// <returns>
+    /// The builder instance for a new optional argument.
+    /// </returns>
     public OptionalArgumentDescriptorBuilder AddOptional()
     {
         return Descriptors.AddOptional();
@@ -62,7 +68,9 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Shortcut method for the <see cref="ArgumentDescriptorsBuilder.Positional"/> method.
     /// </summary>
-    /// <returns>The builder instance for a new positional argument.</returns>
+    /// <returns>
+    /// The builder instance for a new positional argument.
+    /// </returns>
     public PositionalArgumentDescriptorBuilder AddPositional()
     {
         return Descriptors.AddPositional();
@@ -71,8 +79,12 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Sets the constant to set or append for every qualifying value.
     /// </summary>
-    /// <param name="value">The constant object to set.</param>
-    /// <returns>The builder instance.</returns>
+    /// <param name="value">
+    /// The constant object to set.
+    /// </param>
+    /// <returns>
+    /// The builder instance.
+    /// </returns>
     public ArgumentDescriptorBuilder Constant(object value)
     {
         _constant = value;
@@ -83,8 +95,12 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Sets the description text for the argument.
     /// </summary>
-    /// <param name="value">The description for the argument.</param>
-    /// <returns>The builder instance.</returns>
+    /// <param name="value">
+    /// The description for the argument.
+    /// </param>
+    /// <returns>
+    /// The builder instance.
+    /// </returns>
     public ArgumentDescriptorBuilder Description(string value)
     {
         _description = value;
@@ -95,8 +111,12 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Sets the flag descriptor for the argument.
     /// </summary>
-    /// <param name="value">The flag descriptor for the argument.</param>
-    /// <returns>The builder instance.</returns>
+    /// <param name="value">
+    /// The flag descriptor for the argument.
+    /// </param>
+    /// <returns>
+    /// The builder instance.
+    /// </returns>
     public ArgumentDescriptorBuilder Flags(string value)
     {
         _flagDescriptor = value;
@@ -107,8 +127,12 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Sets the name of the argument.
     /// </summary>
-    /// <param name="value">The name of the argument.</param>
-    /// <returns>The builder instance.</returns>
+    /// <param name="value">
+    /// The name of the argument.
+    /// </param>
+    /// <returns>
+    /// The builder instance.
+    /// </returns>
     public ArgumentDescriptorBuilder Name(string value)
     {
         _name = value;
@@ -119,8 +143,12 @@ public abstract class ArgumentDescriptorBuilder
     /// <summary>
     /// Sets the store kind for the argument.
     /// </summary>
-    /// <param name="value">The type to store the parsed value as.</param>
-    /// <returns>The builder instance.</returns>
+    /// <param name="value">
+    /// The type to store the parsed value as.
+    /// </param>
+    /// <returns>
+    /// The builder instance.
+    /// </returns>
     public ArgumentDescriptorBuilder StoreKind(ArgumentStoreKind value)
     {
         _storeKind = value;
@@ -129,8 +157,11 @@ public abstract class ArgumentDescriptorBuilder
     }
 
     /// <summary>
-    /// Constructs an instance of the <see cref="OptionalArgumentDescriptor"/> class using all provided values.
+    /// Constructs an instance of the <see cref="OptionalArgumentDescriptor"/> class using
+    /// all provided values.
     /// </summary>
-    /// <returns>The descriptor instance.</returns>
+    /// <returns>
+    /// The descriptor instance.
+    /// </returns>
     public abstract ArgumentDescriptor Build();
 }

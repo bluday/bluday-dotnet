@@ -25,14 +25,20 @@ public readonly struct ParsedArgument
     /// <summary>
     /// Initializes a new value with the provided argument token.
     /// </summary>
-    /// <param name="token">The token for the parsed argument.</param>
+    /// <param name="token">
+    /// The token for the parsed argument.
+    /// </param>
     public ParsedArgument(ArgumentToken token) : this(token, null!) { }
 
     /// <summary>
     /// Initializes a new value with the provided argument token and store values.
     /// </summary>
-    /// <param name="token">The token for the parsed argument.</param>
-    /// <param name="values">An enumerable of store value tokens.</param>
+    /// <param name="token">
+    /// The token for the parsed argument.
+    /// </param>
+    /// <param name="values">
+    /// An enumerable of store value tokens.
+    /// </param>
     public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
         _values = values.ToList();

@@ -22,7 +22,8 @@ public interface IArgumentDescriptor
 
     /// <summary>
     /// The constant value to set for every parsed store value.
-    /// <para>
+    /// </summary>
+    /// <remarks>
     /// Used only if <see cref="ActionKind"/> is set to one of the following values:
     /// <list type="bullet">
     ///     <item>
@@ -32,8 +33,7 @@ public interface IArgumentDescriptor
     ///         <see cref="ArgumentActionKind.AppendConstant"/>
     ///     </item>
     /// </list>
-    /// </para>
-    /// </summary>
+    /// </remarks>
     object? Constant { get; }
 
     /// <summary>

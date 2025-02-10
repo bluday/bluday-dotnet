@@ -18,7 +18,12 @@ public readonly struct ArgumentFlag
     /// <summary>
     /// Initializes a new value with the provided name.
     /// </summary>
-    /// <param name="name">The name of the flag.</param>
+    /// <param name="name">
+    /// The name of the flag.
+    /// </param>
+    /// <exception cref="ArgumentException">
+    /// If <paramref name="name"/> is null.
+    /// </exception>
     public ArgumentFlag(string name)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);

@@ -4,7 +4,9 @@
 /// A class that facilitates parsing and mapping of command-line argument values to an instance
 /// of the specified generic parameter type.
 /// </summary>
-/// <typeparam name="TArguments">The target type for argument mapping.</typeparam>
+/// <typeparam name="TArguments">
+/// The target type for argument mapping.
+/// </typeparam>
 public class ArgumentsParser<TArguments> where TArguments : new()
 {
     private readonly ArgumentDescriptors _argumentDescriptors;
@@ -48,9 +50,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <returns>
     /// A <see cref="ParsedArgument"/> value with information about the argument.
     /// </returns>
-    /// <exception cref="NotImplementedException">
-    /// Temporary.
-    /// </exception>
     public ParsedArgument ParseArgument(string argument)
     {
         return ParseArgument(argument, []);
@@ -65,9 +64,6 @@ public class ArgumentsParser<TArguments> where TArguments : new()
     /// <returns>
     /// A <see cref="ParsedArgument"/> value with information about the argument.
     /// </returns>
-    /// <exception cref="NotImplementedException">
-    /// Temporary.
-    /// </exception>
     public ParsedArgument ParseArgument(string argument, params string[] values)
     {
         throw new NotImplementedException();

@@ -1,7 +1,8 @@
 namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// Base class for creating derived command-line argument descriptors classes.
+/// Serves as the foundational class for defining command-line argument descriptors.
+/// Provides core functionality for derived descriptor classes.
 /// </summary>
 public abstract class ArgumentDescriptor : IArgumentDescriptor
 {
@@ -17,9 +18,7 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
 
     private readonly Type _storeType;
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.ActionKind"/>
-    /// </summary>
     public ArgumentActionKind ActionKind
     {
         get => _actionKind;
@@ -31,9 +30,7 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
         }
     }
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.StoreKind"/>
-    /// </summary>
     public ArgumentStoreKind StoreKind
     {
         get => _storeKind;
@@ -47,14 +44,10 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
         }
     }
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.IsRequired"/>
-    /// </summary>
     public bool IsRequired { get; init; }
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.Constant"/>
-    /// </summary>
     public object? Constant
     {
         get => _constant;
@@ -66,9 +59,7 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
         }
     }
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.DefaultValue"/>
-    /// </summary>
     public object? DefaultValue
     {
         get => _defaultValue;
@@ -80,19 +71,13 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
         }
     }
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.Description"/>
-    /// </summary>
     public string? Description { get; init; }
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.Name"/>
-    /// </summary>
     public string Name => _name;
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.MaxValueCount"/>
-    /// </summary>
     public int MaxValueCount { get; init; }
 
     /// <summary>
@@ -100,9 +85,7 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
     /// </summary>
     public Func<string, object?> ValueHandler { get; init; }
 
-    /// <summary>
     /// <inheritdoc cref="IArgumentDescriptor.StoreType"/>
-    /// </summary>
     public Type StoreType => _storeType;
 
     /// <summary>
@@ -123,8 +106,12 @@ public abstract class ArgumentDescriptor : IArgumentDescriptor
     /// <summary>
     /// Gets the store value type by a provided <see cref="ArgumentStoreKind"/> value.
     /// </summary>
-    /// <param name="kind">The store kind.</param>
-    /// <returns>The corresponding value type.</returns>
+    /// <param name="kind">
+    /// The store kind.
+    /// </param>
+    /// <returns>
+    /// The corresponding value type.
+    /// </returns>
     public static Type GetStoreType(ArgumentStoreKind kind) => kind switch
     {
         ArgumentStoreKind.Boolean => typeof(bool),

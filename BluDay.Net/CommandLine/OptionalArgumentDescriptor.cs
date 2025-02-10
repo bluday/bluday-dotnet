@@ -29,8 +29,6 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     /// <summary>
     /// Gets the raw flag descriptor value specified at instantiation.
     /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="InvalidArgumentFlagLengthException"></exception>
     public required string FlagDescriptor
     {
         get => _flagDescriptor;
@@ -43,10 +41,10 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     }
 
     /// <summary>
-    /// Initializes an instance of the <see cref="OptionalArgumentDescriptor"/> class using the
-    /// provided <see cref="string"/> flag descriptor value.
+    /// Initializes an instance of the <see cref="OptionalArgumentDescriptor"/> class using
+    /// the provided <see cref="string"/> flag descriptor value.
     /// </summary>
-    /// <param name="name"><inheritdoc cref="ArgumentDescriptor(string)"/></param>
+    /// <inheritdoc cref="ArgumentDescriptor(string)"/>
     public OptionalArgumentDescriptor(string name) : base(name)
     {
         _flagDescriptor = null!;
@@ -55,10 +53,18 @@ public class OptionalArgumentDescriptor : ArgumentDescriptor
     /// <summary>
     /// Parses a flag descriptor and extracts the short and long argument flags.
     /// </summary>
-    /// <param name="flagDescriptor">The flag descriptor string.</param>
-    /// <returns>A tuple containing the short and long arguments (if present).</returns>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="InvalidArgumentFlagLengthException"></exception>
+    /// <param name="flagDescriptor">
+    /// The flag descriptor string.
+    /// </param>
+    /// <returns>
+    /// A tuple containing parsed short and long flags.
+    /// </returns>
+    /// <exception cref="ArgumentException">
+    /// If <paramref name="flagDescriptor"/> is null or contains only whitespace characters.
+    /// </exception>
+    /// <exception cref="InvalidArgumentFlagLengthException">
+    /// If the short flag is longer than the long flag.
+    /// </exception>
     public static (ArgumentFlag? Short, ArgumentFlag? Long) ParseFlags(string flagDescriptor)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(flagDescriptor);
