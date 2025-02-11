@@ -5,8 +5,6 @@ namespace BluDay.Net.CommandLine;
 /// </summary>
 public readonly struct ParsedArgument
 {
-    private readonly IReadOnlyList<ArgumentToken> _values;
-
     /// <summary>
     /// Gets the token of the parsed argument.
     /// </summary>
@@ -15,12 +13,12 @@ public readonly struct ParsedArgument
     /// <summary>
     /// Gets a value indicative of if the count of values is greater than zero.
     /// </summary>
-    public bool HasValues => _values.Count > 0;
+    public bool HasValues { get; }
 
     /// <summary>
-    /// An read-only list of store value tokens.
+    /// An enumerable of stored value tokens.
     /// </summary>
-    public IReadOnlyList<ArgumentToken> Values => _values;
+    public IEnumerable<ArgumentToken> Values { get; }
 
     /// <summary>
     /// Initializes a new value with the provided argument token.
@@ -41,8 +39,10 @@ public readonly struct ParsedArgument
     /// </param>
     public ParsedArgument(ArgumentToken token, IEnumerable<ArgumentToken> values)
     {
-        _values = values.ToList();
-
         Token = token;
+
+        HasValues = values.Count() > 0;
+
+        Values = values;
     }
 }
