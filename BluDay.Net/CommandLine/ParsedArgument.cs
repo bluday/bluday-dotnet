@@ -1,14 +1,14 @@
 namespace BluDay.Net.CommandLine;
 
 /// <summary>
-/// A struct for representing a raw command-line argument flag or value.
+/// Represents a raw command-line argument flag or value.
 /// </summary>
 public readonly struct ParsedArgument
 {
     private readonly IReadOnlyList<ArgumentToken> _values;
 
     /// <summary>
-    /// The token of the parsed argument.
+    /// Gets the token of the parsed argument.
     /// </summary>
     public ArgumentToken Token { get; }
 
