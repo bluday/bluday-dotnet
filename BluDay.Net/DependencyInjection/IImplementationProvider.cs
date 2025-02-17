@@ -1,7 +1,7 @@
 namespace BluDay.Net.DependencyInjection;
 
 /// <summary>
-/// Represents a provider for resolving implementations of a shared service type.
+/// Represents a provider for resolving implementation instances of a service type.
 /// </summary>
 public interface IImplementationProvider
 {
@@ -16,13 +16,13 @@ public interface IImplementationProvider
     IEnumerable<Type> ImplementationTypes { get; }
 
     /// <summary>
-    /// Resolves an instance of the specificed <paramref name="implementationType"/>.
+    /// Resolves an instance of the specificed implementation type.
     /// </summary>
     /// <param name="implementationType">
     /// The type of implementation to resolve.
     /// </param>
     /// <returns>
-    /// An instance of the resolved implementation.
+    /// An instance of the resolved implementation if found, <c>null</c> otherwise.
     /// </returns>
     /// <exception cref="InvalidImplementationTypeException">
     /// If <paramref name="implementationType"/> is not assignable to the shared service type.

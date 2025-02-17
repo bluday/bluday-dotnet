@@ -1,5 +1,9 @@
 namespace BluDay.Net.DependencyInjection;
 
+/// <summary>
+/// The default implementation class fpr <see cref="IImplementationProvider{TService}"/>.
+/// </summary>
+/// <inheritdoc cref="IImplementationProvider{TService}"/>
 public class ImplementationProvider<TService> : IImplementationProvider<TService> where TService : notnull
 {
     private readonly Type _serviceType;
@@ -8,8 +12,10 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
 
     private readonly IReadOnlyDictionary<Type, ObjectFactory> _implementationTypeToFactoryMap;
 
+    /// <inheritdoc cref="IImplementationProvider.ServiceType"/>
     public Type ServiceType => _serviceType;
 
+    /// <inheritdoc cref="IImplementationProvider.ImplementationTypes"/>
     public IEnumerable<Type> ImplementationTypes => _implementationTypeToFactoryMap.Keys;
 
     /// <summary>
@@ -52,6 +58,7 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
         return GetFactory;
     }
 
+    /// <inheritdoc cref="IImplementationProvider.GetInstance(Type)"/>
     public object? GetInstance(Type implementationType)
     {
         if (!implementationType.IsAssignableTo(_serviceType))

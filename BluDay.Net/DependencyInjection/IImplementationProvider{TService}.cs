@@ -1,8 +1,8 @@
 namespace BluDay.Net.DependencyInjection;
 
-/// <inheritdoc />
+/// <inheritdoc cref="IImplementationProvider"/>
 /// <typeparam name="TService">
-/// The shared service type.
+/// The targeted service type.
 /// </typeparam>
 public interface IImplementationProvider<TService> : IImplementationProvider where TService : notnull
 {
