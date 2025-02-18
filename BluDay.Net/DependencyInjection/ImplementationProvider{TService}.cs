@@ -50,12 +50,10 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
             argumentTypes: []
         );
 
-        object GetFactory(IServiceProvider serviceProvider, object?[]? args)
+        return (IServiceProvider serviceProvider, object?[]? args) =>
         {
             return factory.Invoke(serviceProvider, args)!;
         };
-
-        return GetFactory;
     }
 
     /// <inheritdoc cref="IImplementationProvider.GetInstance(Type)"/>
