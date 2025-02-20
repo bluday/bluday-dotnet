@@ -4,7 +4,8 @@ namespace BluDay.Net.DependencyInjection;
 /// The default implementation class fpr <see cref="IImplementationProvider{TService}"/>.
 /// </summary>
 /// <inheritdoc cref="IImplementationProvider{TService}"/>
-public class ImplementationProvider<TService> : IImplementationProvider<TService> where TService : notnull
+public class ImplementationProvider<TService> : IImplementationProvider<TService>
+    where TService : notnull
 {
     private readonly Type _serviceType;
 
