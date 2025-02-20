@@ -69,6 +69,7 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
             .Invoke(_serviceProvider, arguments: null);
     }
 
+    /// <inheritdoc cref="IImplementationProvider{TService}.GetInstance{TImplementation}"/>
     public TImplementation? GetInstance<TImplementation>() where TImplementation : TService
     {
         return (TImplementation)GetInstance(typeof(TImplementation))!;
