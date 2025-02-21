@@ -5,7 +5,6 @@ global using BluDay.Net.Constants;
 global using BluDay.Net.Extensions;
 global using BluDay.Net.Services;
 global using BluDay.Net.ViewModels;
-global using BluDay.Net.UI.Navigation;
 global using BluDay.Net.UI.Windowing;
 
 global using BluDay.Net.WinUI3.ComponentModel;
