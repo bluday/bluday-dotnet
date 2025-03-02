@@ -1,6 +1,8 @@
 ﻿namespace BluDay.Net.Services;
 
-/// <inheritdoc cref="IAppWindowService"/>
+/// <summary>
+/// Represents the implementation class for the app window service.
+/// </summary>
 public sealed class AppWindowService : Service, IAppWindowService
 {
     private readonly ImplementationProvider<IBluWindow> _windowFactory;
@@ -8,13 +10,22 @@ public sealed class AppWindowService : Service, IAppWindowService
     private readonly HashSet<IBluWindow> _windows;
 
     /// <inheritdoc cref="IAppWindowService.MainWindow"/>
-    public IBluWindow? MainWindow => _windows.FirstOrDefault();
+    public IBluWindow? MainWindow
+    {
+        get => _windows.FirstOrDefault();
+    }
 
     /// <inheritdoc cref="IAppWindowService.WindowCount"/>
-    public int WindowCount => _windows.Count;
+    public int WindowCount
+    {
+        get => _windows.Count;
+    }
 
     /// <inheritdoc cref="IAppWindowService.Windows"/>
-    public IEnumerable<IBluWindow> Windows => _windows;
+    public IEnumerable<IBluWindow> Windows
+    {
+        get => _windows;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AppWindowService"/> class.
