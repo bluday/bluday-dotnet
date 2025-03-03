@@ -1,10 +1,17 @@
 namespace BluDay.Net.Services;
 
-/// <inheritdoc cref="IAppActivationService"/>
+/// <summary>
+/// Represents the implementation class for the app activation service.
+/// </summary>
 public sealed class AppActivationService : Service, IAppActivationService
 {
+    private bool _isActivated;
+
     /// <inheritdoc cref="IAppActivationService.IsActivated"/>
-    public bool IsActivated { get; private set; }
+    public bool IsActivated
+    {
+        get => _isActivated;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AppActivationService"/> class.
@@ -17,20 +24,20 @@ public sealed class AppActivationService : Service, IAppActivationService
     /// <inheritdoc cref="IAppActivationService.Activate"/>
     public void Activate()
     {
-        if (IsActivated) return;
+        if (_isActivated) return;
 
         // TODO: Activate the main window and the app.
 
-        IsActivated = true;
+        _isActivated = true;
     }
 
     /// <inheritdoc cref="IAppActivationService.Deactivate"/>
     public void Deactivate()
     {
-        if (!IsActivated) return;
+        if (!_isActivated) return;
 
         // TODO: Deactivate the activated main window and the app.
 
-        IsActivated = false;
+        _isActivated = false;
     }
 }
