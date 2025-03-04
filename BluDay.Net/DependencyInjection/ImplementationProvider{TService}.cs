@@ -1,10 +1,9 @@
 namespace BluDay.Net.DependencyInjection;
 
 /// <summary>
-/// The default implementation class fpr <see cref="IImplementationProvider{TService}"/>.
+/// Represents the implementation class for <see cref="IImplementationProvider"/>.
 /// </summary>
-/// <inheritdoc cref="IImplementationProvider{TService}"/>
-public class ImplementationProvider<TService> : IImplementationProvider<TService>
+public class ImplementationProvider<TService> : IImplementationProvider
     where TService : notnull
 {
     private readonly Type _serviceType;
@@ -14,10 +13,16 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
     private readonly IReadOnlyDictionary<Type, ObjectFactory> _implementationTypeToFactoryMap;
 
     /// <inheritdoc cref="IImplementationProvider.ServiceType"/>
-    public Type ServiceType => _serviceType;
+    public Type ServiceType
+    {
+        get => _serviceType;
+    }
 
     /// <inheritdoc cref="IImplementationProvider.ImplementationTypes"/>
-    public IEnumerable<Type> ImplementationTypes => _implementationTypeToFactoryMap.Keys;
+    public IEnumerable<Type> ImplementationTypes
+    {
+        get => _implementationTypeToFactoryMap.Keys;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ImplementationProvider{TService}"/> class.
@@ -38,13 +43,13 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
             .GetImplementationTypes()
             .ToDictionary(
                 keySelector:     implementationType => implementationType,
-                elementSelector: GetImplementationFactory
+                elementSelector: CreateImplementationFactory
             );
 
         _serviceProvider = serviceProvider;
     }
 
-    private static ObjectFactory GetImplementationFactory(Type implementationType)
+    private static ObjectFactory CreateImplementationFactory(Type implementationType)
     {
         ObjectFactory factory = ActivatorUtilities.CreateFactory(
             implementationType,
@@ -58,21 +63,16 @@ public class ImplementationProvider<TService> : IImplementationProvider<TService
     }
 
     /// <inheritdoc cref="IImplementationProvider.GetInstance(Type)"/>
-    public object? GetInstance(Type implementationType)
+    public object GetInstance(Type implementationType)
     {
         if (!implementationType.IsAssignableTo(_serviceType))
         {
             throw new InvalidImplementationTypeException(implementationType, _serviceType);
         }
 
-        return _implementationTypeToFactoryMap
-            .GetValueOrDefault(implementationType)?
-            .Invoke(_serviceProvider, arguments: null);
-    }
-
-    /// <inheritdoc cref="IImplementationProvider{TService}.GetInstance{TImplementation}"/>
-    public TImplementation? GetInstance<TImplementation>() where TImplementation : TService
-    {
-        return (TImplementation)GetInstance(typeof(TImplementation))!;
+        return _implementationTypeToFactoryMap[implementationType].Invoke(
+            _serviceProvider,
+            arguments: null
+        );
     }
 }
