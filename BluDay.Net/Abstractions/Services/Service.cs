@@ -18,17 +18,5 @@ public abstract class Service
         ArgumentNullException.ThrowIfNull(messenger);
 
         _messenger = messenger;
-
-        Subscribe();
     }
-
-    /// <summary>
-    /// Registers recipients of specified message types.
-    /// </summary>
-    protected virtual void Subscribe() { }
-
-    /// <summary>
-    /// Unregisters recipients of specified message types.
-    /// </summary>
-    protected virtual void Unsubscribe() { }
 }
