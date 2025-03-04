@@ -48,10 +48,10 @@ public sealed class AppWindowService : Service, IAppWindowService
         _windows = new HashSet<IBluWindow>();
     }
 
-    /// <inheritdoc cref="IAppWindowService.CreateWindow{TWindow}"/>
-    public TWindow CreateWindow<TWindow>() where TWindow : IBluWindow
+    /// <inheritdoc cref="IAppWindowService.CreateWindow"/>
+    public IBluWindow CreateWindow(Type windowType)
     {
-        TWindow window = _windowFactory.GetInstance<TWindow>()!;
+        var window = (IBluWindow)_windowFactory.GetInstance(windowType);
 
         _windows.Add(window);
 

@@ -23,13 +23,10 @@ public interface IAppWindowService
     /// <summary>
     /// Creates a new window instance of type <see cref="IBluWindow"/>.
     /// </summary>
-    /// <param name="config">
-    /// The window configuration instance.
-    /// </param>
     /// <returns>
     /// The window instance.
     /// </returns>
-    TWindow CreateWindow<TWindow>() where TWindow : IBluWindow;
+    IBluWindow CreateWindow(Type windowType);
 
     /// <summary>
     /// Closes and destroys the provided <see cref="IBluWindow"/> window instance if it
