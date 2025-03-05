@@ -3,9 +3,7 @@
 /// <summary>
 /// Represents the implementation class for the app window service.
 /// </summary>
-public sealed class AppWindowService : Service,
-    IAppWindowService,
-    IRecipient<WindowCreationRequestMessage>
+public sealed class AppWindowService : Service, IAppWindowService
 {
     private readonly ImplementationProvider<IBluWindow> _windowFactory;
 
@@ -48,8 +46,6 @@ public sealed class AppWindowService : Service,
         _windowFactory = windowFactory;
 
         _windows = new HashSet<IBluWindow>();
-
-        messenger.Register(this);
     }
 
     /// <inheritdoc cref="IAppWindowService.CreateWindow"/>
@@ -83,11 +79,5 @@ public sealed class AppWindowService : Service,
     public bool HasWindow(IBluWindow window)
     {
         return _windows.Contains(window);
-    }
-
-    /// <inheritdoc cref="IRecipient{TMessage}.Receive(TMessage)"/>
-    public void Receive(WindowCreationRequestMessage message)
-    {
-        message.Reply(CreateWindow(message.WindowType));
     }
 }
