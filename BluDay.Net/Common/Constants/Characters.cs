@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Constants;
+﻿namespace BluDay.Net.Common.Constants;
 
 /// <summary>
 /// Provides a collection of convenient <see cref="char"/> constants for common characters.

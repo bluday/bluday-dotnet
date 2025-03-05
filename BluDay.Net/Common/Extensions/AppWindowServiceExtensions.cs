@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Extensions;
+﻿namespace BluDay.Net.Common.Extensions;
 
 /// <summary>
 /// Provides extension methods for the <see cref="IAppWindowService"/> interface.

@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Extensions;
+﻿namespace BluDay.Net.Common.Extensions;
 
 /// <summary>
 /// A utility with method extensions for the <see cref="Type"/> type.

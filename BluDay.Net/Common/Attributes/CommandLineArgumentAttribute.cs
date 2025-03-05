@@ -1,4 +1,4 @@
-namespace BluDay.Net.Attributes;
+namespace BluDay.Net.Common.Attributes;
 
 /// <summary>
 /// Specifies a command-line argument with a certain name.
