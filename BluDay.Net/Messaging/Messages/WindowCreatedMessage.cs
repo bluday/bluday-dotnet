@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Messaging;
+﻿namespace BluDay.Net.Messaging.Messages;
 
 /// <summary>
 /// Represents a message for a new window that was created in the app.

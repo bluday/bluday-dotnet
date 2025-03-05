@@ -6,7 +6,7 @@ global using BluDay.Net.Constants;
 global using BluDay.Net.Exceptions;
 global using BluDay.Net.Extensions;
 global using BluDay.Net.DependencyInjection;
-global using BluDay.Net.Messaging;
+global using BluDay.Net.Messaging.Messages;
 global using BluDay.Net.Resources;
 global using BluDay.Net.Services;
 global using BluDay.Net.ViewModels;

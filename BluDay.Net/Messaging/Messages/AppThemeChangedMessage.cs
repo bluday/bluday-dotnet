@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Messaging;
+﻿namespace BluDay.Net.Messaging.Messages;
 
 /// <summary>
 /// Represents a message that is sent when the current application theme has been changed.

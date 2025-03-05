@@ -1,4 +1,6 @@
-﻿namespace BluDay.Net.Tests.Unit.Services;
+﻿using BluDay.Net.Messaging.Messages;
+
+namespace BluDay.Net.Tests.Unit.Services;
 
 [TestClass]
 public sealed class AppThemeServiceTests
