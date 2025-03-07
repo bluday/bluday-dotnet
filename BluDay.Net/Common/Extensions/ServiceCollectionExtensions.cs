@@ -25,6 +25,30 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
+    /// Registers all available services for a desktop client.
+    /// </summary>
+    /// <param name="source">
+    /// The targeted instance.
+    /// </param>
+    /// <returns>
+    /// The service collection instance.
+    /// </returns>
+    public static IServiceCollection AddDesktopClientServices(this IServiceCollection source)
+    {
+        source
+            .AddSingleton<IAppActivationService, AppActivationService>()
+            .AddSingleton<IAppDialogService, AppDialogService>()
+            .AddSingleton<IAppNavigationService, AppNavigationService>()
+            .AddSingleton<IAppThemeService, AppThemeService>()
+            .AddSingleton<IAppWindowService, AppWindowService>();
+
+        source
+            .AddSingleton<ImplementationProvider<IBluWindow>>();
+
+        return source;
+    }
+
+    /// <summary>
     /// Registers all view model types from the calling assembly.
     /// </summary>
     /// <param name="source">
