@@ -68,4 +68,41 @@ public static class ServiceCollectionExtensions
 
         return source;
     }
+
+    /// <inheritdoc cref="AddViews{TView}(IServiceCollection, Assembly)"/>
+    public static IServiceCollection AddViews<TView>(this IServiceCollection source) where TView : class
+    {
+        return source.AddViews<TView>(Assembly.GetCallingAssembly());
+    }
+
+    /// <summary>
+    /// Registers all views of type <see cref="UserControl"/>.
+    /// </summary>
+    /// <param name="source">
+    /// The service collection.
+    /// </param>
+    /// <param name="assembly">
+    /// The targeted assembly to search within.
+    /// </param>
+    /// <returns>
+    /// The service collection to chained calls.
+    /// </returns>
+    /// <typeparam name="TView">
+    /// The underlying view type.
+    /// </typeparam>
+    public static IServiceCollection AddViews<TView>(this IServiceCollection source, Assembly assembly)
+        where TView : class
+    {
+        assembly ??= Assembly.GetCallingAssembly();
+
+        foreach (Type viewType in typeof(TView).GetImplementationTypes(assembly))
+        {
+            if (viewType.Name[new Index(4, fromEnd: true)..] is Strings.View)
+            {
+                source.AddTransient(viewType);
+            }
+        }
+
+        return source;
+    }
 }

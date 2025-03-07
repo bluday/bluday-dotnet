@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.WinUI3.Common.Extensions;
+﻿namespace BluDay.Net.WPF.Common.Extensions;
 
 /// <summary>
 /// A utility class with method extensions for the <see cref="ServiceCollection"/> type.
