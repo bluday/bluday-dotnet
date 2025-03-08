@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.WPF.Extensions;
+﻿namespace BluDay.Net.WPF.Common.Extensions;
 
 /// <summary>
 /// A utility class with method extensions for the <see cref="IServiceProvider"/> type.
@@ -8,17 +8,24 @@ public static class ServiceProviderExtensions
     /// <summary>
     /// Creates a new task that represents the asynchronous creation of the app.
     /// </summary>
-    /// <param name="source">
-    /// A service provider instance.
-    /// </param>
-    /// <returns>
-    /// A task that represents the asynchronous creation of the <typeparamref name="TApp"/> instance.
-    /// </returns>
     /// <typeparam name="TApp">
     /// The derived <see cref="Application"/> type for the WPF app.
     /// </typeparam>
-    public static Task<TApp> CreateWpfAppAsync<TApp>(this IServiceProvider source) where TApp : Application
+    /// <param name="source">
+    /// A service provider instance. Cannot be <c>null</c>.
+    /// </param>
+    /// <returns>
+    /// A task that represents the asynchronous creation of the <typeparamref name="TApp"/>
+    /// instance.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <paramref name="source"/> is <c>null</c>.
+    /// </exception>
+    public static Task<TApp> CreateWpfAppAsync<TApp>(this IServiceProvider source)
+        where TApp : Application
     {
+        ArgumentNullException.ThrowIfNull(source);
+
         return WpfApplication.CreateAsync(source.GetRequiredService<TApp>);
     }
 }
