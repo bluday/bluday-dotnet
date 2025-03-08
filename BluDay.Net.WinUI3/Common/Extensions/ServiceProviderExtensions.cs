@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.WinUI3.Extensions;
+﻿namespace BluDay.Net.WinUI3.Common.Extensions;
 
 /// <summary>
 /// A utility class with method extensions for the <see cref="IServiceProvider"/> type.
