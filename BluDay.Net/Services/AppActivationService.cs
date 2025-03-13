@@ -5,31 +5,48 @@ namespace BluDay.Net.Services;
 /// </summary>
 public sealed class AppActivationService : Service, IAppActivationService
 {
-    private bool _isActivated;
+    private readonly IAppActivationHandler _activationHandler;
 
-    /// <inheritdoc cref="IAppActivationService.IsActivated"/>
-    public bool IsActivated
-    {
-        get => _isActivated;
-    }
+    private readonly IAppDeactivationHandler _deactivationHandler;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AppActivationService"/> class.
     /// </summary>
+    /// <param name="activationHandler">
+    /// The handler responsible for managing application activation logic.
+    /// </param>
+    /// <param name="deactivationHandler">
+    /// The handler responsible for managing application deactivation logic.
+    /// </param>
     /// <param name="messenger">
     /// The event messenger instance.
     /// </param>
-    public AppActivationService(WeakReferenceMessenger messenger) : base(messenger) { }
-
-    /// <inheritdoc cref="IAppActivationService.ActivateAsync(IAppActivationHandler)"/>
-    public Task ActivateAsync(IAppActivationHandler handler)
+    public AppActivationService(
+        IAppActivationHandler   activationHandler,
+        IAppDeactivationHandler deactivationHandler,
+        WeakReferenceMessenger  messenger
+    )
+        : base(messenger)
     {
-        return handler.ActivateAsync();
+        _activationHandler   = activationHandler;
+        _deactivationHandler = deactivationHandler;
     }
 
-    /// <inheritdoc cref="IAppActivationService.DeactivateAsync(IAppDeactivationHandler)"/>
-    public Task DeactivateAsync(IAppDeactivationHandler handler)
+    /// <inheritdoc cref="IAppActivationService.ActivateAsync"/>
+    public Task ActivateAsync()
     {
-        return handler.DeactivateAsync();
+        return _activationHandler.ActivateAsync(null);
+    }
+
+    /// <inheritdoc cref="IAppActivationService.ActivateAsync(object)"/>
+    public Task ActivateAsync(object args)
+    {
+        return _activationHandler.ActivateAsync(args);
+    }
+
+    /// <inheritdoc cref="IAppActivationService.DeactivateAsync"/>
+    public Task DeactivateAsync()
+    {
+        return _deactivationHandler.DeactivateAsync();
     }
 }
