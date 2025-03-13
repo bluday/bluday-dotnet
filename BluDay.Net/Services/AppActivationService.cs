@@ -32,7 +32,7 @@ public sealed class AppActivationService : Service, IAppActivationService
         _deactivationHandler = deactivationHandler;
     }
 
-    /// <inheritdoc cref="IAppActivationService.ActivateAsync"/>
+    /// <inheritdoc cref="IAppActivationService.ActivateAsync()"/>
     public Task ActivateAsync()
     {
         return _activationHandler.ActivateAsync(null);
@@ -44,7 +44,7 @@ public sealed class AppActivationService : Service, IAppActivationService
         return _activationHandler.ActivateAsync(args);
     }
 
-    /// <inheritdoc cref="IAppActivationService.DeactivateAsync"/>
+    /// <inheritdoc cref="IAppActivationService.DeactivateAsync()"/>
     public Task DeactivateAsync()
     {
         return _deactivationHandler.DeactivateAsync();

@@ -8,18 +8,13 @@ public interface IAppActivationService
     /// <summary>
     /// Activates the application asynchronously.
     /// </summary>
-    /// <returns>
-    /// A task that represents the asynchronous activation operation.
-    /// </returns>
+    /// <inheritdoc cref="ActivateAsync(object)"/>
     Task ActivateAsync();
 
     /// <summary>
     /// Activates the application asynchronously using the provided arguments.
     /// </summary>
-    /// <param name="args">
-    /// 
-    /// </param>
-    /// <inheritdoc cref="ActivateAsync"/>
+    /// <inheritdoc cref="IAppActivationHandler.ActivateAsync(object?)"/>
     Task ActivateAsync(object args);
 
     /// <summary>
