@@ -1,7 +1,7 @@
 ﻿namespace BluDay.Net.Abstractions.Handlers;
 
 /// <summary>
-/// Defines a contract for handling app activation events specific to a platform.
+/// Defines a contract for handling app activation.
 /// </summary>
 public interface IAppActivationHandler
 {
