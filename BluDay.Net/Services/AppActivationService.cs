@@ -21,33 +21,15 @@ public sealed class AppActivationService : Service, IAppActivationService
     /// </param>
     public AppActivationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
-    /// <inheritdoc cref="IAppActivationService.Activate"/>
-    public Task ActivateAsync()
+    /// <inheritdoc cref="IAppActivationService.ActivateAsync(IAppActivationHandler)"/>
+    public Task ActivateAsync(IAppActivationHandler handler)
     {
-        if (_isActivated)
-        {
-            return Task.CompletedTask;
-        }
-
-        // TODO: Activate the main window and the app.
-
-        _isActivated = true;
-
-        return Task.CompletedTask;
+        return handler.ActivateAsync();
     }
 
-    /// <inheritdoc cref="IAppActivationService.DeactivateAsync"/>
-    public Task DeactivateAsync()
+    /// <inheritdoc cref="IAppActivationService.DeactivateAsync(IAppDeactivationHandler)"/>
+    public Task DeactivateAsync(IAppDeactivationHandler handler)
     {
-        if (!_isActivated)
-        {
-            return Task.CompletedTask;
-        }
-
-        // TODO: Deactivate the activated main window and the app.
-
-        _isActivated = false;
-
-        return Task.CompletedTask;
+        return handler.DeactivateAsync();
     }
 }
