@@ -8,6 +8,11 @@ public sealed class BooleanToVisibilityConverter : IValueConverter
     /// <inheritdoc cref="IValueConverter.Convert(object, Type, object, string)"/>
     public object Convert(object value, Type targetType, object parameter, string language)
     {
+        if (parameter is string shouldNegateValueLiteral && shouldNegateValueLiteral == bool.TrueString)
+        {
+            return value is true ? Visibility.Collapsed : Visibility.Visible;
+        }
+
         return value is true ? Visibility.Visible : Visibility.Collapsed;
     }
 
