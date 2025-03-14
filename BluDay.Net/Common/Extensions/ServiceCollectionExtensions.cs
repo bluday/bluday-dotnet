@@ -47,7 +47,9 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(source);
 
         source
-            .AddSingleton<IAppActivationService, AppActivationService>()
+            .TryAddAppActivationService(Assembly.GetCallingAssembly());
+
+        source
             .AddSingleton<IAppDialogService, AppDialogService>()
             .AddSingleton<IAppNavigationService, AppNavigationService>()
             .AddSingleton<IAppThemeService, AppThemeService>()
@@ -147,6 +149,51 @@ public static class ServiceCollectionExtensions
                 source.AddTransient(viewType);
             }
         }
+
+        return source;
+    }
+
+    /// <summary>
+    /// Attempts to register both app activation handlers and the app activation service
+    /// if the handlers are found.
+    /// </summary>
+    /// <param name="source">
+    /// The service collection to which the handlers will be added.
+    /// </param>
+    /// <param name="assembly">
+    /// The assembly to search for handler implementations.
+    /// </param>
+    /// <returns>
+    /// The updated service collection, allowing for chained calls.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if <paramref name="source"/> is null.
+    /// </exception>
+    public static IServiceCollection TryAddAppActivationService(
+        this IServiceCollection source,
+             Assembly           assembly)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        Type? activationHandlerType = typeof(IAppActivationHandler)
+            .GetImplementationTypes(assembly)
+            .FirstOrDefault();
+
+        Type? deactivationHandlerType = typeof(IAppDeactivationHandler)
+            .GetImplementationTypes(assembly)
+            .FirstOrDefault();
+
+        if (activationHandlerType is null || deactivationHandlerType is null)
+        {
+            return source;
+        }
+
+        source
+            .AddSingleton(typeof(IAppActivationHandler), activationHandlerType)
+            .AddSingleton(typeof(IAppDeactivationHandler), deactivationHandlerType);
+
+        source
+            .AddSingleton<IAppActivationService, AppActivationService>();
 
         return source;
     }
