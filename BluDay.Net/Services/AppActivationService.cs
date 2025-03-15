@@ -39,14 +39,18 @@ public sealed class AppActivationService : Service, IAppActivationService
     }
 
     /// <inheritdoc cref="IAppActivationService.ActivateAsync(object)"/>
-    public Task ActivateAsync(object args)
+    public async Task ActivateAsync(object args)
     {
-        return _activationHandler.ActivateAsync(args);
+        await _activationHandler.ActivateAsync(args);
+
+        _messenger.Send(new AppActivatedMessage());
     }
 
     /// <inheritdoc cref="IAppActivationService.DeactivateAsync()"/>
-    public Task DeactivateAsync()
+    public async Task DeactivateAsync()
     {
-        return _deactivationHandler.DeactivateAsync();
+        await _deactivationHandler.DeactivateAsync();
+
+        _messenger.Send(new AppDeactivatedMessage());
     }
 }
