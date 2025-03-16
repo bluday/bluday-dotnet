@@ -35,7 +35,7 @@ public sealed class AppActivationService : Service, IAppActivationService
     /// <inheritdoc cref="IAppActivationService.ActivateAsync()"/>
     public Task ActivateAsync()
     {
-        return _activationHandler.ActivateAsync(null);
+        return ActivateAsync(null!);
     }
 
     /// <inheritdoc cref="IAppActivationService.ActivateAsync(object)"/>
