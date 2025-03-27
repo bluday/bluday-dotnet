@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.Abstractions.Navigation;
+﻿namespace BluDay.Net.Abstractions.UI.Navigation;
 
 /// <summary>
 /// Represents a navigation host responsible for managing navigation between child views
