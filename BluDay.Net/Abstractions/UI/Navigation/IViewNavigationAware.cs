@@ -1,10 +1,10 @@
-﻿namespace BluDay.Net.Abstractions.Navigation;
+﻿namespace BluDay.Net.Abstractions.UI.Navigation;
 
 /// <summary>
 /// Defines an interface for handling navigation events and their lifecycle stages with
 /// asynchronous operations.
 /// </summary>
-public interface INavigationAware
+public interface IViewNavigationAware
 {
     /// <summary>
     /// Asynchronously called after the object has been navigated away from. Typically
