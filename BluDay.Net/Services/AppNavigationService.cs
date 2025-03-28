@@ -1,6 +1,8 @@
-namespace BluDay.Net.Services;
+namespace BluDay.Net.Abstractions.Services;
 
-/// <inheritdoc cref="IAppNavigationService"/>
+/// <summary>
+/// Represents the default implementation class for the app navigation service.
+/// </summary>
 public sealed class AppNavigationService : Service, IAppNavigationService
 {
     /// <summary>
@@ -11,14 +13,8 @@ public sealed class AppNavigationService : Service, IAppNavigationService
     /// </param>
     public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
-    /// <inheritdoc cref="IAppNavigationService.Navigate{TViewModel}(Guid)"/>
-    public void Navigate<TViewModel>(Guid windowId) where TViewModel : ViewModel
-    {
-        throw new NotImplementedException();
-    }
-
-    /// <inheritdoc cref="IAppNavigationService.TryNavigate{TViewModel}(Guid)"/>
-    public bool TryNavigate<TViewModel>(Guid windowId) where TViewModel : ViewModel
+    /// <inheritdoc cref="IAppNavigationService.NavigateAsync(Type, Guid)"/>
+    public Task NavigateAsync(Type viewType, Guid windowId)
     {
         throw new NotImplementedException();
     }
