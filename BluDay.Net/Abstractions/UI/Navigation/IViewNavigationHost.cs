@@ -21,5 +21,8 @@ public interface IViewNavigationHost
     /// An optional parameter containing data to be passed to the target view during
     /// navigation.
     /// </param>
+    /// <returns>
+    /// A task representing the asynchronous operation.
+    /// </returns>
     Task NavigateAsync(Type viewType, object? parameter);
 }

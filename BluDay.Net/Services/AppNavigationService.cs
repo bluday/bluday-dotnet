@@ -1,4 +1,4 @@
-namespace BluDay.Net.Abstractions.Services;
+namespace BluDay.Net.Services;
 
 /// <summary>
 /// Represents the default implementation class for the app navigation service.

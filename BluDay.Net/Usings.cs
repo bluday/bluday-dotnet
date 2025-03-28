@@ -3,7 +3,6 @@ global using CommunityToolkit.Mvvm.Messaging;
 global using CommunityToolkit.Mvvm.Messaging.Messages;
 
 global using BluDay.Net.Abstractions.Handlers;
-global using BluDay.Net.Abstractions.Services;
 global using BluDay.Net.Common.Constants;
 global using BluDay.Net.Common.Exceptions;
 global using BluDay.Net.Common.Extensions;

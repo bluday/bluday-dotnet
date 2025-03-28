@@ -10,6 +10,9 @@ public interface IViewNavigationAware
     /// Asynchronously called after the object has been navigated away from. Typically
     /// used for cleanup or releasing resources associated with the view or viewmodel.
     /// </summary>
+    /// <returns>
+    /// A task representing the asynchronous operation.
+    /// </returns>
     Task OnNavigatedFromAsync();
 
     /// <summary>
@@ -17,6 +20,9 @@ public interface IViewNavigationAware
     /// navigation parameters. Typically used for setting up the state or initializing
     /// data.
     /// </summary>
+    /// <returns>
+    /// A task representing the asynchronous operation.
+    /// </returns>
     Task OnNavigatedToAsync(object? parameter);
 
     /// <summary>

@@ -14,5 +14,8 @@ public interface IAppNavigationService
     /// <param name="windowId">
     /// The id of the targeted window.
     /// </param>
+    /// <returns>
+    /// A task representing the asynchronous operation.
+    /// </returns>
     Task NavigateAsync(Type viewType, Guid windowId);
 }
