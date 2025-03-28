@@ -1,8 +1,8 @@
 ﻿global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Messaging;
 
+global using BluDay.Net.Abstractions.Services;
 global using BluDay.Net.Common.Extensions;
-global using BluDay.Net.Services;
 global using BluDay.Net.ViewModels;
 global using BluDay.Net.UI.Windowing;
 global using BluDay.Net.WinUI3.Common.Extensions;

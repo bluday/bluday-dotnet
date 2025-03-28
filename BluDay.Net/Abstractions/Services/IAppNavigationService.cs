@@ -1,4 +1,4 @@
-namespace BluDay.Net.Services;
+namespace BluDay.Net.Abstractions.Services;
 
 /// <summary>
 /// A service that manages view navigation within an app, for all active windows.
