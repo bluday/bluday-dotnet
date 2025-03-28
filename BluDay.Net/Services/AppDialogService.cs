@@ -1,6 +1,8 @@
 ﻿namespace BluDay.Net.Services;
 
-/// <inheritdoc cref="IAppDialogService"/>
+/// <summary>
+/// Represents the default implementation class for the app dialog service.
+/// </summary>
 public sealed class AppDialogService : Service, IAppDialogService
 {
     /// <summary>

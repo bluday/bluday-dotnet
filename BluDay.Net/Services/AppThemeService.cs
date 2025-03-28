@@ -1,8 +1,8 @@
-using BluDay.Net.Messaging.Messages;
-
 namespace BluDay.Net.Services;
 
-/// <inheritdoc cref="IAppThemeService"/>
+/// <summary>
+/// Represents the implementation class for the app theme service.
+/// </summary>
 public sealed class AppThemeService : Service,
     IAppThemeService,
     IRecipient<AppThemeChangeMessage>

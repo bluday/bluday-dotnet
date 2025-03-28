@@ -1,7 +1,7 @@
 namespace BluDay.Net.Services;
 
 /// <summary>
-/// Represents the implementation class for the app activation service.
+/// Represents the default implementation class for the app activation service.
 /// </summary>
 public sealed class AppActivationService : Service, IAppActivationService
 {
