@@ -1,4 +1,4 @@
-﻿namespace BluDay.Net.WinUI3.ViewModels;
+﻿namespace BluDay.Net.WinUI3.Abstractions.ViewModels;
 
 /// <summary>
 /// Represents the base view model class of a WinUI 3 window control.
