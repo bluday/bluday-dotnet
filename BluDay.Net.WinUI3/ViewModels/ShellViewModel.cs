@@ -3,10 +3,8 @@
 /// <summary>
 /// Represents the view model class for an app shell control.
 /// </summary>
-public abstract partial class ShellViewModel : ViewModel
+public abstract partial class ShellViewModel : ObservableObject
 {
-    private IAppNavigationService _navigationService;
-
     private Window _window;
 
     private AppWindow _appWindow;
@@ -21,7 +19,16 @@ public abstract partial class ShellViewModel : ViewModel
 
     private ContentAlignment? _alignment;
 
+    #region Observable properties
+    /// <summary>
+    /// Gets the title bar control.
+    /// </summary>
+    [ObservableProperty]
+    public partial UIElement? TitleBarControl { get; set; }
+    #endregion
+
     #region Properties
+    /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
     public bool ExtendsContentIntoTitleBar
     {
         get => _appWindowTitleBar.ExtendsContentIntoTitleBar;
@@ -42,11 +49,15 @@ public abstract partial class ShellViewModel : ViewModel
         }
     }
 
-    /// <summary>
-    /// Gets a value indicating whether the window is visible.
-    /// </summary>
-    public bool IsVisible => _appWindow.IsVisible;
+    /// <inheritdoc cref="AppWindow.IsVisible"/>
+    public bool IsVisible
+    {
+        get => _appWindow.IsVisible;
+    }
 
+    /// <summary>
+    /// Gets the current icon path of the window.
+    /// </summary>
     public string? IconPath
     {
         get => _iconPath;
@@ -60,6 +71,7 @@ public abstract partial class ShellViewModel : ViewModel
         }
     }
 
+    /// <inheritdoc cref="AppWindow.Title"/>
     public string? Title
     {
         get => _appWindow?.Title;
@@ -71,11 +83,15 @@ public abstract partial class ShellViewModel : ViewModel
         }
     }
 
-    /// <summary>
-    /// Gets the id of the window.
-    /// </summary>
-    public ulong? Id => _appWindow.Id.Value;
+    /// <inheritdoc cref="AppWindow.Id"/>
+    public ulong? Id
+    {
+        get => _appWindow.Id.Value;
+    }
 
+    /// <summary>
+    /// Gets or sets the content aligment of the displayed window.
+    /// </summary>
     public ContentAlignment? Alignment
     {
         get => _alignment;
@@ -100,6 +116,9 @@ public abstract partial class ShellViewModel : ViewModel
         }
     }
 
+    /// <summary>
+    /// Gets or sets the size of the current window in screen coordinates.
+    /// </summary>
     public SizeInt32? Size
     {
         get => _appWindow.Size;
@@ -112,37 +131,18 @@ public abstract partial class ShellViewModel : ViewModel
     }
     #endregion
 
-    #region Observable properties
+    #region Virtual properties
     /// <summary>
     /// Gets the default configuration instance.
     /// </summary>
-    [ObservableProperty]
-    public partial WindowConfiguration? DefaultConfiguration { get; set; }
-
-    /// <summary>
-    /// Gets the title bar control.
-    /// </summary>
-    [ObservableProperty]
-    public partial UIElement? TitleBarControl { get; set; }
+    public virtual WindowConfiguration? DefaultConfiguration { get; }
     #endregion
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
     /// </summary>
-    /// <param name="navigationService">
-    /// The navigation service.
-    /// </param>
-    /// <param name="messenger">
-    /// The default <see cref="WeakReferenceMessenger"/> instance.
-    /// </param>
-    public ShellViewModel(
-        IAppNavigationService  navigationService,
-        WeakReferenceMessenger messenger
-    )
-        : base(messenger)
+    public ShellViewModel()
     {
-        _navigationService = navigationService;
-
         _window              = null!;
         _appWindow           = null!;
         _appWindowTitleBar   = null!;
@@ -188,7 +188,10 @@ public abstract partial class ShellViewModel : ViewModel
     /// </summary>
     private void UpdateDisplayArea()
     {
-        _displayArea = DisplayArea.GetFromWindowId(_appWindow.Id, DisplayAreaFallback.Nearest);
+        _displayArea = DisplayArea.GetFromWindowId(
+            _appWindow.Id,
+            DisplayAreaFallback.Nearest
+        );
     }
 
     /// <summary>
