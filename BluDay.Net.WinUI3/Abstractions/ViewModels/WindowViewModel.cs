@@ -285,10 +285,13 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// <param name="window">
     /// The window instance.
     /// </param>
+    /// <typeparam name="TWindow">
+    /// The derived type of the window control.
+    /// </typeparam>
     /// <exception cref="ArgumentNullException">
     /// If <paramref name="window"/> is null.
     /// </exception>
-    public void SetWindow<TWindow>(TWindow window) where TWindow : Window, IBluWindow
+    public void SetWindow<TWindow>(TWindow window) where TWindow : Window
     {
         ArgumentNullException.ThrowIfNull(window);
 
