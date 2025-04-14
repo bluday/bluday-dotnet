@@ -35,7 +35,7 @@ public static class ServiceCollectionExtensions
         IEnumerable<Type> windowTypes = Assembly
             .GetCallingAssembly()
             .GetTypes()
-            .Where(type => type.Name.Contains(nameof(Window)));
+            .Where(type => !type.IsAbstract && type.Name.Contains(nameof(Window)));
 
         foreach (var windowType in windowTypes)
         {
