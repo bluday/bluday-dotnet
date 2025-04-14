@@ -77,9 +77,10 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        Assembly assembly = Assembly.GetCallingAssembly();
-
-        IEnumerable<Type> viewModelTypes = typeof(ViewModel).GetImplementationTypes(assembly);
+        IEnumerable<Type> viewModelTypes = Assembly
+            .GetCallingAssembly()
+            .GetTypes()
+            .Where(type => type.Name.Contains(Strings.ViewModel));
 
         foreach (var viewModelType in viewModelTypes)
         {

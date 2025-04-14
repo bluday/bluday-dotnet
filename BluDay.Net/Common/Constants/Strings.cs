@@ -41,4 +41,9 @@ public static class Strings
     /// Represents the "View" string value ("View").
     /// </summary>
     public const string View = "View";
+
+    /// <summary>
+    /// Represents the "ViewModel" string value ("ViewModel").
+    /// </summary>
+    public const string ViewModel = "ViewModel";
 }
