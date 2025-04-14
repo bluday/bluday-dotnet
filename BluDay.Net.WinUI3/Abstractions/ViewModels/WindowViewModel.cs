@@ -23,7 +23,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 
     #region Observable properties
     /// <summary>
-    /// Gets the title bar control.
+    /// Gets the title bar control of the current window.
     /// </summary>
     [ObservableProperty]
     public partial UIElement? TitleBarControl { get; set; }
