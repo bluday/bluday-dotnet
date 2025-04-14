@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the base view model class of a WinUI 3 window control.
 /// </summary>
-public abstract partial class WindowViewModel : ObservableObject
+public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 {
     private Window _window;
 
@@ -86,7 +86,7 @@ public abstract partial class WindowViewModel : ObservableObject
     }
 
     /// <inheritdoc cref="AppWindow.Id"/>
-    public ulong? Id
+    public ulong Id
     {
         get => _appWindow.Id.Value;
     }
