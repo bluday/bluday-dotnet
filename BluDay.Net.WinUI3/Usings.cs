@@ -1,9 +1,6 @@
 ﻿global using CommunityToolkit.Mvvm.ComponentModel;
-global using CommunityToolkit.Mvvm.Messaging;
 
-global using BluDay.Net.Abstractions.Services;
 global using BluDay.Net.Common.Extensions;
-global using BluDay.Net.ViewModels;
 global using BluDay.Net.UI.Windowing;
 global using BluDay.Net.WinUI3.Common.Extensions;
 global using BluDay.Net.WinUI3.ComponentModel;
@@ -17,7 +14,9 @@ global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Data;
 
 global using System;
+global using System.Collections.Generic;
 global using System.Drawing;
+global using System.Linq;
 global using System.Reflection;
 global using System.Runtime.InteropServices;
 global using System.Threading;
