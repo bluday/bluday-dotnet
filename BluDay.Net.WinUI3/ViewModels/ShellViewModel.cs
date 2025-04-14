@@ -1,9 +1,9 @@
 ﻿namespace BluDay.Net.WinUI3.ViewModels;
 
 /// <summary>
-/// Represents the view model class for an app shell control.
+/// Represents the base view model class of a WinUI 3 window control.
 /// </summary>
-public abstract partial class ShellViewModel : ObservableObject
+public abstract partial class WindowViewModel : ObservableObject
 {
     private Window _window;
 
@@ -18,6 +18,8 @@ public abstract partial class ShellViewModel : ObservableObject
     private string? _iconPath;
 
     private ContentAlignment? _alignment;
+
+    protected WindowConfiguration? _defaultConfiguration;
 
     #region Observable properties
     /// <summary>
@@ -135,13 +137,16 @@ public abstract partial class ShellViewModel : ObservableObject
     /// <summary>
     /// Gets the default configuration instance.
     /// </summary>
-    public virtual WindowConfiguration? DefaultConfiguration { get; }
+    public WindowConfiguration? DefaultConfiguration
+    {
+        get => _defaultConfiguration;
+    }
     #endregion
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ShellViewModel"/> class.
+    /// Initializes a new instance of the <see cref="WindowViewModel"/> class.
     /// </summary>
-    public ShellViewModel()
+    public WindowViewModel()
     {
         _window              = null!;
         _appWindow           = null!;
@@ -207,9 +212,9 @@ public abstract partial class ShellViewModel : ObservableObject
     /// </summary>
     public void ApplyDefaultConfiguration()
     {
-        if (DefaultConfiguration is WindowConfiguration config)
+        if (_defaultConfiguration is not null)
         {
-            Configure(config);
+            Configure(_defaultConfiguration);
         }
     }
 
