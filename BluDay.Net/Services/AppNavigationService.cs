@@ -13,6 +13,12 @@ public sealed class AppNavigationService : Service, IAppNavigationService
     /// </param>
     public AppNavigationService(WeakReferenceMessenger messenger) : base(messenger) { }
 
+    /// <inheritdoc cref="IAppNavigationService.GetCurrentViews(Guid)"/>
+    public LinkedList<Type> GetCurrentViews(Guid windowId)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <inheritdoc cref="IAppNavigationService.NavigateAsync(Type, Guid)"/>
     public Task NavigateAsync(Type viewType, Guid windowId)
     {
