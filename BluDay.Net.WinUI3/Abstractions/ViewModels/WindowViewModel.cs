@@ -159,6 +159,8 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
         _appWindowTitleBar   = null!;
         _displayArea         = null!;
         _overlappedPresenter = null!;
+
+        SystemBackdrop = new MicaBackdrop();
     }
 
     /// <summary>
