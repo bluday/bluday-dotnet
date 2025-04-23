@@ -23,6 +23,12 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 
     #region Observable properties
     /// <summary>
+    /// Gets or sets the system backdrop of the window.
+    /// </summary>
+    [ObservableProperty]
+    public partial SystemBackdrop? SystemBackdrop { get; set; }
+
+    /// <summary>
     /// Gets the title bar control of the current window.
     /// </summary>
     [ObservableProperty]
