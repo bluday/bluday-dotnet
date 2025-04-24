@@ -75,4 +75,16 @@ public class ImplementationProvider<TService> : IImplementationProvider
             arguments: null
         );
     }
+
+    /// <inheritdoc cref="IImplementationProvider.GetInstance(Type)"/>
+    /// <typeparam name="TImplementation">
+    /// The implementation type.
+    /// </typeparam>
+    /// <returns>
+    /// The resolved implementation instance cast to <typeparamref name="TImplementation"/>.
+    /// </returns>
+    public TImplementation GetInstance<TImplementation>() where TImplementation : TService
+    {
+        return (TImplementation)GetInstance(typeof(TImplementation));
+    }
 }
