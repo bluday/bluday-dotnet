@@ -225,8 +225,6 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </exception>
     public void SetWindow<TWindow>(TWindow window) where TWindow : Window
     {
-        ArgumentNullException.ThrowIfNull(window);
-
         _window = window;
 
         _windowManager = new WindowManager(window);
