@@ -5,21 +5,15 @@
 /// </summary>
 public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 {
-    private Window _window;
+    private WindowManager? _windowManager;
 
-    private AppWindow _appWindow;
+    private AppWindow? _appWindow;
 
-    private AppWindowTitleBar _appWindowTitleBar;
+    private AppWindowTitleBar? _appWindowTitleBar;
 
-    private DisplayArea _displayArea;
+    private Window? _window;
 
-    private OverlappedPresenter _overlappedPresenter;
-
-    private string? _iconPath;
-
-    private ContentAlignment? _alignment;
-
-    protected WindowConfiguration? _defaultConfiguration;
+    private Uri? _iconPath;
 
     #region Observable properties
     /// <summary>
@@ -36,47 +30,36 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     #endregion
 
     #region Properties
+    /// <summary>
+    /// Gets the default configuration instance.
+    /// </summary>
+    public WindowConfiguration? DefaultConfiguration { get; protected set; }
+
+    /// <inheritdoc cref="AppWindow.Id"/>
+    public WindowId? Id
+    {
+        get => _appWindow?.Id;
+    }
+
     /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
     public bool ExtendsContentIntoTitleBar
     {
-        get => _appWindowTitleBar.ExtendsContentIntoTitleBar;
+        get => _appWindowTitleBar?.ExtendsContentIntoTitleBar ?? false;
         set
         {
-            _appWindowTitleBar.ExtendsContentIntoTitleBar = value;
-
-            if (value)
+            if (_appWindowTitleBar is not null)
             {
-                ShowCustomTitleBar();
-
-                return;
+                _appWindowTitleBar.ExtendsContentIntoTitleBar = value;
             }
-
-            ShowDefaultTitleBar();
 
             OnPropertyChanged();
         }
     }
 
     /// <inheritdoc cref="AppWindow.IsVisible"/>
-    public bool IsVisible
+    public bool? IsVisible
     {
-        get => _appWindow.IsVisible;
-    }
-
-    /// <summary>
-    /// Gets the current icon path of the window.
-    /// </summary>
-    public string? IconPath
-    {
-        get => _iconPath;
-        set
-        {
-            _appWindow.SetIcon(value);
-
-            _iconPath = value;
-
-            OnPropertyChanged();
-        }
+        get => _appWindow?.IsVisible;
     }
 
     /// <inheritdoc cref="AppWindow.Title"/>
@@ -85,40 +68,26 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
         get => _appWindow?.Title;
         set
         {
-            _appWindow.Title = value;
+            if (_appWindow is not null)
+            {
+                _appWindow.Title = value;
+            }
 
             OnPropertyChanged();
         }
     }
 
-    /// <inheritdoc cref="AppWindow.Id"/>
-    public ulong Id
-    {
-        get => _appWindow.Id.Value;
-    }
-
     /// <summary>
-    /// Gets or sets the content aligment of the displayed window.
+    /// Gets the current icon path of the window.
     /// </summary>
-    public ContentAlignment? Alignment
+    public Uri? IconPath
     {
-        get => _alignment;
+        get => _iconPath;
         set
         {
-            if (value is null) return;
+            _appWindow?.SetIcon(value?.AbsolutePath);
 
-            ContentAlignment alignment = value.Value;
-
-            RectInt32 workArea = _displayArea!.WorkArea;
-
-            SizeInt32 windowSize = _appWindow.Size;
-
-            int x = windowSize.GetXFromAlignment(alignment, workArea);
-            int y = windowSize.GetYFromAlignment(alignment, workArea);
-
-            Move(x, y);
-
-            _alignment = value;
+            _iconPath = value;
 
             OnPropertyChanged();
         }
@@ -132,20 +101,18 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
         get => _appWindow.Size;
         set
         {
-            _appWindow.ResizeClient(value!.Value);
+            if (_appWindow is null || value is not SizeInt32 size)
+            {
+                return;
+            }
+
+            _windowManager?.ResizeUsingScaleFactorValue(
+                size.Width,
+                size.Height
+            );
 
             OnPropertyChanged();
         }
-    }
-    #endregion
-
-    #region Virtual properties
-    /// <summary>
-    /// Gets the default configuration instance.
-    /// </summary>
-    public WindowConfiguration? DefaultConfiguration
-    {
-        get => _defaultConfiguration;
     }
     #endregion
 
@@ -154,57 +121,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public WindowViewModel()
     {
-        _window              = null!;
-        _appWindow           = null!;
-        _appWindowTitleBar   = null!;
-        _displayArea         = null!;
-        _overlappedPresenter = null!;
-
         SystemBackdrop = new MicaBackdrop();
-    }
-
-    /// <summary>
-    /// Shows the custom <see cref="TitleBar"/> control and hides the default Win32 title bar.
-    /// </summary>
-    private void ShowCustomTitleBar()
-    {
-        Windows.UI.Color color = Colors.Transparent;
-
-        _appWindowTitleBar.BackgroundColor               = color;
-        _appWindowTitleBar.ButtonBackgroundColor         = color;
-        _appWindowTitleBar.ButtonInactiveBackgroundColor = color;
-
-        if (TitleBarControl is not UIElement titleBar)
-        {
-            return;
-        }
-
-        titleBar.Visibility = Visibility.Visible;
-
-        _window.SetTitleBar(titleBar);
-    }
-
-    /// <summary>
-    /// Shows the defualt Win32 title bar and hides the custom <see cref="TitleBar"/> control.
-    /// </summary>
-    private void ShowDefaultTitleBar()
-    {
-        if (TitleBarControl is UIElement titleBar)
-        {
-            titleBar.Visibility = Visibility.Collapsed;
-        }
-    }
-
-    /// <summary>
-    /// Gets the current <see cref="DisplayArea"/> for this shell and updates
-    /// <see cref="_displayArea"/> with the new instance.
-    /// </summary>
-    private void UpdateDisplayArea()
-    {
-        _displayArea = DisplayArea.GetFromWindowId(
-            _appWindow.Id,
-            DisplayAreaFallback.Nearest
-        );
     }
 
     /// <summary>
@@ -212,7 +129,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Activate()
     {
-        _window.Activate();
+        _window?.Activate();
     }
 
     /// <summary>
@@ -220,9 +137,9 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void ApplyDefaultConfiguration()
     {
-        if (_defaultConfiguration is not null)
+        if (DefaultConfiguration is WindowConfiguration config)
         {
-            Configure(_defaultConfiguration);
+            Configure(config);
         }
     }
 
@@ -231,7 +148,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Close()
     {
-        _window.Close();
+        _window?.Close();
     }
 
     /// <summary>
@@ -246,7 +163,8 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
         ExtendsContentIntoTitleBar = config.ExtendsContentIntoTitleBar;
         IconPath                   = config.IconPath;
         Size                       = config.Size;
-        Alignment                  = config.Alignment;
+        
+        // TODO: Set position based on the value of ´config.InitialAlignment´.
     }
 
     /// <summary>
@@ -254,7 +172,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Hide()
     {
-        _appWindow.Hide();
+        _appWindow?.Hide();
 
         OnPropertyChanged(nameof(IsVisible));
     }
@@ -270,7 +188,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </param>
     public void Move(int x, int y)
     {
-        _appWindow.Move(new PointInt32(x, y));
+        _appWindow?.Move(new PointInt32(x, y));
     }
 
     /// <summary>
@@ -284,7 +202,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </param>
     public void Resize(int width, int height)
     {
-        _appWindow.Resize(new SizeInt32(width, height));
+        _windowManager?.ResizeUsingScaleFactorValue(width, height);
     }
 
     /// <summary>
@@ -305,13 +223,11 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 
         _window = window;
 
+        _windowManager = new WindowManager(window);
+
         _appWindow = window.AppWindow;
 
         _appWindowTitleBar = _appWindow.TitleBar;
-
-        _overlappedPresenter = (OverlappedPresenter)_appWindow.Presenter;
-
-        UpdateDisplayArea();
 
         ApplyDefaultConfiguration();
 
@@ -323,7 +239,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Show()
     {
-        _appWindow.Show();
+        _appWindow?.Show();
 
         OnPropertyChanged(nameof(IsVisible));
     }
