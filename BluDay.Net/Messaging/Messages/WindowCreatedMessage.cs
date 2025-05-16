@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a message for a new window that was created in the app.
 /// </summary>
-public sealed class WindowCreatedMessage : ValueChangedMessage<ulong>
+public sealed class WindowCreatedMessage
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="WindowCreatedMessage"/> class.
@@ -11,5 +11,5 @@ public sealed class WindowCreatedMessage : ValueChangedMessage<ulong>
     /// <param name="window">
     /// The created window instance.
     /// </param>
-    public WindowCreatedMessage(IBluWindow window) : base(window.Id) { }
+    public WindowCreatedMessage(IBluWindow window) { }
 }
