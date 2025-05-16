@@ -41,6 +41,12 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
         get => _appWindow?.Id;
     }
 
+    /// <inheritdoc cref="AppWindowPresenter.Kind"/>
+    public AppWindowPresenterKind? PresenterKind
+    {
+        get => _appWindow?.Presenter.Kind;
+    }
+
     /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
     public bool ExtendsContentIntoTitleBar
     {
@@ -98,7 +104,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public SizeInt32? Size
     {
-        get => _appWindow.Size;
+        get => _appWindow?.Size;
         set
         {
             if (_appWindow is null || value is not SizeInt32 size)
