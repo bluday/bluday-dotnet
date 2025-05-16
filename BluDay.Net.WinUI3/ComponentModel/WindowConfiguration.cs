@@ -11,19 +11,19 @@ public sealed class WindowConfiguration
     public bool ExtendsContentIntoTitleBar { get; init; }
 
     /// <summary>
-    /// Gets the app icon path for the title bar.
-    /// </summary>
-    public string? IconPath { get; init; }
-
-    /// <summary>
     /// Gets the window title.
     /// </summary>
     public string? Title { get; init; }
 
     /// <summary>
-    /// Gets the alignment of the window.
+    /// Gets the app icon path for the title bar.
     /// </summary>
-    public ContentAlignment? Alignment { get; init; }
+    public Uri? IconPath { get; init; }
+
+    /// <summary>
+    /// Gets the initial alignment to be set for the window.
+    /// </summary>
+    public ContentAlignment? InitialAlignment { get; init; }
 
     /// <summary>
     /// Gets the size of the window.
