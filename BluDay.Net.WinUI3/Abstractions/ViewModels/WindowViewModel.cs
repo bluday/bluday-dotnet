@@ -5,6 +5,7 @@
 /// </summary>
 public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 {
+    #region Fields
     private WindowManager? _windowManager;
 
     private AppWindow? _appWindow;
@@ -14,6 +15,9 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     private Window? _window;
 
     private Uri? _iconPath;
+
+    private bool _hasRegisteredEventHandlers;
+    #endregion
 
     #region Observable properties
     /// <summary>
@@ -68,6 +72,12 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
         get => _appWindow?.IsVisible;
     }
 
+    /// <inheritdoc cref="XamlRoot.RasterizationScale"/>
+    public double? RasterizationScale
+    {
+        get => _window?.Content?.XamlRoot.RasterizationScale;
+    }
+
     /// <inheritdoc cref="AppWindow.Title"/>
     public string? Title
     {
@@ -112,16 +122,14 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
                 return;
             }
 
-            _windowManager?.ResizeUsingScaleFactorValue(
-                size.Width,
-                size.Height
-            );
+            Resize(size.Width, size.Height);
 
             OnPropertyChanged();
         }
     }
     #endregion
 
+    #region Constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="WindowViewModel"/> class.
     /// </summary>
@@ -129,7 +137,51 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     {
         SystemBackdrop = new MicaBackdrop();
     }
+    #endregion
 
+    #region Event handlers
+    private void _window_Activated(object sender, WindowActivatedEventArgs args)
+    {
+        ApplyDefaultConfiguration();
+
+        OnPropertyChanged(string.Empty);
+    }
+
+    private void _window_Closed(object sender, WindowEventArgs args)
+    {
+        UnregisterEventHandlers();
+    }
+    #endregion
+
+    #region Private methods
+    private void RegisterEventHandlers()
+    {
+        if (_window is null || _hasRegisteredEventHandlers)
+        {
+            return;
+        }
+
+        _window.Activated += _window_Activated;
+        _window.Closed    += _window_Closed;
+
+        _hasRegisteredEventHandlers = true;
+    }
+
+    private void UnregisterEventHandlers()
+    {
+        if (_window is null || !_hasRegisteredEventHandlers)
+        {
+            return;
+        }
+
+        _window.Activated -= _window_Activated;
+        _window.Closed    -= _window_Closed;
+
+        _hasRegisteredEventHandlers = false;
+    }
+    #endregion
+
+    #region Public methods
     /// <summary>
     /// Attempts to activate the shell and bring it into the foreground.
     /// </summary>
@@ -165,12 +217,10 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </param>
     public void Configure(WindowConfiguration config)
     {
-        Title                      = config.Title;
         ExtendsContentIntoTitleBar = config.ExtendsContentIntoTitleBar;
         IconPath                   = config.IconPath;
         Size                       = config.Size;
-        
-        // TODO: Set position based on the value of ´config.InitialAlignment´.
+        Title                      = config.Title;
     }
 
     /// <summary>
@@ -198,17 +248,34 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     }
 
     /// <summary>
-    /// Resizes the shell using the provided width and height integer values.
+    /// Resizes the window using the provided width and height integer values.
     /// </summary>
     /// <param name="width">
-    /// The width of the shell.
+    /// The target width of the window.
     /// </param>
     /// <param name="height">
-    /// The height of the shell.
+    /// The target height of the window.
     /// </param>
     public void Resize(int width, int height)
     {
-        _windowManager?.ResizeUsingScaleFactorValue(width, height);
+        _windowManager?.Resize(width, height);
+    }
+
+    /// <summary>
+    /// Resizes the window using a scaling factor.
+    /// </summary>
+    /// <param name="width">
+    /// The base width before scaling.
+    /// </param>
+    /// <param name="height">
+    /// The base height before scaling.
+    /// </param>
+    /// <param name="scaleFactor">
+    /// The scaling factor to apply.
+    /// </param>
+    public void Resize(int width, int height, double scaleFactor)
+    {
+        _windowManager?.Resize(width, height, scaleFactor);
     }
 
     /// <summary>
@@ -229,13 +296,11 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 
         _windowManager = new WindowManager(window);
 
-        _appWindow = window.AppWindow;
+        _appWindow = window?.AppWindow;
 
-        _appWindowTitleBar = _appWindow.TitleBar;
+        _appWindowTitleBar = _appWindow?.TitleBar;
 
-        ApplyDefaultConfiguration();
-
-        OnPropertyChanged(string.Empty);
+        RegisterEventHandlers();
     }
 
     /// <summary>
@@ -247,4 +312,5 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 
         OnPropertyChanged(nameof(IsVisible));
     }
+    #endregion
 }

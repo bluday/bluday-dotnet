@@ -5,11 +5,13 @@
 /// </summary>
 public sealed class WindowManager
 {
+    #region Fields
     private readonly AppWindow _appWindow;
 
     private readonly Window _window;
 
     private readonly nint _windowHandle;
+    #endregion
 
     #region Properties
     /// <summary>
@@ -46,27 +48,32 @@ public sealed class WindowManager
     #endregion
 
     /// <summary>
-    /// 
+    /// Resizes the window to the specified dimensions.
     /// </summary>
     /// <param name="width">
+    /// The target width of the window.
     /// </param>
     /// <param name="height">
+    /// The target height of the window.
     /// </param>
-    public void ResizeUsingScaleFactorValue(int width, int height)
+    public void Resize(int width, int height)
     {
-        ResizeUsingScaleFactorValue(width, height, GetScaleFactorForWindow(_windowHandle));
+        Resize(width, height, GetScaleFactorForWindow(_windowHandle));
     }
 
     /// <summary>
-    /// 
+    /// Resizes the window using a scaling factor.
     /// </summary>
     /// <param name="width">
+    /// The base width before scaling.
     /// </param>
     /// <param name="height">
+    /// The base height before scaling.
     /// </param>
     /// <param name="scaleFactor">
+    /// The scaling factor to apply.
     /// </param>
-    public void ResizeUsingScaleFactorValue(int width, int height, double scaleFactor)
+    public void Resize(int width, int height, double scaleFactor)
     {
         width  *= (int)(width  * scaleFactor);
         height *= (int)(height * scaleFactor);
@@ -75,9 +82,10 @@ public sealed class WindowManager
     }
 
     /// <summary>
-    /// 
+    /// Gets the center position for the window.
     /// </summary>
     /// <returns>
+    /// The center position as a <see cref="PointInt32"/>.
     /// </returns>
     public PointInt32 GetCenterPositionForWindow()
     {
@@ -87,12 +95,14 @@ public sealed class WindowManager
     }
 
     /// <summary>
-    /// 
+    /// Calculates the center position of a window within a given display area.
     /// </summary>
     /// <param name="displayArea">
+    /// The display area where the window is located.
     /// </param>
     /// <returns>
-    /// '</returns>
+    /// The center position as a <see cref="PointInt32"/>.
+    /// </returns>
     public PointInt32 GetCenterPositionForWindow(DisplayArea displayArea)
     {
         RectInt32 displayWorkArea = displayArea.WorkArea;
@@ -106,11 +116,13 @@ public sealed class WindowManager
     }
 
     /// <summary>
-    /// 
+    /// Gets the scale factor for a given window handle.
     /// </summary>
     /// <param name="windowHandle">
+    /// The handle of the window.
     /// </param>
     /// <returns>
+    /// The scale factor as a <see cref="double"/>.
     /// </returns>
     public static double GetScaleFactorForWindow(nint windowHandle)
     {
