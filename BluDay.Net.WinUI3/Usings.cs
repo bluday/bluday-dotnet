@@ -4,7 +4,6 @@ global using BluDay.Net.Common.Extensions;
 global using BluDay.Net.UI.Windowing;
 global using BluDay.Net.WinUI3.Common.Extensions;
 global using BluDay.Net.WinUI3.ComponentModel;
-global using BluDay.Net.WinUI3.UI.Windowing;
 
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.UI;
