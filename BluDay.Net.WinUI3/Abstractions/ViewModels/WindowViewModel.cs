@@ -6,13 +6,11 @@
 public abstract partial class WindowViewModel : ObservableObject, IBluWindow
 {
     #region Fields
-    private WindowManager? _windowManager;
+    private AppWindow _appWindow;
 
-    private AppWindow? _appWindow;
+    private AppWindowTitleBar _appWindowTitleBar;
 
-    private AppWindowTitleBar? _appWindowTitleBar;
-
-    private Window? _window;
+    private Window _window;
 
     private Uri? _iconPath;
 
@@ -40,54 +38,60 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     public WindowConfiguration? DefaultConfiguration { get; protected set; }
 
     /// <inheritdoc cref="AppWindow.Id"/>
-    public WindowId? Id
+    public WindowId Id
     {
-        get => _appWindow?.Id;
+        get => _appWindow.Id;
     }
 
     /// <inheritdoc cref="AppWindowPresenter.Kind"/>
-    public AppWindowPresenterKind? PresenterKind
+    public AppWindowPresenterKind PresenterKind
     {
-        get => _appWindow?.Presenter.Kind;
+        get => _appWindow.Presenter.Kind;
+    }
+
+    /// <inheritdoc cref="AppWindowTitleBar.PreferredHeightOption"/>
+    public TitleBarHeightOption PreferredTitleBarHeightOption
+    {
+        get => _appWindowTitleBar.PreferredHeightOption;
+        set
+        {
+            _appWindowTitleBar.PreferredHeightOption = value;
+
+            OnPropertyChanged();
+        }
     }
 
     /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
     public bool ExtendsContentIntoTitleBar
     {
-        get => _appWindowTitleBar?.ExtendsContentIntoTitleBar ?? false;
+        get => _appWindowTitleBar.ExtendsContentIntoTitleBar;
         set
         {
-            if (_appWindowTitleBar is not null)
-            {
-                _appWindowTitleBar.ExtendsContentIntoTitleBar = value;
-            }
+            _appWindowTitleBar.ExtendsContentIntoTitleBar = value;
 
             OnPropertyChanged();
         }
     }
 
     /// <inheritdoc cref="AppWindow.IsVisible"/>
-    public bool? IsVisible
+    public bool IsVisible
     {
-        get => _appWindow?.IsVisible;
+        get => _appWindow.IsVisible;
     }
 
     /// <inheritdoc cref="XamlRoot.RasterizationScale"/>
-    public double? RasterizationScale
+    public double RasterizationScale
     {
-        get => _window?.Content?.XamlRoot.RasterizationScale;
+        get => _window.Content.XamlRoot.RasterizationScale;
     }
 
     /// <inheritdoc cref="AppWindow.Title"/>
-    public string? Title
+    public string Title
     {
-        get => _appWindow?.Title;
+        get => _appWindow.Title;
         set
         {
-            if (_appWindow is not null)
-            {
-                _appWindow.Title = value;
-            }
+            _appWindow.Title = value;
 
             OnPropertyChanged();
         }
@@ -101,7 +105,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
         get => _iconPath;
         set
         {
-            _appWindow?.SetIcon(value?.AbsolutePath);
+            _appWindow.SetIcon(value?.AbsolutePath);
 
             _iconPath = value;
 
@@ -112,17 +116,12 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// <summary>
     /// Gets or sets the size of the current window in screen coordinates.
     /// </summary>
-    public SizeInt32? Size
+    public SizeInt32 Size
     {
-        get => _appWindow?.Size;
+        get => _appWindow.Size;
         set
         {
-            if (_appWindow is null || value is not SizeInt32 size)
-            {
-                return;
-            }
-
-            Resize(size.Width, size.Height);
+            Resize(value.Width, value.Height);
 
             OnPropertyChanged();
         }
@@ -135,6 +134,10 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public WindowViewModel()
     {
+        _appWindow         = null!;
+        _appWindowTitleBar = null!;
+        _window            = null!;
+
         SystemBackdrop = new MicaBackdrop();
     }
     #endregion
@@ -142,43 +145,26 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     #region Event handlers
     private void _window_Activated(object sender, WindowActivatedEventArgs args)
     {
-        ApplyDefaultConfiguration();
+        _window.Activated -= _window_Activated;
 
-        OnPropertyChanged(string.Empty);
+        OnActivated();
     }
 
     private void _window_Closed(object sender, WindowEventArgs args)
     {
-        UnregisterEventHandlers();
+        _window.Closed -= _window_Closed;
+
+        OnClosed();
     }
     #endregion
 
-    #region Private methods
-    private void RegisterEventHandlers()
+    #region Protected methods
+    protected virtual void OnActivated()
     {
-        if (_window is null || _hasRegisteredEventHandlers)
-        {
-            return;
-        }
-
-        _window.Activated += _window_Activated;
-        _window.Closed    += _window_Closed;
-
-        _hasRegisteredEventHandlers = true;
+        OnPropertyChanged(string.Empty);
     }
 
-    private void UnregisterEventHandlers()
-    {
-        if (_window is null || !_hasRegisteredEventHandlers)
-        {
-            return;
-        }
-
-        _window.Activated -= _window_Activated;
-        _window.Closed    -= _window_Closed;
-
-        _hasRegisteredEventHandlers = false;
-    }
+    protected virtual void OnClosed() { }
     #endregion
 
     #region Public methods
@@ -187,7 +173,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Activate()
     {
-        _window?.Activate();
+        _window.Activate();
     }
 
     /// <summary>
@@ -206,7 +192,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Close()
     {
-        _window?.Close();
+        _window.Close();
     }
 
     /// <summary>
@@ -218,9 +204,15 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     public void Configure(WindowConfiguration config)
     {
         ExtendsContentIntoTitleBar = config.ExtendsContentIntoTitleBar;
-        IconPath                   = config.IconPath;
-        Size                       = config.Size;
-        Title                      = config.Title;
+
+        IconPath = config.IconPath;
+
+        if (config.Size is SizeInt32 size)
+        {
+            Size = size;
+        }
+
+        Title = config.Title!;
     }
 
     /// <summary>
@@ -228,13 +220,13 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Hide()
     {
-        _appWindow?.Hide();
+        _appWindow.Hide();
 
         OnPropertyChanged(nameof(IsVisible));
     }
 
     /// <summary>
-    /// Moves the shell to the provided x and y coordinates on the screen.
+    /// Moves the window to the provided x and y coordinates on the screen.
     /// </summary>
     /// <param name="x">
     /// The x coordinate.
@@ -244,7 +236,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </param>
     public void Move(int x, int y)
     {
-        _appWindow?.Move(new PointInt32(x, y));
+        _appWindow.Move(new PointInt32(x, y));
     }
 
     /// <summary>
@@ -258,24 +250,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </param>
     public void Resize(int width, int height)
     {
-        _windowManager?.Resize(width, height);
-    }
-
-    /// <summary>
-    /// Resizes the window using a scaling factor.
-    /// </summary>
-    /// <param name="width">
-    /// The base width before scaling.
-    /// </param>
-    /// <param name="height">
-    /// The base height before scaling.
-    /// </param>
-    /// <param name="scaleFactor">
-    /// The scaling factor to apply.
-    /// </param>
-    public void Resize(int width, int height, double scaleFactor)
-    {
-        _windowManager?.Resize(width, height, scaleFactor);
+        _appWindow.Resize(width, height);
     }
 
     /// <summary>
@@ -294,13 +269,12 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     {
         _window = window;
 
-        _windowManager = new WindowManager(window);
+        _appWindow = window.AppWindow;
 
-        _appWindow = window?.AppWindow;
+        _appWindowTitleBar = _appWindow.TitleBar;
 
-        _appWindowTitleBar = _appWindow?.TitleBar;
-
-        RegisterEventHandlers();
+        _window.Activated += _window_Activated;
+        _window.Closed    += _window_Closed;
     }
 
     /// <summary>
@@ -308,7 +282,7 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public void Show()
     {
-        _appWindow?.Show();
+        _appWindow.Show();
 
         OnPropertyChanged(nameof(IsVisible));
     }
