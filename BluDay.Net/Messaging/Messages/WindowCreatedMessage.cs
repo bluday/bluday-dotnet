@@ -8,8 +8,5 @@ public sealed class WindowCreatedMessage
     /// <summary>
     /// Initializes a new instance of the <see cref="WindowCreatedMessage"/> class.
     /// </summary>
-    /// <param name="window">
-    /// The created window instance.
-    /// </param>
-    public WindowCreatedMessage(IBluWindow window) { }
+    public WindowCreatedMessage() { }
 }
