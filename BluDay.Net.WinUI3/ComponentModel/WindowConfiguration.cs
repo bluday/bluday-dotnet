@@ -1,32 +1,16 @@
 ﻿namespace BluDay.Net.WinUI3.ComponentModel;
 
 /// <summary>
-/// Represents initial configuration for a window.
+/// Represents initial configuration for a <see cref="Window"/> control.
 /// </summary>
 public sealed class WindowConfiguration
 {
-    /// <summary>
-    /// Gets a value indicating whether the content extends into the title bar area.
-    /// </summary>
+    /// <inheritdoc cref="Window.SystemBackdrop"/>
+    public SystemBackdrop? SystemBackdrop { get; init; }
+
+    /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
     public bool ExtendsContentIntoTitleBar { get; init; }
 
-    /// <summary>
-    /// Gets the window title.
-    /// </summary>
+    /// <inheritdoc cref="Window.Title"/>
     public string? Title { get; init; }
-
-    /// <summary>
-    /// Gets the app icon path for the title bar.
-    /// </summary>
-    public Uri? IconPath { get; init; }
-
-    /// <summary>
-    /// Gets the initial alignment to be set for the window.
-    /// </summary>
-    public ContentAlignment? InitialAlignment { get; init; }
-
-    /// <summary>
-    /// Gets the size of the window.
-    /// </summary>
-    public SizeInt32? Size { get; init; }
 }
