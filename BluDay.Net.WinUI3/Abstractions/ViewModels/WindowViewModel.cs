@@ -3,129 +3,54 @@
 /// <summary>
 /// Represents the base view model class of a WinUI 3 window control.
 /// </summary>
-public abstract partial class WindowViewModel : ObservableObject, IBluWindow
+public abstract partial class WindowViewModel : ObservableObject,
+    IActivatableWindow,
+    IClosableWindow
 {
     #region Fields
     private AppWindow _appWindow;
 
-    private AppWindowTitleBar _appWindowTitleBar;
-
     private Window _window;
-
-    private Uri? _iconPath;
-
-    private bool _hasRegisteredEventHandlers;
     #endregion
 
     #region Observable properties
+    /// <summary>
+    /// Gets the title bar control of the current window.
+    /// </summary>
+    [ObservableProperty]
+    public partial UIElement? TitleBarControl { get; set; }
+
     /// <summary>
     /// Gets or sets the system backdrop of the window.
     /// </summary>
     [ObservableProperty]
     public partial SystemBackdrop? SystemBackdrop { get; set; }
 
+    /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
+    [ObservableProperty]
+    public partial bool ExtendsContentIntoTitleBar { get; set; }
+
     /// <summary>
-    /// Gets the title bar control of the current window.
+    /// Gets or sets the current path of the title bar icon.
     /// </summary>
     [ObservableProperty]
-    public partial UIElement? TitleBarControl { get; set; }
+    public partial string? IconPath { get; set; }
+
+    /// <inheritdoc cref="Window.Title"/>
+    [ObservableProperty]
+    public partial string? Title { get; set; }
     #endregion
 
     #region Properties
     /// <summary>
-    /// Gets the default configuration instance.
+    /// Gets the default configuration for the <see cref="AppWindow"/> instance.
     /// </summary>
-    public WindowConfiguration? DefaultConfiguration { get; protected set; }
-
-    /// <inheritdoc cref="AppWindow.Id"/>
-    public WindowId Id
-    {
-        get => _appWindow.Id;
-    }
-
-    /// <inheritdoc cref="AppWindowPresenter.Kind"/>
-    public AppWindowPresenterKind PresenterKind
-    {
-        get => _appWindow.Presenter.Kind;
-    }
-
-    /// <inheritdoc cref="AppWindowTitleBar.PreferredHeightOption"/>
-    public TitleBarHeightOption PreferredTitleBarHeightOption
-    {
-        get => _appWindowTitleBar.PreferredHeightOption;
-        set
-        {
-            _appWindowTitleBar.PreferredHeightOption = value;
-
-            OnPropertyChanged();
-        }
-    }
-
-    /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
-    public bool ExtendsContentIntoTitleBar
-    {
-        get => _appWindowTitleBar.ExtendsContentIntoTitleBar;
-        set
-        {
-            _appWindowTitleBar.ExtendsContentIntoTitleBar = value;
-
-            OnPropertyChanged();
-        }
-    }
-
-    /// <inheritdoc cref="AppWindow.IsVisible"/>
-    public bool IsVisible
-    {
-        get => _appWindow.IsVisible;
-    }
-
-    /// <inheritdoc cref="XamlRoot.RasterizationScale"/>
-    public double RasterizationScale
-    {
-        get => _window.Content.XamlRoot.RasterizationScale;
-    }
-
-    /// <inheritdoc cref="AppWindow.Title"/>
-    public string Title
-    {
-        get => _appWindow.Title;
-        set
-        {
-            _appWindow.Title = value;
-
-            OnPropertyChanged();
-        }
-    }
+    public AppWindowConfiguration? DefaultAppWindowConfiguration { get; protected set; }
 
     /// <summary>
-    /// Gets the current icon path of the window.
+    /// Gets the default configuration for the <see cref="Window"/> control.
     /// </summary>
-    public Uri? IconPath
-    {
-        get => _iconPath;
-        set
-        {
-            _appWindow.SetIcon(value?.AbsolutePath);
-
-            _iconPath = value;
-
-            OnPropertyChanged();
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the size of the current window in screen coordinates.
-    /// </summary>
-    public SizeInt32 Size
-    {
-        get => _appWindow.Size;
-        set
-        {
-            Resize(value.Width, value.Height);
-
-            OnPropertyChanged();
-        }
-    }
+    public WindowConfiguration? DefaultWindowConfiguration { get; protected set; }
     #endregion
 
     #region Constructor
@@ -134,95 +59,76 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     /// </summary>
     public WindowViewModel()
     {
-        _appWindow         = null!;
-        _appWindowTitleBar = null!;
-        _window            = null!;
+        _appWindow = null!;
+        _window    = null!;
 
         SystemBackdrop = new MicaBackdrop();
     }
     #endregion
 
-    #region Event handlers
-    private void _window_Activated(object sender, WindowActivatedEventArgs args)
-    {
-        _window.Activated -= _window_Activated;
-
-        OnActivated();
-    }
-
-    private void _window_Closed(object sender, WindowEventArgs args)
-    {
-        _window.Closed -= _window_Closed;
-
-        OnClosed();
-    }
-    #endregion
-
-    #region Protected methods
-    protected virtual void OnActivated()
-    {
-        OnPropertyChanged(string.Empty);
-    }
-
-    protected virtual void OnClosed() { }
-    #endregion
-
-    #region Public methods
+    #region Configuration methods
     /// <summary>
-    /// Attempts to activate the shell and bring it into the foreground.
-    /// </summary>
-    public void Activate()
-    {
-        _window.Activate();
-    }
-
-    /// <summary>
-    /// Applies default configuration values that was provided at instantiation.
-    /// </summary>
-    public void ApplyDefaultConfiguration()
-    {
-        if (DefaultConfiguration is WindowConfiguration config)
-        {
-            Configure(config);
-        }
-    }
-
-    /// <summary>
-    /// Closes the shell instance.
-    /// </summary>
-    public void Close()
-    {
-        _window.Close();
-    }
-
-    /// <summary>
-    /// Configures the shell using the provided properties.
+    /// Configures the current <see cref="AppWindow"/> instance using the provided
+    /// configuration instance.
     /// </summary>
     /// <param name="config">
     /// The configuration instance.
     /// </param>
-    public void Configure(WindowConfiguration config)
+    public void ConfigureAppWindow(AppWindowConfiguration config)
     {
-        ExtendsContentIntoTitleBar = config.ExtendsContentIntoTitleBar;
-
         IconPath = config.IconPath;
 
         if (config.Size is SizeInt32 size)
         {
-            Size = size;
+            Resize(size.Width, size.Height);
         }
 
-        Title = config.Title!;
+        _appWindow.Title = config.Title;
     }
 
+    /// <summary>
+    /// Configures the current <see cref="Window"/> instance using the provided
+    /// configuration instance.
+    /// </summary>
+    /// <param name="config">
+    /// The configuration instance.
+    /// </param>
+    public void ConfigureWindow(WindowConfiguration config)
+    {
+        SystemBackdrop             = config.SystemBackdrop;
+        ExtendsContentIntoTitleBar = config.ExtendsContentIntoTitleBar;
+        Title                      = config.Title;
+    }
+
+    /// <summary>
+    /// Sets the targeted window instance.
+    /// </summary>
+    /// <param name="window">
+    /// The window instance.
+    /// </param>
+    /// <typeparam name="TWindow">
+    /// The derived type of the window control.
+    /// </typeparam>
+    /// <exception cref="ArgumentNullException">
+    /// If <paramref name="window"/> is null.
+    /// </exception>
+    public void SetWindow<TWindow>(TWindow window) where TWindow : Window
+    {
+        _window = window;
+
+        _appWindow = window.AppWindow;
+
+        OnPropertyChanged(string.Empty);
+    }
+    #endregion
+
+    #region AppWindow methods
     /// <summary>
     /// Hides the window.
     /// </summary>
     public void Hide()
     {
         _appWindow.Hide();
-
-        OnPropertyChanged(nameof(IsVisible));
     }
 
     /// <summary>
@@ -254,37 +160,36 @@ public abstract partial class WindowViewModel : ObservableObject, IBluWindow
     }
 
     /// <summary>
-    /// Sets the targeted window instance.
-    /// </summary>
-    /// <param name="window">
-    /// The window instance.
-    /// </param>
-    /// <typeparam name="TWindow">
-    /// The derived type of the window control.
-    /// </typeparam>
-    /// <exception cref="ArgumentNullException">
-    /// If <paramref name="window"/> is null.
-    /// </exception>
-    public void SetWindow<TWindow>(TWindow window) where TWindow : Window
-    {
-        _window = window;
-
-        _appWindow = window.AppWindow;
-
-        _appWindowTitleBar = _appWindow.TitleBar;
-
-        _window.Activated += _window_Activated;
-        _window.Closed    += _window_Closed;
-    }
-
-    /// <summary>
     /// Shows the window.
     /// </summary>
     public void Show()
     {
         _appWindow.Show();
+    }
+    #endregion
 
-        OnPropertyChanged(nameof(IsVisible));
+    #region Partial INotifyPropertyChanged methods
+    partial void OnIconPathChanged(string? value)
+    {
+        _appWindow.SetIcon(value);
+    }
+    #endregion
+
+    #region Window control methods
+    /// <summary>
+    /// Attempts to activate the shell and bring it into the foreground.
+    /// </summary>
+    public void Activate()
+    {
+        _window.Activate();
+    }
+
+    /// <summary>
+    /// Closes the shell instance.
+    /// </summary>
+    public void Close()
+    {
+        _window.Close();
     }
     #endregion
 }
