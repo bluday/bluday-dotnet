@@ -31,37 +31,6 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Registers all available services for a desktop client.
-    /// </summary>
-    /// <param name="source">
-    /// The targeted instance.
-    /// </param>
-    /// <returns>
-    /// The service collection instance.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="source"/> is null.
-    /// </exception>
-    public static IServiceCollection AddDesktopClientServices(this IServiceCollection source)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        source
-            .TryAddAppActivationService(Assembly.GetCallingAssembly());
-
-        source
-            .AddSingleton<IAppDialogService, AppDialogService>()
-            .AddSingleton<IAppNavigationService, AppNavigationService>()
-            .AddSingleton<IAppThemeService, AppThemeService>()
-            .AddSingleton<IAppWindowService, AppWindowService>();
-
-        source
-            .AddSingleton<ImplementationProvider<IBluWindow>>();
-
-        return source;
-    }
-
-    /// <summary>
     /// Registers all view model types from the calling assembly.
     /// </summary>
     /// <param name="source">
@@ -152,6 +121,12 @@ public static class ServiceCollectionExtensions
         }
 
         return source;
+    }
+
+    /// <inheritdoc cref="TryAddAppActivationService(IServiceCollection, Assembly)"/>
+    public static IServiceCollection TryAddAppActivationService(this IServiceCollection source)
+    {
+        return source.TryAddAppActivationService(Assembly.GetCallingAssembly());
     }
 
     /// <summary>
