@@ -9,7 +9,7 @@ public sealed class WindowConfiguration
     public SystemBackdrop? SystemBackdrop { get; init; }
 
     /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
-    public bool ExtendsContentIntoTitleBar { get; init; }
+    public bool? ExtendsContentIntoTitleBar { get; init; }
 
     /// <inheritdoc cref="Window.Title"/>
     public string? Title { get; init; }
