@@ -21,10 +21,10 @@ public static class AppWindowServiceExtensions
     /// Thrown when <paramref name="source"/> is <c>null</c>.
     /// </exception>
     public static TWindow CreateWindow<TWindow>(this IAppWindowService source)
-        where TWindow : IBluWindow
+        where TWindow : class
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        return (TWindow)source.CreateWindow(typeof(TWindow));
+        return default!;
     }
 }
