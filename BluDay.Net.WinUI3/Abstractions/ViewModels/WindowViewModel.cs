@@ -10,6 +10,8 @@ public abstract partial class WindowViewModel : ObservableObject,
     #region Fields
     private AppWindow _appWindow;
 
+    private AppWindowTitleBar _appWindowTitleBar;
+
     private Window _window;
     #endregion
 
@@ -20,11 +22,10 @@ public abstract partial class WindowViewModel : ObservableObject,
     [ObservableProperty]
     public partial UIElement? TitleBarControl { get; set; }
 
-    /// <summary>
-    /// Gets or sets the system backdrop of the window.
-    /// </summary>
+    /// <inheritdoc cref="Window.SystemBackdrop"/>
     [ObservableProperty]
-    public partial SystemBackdrop? SystemBackdrop { get; set; }
+    public partial SystemBackdrop SystemBackdrop { get; set; }
+
 
     /// <inheritdoc cref="Window.ExtendsContentIntoTitleBar"/>
     [ObservableProperty]
@@ -34,11 +35,11 @@ public abstract partial class WindowViewModel : ObservableObject,
     /// Gets or sets the current path of the title bar icon.
     /// </summary>
     [ObservableProperty]
-    public partial string? IconPath { get; set; }
+    public partial string IconPath { get; set; }
 
     /// <inheritdoc cref="Window.Title"/>
     [ObservableProperty]
-    public partial string? Title { get; set; }
+    public partial string Title { get; set; }
     #endregion
 
     #region Properties
@@ -51,6 +52,24 @@ public abstract partial class WindowViewModel : ObservableObject,
     /// Gets the default configuration for the <see cref="Window"/> control.
     /// </summary>
     public WindowConfiguration? DefaultWindowConfiguration { get; protected set; }
+
+    /// <inheritdoc cref="AppWindow.TitleBar"/>
+    public AppWindowTitleBar TitleBar
+    {
+        get => _appWindow.TitleBar;
+    }
+
+    /// <inheritdoc cref="AppWindow.Size"/>
+    public SizeInt32 Size
+    {
+        get => _appWindow.Size;
+        set
+        {
+            _appWindow.Resize(value);
+
+            OnPropertyChanged();
+        }
+    }
     #endregion
 
     #region Constructor
@@ -59,14 +78,97 @@ public abstract partial class WindowViewModel : ObservableObject,
     /// </summary>
     public WindowViewModel()
     {
-        _appWindow = null!;
-        _window    = null!;
+        _appWindow         = null!;
+        _appWindowTitleBar = null!;
+        _window            = null!;
+
+        IconPath = string.Empty;
+        Title    = string.Empty;
 
         SystemBackdrop = new MicaBackdrop();
     }
     #endregion
 
+    #region Partial property changing/changed callbacks
+    partial void OnIconPathChanged(string value)
+    {
+        if (_appWindow is null) return;
+
+        _appWindow.SetIcon(value);
+    }
+    #endregion
+
+    #region Event handlers
+    private void _window_Activated(object sender, WindowActivatedEventArgs args)
+    {
+        ApplyDefaultPostActivationAppWindowConfiguration();
+
+        _window.Activated -= _window_Activated;
+    }
+
+    private void _window_Closed(object sender, WindowEventArgs args)
+    {
+        _window.Closed -= _window_Closed;
+    }
+    #endregion
+
     #region Configuration methods
+    private void RegisterEventHandlers()
+    {
+        _window.Activated += _window_Activated;
+        _window.Closed    += _window_Closed;
+    }
+
+    /// <summary>
+    /// Configures the current <see cref="AppWindow"/> instance if a default configuration
+    /// is available post activation of the current window instance.
+    /// </summary>
+    public void ApplyDefaultPostActivationAppWindowConfiguration()
+    {
+        if (DefaultAppWindowConfiguration is AppWindowConfiguration config)
+        {
+            ConfigureAppWindowPostActivation(config);
+        }
+    }
+
+    /// <summary>
+    /// Configures the current <see cref="AppWindow"/> instance if a default configuration
+    /// is available prior to the activation of the current window instance.
+    /// </summary>
+    public void ApplyDefaultPreActivationAppWindowConfiguration()
+    {
+        if (DefaultAppWindowConfiguration is AppWindowConfiguration config)
+        {
+            ConfigureAppWindowPreActivation(config);
+        }
+    }
+
+    /// <summary>
+    /// Configures the current <see cref="Window"/> instance if a default configuration is available.
+    /// </summary>
+    public void ApplyDefaultWindowConfiguration()
+    {
+        if (DefaultWindowConfiguration is WindowConfiguration config)
+        {
+            ConfigureWindow(config);
+        }
+    }
+
+    /// <summary>
+    /// Configures the current <see cref="AppWindow"/> instance using the provided
+    /// configuration instance once the current window instance has been activated.
+    /// </summary>
+    /// <param name="config">
+    /// The configuration instance.
+    /// </param>
+    public void ConfigureAppWindowPostActivation(AppWindowConfiguration config)
+    {
+        if (config.TitleBar?.PreferredHeightOption is TitleBarHeightOption titleBarHeightOption)
+        {
+            _appWindowTitleBar.PreferredHeightOption = titleBarHeightOption;
+        }
+    }
+
     /// <summary>
     /// Configures the current <see cref="AppWindow"/> instance using the provided
     /// configuration instance.
@@ -74,16 +176,22 @@ public abstract partial class WindowViewModel : ObservableObject,
     /// <param name="config">
     /// The configuration instance.
     /// </param>
-    public void ConfigureAppWindow(AppWindowConfiguration config)
+    public void ConfigureAppWindowPreActivation(AppWindowConfiguration config)
     {
-        IconPath = config.IconPath;
-
         if (config.Size is SizeInt32 size)
         {
-            Resize(size.Width, size.Height);
+            Size = size;
         }
 
-        _appWindow.Title = config.Title;
+        if (config.IconPath is string iconPath)
+        {
+            IconPath = iconPath;
+        }
+
+        if (config.Title is string title)
+        {
+            Title = title;
+        }
     }
 
     /// <summary>
@@ -95,9 +203,20 @@ public abstract partial class WindowViewModel : ObservableObject,
     /// </param>
     public void ConfigureWindow(WindowConfiguration config)
     {
-        SystemBackdrop             = config.SystemBackdrop;
-        ExtendsContentIntoTitleBar = config.ExtendsContentIntoTitleBar;
-        Title                      = config.Title;
+        if (config.ExtendsContentIntoTitleBar.HasValue)
+        {
+            ExtendsContentIntoTitleBar = config.ExtendsContentIntoTitleBar.Value;
+        }
+
+        if (config.SystemBackdrop is SystemBackdrop systemBackdrop)
+        {
+            SystemBackdrop = systemBackdrop;
+        }
+
+        if (config.Title is string title)
+        {
+            Title = title;
+        }
     }
 
     /// <summary>
@@ -118,7 +237,12 @@ public abstract partial class WindowViewModel : ObservableObject,
 
         _appWindow = window.AppWindow;
 
-        OnPropertyChanged(string.Empty);
+        _appWindowTitleBar = _appWindow.TitleBar;
+
+        RegisterEventHandlers();
+
+        ApplyDefaultWindowConfiguration();
+        ApplyDefaultPreActivationAppWindowConfiguration();
     }
     #endregion
 
@@ -132,46 +256,11 @@ public abstract partial class WindowViewModel : ObservableObject,
     }
 
     /// <summary>
-    /// Moves the window to the provided x and y coordinates on the screen.
-    /// </summary>
-    /// <param name="x">
-    /// The x coordinate.
-    /// </param>
-    /// <param name="y">
-    /// The y coordinate.
-    /// </param>
-    public void Move(int x, int y)
-    {
-        _appWindow.Move(new PointInt32(x, y));
-    }
-
-    /// <summary>
-    /// Resizes the window using the provided width and height integer values.
-    /// </summary>
-    /// <param name="width">
-    /// The target width of the window.
-    /// </param>
-    /// <param name="height">
-    /// The target height of the window.
-    /// </param>
-    public void Resize(int width, int height)
-    {
-        _appWindow.Resize(width, height);
-    }
-
-    /// <summary>
     /// Shows the window.
     /// </summary>
     public void Show()
     {
         _appWindow.Show();
-    }
-    #endregion
-
-    #region Partial INotifyPropertyChanged methods
-    partial void OnIconPathChanged(string? value)
-    {
-        _appWindow.SetIcon(value);
     }
     #endregion
 
