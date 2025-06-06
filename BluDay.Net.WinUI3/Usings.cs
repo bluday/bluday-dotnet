@@ -2,7 +2,6 @@
 
 global using BluDay.Net.Common.Extensions;
 global using BluDay.Net.UI.Windowing;
-global using BluDay.Net.WinUI3.Common.Extensions;
 global using BluDay.Net.WinUI3.ComponentModel;
 
 global using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +21,7 @@ global using System.Runtime.InteropServices;
 global using System.Threading;
 global using System.Threading.Tasks;
 
+global using Windows.Foundation;
 global using Windows.Graphics;
 
 global using WinRT.Interop;
