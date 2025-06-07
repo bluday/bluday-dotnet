@@ -5,11 +5,22 @@
 /// </summary>
 public static class WindowExtensions
 {
-    #region External methods
-    [DllImport("user32.dll")]
-    public static extern int GetDpiForWindow(IntPtr handle);
+    #region Constants
+    /// <summary>
+    /// Used for setting a new parent for a top-level window.
+    /// </summary>
+    public const int GWLP_HWNDPARENT = -8;
     #endregion
 
+    #region External methods
+    [DllImport("user32.dll")]
+    public static extern int GetDpiForWindow(nint hwnd);
+
+    [DllImport("user32.dll")]
+    public static extern nint SetWindowLongPtr(nint hWnd, int nIndex, nint dwNewLong);
+    #endregion
+
+    #region Public static methods
     /// <summary>
     /// Gets the system-set DPI scale for the target window.
     /// </summary>
@@ -29,4 +40,34 @@ public static class WindowExtensions
 
         return GetDpiForWindow(WindowNative.GetWindowHandle(source)) / 96.0;
     }
+
+    /// <summary>
+    /// Sets the parent of the provided window instance.
+    /// </summary>
+    /// <param name="source">
+    /// The child window instance.
+    /// </param>
+    /// <param name="parent">
+    /// The targeted window instance to be set as the new parent.
+    /// </param>
+    public static void SetParent(this Window source, Window parent)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        SetWindowLongPtr(
+            WindowNative.GetWindowHandle(source),
+            GWLP_HWNDPARENT,
+            WindowNative.GetWindowHandle(parent)
+        );
+
+        void Parent_Closed(object sender, WindowEventArgs e)
+        {
+            source.Close();
+
+            parent.Closed -= Parent_Closed;
+        }
+
+        parent.Closed += Parent_Closed;
+    }
+    #endregion
 }

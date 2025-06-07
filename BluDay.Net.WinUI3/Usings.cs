@@ -5,6 +5,7 @@ global using BluDay.Net.UI.Windowing;
 global using BluDay.Net.WinUI3.ComponentModel;
 
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.UI;
 global using Microsoft.UI.Dispatching;
 global using Microsoft.UI.Windowing;
 global using Microsoft.UI.Xaml;
