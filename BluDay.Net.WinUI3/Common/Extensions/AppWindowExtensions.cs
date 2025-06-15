@@ -37,8 +37,8 @@ public static class AppWindowExtensions
 
         if (scaleFactor.HasValue)
         {
-            width  = (int)(width  * scaleFactor);
-            height = (int)(height * scaleFactor);
+            width  = (int)(width  / scaleFactor);
+            height = (int)(height / scaleFactor);
         }
 
         source.Resize(new SizeInt32(width, height));
