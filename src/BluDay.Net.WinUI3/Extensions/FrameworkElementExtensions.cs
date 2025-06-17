@@ -1,22 +1,12 @@
-﻿namespace BluDay.Net.WinUI3.Common.Extensions;
+﻿using Microsoft.UI.Xaml;
+using System;
+using Windows.Foundation;
+using Windows.Graphics;
 
-/// <summary>
-/// A utility class with method extensions for the <see cref="FrameworkElement"/> type.
-/// </summary>
+namespace BluDay.Net.WinUI3.Extensions;
+
 public static class FrameworkElementExtensions
 {
-    /// <summary>
-    /// Gets the bounding box of a given <see cref="FrameworkElement"/>, optionally scaled.
-    /// </summary>
-    /// <param name="source">
-    /// The <see cref="FrameworkElement"/> whose bounding box is to be determined.
-    /// </param>
-    /// <param name="scale">
-    /// A scaling factor applied to the bounding box dimensions. If negative, defaults to 1.
-    /// </param>
-    /// <returns>
-    /// A <see cref="RectInt32"/> representing the bounding box of the element, scaled accordingly.
-    /// </returns>
     public static RectInt32 GetBoundingBox(this FrameworkElement source, double scale)
     {
         ArgumentNullException.ThrowIfNull(source);

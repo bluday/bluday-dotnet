@@ -1,11 +1,10 @@
-﻿namespace BluDay.Net.WinUI3.Converters;
+﻿using Microsoft.UI.Xaml.Data;
+using System;
 
-/// <summary>
-/// Represents a <see cref="DateTime"> to <see cref="string"/> value converter.
-/// </summary>
+namespace BluDay.Net.WinUI3.Converters;
+
 public sealed class DateTimeToStringConverter : IValueConverter
 {
-    /// <inheritdoc cref="IValueConverter.Convert(object, Type, object, string)"/>
     public object Convert(object value, Type targetType, object parameter, string language)
     {
         if (value is DateTime dateTime)
@@ -21,7 +20,6 @@ public sealed class DateTimeToStringConverter : IValueConverter
         return string.Empty;
     }
 
-    /// <inheritdoc cref="IValueConverter.ConvertBack(object, Type, object, string)"/>
     public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
         throw new NotImplementedException();

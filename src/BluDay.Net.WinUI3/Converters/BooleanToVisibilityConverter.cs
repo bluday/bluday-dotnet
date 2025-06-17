@@ -1,11 +1,11 @@
-﻿namespace BluDay.Net.WinUI3.Converters;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Data;
+using System;
 
-/// <summary>
-/// Represents a <see cref="bool"> to <see cref="Visibility"/> value converter.
-/// </summary>
+namespace BluDay.Net.WinUI3.Converters;
+
 public sealed class BooleanToVisibilityConverter : IValueConverter
 {
-    /// <inheritdoc cref="IValueConverter.Convert(object, Type, object, string)"/>
     public object Convert(object value, Type targetType, object parameter, string language)
     {
         if (parameter is string shouldNegateValueLiteral && shouldNegateValueLiteral == bool.TrueString)
@@ -16,7 +16,6 @@ public sealed class BooleanToVisibilityConverter : IValueConverter
         return value is true ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    /// <inheritdoc cref="IValueConverter.ConvertBack(object, Type, object, string)"/>
     public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
         throw new NotImplementedException();

@@ -1,10 +1,10 @@
+using BluDay.Net.Exceptions;
+using BluDay.Net.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace BluDay.Net.DependencyInjection;
 
-/// <summary>
-/// Represents the implementation class for <see cref="IImplementationProvider"/>.
-/// </summary>
-public class ImplementationProvider<TService> : IImplementationProvider
-    where TService : notnull
+public class ImplementationProvider<TService> : IImplementationProvider where TService : notnull
 {
     private readonly Type _serviceType;
 
@@ -12,27 +12,10 @@ public class ImplementationProvider<TService> : IImplementationProvider
 
     private readonly IReadOnlyDictionary<Type, ObjectFactory> _implementationTypeToFactoryMap;
 
-    /// <inheritdoc cref="IImplementationProvider.ServiceType"/>
-    public Type ServiceType
-    {
-        get => _serviceType;
-    }
+    public Type ServiceType => _serviceType;
 
-    /// <inheritdoc cref="IImplementationProvider.ImplementationTypes"/>
-    public IEnumerable<Type> ImplementationTypes
-    {
-        get => _implementationTypeToFactoryMap.Keys;
-    }
+    public IEnumerable<Type> ImplementationTypes => _implementationTypeToFactoryMap.Keys;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ImplementationProvider{TService}"/> class.
-    /// </summary>
-    /// <param name="serviceProvider">
-    /// The <see cref="IServiceProvider"/> used for resolving the dependencies a registered, concrete type.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    /// If <paramref name="serviceProvider"/> is null.
-    /// </exception>
     public ImplementationProvider(IServiceProvider serviceProvider)
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
@@ -62,7 +45,6 @@ public class ImplementationProvider<TService> : IImplementationProvider
         };
     }
 
-    /// <inheritdoc cref="IImplementationProvider.GetInstance(Type)"/>
     public object GetInstance(Type implementationType)
     {
         if (!implementationType.IsAssignableTo(_serviceType))
@@ -76,13 +58,6 @@ public class ImplementationProvider<TService> : IImplementationProvider
         );
     }
 
-    /// <inheritdoc cref="IImplementationProvider.GetInstance(Type)"/>
-    /// <typeparam name="TImplementation">
-    /// The implementation type.
-    /// </typeparam>
-    /// <returns>
-    /// The resolved implementation instance cast to <typeparamref name="TImplementation"/>.
-    /// </returns>
     public TImplementation GetInstance<TImplementation>() where TImplementation : TService
     {
         return (TImplementation)GetInstance(typeof(TImplementation));
