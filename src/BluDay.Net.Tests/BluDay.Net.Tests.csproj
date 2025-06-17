@@ -45,11 +45,4 @@
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
-
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-  <!-- Includes -->
-  <ItemGroup>
-    <Folder Include="BluDay.Net.Tests\Integration\" />
-  </ItemGroup>
 </Project>

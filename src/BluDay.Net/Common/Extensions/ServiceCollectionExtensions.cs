@@ -49,7 +49,7 @@ public static class ServiceCollectionExtensions
         IEnumerable<Type> viewModelTypes = Assembly
             .GetCallingAssembly()
             .GetTypes()
-            .Where(type => type.Name.Contains(Strings.ViewModel));
+            .Where(type => !type.IsAbstract && type.Name.Contains(Strings.ViewModel));
 
         foreach (var viewModelType in viewModelTypes)
         {
