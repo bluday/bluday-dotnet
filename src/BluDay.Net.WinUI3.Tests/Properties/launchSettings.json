@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BluDay.Net.WinUI3.Tests (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "BluDay.Net.WinUI3.Tests (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
