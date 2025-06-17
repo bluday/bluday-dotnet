@@ -11,7 +11,8 @@ public static class TypeExtensions
 
         return source != serviceType
             && source.IsClass
-            && source.IsAbstract is false
+            && !source.IsAbstract
+            && !source.IsInterface
             && source.IsAssignableTo(serviceType);
     }
 
