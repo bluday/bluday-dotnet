@@ -29,7 +29,7 @@
 
   <!-- Project references -->
   <ItemGroup>
-    <ProjectReference Include="..\BluDay.Net\BluDay.Net.csproj" />
+    <ProjectReference Include="..\..\src\BluDay.Net\BluDay.Net.csproj" />
   </ItemGroup>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
