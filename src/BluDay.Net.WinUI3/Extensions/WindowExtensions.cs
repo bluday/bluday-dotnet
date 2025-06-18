@@ -7,9 +7,9 @@ namespace BluDay.Net.WinUI3.Extensions;
 
 public static class WindowExtensions
 {
-    public const int GWLP_HWNDPARENT = -8;
+    public const double STANDARD_DPI = 96.0;
 
-    public const int STANDARD_DPI = 96;
+    public const int GWLP_HWNDPARENT = -8;
 
     [DllImport("user32.dll")]
     public static extern int GetDpiForWindow(nint hwnd);
