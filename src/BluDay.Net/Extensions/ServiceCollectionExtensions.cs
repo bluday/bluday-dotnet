@@ -5,6 +5,8 @@ namespace BluDay.Net.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    public const string ViewModel = "ViewModel";
+
     public static IServiceCollection Add(this IServiceCollection source, Action<IServiceCollection> factory)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -15,18 +17,43 @@ public static class ServiceCollectionExtensions
         return source;
     }
 
-    public static IServiceCollection AddViewModels(this IServiceCollection source)
+    public static IServiceCollection AddConcreteTypes<TBase>(
+        this IServiceCollection source,
+             ServiceLifetime    lifetime,
+             Assembly           assembly
+    )
+        where TBase : class
     {
         ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(assembly);
 
-        IEnumerable<Type> viewModelTypes = Assembly
-            .GetCallingAssembly()
-            .GetTypes()
-            .Where(type => !type.IsAbstract && type.Name.Contains("ViewModel"));
+        IEnumerable<Type> types = typeof(TBase).GetImplementationTypes(assembly);
 
-        foreach (var viewModelType in viewModelTypes)
+        foreach (var type in types)
         {
-            source.AddTransient(viewModelType);
+            source.Add(new ServiceDescriptor(type, type, lifetime));
+        }
+
+        return source;
+    }
+
+    public static IServiceCollection AddViewModels(this IServiceCollection source)
+    {
+        return source.AddViewModels(Assembly.GetCallingAssembly());
+    }
+
+    public static IServiceCollection AddViewModels(this IServiceCollection source, Assembly assembly)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(assembly);
+
+        IEnumerable<Type> types = assembly.GetTypes().Where(
+            type => type.Name.EndsWith("ViewModel") && type.IsConcreteType()
+        );
+
+        foreach (var type in types)
+        {
+            source.AddTransient(type);
         }
 
         return source;

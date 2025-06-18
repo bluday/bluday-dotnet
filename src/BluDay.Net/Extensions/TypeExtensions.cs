@@ -4,16 +4,19 @@ namespace BluDay.Net.Extensions;
 
 public static class TypeExtensions
 {
+    public static bool IsConcreteType(this Type source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        return source.IsClass && !source.IsAbstract && !source.IsInterface;
+    }
+
     public static bool IsImplementationType(this Type source, Type serviceType)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(serviceType);
 
-        return source != serviceType
-            && source.IsClass
-            && !source.IsAbstract
-            && !source.IsInterface
-            && source.IsAssignableTo(serviceType);
+        return source.IsAssignableTo(serviceType) && source.IsConcreteType();
     }
 
     public static IEnumerable<Type> GetImplementationTypes(this Type source)
