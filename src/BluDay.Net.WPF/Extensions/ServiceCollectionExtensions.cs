@@ -8,47 +8,28 @@ namespace BluDay.Net.WPF.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddPages<TPage>(this IServiceCollection source) where TPage : Page
+    public static IServiceCollection AddPages(this IServiceCollection source)
     {
-        return source.AddPages<TPage>(Assembly.GetCallingAssembly());
+        return source.AddPages(Assembly.GetCallingAssembly());
     }
 
-    public static IServiceCollection AddPages<TPage>(this IServiceCollection source, Assembly assembly)
-        where TPage : Page
+    public static IServiceCollection AddPages(this IServiceCollection source, Assembly assembly)
     {
         ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(assembly);
 
-        assembly ??= Assembly.GetCallingAssembly();
-
-        IEnumerable<Type> pageTypes = typeof(Page).GetImplementationTypes(assembly);
-
-        Index pageNameIndexFromEnd = new(nameof(Page).Length, fromEnd: true);
-
-        foreach (var pageType in pageTypes)
-        {
-            if (pageType.Name[pageNameIndexFromEnd..] is nameof(Page))
-            {
-                source.AddTransient(pageType);
-            }
-        }
-
-        return source;
+        return source.AddConcreteTypes<Page>(ServiceLifetime.Transient, assembly);
     }
 
     public static IServiceCollection AddWindows(this IServiceCollection source)
     {
+        return source.AddWindows(Assembly.GetCallingAssembly());
+    }
+
+    public static IServiceCollection AddWindows(this IServiceCollection source, Assembly assembly)
+    {
         ArgumentNullException.ThrowIfNull(source);
 
-        IEnumerable<Type> windowTypes = Assembly
-            .GetCallingAssembly()
-            .GetTypes()
-            .Where(type => !type.IsAbstract && type.Name.Contains(nameof(Window)));
-
-        foreach (var windowType in windowTypes)
-        {
-            source.AddTransient(windowType);
-        }
-
-        return source;
+        return source.AddConcreteTypes<Window>(ServiceLifetime.Transient, assembly);
     }
 }
