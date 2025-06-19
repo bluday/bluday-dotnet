@@ -38,6 +38,19 @@ public static class AppWindowExtensions
         return DisplayArea.GetFromWindowId(source.Id, displayAreaFallback);
     }
 
+    public static void MoveToCenter(this AppWindow source)
+    {
+        source.MoveToCenter(source.GetDisplayArea());
+    }
+
+    public static void MoveToCenter(this AppWindow source, DisplayArea displayArea)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(displayArea);
+
+        source.Move(source.GetCenterPositionForDisplay(displayArea));
+    }
+
     public static void Resize(this AppWindow source, int width, int height)
     {
         source.Resize(width, height, scaleFactor: null);
