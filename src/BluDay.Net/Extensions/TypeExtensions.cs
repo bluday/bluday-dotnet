@@ -11,26 +11,20 @@ public static class TypeExtensions
         return source.IsClass && !source.IsAbstract && !source.IsInterface;
     }
 
-    public static bool IsImplementationType(this Type source, Type serviceType)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(serviceType);
-
-        return source.IsAssignableTo(serviceType) && source.IsConcreteType();
-    }
-
-    public static IEnumerable<Type> GetImplementationTypes(this Type source)
+    public static IEnumerable<Type> GetConcreteTypes(this Type source)
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        return source.GetImplementationTypes(Assembly.GetEntryAssembly()!);
+        return source.GetConcreteTypes(Assembly.GetEntryAssembly()!);
     }
 
-    public static IEnumerable<Type> GetImplementationTypes(this Type source, Assembly assembly)
+    public static IEnumerable<Type> GetConcreteTypes(this Type source, Assembly assembly)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(assembly);
 
-        return assembly.GetTypes().Where(type => type.IsImplementationType(source));
+        return assembly.GetTypes().Where(
+            type => type.IsAssignableTo(source) && type.IsConcreteType()
+        );
     }
 }

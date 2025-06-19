@@ -23,7 +23,7 @@ public class ImplementationProvider<TService> : IImplementationProvider where TS
         _serviceType = typeof(TService);
 
         _implementationTypeToFactoryMap = _serviceType
-            .GetImplementationTypes()
+            .GetConcreteTypes()
             .ToDictionary(
                 keySelector:     implementationType => implementationType,
                 elementSelector: CreateImplementationFactory

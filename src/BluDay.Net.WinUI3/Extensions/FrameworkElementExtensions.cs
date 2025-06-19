@@ -16,15 +16,15 @@ public static class FrameworkElementExtensions
         Rect rect = source
             .TransformToVisual(visual: null)
             .TransformBounds(new Rect(
-                x:      0,
-                y:      0,
+                x: 0,
+                y: 0,
                 width:  source.ActualWidth,
                 height: source.ActualHeight
             ));
 
         return new RectInt32(
-            _X:      (int)(rect.X      * scale),
-            _Y:      (int)(rect.Y      * scale),
+            _X: (int)(rect.X * scale),
+            _Y: (int)(rect.Y * scale),
             _Width:  (int)(rect.Width  * scale),
             _Height: (int)(rect.Height * scale)
         );

@@ -27,11 +27,11 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(assembly);
 
-        IEnumerable<Type> types = typeof(TBase).GetImplementationTypes(assembly);
+        IEnumerable<Type> types = typeof(TBase).GetConcreteTypes(assembly);
 
-        foreach (var type in types)
+        foreach (Type concreteType in typeof(TBase).GetConcreteTypes(assembly))
         {
-            source.Add(new ServiceDescriptor(type, type, lifetime));
+            source.Add(new ServiceDescriptor(concreteType, concreteType, lifetime));
         }
 
         return source;
@@ -47,13 +47,13 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(assembly);
 
-        IEnumerable<Type> types = assembly.GetTypes().Where(
-            type => type.Name.EndsWith("ViewModel") && type.IsConcreteType()
-        );
+        IEnumerable<Type> concreteTypes = assembly
+            .GetTypes()
+            .Where(type => type.Name.EndsWith("ViewModel") && type.IsConcreteType());
 
-        foreach (var type in types)
+        foreach (Type concreteType in concreteTypes)
         {
-            source.AddTransient(type);
+            source.AddTransient(concreteType);
         }
 
         return source;

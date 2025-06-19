@@ -8,8 +8,6 @@ public static class AppWindowExtensions
 {
     public static void Resize(this AppWindow source, int width, int height)
     {
-        ArgumentNullException.ThrowIfNull(source);
-
         source.Resize(width, height, scaleFactor: null);
     }
 
