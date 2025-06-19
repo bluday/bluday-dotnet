@@ -6,6 +6,26 @@ namespace BluDay.Net.WinUI3.Extensions;
 
 public static class AppWindowExtensions
 {
+    public static PointInt32 GetCenterPositionForDisplay(this AppWindow source)
+    {
+        return source.GetCenterPositionForDisplay(source.GetDisplayArea());
+    }
+
+    public static PointInt32 GetCenterPositionForDisplay(this AppWindow source, DisplayArea displayArea)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(displayArea);
+
+        SizeInt32 windowSize = source.Size;
+
+        RectInt32 displayWorkArea = displayArea.WorkArea;
+
+        return new(
+            (displayWorkArea.Width  - windowSize.Width)  / 2,
+            (displayWorkArea.Height - windowSize.Height) / 2
+        );
+    }
+
     public static DisplayArea GetDisplayArea(this AppWindow source)
     {
         return source.GetDisplayArea(DisplayAreaFallback.Nearest);
