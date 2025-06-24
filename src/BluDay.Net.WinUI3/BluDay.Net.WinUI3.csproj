@@ -20,7 +20,7 @@
 
 	<!-- Project references -->
 	<ItemGroup>
-		<ProjectReference Include="..\BluDay.Net\BluDay.Net.csproj"/>
+		<ProjectReference Include="..\BluDay.Net\BluDay.Net.csproj" />
 	</ItemGroup>
 
 	<!-- NuGet packages -->
