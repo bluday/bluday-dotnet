@@ -9,12 +9,12 @@ namespace BluDay.Net.WinUI3.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddPages(this IServiceCollection source)
+    public static IServiceCollection AddViews(this IServiceCollection source)
     {
-        return source.AddPages(Assembly.GetCallingAssembly());
+        return source.AddViews(Assembly.GetCallingAssembly());
     }
 
-    public static IServiceCollection AddPages(this IServiceCollection source, Assembly assembly)
+    public static IServiceCollection AddViews(this IServiceCollection source, Assembly assembly)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(assembly);
