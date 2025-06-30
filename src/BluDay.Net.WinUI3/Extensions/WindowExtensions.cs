@@ -1,46 +1,34 @@
-﻿using Microsoft.UI.Xaml;
+﻿using BluDay.Net.WinUI3.Helpers;
+using Microsoft.UI.Xaml;
 using System;
-using System.Runtime.InteropServices;
-using WinRT.Interop;
 
 namespace BluDay.Net.WinUI3.Extensions;
 
+/// <summary>
+/// Provides extension methods for the <see cref="Window"/> class, offering additional
+/// functionality related to DPI scaling and window behavior. These helpers are designed
+/// to simplify common UI-related tasks in applications using Windows App SDK.
+/// </summary>
 public static class WindowExtensions
 {
-    public const double STANDARD_DPI = 96.0;
-
-    public const int GWLP_HWNDPARENT = -8;
-
-    [DllImport("user32.dll")]
-    public static extern int GetDpiForWindow(nint hwnd);
-
-    [DllImport("user32.dll")]
-    public static extern nint SetWindowLongPtr(nint hWnd, int nIndex, nint dwNewLong);
-
+    /// <summary>
+    /// Gets the decimal value of the DPI scaling factor for the specified <see cref="Window"/>
+    /// instance.
+    /// </summary>
+    /// <param name="source">
+    /// The <see cref="Window"/> instance for which to retrieve the DPI scale factor.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if <paramref name="source"/> is <c>null</c>.
+    /// </exception>
+    /// <returns>
+    /// A decimal value representing the window's DPI scale factor relative to standard DPI
+    /// (96.0). For instance, 1.5 corresponds to 150% scaling.
+    /// </returns>
     public static double GetDpiScaleFactorInDecimal(this Window source)
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        return GetDpiForWindow(WindowNative.GetWindowHandle(source)) / STANDARD_DPI;
-    }
-
-    public static void SetParent(this Window source, Window parent)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        SetWindowLongPtr(
-            hWnd:      WindowNative.GetWindowHandle(source),
-            nIndex:    GWLP_HWNDPARENT,
-            dwNewLong: WindowNative.GetWindowHandle(parent)
-        );
-
-        void Parent_Closed(object sender, WindowEventArgs e)
-        {
-            source.Close();
-
-            parent.Closed -= Parent_Closed;
-        }
-
-        parent.Closed += Parent_Closed;
+        return WindowHelper.GetDpiScaleFactorInDecimal(source);
     }
 }
