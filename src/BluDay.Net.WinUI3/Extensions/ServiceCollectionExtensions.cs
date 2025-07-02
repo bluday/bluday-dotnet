@@ -1,7 +1,5 @@
 ﻿using BluDay.Net.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Reflection;
 
@@ -9,28 +7,17 @@ namespace BluDay.Net.WinUI3.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddViews(this IServiceCollection source)
+    public static IServiceCollection AddViews<TView>(this IServiceCollection source) where TView : class
     {
-        return source.AddViews(Assembly.GetCallingAssembly());
+        return source.AddViews<TView>(Assembly.GetCallingAssembly());
     }
 
-    public static IServiceCollection AddViews(this IServiceCollection source, Assembly assembly)
+    public static IServiceCollection AddViews<TView>(this IServiceCollection source, Assembly assembly)
+        where TView : class
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(assembly);
 
-        return source.AddConcreteTypes<Page>(ServiceLifetime.Transient, assembly);
-    }
-
-    public static IServiceCollection AddWindows(this IServiceCollection source)
-    {
-        return source.AddWindows(Assembly.GetCallingAssembly());
-    }
-
-    public static IServiceCollection AddWindows(this IServiceCollection source, Assembly assembly)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        return source.AddConcreteTypes<Window>(ServiceLifetime.Transient, assembly);
+        return source.AddConcreteTypes<TView>(ServiceLifetime.Transient, assembly);
     }
 }
