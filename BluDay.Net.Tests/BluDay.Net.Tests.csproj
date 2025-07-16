@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Authors>BluDay</Authors>
+		<Copyright>© BluDay 2025</Copyright>
+		<Description>Developed by BluDay.</Description>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+		<LangVersion>preview</LangVersion>
+		<Nullable>enable</Nullable>
+		<PackageVersion>1.0.0</PackageVersion>
+		<Platforms>x64</Platforms>
+		<PlatformTarget>x64</PlatformTarget>
+		<RepositoryUrl>https://github.com/bluday/bluday-dotnet</RepositoryUrl>
+		<TargetFramework>net9.0</TargetFramework>
+		<Title>BluDay.Net.Tests</Title>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BluDay.Net\BluDay.Net.csproj"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0"/>
+		<PackageReference Include="Moq" Version="4.20.72"/>
+		<PackageReference Include="MSTest.TestAdapter" Version="3.7.1"/>
+		<PackageReference Include="MSTest.TestFramework" Version="3.7.1"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
+	</ItemGroup>
+</Project>

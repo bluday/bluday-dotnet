@@ -1,0 +1,29 @@
+<Solution>
+    <Configurations>
+        <Platform Name="x64"/>
+    </Configurations>
+    
+    <Project Path="BluDay.Net/BluDay.Net.csproj">
+        <Platform Project="x64"/>
+    </Project>
+    
+    <Project Path="BluDay.Net.Tests/BluDay.Net.Tests.csproj">
+        <Platform Project="x64"/>
+    </Project>
+
+    <Project Path="BluDay.Net.WPF/BluDay.Net.WPF.csproj">
+        <Platform Project="x64"/>
+    </Project>
+    
+    <Project Path="BluDay.Net.WPF.Tests/BluDay.Net.WPF.Tests.csproj">
+        <Platform Project="x64"/>
+    </Project>
+
+    <Project Path="BluDay.Net.WinUI3/BluDay.Net.WinUI3.csproj">
+        <Platform Project="x64"/>
+    </Project>
+
+    <Project Path="BluDay.Net.WinUI3.Tests/BluDay.Net.WinUI3.Tests.csproj">
+        <Platform Project="x64"/>
+    </Project>
+</Solution>

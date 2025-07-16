@@ -11,16 +11,13 @@ public static class FrameworkElementExtensions
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        scale = scale < 0 ? 1 : scale;
-
         Rect rect = source
             .TransformToVisual(visual: null)
-            .TransformBounds(new Rect(
-                x: 0,
-                y: 0,
-                width:  source.ActualWidth,
-                height: source.ActualHeight
-            ));
+            .TransformBounds(
+                new Rect(0, 0, source.ActualWidth, source.ActualHeight)
+            );
+
+        scale = scale < 0 ? 1 : scale;
 
         return new RectInt32(
             _X: (int)(rect.X * scale),

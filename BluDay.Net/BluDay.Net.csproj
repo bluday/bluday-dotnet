@@ -1,19 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<!-- Assembly information -->
 	<PropertyGroup>
 		<Authors>BluDay</Authors>
 		<Copyright>© BluDay 2025</Copyright>
 		<Description>Developed by BluDay.</Description>
-		<RepositoryUrl>https://github.com/bluday/bluday-dotnet</RepositoryUrl>
-	</PropertyGroup>
-  
-	<!-- Framework versioning -->
-	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
-	</PropertyGroup>
-  
-	<!-- General settings -->
-	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>preview</LangVersion>
@@ -21,11 +10,12 @@
 		<PackageVersion>1.0.0</PackageVersion>
 		<Platforms>x64;ARM64</Platforms>
 		<PlatformTarget>x64</PlatformTarget>
+		<RepositoryUrl>https://github.com/bluday/bluday-dotnet</RepositoryUrl>
+		<TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 
-	<!-- NuGet packages -->
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5"/>
 	</ItemGroup>
 </Project>

@@ -1,27 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <!-- Framework versioning -->
-    <PropertyGroup>
-        <TargetFramework>net9.0-windows8.0</TargetFramework>
-    </PropertyGroup>
-  
-    <!-- General settings -->
     <PropertyGroup>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>preview</LangVersion>
         <Nullable>enable</Nullable>
         <PackageVersion>1.0.0</PackageVersion>
-        <Platforms>x64;ARM64</Platforms>
+        <Platforms>x64</Platforms>
         <PlatformTarget>x64</PlatformTarget>
         <RootNamespace>BluDay.Net.WPF</RootNamespace>
-    </PropertyGroup>
-  
-    <!-- WPF -->
-    <PropertyGroup>
+        <TargetFramework>net9.0-windows8.0</TargetFramework>
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
-    <!-- Project references -->
     <ItemGroup>
 		<ProjectReference Include="..\BluDay.Net\BluDay.Net.csproj"/>
     </ItemGroup>
