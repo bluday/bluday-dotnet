@@ -78,19 +78,30 @@ public class ImplementationProvider<TService> where TService : class
     /// <typeparam name="TImplementation">
     /// The type of implementation to resolve, which must inherit from <typeparamref name="TService"/>.
     /// </typeparam>
+    /// <returns>
+    /// An instance of type <typeparamref name="TImplementation"/> if found, otherwise <c>null</c>.
+    /// </returns>
+    public TImplementation? Resolve<TImplementation>() where TImplementation : class, TService
+    {
+        Func<object>? resolver = _implementationResolvers.GetValueOrDefault(typeof(TImplementation));
+
+        return resolver?.Invoke() as TImplementation;
+    }
+
+    /// <summary>
+    /// Resolves and returns a required concrete instance of the specified implementation type.
+    /// </summary>
+    /// <typeparam name="TImplementation">
+    /// The type of implementation to resolve, which must inherit from <typeparamref name="TService"/>.
+    /// </typeparam>
     /// <exception cref="Exception">
     /// Thrown if the requested implementation type is not registered or cannot be resolved.
     /// </exception>
     /// <returns>
     /// An instance of type <typeparamref name="TImplementation"/>.
     /// </returns>
-    public TImplementation GetInstance<TImplementation>() where TImplementation : TService
+    public TImplementation ResolveRequired<TImplementation>() where TImplementation : class, TService
     {
-        if (!_implementationResolvers.TryGetValue(typeof(TImplementation), out Func<object>? resolver))
-        {
-            throw new Exception();
-        }
-
-        return (TImplementation)resolver();
+        return Resolve<TImplementation>() ?? throw new Exception();
     }
 }
