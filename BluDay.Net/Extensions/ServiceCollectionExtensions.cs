@@ -27,8 +27,6 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(assembly);
 
-        IEnumerable<Type> types = typeof(TBase).GetConcreteTypes(assembly);
-
         foreach (Type concreteType in typeof(TBase).GetConcreteTypes(assembly))
         {
             source.Add(new ServiceDescriptor(concreteType, concreteType, lifetime));
