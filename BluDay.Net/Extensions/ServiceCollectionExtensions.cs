@@ -162,7 +162,8 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Registers all concrete view model types from the calling assembly in the service collection.
+    /// Registers all concrete view model types to the service collection. View model types are identified
+    /// by name convention (ending in "ViewModel") and concrete type checks.
     /// </summary>
     /// <param name="source">
     /// The service collection to register view models with.
@@ -177,33 +178,15 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        return source.AddViewModels(Assembly.GetCallingAssembly());
-    }
-
-    /// <summary>
-    /// Registers all concrete view model types from the specified assembly in the service collection.
-    /// View model types are identified by name convention (ending in "ViewModel") and concrete type checks.
-    /// </summary>
-    /// <param name="source">
-    /// The service collection to register view models with.
-    /// </param>
-    /// <param name="assembly">
-    /// The assembly to search for view model types.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="source"/> or <paramref name="assembly"/> is <c>null</c>.
-    /// </exception>
-    /// <returns>
-    /// The updated <see cref="IServiceCollection"/> instance.
-    /// </returns>
-    public static IServiceCollection AddViewModels(this IServiceCollection source, Assembly assembly)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(assembly);
-
-        IEnumerable<Type> concreteTypes = assembly.GetTypes().Where(
-            type => type.IsConcreteType() && type.Name.EndsWith("ViewModel")
-        );
+        IEnumerable<Type> concreteTypes = Assembly
+            .GetCallingAssembly()
+            .GetReferencedAssemblies()
+            .SelectMany(
+                assemblyName => Assembly
+                    .Load(assemblyName)
+                    .GetTypes()
+                    .Where(type => type.IsConcreteType() && type.Name.EndsWith("ViewModel"))
+            );
 
         foreach (Type concreteType in concreteTypes)
         {
