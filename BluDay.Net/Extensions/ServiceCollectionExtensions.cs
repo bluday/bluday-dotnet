@@ -5,7 +5,8 @@ using System.Reflection;
 namespace BluDay.Net.Extensions;
 
 /// <summary>
-/// Provides extension methods for registering concrete types and view models in an <see cref="IServiceCollection"/>.
+/// Provides extension methods for registering concrete types and view models in an
+/// <see cref="IServiceCollection"/>.
 /// </summary>
 public static class ServiceCollectionExtensions
 {
@@ -35,8 +36,8 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Registers all non-abstract types derived from <typeparamref name="TBase"/> found in the specified assembly
-    /// with the given <see cref="ServiceLifetime"/>.
+    /// Registers all non-abstract types derived from <typeparamref name="TBase"/> found in the
+    /// specified assembly with the given <see cref="ServiceLifetime"/>.
     /// </summary>
     /// <typeparam name="TBase">
     /// The base type used to filter concrete types.
@@ -51,8 +52,7 @@ public static class ServiceCollectionExtensions
     /// The assembly to search for concrete types.
     /// </param>
     /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="source"/>, <paramref name="lifetime"/> or <paramref name="assembly"/> is
-    /// <c>null</c>.
+    /// Thrown if <paramref name="source"/> or <paramref name="assembly"/> is <c>null</c>.
     /// </exception>
     /// <returns>
     /// The updated <see cref="IServiceCollection"/> instance.
@@ -69,15 +69,15 @@ public static class ServiceCollectionExtensions
 
         foreach (Type concreteType in typeof(TBase).GetConcreteTypes(assembly))
         {
-            source.Add(new ServiceDescriptor(concreteType, concreteType, lifetime));
+            source.Add(ServiceDescriptor.Describe(concreteType, concreteType, lifetime));
         }
 
         return source;
     }
 
     /// <summary>
-    /// Registers a factory delegate for the specified service type that resolves instances using the
-    /// <see cref="IServiceProvider"/> at runtime.
+    /// Registers a factory delegate for the specified service type that resolves instances using
+    /// the <see cref="IServiceProvider"/> at runtime.
     /// </summary>
     /// <typeparam name="TService">
     /// The service type to register a factory for.
@@ -162,8 +162,8 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Registers all concrete view model types to the service collection. View model types are identified
-    /// by name convention (ending in "ViewModel") and concrete type checks.
+    /// Registers all concrete view model types to the service collection. View model types are
+    /// identified by name convention (ending in "ViewModel") and concrete type checks.
     /// </summary>
     /// <param name="source">
     /// The service collection to register view models with.
@@ -180,13 +180,8 @@ public static class ServiceCollectionExtensions
 
         IEnumerable<Type> concreteTypes = Assembly
             .GetCallingAssembly()
-            .GetReferencedAssemblies()
-            .SelectMany(
-                assemblyName => Assembly
-                    .Load(assemblyName)
-                    .GetTypes()
-                    .Where(type => type.IsConcreteType() && type.Name.EndsWith("ViewModel"))
-            );
+            .GetReferencedTypes()
+            .Where(type => type.IsConcreteType() && type.Name.EndsWith("ViewModel"));
 
         foreach (Type concreteType in concreteTypes)
         {
