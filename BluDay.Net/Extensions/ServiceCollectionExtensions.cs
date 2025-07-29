@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.Reflection;
 
 namespace BluDay.Net.Extensions;
 
@@ -10,71 +9,6 @@ namespace BluDay.Net.Extensions;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
-    /// <summary>
-    /// Applies the specified factory delegate to configure the service collection.
-    /// </summary>
-    /// <param name="source">
-    /// The service collection to apply the configuration to.
-    /// </param>
-    /// <param name="factory">
-    /// A delegate that defines how to configure the service collection.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="source"/> or <paramref name="factory"/> is <c>null</c>.
-    /// </exception>
-    /// <returns>
-    /// The updated <see cref="IServiceCollection"/> instance.
-    /// </returns>
-    public static IServiceCollection Add(this IServiceCollection source, Action<IServiceCollection> factory)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(factory);
-
-        factory(source);
-
-        return source;
-    }
-
-    /// <summary>
-    /// Registers all non-abstract types derived from <typeparamref name="TBase"/> found in the
-    /// specified assembly with the given <see cref="ServiceLifetime"/>.
-    /// </summary>
-    /// <typeparam name="TBase">
-    /// The base type used to filter concrete types.
-    /// </typeparam>
-    /// <param name="source">
-    /// The service collection to register the types with.
-    /// </param>
-    /// <param name="lifetime">
-    /// The lifetime to assign to each service descriptor.
-    /// </param>
-    /// <param name="assembly">
-    /// The assembly to search for concrete types.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="source"/> or <paramref name="assembly"/> is <c>null</c>.
-    /// </exception>
-    /// <returns>
-    /// The updated <see cref="IServiceCollection"/> instance.
-    /// </returns>
-    public static IServiceCollection AddConcreteTypes<TBase>(
-        this IServiceCollection source,
-             ServiceLifetime    lifetime,
-             Assembly           assembly
-    )
-        where TBase : class
-    {
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(assembly);
-
-        foreach (Type concreteType in typeof(TBase).GetConcreteTypes(assembly))
-        {
-            source.Add(ServiceDescriptor.Describe(concreteType, concreteType, lifetime));
-        }
-
-        return source;
-    }
-
     /// <summary>
     /// Registers a factory delegate for the specified service type that resolves instances using
     /// the <see cref="IServiceProvider"/> at runtime.
@@ -99,13 +33,13 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        source.TryAddTransient<TService>();
-
         Func<IServiceProvider, Func<TService>> implementationFactory =
             serviceProvider => serviceProvider.GetRequiredService<TService>;
 
+        source.TryAddTransient<TService>();
+
         source.Add(ServiceDescriptor.Describe(
-            serviceType: typeof(Func<TService>),
+            typeof(Func<TService>),
             implementationFactory,
             lifetime
         ));
@@ -159,35 +93,5 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(source);
 
         return source.AddFactory<TService>(ServiceLifetime.Transient);
-    }
-
-    /// <summary>
-    /// Registers all concrete view model types to the service collection. View model types are
-    /// identified by name convention (ending in "ViewModel") and concrete type checks.
-    /// </summary>
-    /// <param name="source">
-    /// The service collection to register view models with.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="source"/> is <c>null</c>.
-    /// </exception>
-    /// <returns>
-    /// The updated <see cref="IServiceCollection"/> instance.
-    /// </returns>
-    public static IServiceCollection AddViewModels(this IServiceCollection source)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        IEnumerable<Type> concreteTypes = Assembly
-            .GetCallingAssembly()
-            .GetReferencedTypes()
-            .Where(type => type.IsConcreteType() && type.Name.EndsWith("ViewModel"));
-
-        foreach (Type concreteType in concreteTypes)
-        {
-            source.AddTransient(concreteType);
-        }
-
-        return source;
     }
 }
