@@ -4,6 +4,9 @@ using System;
 
 namespace BluDay.Net.WinUI3.Converters;
 
+/// <summary>
+/// Represents a <see cref="bool"/> to <see cref="Visibility"/> value converter.
+/// </summary>
 public sealed class BooleanToVisibilityConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)

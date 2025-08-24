@@ -3,6 +3,9 @@ using System;
 
 namespace BluDay.Net.WinUI3.Converters;
 
+/// <summary>
+/// Represents a <see cref="DateTime"/> to <see cref="string"/> value converter.
+/// </summary>
 public sealed class DateTimeToStringConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
